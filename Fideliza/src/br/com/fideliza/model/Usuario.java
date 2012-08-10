@@ -2,12 +2,19 @@ package br.com.fideliza.model;
 
 import java.io.Serializable;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class Usuario implements Serializable {
 
 	/**
 	 * 
 	 */
+
+
 	private static final long serialVersionUID = 4675927773047259047L;
+	@Id
+	@GeneratedValue
 	private int idUser;
 	private String user;
 	private String password;
