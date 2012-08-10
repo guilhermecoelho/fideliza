@@ -12,8 +12,10 @@ public class UsuarioDAO {
 	private Transaction tx;
 	
 	public UsuarioDAO (){
+		
 		session = HibernateUtil.getSession();
 		tx = session.beginTransaction();
+
 	}
 	
 	public void adicionaUser(Usuario user){

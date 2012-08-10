@@ -11,7 +11,9 @@
 	<class name="br.com.fideliza.model.Usuario" table="usuario">
 
 
-		<id name="idUser" column="idUser" />
+		<id name="idUser" column="idUser" >
+		    <generator class="increment"/>
+		</id>
 
 		<property name="user" column="nomeUser" />
 		<property name="password" column="senhaUser" />
