@@ -21,10 +21,15 @@
 
 			<h:outputText value="nome" />
 			<p:inputText value="#{usuarioController.user.user}" id="user" />
-			<h:outputText value="senha" />
-			<p:inputText value="#{usuarioController.user.password}" id="password" />
-			<p:commandButton value="teste"
-				action="#{usuarioController.salvaUser}" />
+			
+			<h:outputText for="password" value="senha" />
+			<p:password value="#{usuarioController.user.password}" id="password" label = "senha" match="passwordConfirm" feedback="true" required="true"/>
+			
+			<h:outputText for="password" value="confirmar senha" />
+			<p:password value="#{usuarioController.user.password}" id="passwordConfirm" label = "confirmação" feedback="true"/><br></br>
+			<p:messages id="errosSenha" showDetail="true" autoUpdate="true"/>
+			
+			<p:commandButton value="teste" action="#{usuarioController.salvaUser}" />
 
 
 		</h:panelGrid>

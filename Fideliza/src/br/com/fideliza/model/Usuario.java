@@ -18,6 +18,36 @@ public class Usuario implements Serializable {
 	private int idUser;
 	private String user;
 	private String password;
+	private String email;
+	private String cidade;
+	private int cpf;
+	
+	
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public int getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(int cpf) {
+		this.cpf = cpf;
+	}
 
 	public String getUser() {
 		return user;
