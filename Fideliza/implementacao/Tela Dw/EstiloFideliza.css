@@ -1,0 +1,81 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+  text-align: center;
+}
+
+#pagina {
+	width:1000px;
+	text-align: left;
+}
+#cabecalho{
+	background-color:#c2ccff;
+	width: 1000px;
+	overflow: auto;
+	text-align: center;
+}
+#menu{
+	width: 150px;
+	float: left;
+	height: 400px;
+	overflow: auto;
+	list-style-type: none;
+	text-align: left;
+	margin:0;
+	padding:0;
+	background-color:#CCC;
+}
+
+#conteudo {
+  width: 850px; float: left; height: 400px;
+  background-color:FFFFFF;
+   background-repeat: no-repeat;
+  Background-attachment: fixed;
+}
+
+#rodape { 
+  width:1000px;
+  text-align: center;
+  background-color:#c2ccff;
+}
+
+.m
+{
+  width: 560px;
+  padding: 20px;
+  height: auto;
+}
+
+.l {
+  width: 190px;
+  margin: 0px;
+  padding: 0px; 
+  float: left;  
+  text-align: right;
+}
+
+
+.r {
+  width: 300px;
+  margin: 0px;
+  padding: 0px; 
+  float: right; 
+  text-align: left;
+}
+
+.a {
+  clear: both;
+  width: 470px;
+  padding: 10px;
+}
+
+thead {
+  background: #A9C6C9;
+  
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+#rodape address {
+	font-weight: bold;
+}
