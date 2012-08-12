@@ -1,0 +1,86 @@
+body {
+  text-align: center;
+}
+
+#pagina {  
+  width:860px;
+}
+#cabecalho{
+ background-color:#bbb;
+  background-image: url("C:\Users\Felipe Rocha\Pictures\AF2010\Felipe.jpg");
+  background-repeat: no-repeat;
+  Background-attachment: fixed;
+	 width: 860px;
+	 overflow: auto;
+	 
+}
+#menu{
+  width: 150px; float: left; height: 300px;
+  background-color: cyan;
+  overflow: auto;
+  list-style-type: none;
+  text-align: left;
+  margin:0;
+  padding:0;
+  background:#FADE8B;
+  border-bottom:1px solid #a4a0f5; 
+}
+
+#conteudo {
+  width: 710px; float: left; height: 300px;
+  background-color:#bbf;
+  overflow: auto;
+}
+
+#rodape { 
+ 
+  clear:both;
+  width:860px;
+ 
+  text-align: right;
+   background-color:#bbb;
+}
+
+
+
+.m
+{
+  width: 560px;
+  padding: 20px;
+  height: auto;
+}
+
+.l {
+  width: 190px;
+  margin: 0px;
+  padding: 0px; 
+  float: left;  
+  text-align: right;
+}
+
+
+.r {
+  width: 300px;
+  margin: 0px;
+  padding: 0px; 
+  float: right; 
+  text-align: left;
+}
+
+.a {
+  clear: both;
+  width: 470px;
+  padding: 10px;
+}
+
+table, td {
+  border: 1px solid black;
+}
+
+thead {
+  background: #A9C6C9;
+  
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+

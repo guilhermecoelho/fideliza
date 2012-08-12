@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head>
+<title>Registrar pontos</title>
+<link href="estiloFideliza.css" type="text/css" rel="stylesheet" />
+<link href="estiloFideliza.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+      .lbl_erro {
+        color: red;
+      }     
+      
+      .mensagem_erro {
+        margin:10px;
+        padding:10px;
+        color: white;
+        font-weight: bold;
+        font-family: Verdana;
+        font-size: 14px;        
+        background-color:red;
+        display:none;
+      }
+    </style>        
+        
+    <script type="text/javascript">
+    
+    
+      function valida_dados() {
+        var divMensagem = document.getElementById("div_mensagem");
+        var formulario = document.getElementById("form_dados");
+        var arrErros = new Array();
+        var arrSucessos = new Array();
+        
+        //verificacao de obrigatório e tamanho mínimo
+        if(formulario.txt_valor.value=="" || formulario.txt_valor.value <= 0 || isNaN(formulario.txt_valor.value) ) {
+          arrErros.push("lbl_valor");          
+        } else {
+          arrSucessos.push("lbl_valor");
+        }
+        
+        //verificacao de obrigatório e numero
+        if(formulario.txt_cpf.value=="" || isNaN(formulario.txt_cpf.value) || formulario.txt_cpf.value <= 0 || formulario.txt_cpf.value.length < 11 || formulario.txt_cpf.value.length > 11) {
+          arrErros.push("lbl_cpf");
+        } else {
+          arrSucessos.push("lbl_cpf");
+        }
+        
+        if (arrErros.length > 0) {
+          exibir_erros_formulario(formulario, arrErros, divMensagem);
+          return false;
+        }
+        else {
+          return true;
+        }
+      }
+      
+      function exibir_erros_formulario(formulario, arrErros, divMensagem) {
+        var arrLabels = formulario.getElementsByTagName("label");
+        for (intIndex = 0; intIndex < arrLabels.length; intIndex++) {
+          if (arrLabels[intIndex].className == "lbl_erro") {
+            arrLabels[intIndex].className = "";
+          }
+        }
+      
+        if (arrErros.length > 0) {
+          divMensagem.innerHTML = "<ul>\n";
+          
+          for (intIndex in arrErros) {
+            var strNomeLabel = arrErros[intIndex];
+            var varLabel = document.getElementById(strNomeLabel);
+            var strNomeInput = varLabel.htmlFor;
+            var varInput = document.getElementById(strNomeInput);
+            
+            varLabel.className = "lbl_erro";
+            varInput.focus();
+            varInput.select();
+            
+            switch (strNomeLabel) {
+              case "lbl_cpf": divMensagem.innerHTML += "\t<li>O campo CPF é obrigatório e deve conter 11 numeros!</li>\n"; break;
+              case "lbl_valor": divMensagem.innerHTML += "\t<li>Entre somente com numeros, valor não pode ser negativo, tem que ser maior que 0.</li>\n"; break;
+              default: divMensagem.innerHTML += "\t<li>Não foi possível determinar o campo com erro!</li>\n"; break;
+            }
+          }
+          
+          divMensagem.innerHTML += "</ul>\n";
+          divMensagem.style.display = "block";
+        }
+      }
+    </script>
+
+</head>
+
+<body>
+<div id="pagina">
+<div id="cabecalho">
+<h1>Cadastro de Cliente</h1>
+</div>
+
+<div id="menu">
+<ul id="menu">
+<li><a href="menu.html">Menu inicial</a></li>
+<li><a href="informacoes.html">Info</a></li>
+<li><a href="cadastroCliente.html">Cadastro de cliente</a></li>
+<li><a href="visualizaPontos.html">Visualizar pontos</a></li>
+<li><a href="registraPontos.html">Registrar pontos</a></li>
+</ul>
+</div>
+
+<div id="conteudo">
+
+ <div class="mensagem_erro" id="div_mensagem"></div>
+ 
+    <form id="form_dados" action="#" onsubmit="return valida_dados();" method="get">
+   <div class="a"> <div class="l">
+      <fieldset>
+      
+        <label id="lbl_cpf" for="txt_cpf">
+          CPF <input type="text" id="txt_cpf" name="txt_cpf"/>
+        </label>
+        
+        <label id="lbl_valor" for="txt_valor">
+          Valor$$ <input type="text" id="txt_valor" name="txt_valor"/>
+        </label> 
+      
+      </fieldset>
+    
+      <p>
+        <input type="submit" value="Registrar pontos"/>
+      </p>
+      </div></div>
+    </form>
+     
+ </div>
+   
+
+
+
+
+
+<div id="rodape">
+        <address>Copyright Sistema fideliza</address>
+      </div>
+</div>
+</body>
+</html>
