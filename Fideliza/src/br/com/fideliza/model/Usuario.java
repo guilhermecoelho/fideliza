@@ -11,7 +11,6 @@ public class Usuario implements Serializable {
 	 * 
 	 */
 
-
 	private static final long serialVersionUID = 4675927773047259047L;
 	@Id
 	@GeneratedValue
@@ -21,9 +20,15 @@ public class Usuario implements Serializable {
 	private String email;
 	private String cidade;
 	private int cpf;
-	
-	
-	
+	private String cpf2;
+
+	public String getCpf2() {
+		return cpf2;
+	}
+
+	public void setCpf2(String cpf2) {
+		this.cpf2 = cpf2;
+	}
 
 	public String getEmail() {
 		return email;
