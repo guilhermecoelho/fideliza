@@ -19,7 +19,7 @@
 		<property name="password" column="senhaUser" />
 		<property name="email" column="emailUser" />
 		<property name="cidade" column="cidadeUser" />
-		<property name="cpf" column="cpfUser" />
+		<property name="cpf2" column="cpfUser2" />
 
 	</class>
 
