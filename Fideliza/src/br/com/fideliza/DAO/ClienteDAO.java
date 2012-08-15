@@ -22,6 +22,8 @@ public class ClienteDAO {
 		session.save(cliente);
 		tx.commit();
 		session.close();
+
 	}
+	
 
 }
