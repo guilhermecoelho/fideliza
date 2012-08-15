@@ -36,7 +36,7 @@ public class ClienteController {
 	
 	public boolean verificaEmail(){
 		if(!cliente.getEmail().equals(cliente.getEmailConfirm())){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "email invalido", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "email invalido", null));
 			return false;
 		} else {
 			return true;
