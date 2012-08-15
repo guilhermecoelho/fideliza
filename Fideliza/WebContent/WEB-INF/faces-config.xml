@@ -6,8 +6,8 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
     version="2.0">
 	<managed-bean>
-		<managed-bean-name>usuarioController</managed-bean-name>
-		<managed-bean-class>br.com.fideliza.controller.UsuarioController</managed-bean-class>
+		<managed-bean-name>clienteController</managed-bean-name>
+		<managed-bean-class>br.com.fideliza.controller.ClienteController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
@@ -16,15 +16,21 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
-		<display-name>index.xhtml</display-name>
-		<from-view-id>/index.xhtml</from-view-id>
+		<display-name>cadastro_cliente.xhtml</display-name>
+		<from-view-id>/cadastro_cliente.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>login</from-outcome>
+			<from-outcome>save</from-outcome>
 			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
-
-	
+	<navigation-rule>
+		<display-name>cadastro_cliente.xhtml</display-name>
+		<from-view-id>/cadastro_cliente.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/cadastro_cliente.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>
