@@ -13,16 +13,16 @@
 <h:body>
 
 	<h:form id="form">
-		<p:panel header="Cadastro usuario">
+		<p:panel header="Cadastro cliente">
 		
 			<p:messages id="msgError" autoUpdate="true" />
 			
 			<h:panelGrid columns="3" cellpadding="5">
 			
-				<h:outputLabel for="cliente" value="nome *" />
+				<h:outputLabel for="nome" value="nome *" />
 				<p:inputText value="#{clienteController.cliente.nome}" id="nome"
 					label="nome" required="true" requiredMessage="O campo nome deve ser preenchido"/>
-				<p:message for="cliente"  />
+				<p:message for="nome"  />
 
 				<h:outputLabel for="cpf" value="CPF *" />
 				<p:inputMask value="#{clienteController.cliente.cpf}" id="cpf"
