@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13403219658990" configfile="/Fideliza/WebContent/WEB-INF/faces-config.xml">
   <nodes xsi:type="pageflow:PFPage" name="cadastro_cliente.xhtml" x="132" y="156" id="pf13450340124726" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf13450340358668 pf134503414702012" inlinks="pf134503414702012" path="/cadastro_cliente.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="336" y="156" id="pf13450340358669" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13450340358668" path="/index.xhtml"/>
-  <links id="pf13450340358668" target="pf13450340358669" source="pf13450340124726" outcome="save"/>
+  <nodes xsi:type="pageflow:PFPage" name="consulta_cliente.xhtml" x="300" y="84" id="pf13451347882220" inlinks="pf13450340358668" path="/consulta_cliente.xhtml"/>
+  <links id="pf13450340358668" target="pf13451347882220" source="pf13450340124726" outcome="save"/>
   <links id="pf134503414702012" target="pf13450340124726" source="pf13450340124726" outcome="error"/>
 </pageflow:Pageflow>

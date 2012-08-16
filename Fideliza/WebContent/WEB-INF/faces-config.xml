@@ -15,14 +15,6 @@
 		<managed-bean-class>br.com.fideliza.controller.TesteController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
-	<navigation-rule>
-		<display-name>cadastro_cliente.xhtml</display-name>
-		<from-view-id>/cadastro_cliente.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>save</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
 
 	<navigation-rule>
 		<display-name>cadastro_cliente.xhtml</display-name>
@@ -30,6 +22,14 @@
 		<navigation-case>
 			<from-outcome>error</from-outcome>
 			<to-view-id>/cadastro_cliente.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>cadastro_cliente.xhtml</display-name>
+		<from-view-id>/cadastro_cliente.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/consulta_cliente.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
