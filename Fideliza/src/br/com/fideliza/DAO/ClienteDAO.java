@@ -1,5 +1,7 @@
 package br.com.fideliza.DAO;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -23,6 +25,13 @@ public class ClienteDAO {
 		tx.commit();
 		session.close();
 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Cliente> listaClientes(){
+		return session.createCriteria(Cliente.class).list();
+
+		
 	}
 	
 
