@@ -12,24 +12,54 @@
 </h:head>
 <h:body>
 	<h:form>
-		<p:dataTable  id="table" var="result" value="#{clienteController.clienteLista}">
+		<p:panel header="Consulta" />
+		
+		<p:messages id="msgError" autoUpdate="true" />
+		
+		<p:dataTable id="table" var="result"
+			value="#{clienteController.clienteLista}" paginator="true" rows="2"
+			editable="true">
+
 			<p:column sortBy="#{result.nome}">
+
 				<f:facet name="header">
-					<h:outputText value="nome"/>
+					<h:outputText value="nome" />
 				</f:facet>
-				<h:outputText value="#{result.nome}"/>
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{result.nome}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{result.nome}" id="nome"
+					label="nome" required="true" requiredMessage="O campo nome deve ser preenchido"/>
+				<p:message for="nome"  />
+					</f:facet>
+				</p:cellEditor>
 			</p:column>
 			<p:column sortBy="#{result.cpf}">
 				<f:facet name="header">
-					<h:outputText value="cpf"/>
+					<h:outputText value="cpf" />
 				</f:facet>
-				<h:outputText value="#{result.cpf}"/>
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{result.cpf}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputMask value="#{result.cpf}" id="cpf"
+					mask="999.999.999-99" label="cpf" required="true" requiredMessage="Informe seu CPF" />
+					<p:message  for="cpf"/>
+					</f:facet>
+				</p:cellEditor>
+				
 			</p:column>
 			<p:column sortBy="#{result.email}">
 				<f:facet name="header">
-					<h:outputText value="email"/>
+					<h:outputText value="email" />
 				</f:facet>
-				<h:outputText value="#{result.email}"/>
+				<h:outputText value="#{result.email}" />
+			</p:column>
+			<p:column headerText="Editar" style="width:50px">
+				<p:rowEditor />
 			</p:column>
 		</p:dataTable>
 	</h:form>
