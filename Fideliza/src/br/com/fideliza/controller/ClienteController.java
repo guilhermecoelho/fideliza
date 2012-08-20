@@ -19,6 +19,7 @@ public class ClienteController {
 	private Cliente cliente;
 	private ClienteDAO clienteDAO;
 	private boolean flag = false;
+	private Cliente selectCliente;
 
 	private DataModel<Cliente> clienteLista;
 
@@ -59,6 +60,14 @@ public class ClienteController {
 		}
 		return clienteLista;
 
+	}
+
+	public Cliente getSelectCliente() {
+		return selectCliente;
+	}
+
+	public void setSelectCliente(Cliente selectCliente) {
+		this.selectCliente = selectCliente;
 	}
 
 	public void setClienteLista(DataModel<Cliente> clienteLista) {
