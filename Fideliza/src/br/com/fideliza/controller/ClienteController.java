@@ -53,8 +53,10 @@ public class ClienteController {
 	}
 
 	public DataModel<Cliente> getClienteLista() { // lista todos clientes
-		List<Cliente> cliente = new ClienteDAO().listaClientes();
-		clienteLista = new ListDataModel<Cliente>(cliente);
+		if(clienteLista == null){
+			List<Cliente> cliente = new ClienteDAO().listaClientes();
+			clienteLista = new ListDataModel<Cliente>(cliente);	
+		}
 		return clienteLista;
 
 	}

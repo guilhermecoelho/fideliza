@@ -31,6 +31,9 @@ public class ClienteDAO {
 	public List<Cliente> listaClientes(){
 		return session.createCriteria(Cliente.class).list();
 
+	}
+	
+	public void editarCliente (Cliente cliente){
 		
 	}
 	
