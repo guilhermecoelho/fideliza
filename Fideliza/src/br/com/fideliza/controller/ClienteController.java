@@ -1,10 +1,11 @@
 package br.com.fideliza.controller;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -13,9 +14,13 @@ import br.com.fideliza.DAO.ClienteDAO;
 import br.com.fideliza.model.Cliente;
 
 @ManagedBean(name = "ClienteController")
-@RequestScoped
-public class ClienteController {
+@SessionScoped
+public class ClienteController implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4157361338947184411L;
 	private Cliente cliente;
 	private ClienteDAO clienteDAO;
 	private boolean flag = false;
@@ -38,6 +43,12 @@ public class ClienteController {
 			return "erro";
 		}
 
+	}
+	
+	public String editaCliente(){
+		
+		clienteDAO.editarCliente(cliente);
+		return "save";
 	}
 
 	public boolean verificaEmail() { // verifica se os campos "email" e  "confirma email" são iguais

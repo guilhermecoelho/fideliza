@@ -2,92 +2,72 @@ package br.com.fideliza.model;
 
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-public class Cliente implements Serializable {
+public class Empresa implements Serializable{
 
 	/**
 	 * 
 	 */
-
-	private static final long serialVersionUID = 4675927773047259047L;
-	@Id
-	@GeneratedValue
-	private int idCliente;
+	private static final long serialVersionUID = 8732575614776935800L;
+	private int idEmpresa;
 	private String nome;
-	private String password;
+	private String cnpj;
 	private String email;
-	private String emailConfirm;
-	private String cpf;
-
+	private String ConfirmEmail;
+	private String password;
 	
-	public int getIdCliente() {
-		return idCliente;
+	public int getIdEmpresa() {
+		return idEmpresa;
 	}
-
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setIdEmpresa(int idEmpresa) {
+		this.idEmpresa = idEmpresa;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public String getEmailConfirm() {
-		return emailConfirm;
+	public String getCnpj() {
+		return cnpj;
 	}
-
-	public void setEmailConfirm(String emailConfirm) {
-		this.emailConfirm = emailConfirm;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
-	public String getCpf() {
-		return cpf;
+	public String getConfirmEmail() {
+		return ConfirmEmail;
 	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setConfirmEmail(String confirmEmail) {
+		ConfirmEmail = confirmEmail;
 	}
-
-
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
-				+ ((emailConfirm == null) ? 0 : emailConfirm.hashCode());
-		result = prime * result + idCliente;
+				+ ((ConfirmEmail == null) ? 0 : ConfirmEmail.hashCode());
+		result = prime * result + ((cnpj == null) ? 0 : cnpj.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + idEmpresa;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,23 +76,23 @@ public class Cliente implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
+		Empresa other = (Empresa) obj;
+		if (ConfirmEmail == null) {
+			if (other.ConfirmEmail != null)
 				return false;
-		} else if (!cpf.equals(other.cpf))
+		} else if (!ConfirmEmail.equals(other.ConfirmEmail))
+			return false;
+		if (cnpj == null) {
+			if (other.cnpj != null)
+				return false;
+		} else if (!cnpj.equals(other.cnpj))
 			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (emailConfirm == null) {
-			if (other.emailConfirm != null)
-				return false;
-		} else if (!emailConfirm.equals(other.emailConfirm))
-			return false;
-		if (idCliente != other.idCliente)
+		if (idEmpresa != other.idEmpresa)
 			return false;
 		if (nome == null) {
 			if (other.nome != null)

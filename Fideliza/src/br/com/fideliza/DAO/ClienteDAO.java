@@ -2,8 +2,10 @@ package br.com.fideliza.DAO;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.fideliza.model.Cliente;
 import br.com.fideliza.util.HibernateUtil;
@@ -34,7 +36,18 @@ public class ClienteDAO {
 	}
 	
 	public void editarCliente (Cliente cliente){
+		session.update(cliente);
+		tx.commit();
+		session.close();
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Cliente> listaUmCliente(int id) throws HibernateException{
+
+			return session.createCriteria(Cliente.class)
+					.add(Restrictions.like("idCliente",id)).list();
+
 	}
 	
 
