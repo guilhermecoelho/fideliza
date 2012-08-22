@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13403219658990" configfile="/Fideliza/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="cadastro_cliente.xhtml" x="132" y="156" id="pf13450340124726" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf13450340358668 pf134503414702012" inlinks="pf134503414702012" path="/cadastro_cliente.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="consulta_cliente.xhtml" x="300" y="84" id="pf13451347882220" inlinks="pf13450340358668" path="/consulta_cliente.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="cadastro_cliente.xhtml" x="137" y="144" id="pf13450340124726" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf13450340358668 pf134503414702012" inlinks="pf134503414702012" path="/cadastro_cliente.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="consulta_cliente.xhtml" x="305" y="144" id="pf13451347882220" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf13450340358668" path="/consulta_cliente.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="cadastro_empresa.xhtml" x="127" y="36" id="pf13456537766080" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf13456537766081 pf13456538508683" inlinks="pf13456538508683" path="/cadastro_empresa.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="consulta_empresa.xhtml" x="305" y="36" id="pf13456537766082" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf13456537766081" path="/consulta_empresa.xhtml"/>
   <links id="pf13450340358668" target="pf13451347882220" source="pf13450340124726" outcome="save"/>
   <links id="pf134503414702012" target="pf13450340124726" source="pf13450340124726" outcome="error"/>
+  <links id="pf13456537766081" target="pf13456537766082" source="pf13456537766080" outcome="empresaSalva"/>
+  <links id="pf13456538508683" target="pf13456537766080" source="pf13456537766080" outcome="error">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
 </pageflow:Pageflow>

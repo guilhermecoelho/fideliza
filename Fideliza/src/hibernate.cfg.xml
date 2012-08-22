@@ -13,8 +13,12 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<property name="use_sql_comments">true</property>
 			
 		<mapping resource="br/com/fideliza/hbm/cliente.hbm.xml"/>
+		<mapping resource="br/com/fideliza/hbm/empresa.hbm.xml"/>
 		
 	</session-factory>
 </hibernate-configuration>
