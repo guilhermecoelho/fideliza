@@ -17,7 +17,7 @@
 		
 			<p:messages id="msgError" autoUpdate="true" />
 			
-			<h:panelGrid columns="3" cellpadding="5">
+			<h:panelGrid columns="3" cellpadding="5" process="@this">
 			
 				<h:outputLabel for="nome" value="nome *" />
 				<p:inputText value="#{clienteController.cliente.nome}" id="nome"
@@ -53,6 +53,13 @@
 					strongLabel="forte"  required="true" requiredMessage="Confirme a senha" />
 					<p:message  for="passwordConfirm"/>
 					
+					<h:outputLabel value="Empresa"/>
+					<p:selectOneMenu>
+						
+						<f:selectItems value="#{empresaController.populaComboBox}" var="c" itemLabel="#{c.nome}"  itemValue="#{c.idEmpresa}"/>
+						
+					</p:selectOneMenu>
+				
 				
 				<p:commandButton value="Salvar"
 					action="#{clienteController.salvaCliente}" ajax="false"/>
