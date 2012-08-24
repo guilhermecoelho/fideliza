@@ -24,6 +24,7 @@ public class PromocaoController implements Serializable{
 	}
 	
 	public String salvaPromocao(){
+		
 		promocaoDAO.adicionaPromocao(promocao);
 		return "save";
 	}

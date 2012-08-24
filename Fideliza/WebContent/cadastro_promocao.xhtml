@@ -36,7 +36,7 @@
 				
 					
 				<h:outputLabel value="Empresa"/>
-				<p:selectOneMenu value="#{promocaoController.promocao.idEmpresa}">
+				<p:selectOneMenu value="#{promocaoController.promocao.idEmpresa}" id="idEmpresa">
 						
 					<f:selectItems value="#{empresaController.populaComboBox}" var="c" itemLabel="#{c.nome}"  itemValue="#{c.idEmpresa}"/>
 						
