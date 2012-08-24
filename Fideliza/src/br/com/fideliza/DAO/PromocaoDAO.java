@@ -29,5 +29,10 @@ public class PromocaoDAO {
 	public List<Promocao> listaPromocao(){
 		return session.createCriteria(Promocao.class).list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Promocao> listaPromocao2(){
+		return session.createQuery("select promocao from Promocao as promocao left join fetch promocao.idEmpresa").list();
+	}
 
 }

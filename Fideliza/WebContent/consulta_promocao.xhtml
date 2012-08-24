@@ -42,7 +42,7 @@
 				<f:facet name="header">
 					<h:outputText value="empresa" />
 				</f:facet>
-				<h:outputText value="#{result.idEmpresa}" />
+				<h:outputText value="#{result.idEmpresa.nome}" />
 			</p:column>
 
 			<p:rowExpansion>
@@ -61,6 +61,9 @@
 
 					<h:outputLabel for="desconto" value="desconto" />
 					<h:outputText value="#{result.desconto}" />
+					
+					<h:outputLabel for="desconto" value="empresa" />
+					<h:outputText value="#{result.idEmpresa.nome}" />
 
 				</h:panelGrid>
 			</p:rowExpansion>
