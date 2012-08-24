@@ -20,6 +20,11 @@
 		<managed-bean-class>br.com.fideliza.controller.EmpresaController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>promocaoController</managed-bean-name>
+		<managed-bean-class>br.com.fideliza.controller.PromocaoController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 		<display-name>cadastro_cliente.xhtml</display-name>
@@ -51,6 +56,14 @@
 		<navigation-case>
 			<from-outcome>error</from-outcome>
 			<to-view-id>/cadastro_empresa.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>cadastro_promocao.xhtml</display-name>
+		<from-view-id>/cadastro_promocao.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>save</from-outcome>
+			<to-view-id>/consulta_promocao.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 

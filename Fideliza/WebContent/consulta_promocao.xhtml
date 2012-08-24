@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<p:panel header="Consulta" />
+
+
+
+		<p:dataTable id="table" var="result"
+			value="#{promocaoController.promocaoLista}" paginator="true" rows="5">
+			<p:column>
+				<p:rowToggler />
+			</p:column>
+
+			<p:column sortBy="#{result.nome}">
+
+				<f:facet name="header">
+					<h:outputText value="nome" />
+				</f:facet>
+				<h:outputText value="#{result.nome}" />
+			</p:column>
+			<p:column sortBy="#{result.descricao}">
+
+				<f:facet name="header">
+					<h:outputText value="descricao" />
+				</f:facet>
+				<h:outputText value="#{result.descricao}" />
+			</p:column>
+			
+			<p:column sortBy="#{result.descricao}">
+
+				<f:facet name="header">
+					<h:outputText value="empresa" />
+				</f:facet>
+				<h:outputText value="#{result.idEmpresa}" />
+			</p:column>
+
+			<p:rowExpansion>
+
+				<h:panelGrid columns="2" cellpadding="2"
+					styleClass="ui-widget-content grid" id="display">
+
+					<h:outputLabel for="nome" value="Id" />
+					<h:outputText value="#{result.idPromocao}" />
+
+					<h:outputLabel for="nome" value="nome *" />
+					<h:outputText value="#{result.nome}" />
+
+					<h:outputLabel for="descricao" value="Descricao" />
+					<h:outputText value="#{result.descricao}" />
+
+					<h:outputLabel for="desconto" value="desconto" />
+					<h:outputText value="#{result.desconto}" />
+
+				</h:panelGrid>
+			</p:rowExpansion>
+
+		</p:dataTable>
+
+	</h:form>
+</h:body>
+</html>
