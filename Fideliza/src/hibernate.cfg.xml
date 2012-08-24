@@ -19,6 +19,7 @@
 			
 		<mapping resource="br/com/fideliza/hbm/cliente.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/empresa.hbm.xml"/>
+		<mapping resource="br/com/fideliza/hbm/promocao.hbm.xml"/>
 		
 	</session-factory>
 </hibernate-configuration>
