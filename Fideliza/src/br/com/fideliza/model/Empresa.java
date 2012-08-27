@@ -14,7 +14,11 @@ public class Empresa implements Serializable{
 	private String email;
 	private String ConfirmEmail;
 	private String password;
+
 	
+	//gets e setters
+	
+
 	public int getIdEmpresa() {
 		return idEmpresa;
 	}
@@ -54,6 +58,9 @@ public class Empresa implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	//hashCode
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -68,6 +75,8 @@ public class Empresa implements Serializable{
 				+ ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -106,7 +115,9 @@ public class Empresa implements Serializable{
 			return false;
 		return true;
 	}
+	
 
 	
+		
 
 }

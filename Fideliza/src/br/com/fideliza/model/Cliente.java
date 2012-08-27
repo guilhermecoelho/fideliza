@@ -20,10 +20,20 @@ public class Cliente implements Serializable {
 	private String email;
 	private String emailConfirm;
 	private String cpf;
-
+	private TipoUsuario tipoUsuario;
+	
+	//gets e setters
 	
 	public int getIdCliente() {
 		return idCliente;
+	}
+
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 	public void setIdCliente(int idCliente) {
@@ -85,9 +95,14 @@ public class Cliente implements Serializable {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result
+				+ ((tipoUsuario == null) ? 0 : tipoUsuario.hashCode());
 		return result;
 	}
 
+	//hashCode
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -124,9 +139,17 @@ public class Cliente implements Serializable {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (tipoUsuario == null) {
+			if (other.tipoUsuario != null)
+				return false;
+		} else if (!tipoUsuario.equals(other.tipoUsuario))
+			return false;
 		return true;
 	}
+	
 
+	
+	
 	
 
 }
