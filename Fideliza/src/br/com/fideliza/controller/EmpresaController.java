@@ -38,7 +38,6 @@ public class EmpresaController implements Serializable{
 		
 	}
 	
-	
 	// gets e setters
 	
 	

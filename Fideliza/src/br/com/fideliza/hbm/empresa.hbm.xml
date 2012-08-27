@@ -19,6 +19,7 @@
 		<property name="password" column="PASSWORD_EMPRESA" />
 		<property name="email" column="EMAIL_EMPRESA" />
 		<property name="cnpj" column="CNPJ_EMPRESA" />
+		
 
 	</class>
 

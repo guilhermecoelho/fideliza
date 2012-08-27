@@ -23,7 +23,7 @@ public class ClienteController implements Serializable{
 	private static final long serialVersionUID = -4157361338947184411L;
 	private Cliente cliente;
 	private ClienteDAO clienteDAO;
-	private boolean flag = false;
+
 	private Cliente selectCliente;
 
 	private DataModel<Cliente> clienteLista;
@@ -34,9 +34,10 @@ public class ClienteController implements Serializable{
 		this.clienteDAO = new ClienteDAO();
 	}
 
+
 	public String salvaCliente() {
 		if (verificaEmail() == true) { // se o email está certo salva cadastro
-			flag = true;
+
 			clienteDAO.adicionaCliente(cliente);
 			return "save";
 		} else {
@@ -101,12 +102,6 @@ public class ClienteController implements Serializable{
 		this.clienteDAO = clienteDAO;
 	}
 
-	public boolean isFlag() {
-		return flag;
-	}
 
-	public void setFlag(boolean flag) {
-		this.flag = flag;
-	}
 
 }

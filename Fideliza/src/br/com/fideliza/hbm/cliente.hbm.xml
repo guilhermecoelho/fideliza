@@ -19,6 +19,10 @@
 		<property name="password" column="PASSWORD_CLIENTE" />
 		<property name="email" column="EMAIL_CLIENTE" />
 		<property name="cpf" column="CPF_CLIENTE" />
+		
+		<many-to-one name="tipoUsuario" class="br.com.fideliza.model.TipoUsuario" fetch="join">
+         <column name="IDTIPOUSUARIO_CLIENTE" />
+        </many-to-one>
 
 	</class>
 
