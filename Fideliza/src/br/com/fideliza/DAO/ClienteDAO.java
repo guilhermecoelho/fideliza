@@ -3,6 +3,7 @@ package br.com.fideliza.DAO;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -56,6 +57,17 @@ public class ClienteDAO {
 			return session.createCriteria(Cliente.class)
 					.add(Restrictions.like("idCliente",id)).list();
 
+	}
+	
+	public Cliente verificaCPF(String cpf){
+		
+		Cliente retorno;
+		String sql= "select cliente from Cliente as cliente where cpf = :cpf";
+		Query q = session.createQuery(sql);
+		q.setString("cpf", cpf);
+		retorno = (Cliente)  q.uniqueResult();
+		
+		return retorno;
 	}
 	
 

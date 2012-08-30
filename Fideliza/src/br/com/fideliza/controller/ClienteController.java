@@ -32,13 +32,17 @@ public class ClienteController implements Serializable{
 
 		this.cliente = new Cliente();
 		this.clienteDAO = new ClienteDAO();
+
 	}
 
 
 	public String salvaCliente() {
-		if (verificaEmail() == true) { // se o email está certo salva cadastro
-
+		
+		
+		if (verificaEmail() == true && verificaCPF() == true) { // se o email está certo salva cadastro
+			
 			clienteDAO.adicionaCliente(cliente);
+			
 			return "save";
 		} else {
 			return "erro";
@@ -61,6 +65,23 @@ public class ClienteController implements Serializable{
 							"email invalido", null));
 			return false;
 		} else {
+			return true;
+		}
+	}
+	public boolean verificaCPF(){ // verifica se cpf já esta cadastrado
+		
+		Cliente retorno = clienteDAO.verificaCPF(cliente.getCpf());
+		try{
+			// se CPF já estiver cadastrado, retorna mensagem de erro
+			if(!retorno.equals(null)){ 
+				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"CPF já cadastrado", null));
+				return false;
+			} else {
+				return true;
+			}
+		
+		 // se não encontrar cpf no banco, hibernate retornará um erro de nullPointException
+		} catch (NullPointerException e){
 			return true;
 		}
 	}
