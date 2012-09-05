@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.ClienteDAO;
 import br.com.fideliza.model.Cliente;
@@ -36,9 +37,8 @@ public class ClienteController implements Serializable{
 	}
 
 
-	public String salvaCliente() {
-		
-		
+	public String salvaCliente(){
+
 		if (verificaEmail() == true && verificaCPF() == true) { // se o email está certo salva cadastro
 			
 			clienteDAO.adicionaCliente(cliente);
@@ -71,25 +71,38 @@ public class ClienteController implements Serializable{
 	public boolean verificaCPF(){ // verifica se cpf já esta cadastrado
 		
 		Cliente retorno = clienteDAO.verificaCPF(cliente.getCpf());
-		try{
-			// se CPF já estiver cadastrado, retorna mensagem de erro
-			if(!retorno.equals(null)){ 
-				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"CPF já cadastrado", null));
-				return false;
-			} else {
-				return true;
-			}
 		
-		 // se não encontrar cpf no banco, hibernate retornará um erro de nullPointException
-		} catch (NullPointerException e){
+		if( retorno != null){
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"CPF já cadastrado", null));
+			return false;
+		} else {
 			return true;
 		}
 	}
-
+	
+	
 	public DataModel<Cliente> getClienteLista() { // lista todos clientes
 		if(clienteLista == null){
-			List<Cliente> cliente = new ClienteDAO().listaClientes();
-			clienteLista = new ListDataModel<Cliente>(cliente);	
+			
+			HttpSession session = ( HttpSession ) FacesContext.getCurrentInstance().getExternalContext().getSession( true );  
+			
+			cliente = (Cliente) session.getAttribute("cliente"); //recupera dados da sessão
+			
+			// método em teste!!!
+			
+			if(cliente != null){ //se estiver logado, lista somente dados do cliente logado
+				
+				int idCliente = cliente.getIdCliente(); // recupera id da sessão
+				List<Cliente> cliente = new ClienteDAO().listaUmCliente(idCliente);
+				clienteLista = new ListDataModel<Cliente>(cliente);	
+				
+			} else { //lista todos clientes
+				
+				List<Cliente> cliente = new ClienteDAO().listaClientes();
+				clienteLista = new ListDataModel<Cliente>(cliente);	
+				
+			}
+
 		}
 		return clienteLista;
 

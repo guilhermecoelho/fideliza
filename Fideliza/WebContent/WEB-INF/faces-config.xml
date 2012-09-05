@@ -25,6 +25,11 @@
 		<managed-bean-class>br.com.fideliza.controller.PromocaoController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>usuarioController</managed-bean-name>
+		<managed-bean-class>br.com.fideliza.controller.UsuarioController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 		<display-name>cadastro_cliente.xhtml</display-name>
@@ -64,6 +69,22 @@
 		<navigation-case>
 			<from-outcome>save</from-outcome>
 			<to-view-id>/consulta_promocao.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>errorLogin</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginOK</from-outcome>
+			<to-view-id>/consulta_cliente.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
