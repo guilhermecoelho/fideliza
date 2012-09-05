@@ -11,25 +11,22 @@
 <h:head>
 </h:head>
 <h:body>
-	<c:if test="#{usuarioController.flag == true}">
-	
-		logado
-	</c:if>
 
 	<h:form>
-		<h:panelGrid columns="2" cellpadding="5">
 
-			<h:outputText value="nome" />
-			<p:inputText value="#{usuarioController.user.user}" id="user" />
+	<p:messages id="error" showDetail="true" autoUpdate="true"/>
+		<h:panelGrid columns="2" cellpadding="5">
+			
+			
+			 
+			<h:outputText value="CPF" />
+			<p:inputMask value="#{usuarioController.cliente.cpf}" id="cpf" mask="999.999.999-99"/>
 			
 			<h:outputText for="password" value="senha" />
-			<p:password value="#{usuarioController.user.password}" id="password" label = "senha" match="passwordConfirm" feedback="true" required="true"/>
+			<p:password value="#{usuarioController.cliente.password}" id="password" label = "senha"  feedback="true" required="true"/>
 			
-			<h:outputText for="password" value="confirmar senha" />
-			<p:password value="#{usuarioController.user.password}" id="passwordConfirm" label = "confirmação" feedback="true"/><br></br>
-			<p:messages id="errosSenha" showDetail="true" autoUpdate="true"/>
 			
-			<p:commandButton value="teste" action="#{usuarioController.salvaUser}" />
+			<p:commandButton value="teste" action="#{usuarioController.login}" />
 
 
 		</h:panelGrid>

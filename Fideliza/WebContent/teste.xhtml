@@ -12,14 +12,15 @@
 <h:body>
 
 <h:form>
+
 	<h:panelGrid columns="2" cellpadding="5">
 		
-		<h:outputText value="nome"/>
-		<p:inputText binding="#{usuarioController.usuario.user}" id="user"/>
-		<h:outputText value="senha"/>
-		<p:inputText binding="#{usuarioController.usuario.password}" id="password"/>
-		<p:commandButton value="teste" actionListener="#{usuarioController.verificaUser}"/>
-
+		
+		<h:outputText value="#{usuarioController.cliente.cpf}" />
+		
+		<h:outputText value="#{usuarioController.cliente.nome}" />
+		<h:outputText value="#{usuarioController.cliente.tipoUsuario.nome}" />
+		
 	</h:panelGrid>
 </h:form>
 	

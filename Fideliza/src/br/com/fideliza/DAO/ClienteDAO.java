@@ -60,7 +60,7 @@ public class ClienteDAO {
 	}
 	
 	public Cliente verificaCPF(String cpf){
-		
+
 		Cliente retorno;
 		String sql= "select cliente from Cliente as cliente where cpf = :cpf";
 		Query q = session.createQuery(sql);
@@ -70,5 +70,16 @@ public class ClienteDAO {
 		return retorno;
 	}
 	
-
+	public Cliente login(String password, String cpf){
+		
+		Cliente retorno;
+		String sql = "select cliente from Cliente as cliente where cpf = :cpf and password = :password";
+		Query q = session.createQuery(sql);
+		q.setString("cpf", cpf);
+		q.setString("password", password);
+		retorno = (Cliente) q.uniqueResult();
+		
+		return retorno;
+		
+	}
 }
