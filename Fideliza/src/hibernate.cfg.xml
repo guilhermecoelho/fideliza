@@ -17,11 +17,13 @@
 		<property name="format_sql">true</property>
 		<property name="use_sql_comments">true</property>
 			
-		<mapping resource="br/com/fideliza/hbm/cliente.hbm.xml"/>
-		<mapping resource="br/com/fideliza/hbm/empresa.hbm.xml"/>
-		<mapping resource="br/com/fideliza/hbm/promocao.hbm.xml"/>
+		<mapping resource="br/com/fideliza/hbm/Administrador.hbm.xml"/>
+		<mapping resource="br/com/fideliza/hbm/Cliente.hbm.xml"/>
+		<mapping resource="br/com/fideliza/hbm/Empresa.hbm.xml"/>
+		<mapping resource="br/com/fideliza/hbm/Promocao.hbm.xml"/>
+		<mapping resource="br/com/fideliza/hbm/Terminal.hbm.xml"/>
+		<mapping resource="br/com/fideliza/hbm/Usuario.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/TipoUsuario.hbm.xml"/>
-		<mapping resource="br/com/fideliza/hbm/UsuarioEmpresa.hbm.xml"/>
 		
 	</session-factory>
 </hibernate-configuration>

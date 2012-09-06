@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.fideliza.model.Cliente;
-import br.com.fideliza.model.TipoUsuario;
 import br.com.fideliza.util.HibernateUtil;
 
 public class ClienteDAO {
@@ -26,15 +25,9 @@ public class ClienteDAO {
 	
 	public void adicionaCliente (Cliente cliente){
 		
-		//setar o tipo de usuario
-		TipoUsuario tipoUsuario = new TipoUsuario();
-		tipoUsuario.setIdTipoUsuario(1); //salvar cliente sempre como tipo usuario = 1
-		cliente.setTipoUsuario(tipoUsuario);
-		
-		//salvar no BD
 		session.save(cliente);
 		tx.commit();
-		session.close();
+		//session.close();
 
 	}
 	

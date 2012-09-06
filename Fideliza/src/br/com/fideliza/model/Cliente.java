@@ -20,7 +20,7 @@ public class Cliente implements Serializable {
 	private String email;
 	private String emailConfirm;
 	private String cpf;
-	private TipoUsuario tipoUsuario;
+	private boolean status;
 	
 	//gets e setters
 	
@@ -28,12 +28,12 @@ public class Cliente implements Serializable {
 		return idCliente;
 	}
 
-	public TipoUsuario getTipoUsuario() {
-		return tipoUsuario;
+	public boolean isStatus() {
+		return status;
 	}
 
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 	public void setIdCliente(int idCliente) {
@@ -73,8 +73,6 @@ public class Cliente implements Serializable {
 		this.cpf = cpf;
 	}
 
-
-
 	public String getPassword() {
 		return password;
 	}
@@ -83,6 +81,8 @@ public class Cliente implements Serializable {
 		this.password = password;
 	}
 
+	//hashCode
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -95,14 +95,10 @@ public class Cliente implements Serializable {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
-		result = prime * result
-				+ ((tipoUsuario == null) ? 0 : tipoUsuario.hashCode());
+		result = prime * result + (status ? 1231 : 1237);
 		return result;
 	}
 
-	//hashCode
-	
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -139,17 +135,8 @@ public class Cliente implements Serializable {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (tipoUsuario == null) {
-			if (other.tipoUsuario != null)
-				return false;
-		} else if (!tipoUsuario.equals(other.tipoUsuario))
+		if (status != other.status)
 			return false;
 		return true;
 	}
-	
-
-	
-	
-	
-
 }
