@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 24/08/2012 07:32:33 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 06/09/2012 08:23:40 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="br.com.fideliza.model.Promocao" table="PROMOCAO">
         <id name="idPromocao" type="int">
-            <column name="ID_PROMOCAO" />
-            <generator class="increment" />
+            <column name="INT_ID_PROMOCAO_PRO" />
+            <generator class="assigned" />
         </id>
         <property name="nome" type="java.lang.String">
-            <column name="NOME_PROMOCAO" />
+            <column name="STRING_NOME_PRO" />
         </property>
         <property name="descricao" type="java.lang.String">
-            <column name="DESCRICAO_PROMOCAO" />
+            <column name="STRING_DESCRICAO_PRO" />
         </property>
         <property name="desconto" type="double">
-            <column name="DESCONTO_PROMOCAO" />
+            <column name="DOUBLE_DESCONTO_PRO" />
         </property>
         <property name="saldoPontos" type="double">
-            <column name="SALDOPONTOS_PROMOCAO" />
+            <column name="DOUBLE_SALDOPONTOS_PRO" />
         </property>
         <many-to-one name="idEmpresa" class="br.com.fideliza.model.Empresa" fetch="join">
-            <column name="IDEMPRESA_PROMOCAO" />
+            <column name="INT_ID_EMPRESA_PRO" />
         </many-to-one>
     </class>
 </hibernate-mapping>

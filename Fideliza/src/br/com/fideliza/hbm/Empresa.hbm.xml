@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/09/2012 08:24:49 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="br.com.fideliza.model.Empresa" table="EMPRESA">
+        <id name="idEmpresa" type="int">
+            <column name="INT_ID_EMPRESA_EMP" />
+            <generator class="assigned" />
+        </id>
+        <property name="nome" type="java.lang.String">
+            <column name="STRING_NOME_EMP" />
+        </property>
+        <property name="cnpj" type="java.lang.String">
+            <column name="STRING_CNPJ_EMP" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="STRING_EMAIL_EMP" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="STRING_PASSWORD_EMP" />
+        </property>
+        <property name="status" type="boolean">
+            <column name="BOOL_STATUS_EMP" />
+        </property>
+    </class>
+</hibernate-mapping>

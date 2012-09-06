@@ -14,13 +14,18 @@ public class Empresa implements Serializable{
 	private String email;
 	private String ConfirmEmail;
 	private String password;
-
+	private boolean status;
 	
 	//gets e setters
 	
-
 	public int getIdEmpresa() {
 		return idEmpresa;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	public void setIdEmpresa(int idEmpresa) {
 		this.idEmpresa = idEmpresa;
@@ -73,10 +78,9 @@ public class Empresa implements Serializable{
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result + (status ? 1231 : 1237);
 		return result;
 	}
-	
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -113,11 +117,8 @@ public class Empresa implements Serializable{
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (status != other.status)
+			return false;
 		return true;
 	}
-	
-
-	
-		
-
 }

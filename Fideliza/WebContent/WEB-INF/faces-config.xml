@@ -30,6 +30,11 @@
 		<managed-bean-class>br.com.fideliza.controller.UsuarioController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>usuarioEmpresaController</managed-bean-name>
+		<managed-bean-class>br.com.fideliza.controller.UsuarioEmpresaController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 		<display-name>cadastro_cliente.xhtml</display-name>

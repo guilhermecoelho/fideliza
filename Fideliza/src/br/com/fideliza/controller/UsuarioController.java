@@ -5,12 +5,16 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.ClienteDAO;
+import br.com.fideliza.DAO.UsuarioDAO;
 import br.com.fideliza.model.Cliente;
+import br.com.fideliza.model.Usuario;
 
 public class UsuarioController {
 	
 	private ClienteDAO clienteDAO;
 	private Cliente cliente;
+	private Usuario user;
+	private UsuarioDAO userDAO;
 	
 	public UsuarioController(){
 		this.cliente = new Cliente();
@@ -28,16 +32,34 @@ public class UsuarioController {
 			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
 			session.setAttribute("cliente", cliente); //salva dados do cliente na sessão
 			
-			if(retorno.getTipoUsuario().getIdTipoUsuario() == 1){
+			/*if(retorno.getTipoUsuario().getIdTipoUsuario() == 1){
 				return "loginOK";
 			} else {
 				return "loginOK2";
-			}
+			}*/
+			return "loginOK";
 
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Senha ou Usuario incorreto", null));
 			return "errorLogin";
 		}
+	}
+
+	
+	public Usuario getUser() {
+		return user;
+	}
+
+	public void setUser(Usuario user) {
+		this.user = user;
+	}
+
+	public UsuarioDAO getUserDAO() {
+		return userDAO;
+	}
+
+	public void setUserDAO(UsuarioDAO userDAO) {
+		this.userDAO = userDAO;
 	}
 
 	public ClienteDAO getClienteDAO() {
