@@ -1,41 +1,88 @@
 package br.com.fideliza.controller;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 import br.com.fideliza.DAO.EmpresaDAO;
+import br.com.fideliza.DAO.UsuarioDAO;
 import br.com.fideliza.model.Empresa;
+import br.com.fideliza.model.Usuario;
 
-public class EmpresaController implements Serializable{
+public class EmpresaController {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7278552676261524272L;
 	private Empresa empresa;
 	private EmpresaDAO empresaDAO;
-	private Empresa selectEmpresa;
+	private Usuario user;
+	private UsuarioDAO usuarioDAO;
 	private DataModel<Empresa> empresaLista; //lista empresas
 	private ArrayList<Empresa> populaComboBox; //popula comboBox
-	
 	
 	
 	public EmpresaController(){
 		this.empresa = new Empresa();
 		this.empresaDAO = new EmpresaDAO();
+		this.user = new Usuario();
+		this.usuarioDAO = new UsuarioDAO();
 	}
 	
 	public String salvaEmpresa(){
-		empresaDAO.adicionaEmpresa(empresa);
-		return "empresaSalva";
+		if(verificaEmail() == true && verificaCNPJ() == true){
+			
+			empresa.setStatus(true);
+			empresaDAO.adicionaEmpresa(empresa);
+			
+			Empresa retorno = empresaDAO.BuscaPorCNPJ(empresa.getCnpj());
+			
+			if(retorno != null){
+				user.setEmpresa(retorno);
+				user.setUser(retorno.getEmail());
+				user.setPassword(retorno.getPassword());
+				
+				usuarioDAO.adicionaUsuario(user);
+				
+				return "empresaSalva";
+			} else {
+				return "error";
+			}
+			
+		} else {
+			return "error";
+		}
 	}
 	
 	public void editaEmpresa(){
 		
+	}
+	
+	public boolean verificaEmail(){
+		
+		if (!empresa.getEmail().equals(empresa.getConfirmEmail())) {
+			FacesContext.getCurrentInstance().addMessage(
+					null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean verificaCNPJ(){
+		
+		Empresa retorno = empresaDAO.BuscaPorCNPJ(empresa.getCnpj());
+		
+		if (retorno != null){
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"CNPJ já cadastrado", null));
+			return false;
+		}else {
+			return true;
+		}
 	}
 	
 	// gets e setters
@@ -68,14 +115,6 @@ public class EmpresaController implements Serializable{
 
 	public void setEmpresaDAO(EmpresaDAO empresaDAO) {
 		this.empresaDAO = empresaDAO;
-	}
-
-	public Empresa getSelectEmpresa() {
-		return selectEmpresa;
-	}
-
-	public void setSelectEmpresa(Empresa selectEmpresa) {
-		this.selectEmpresa = selectEmpresa;
 	}
 
 	public DataModel<Empresa> getEmpresaLista() { //lista todas as empresas

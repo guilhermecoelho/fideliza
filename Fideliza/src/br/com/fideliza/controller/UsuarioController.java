@@ -4,39 +4,32 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import br.com.fideliza.DAO.ClienteDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
-import br.com.fideliza.model.Cliente;
 import br.com.fideliza.model.Usuario;
 
 public class UsuarioController {
 	
-	private ClienteDAO clienteDAO;
-	private Cliente cliente;
-	private Usuario user;
+
+	private Usuario usuario;
 	private UsuarioDAO userDAO;
 	
 	public UsuarioController(){
-		this.cliente = new Cliente();
-		this.clienteDAO = new ClienteDAO();
+
+		this.usuario = new Usuario();
+		this.userDAO = new UsuarioDAO();
 	}
 	
 	public String login(){
-		Cliente retorno = clienteDAO.login(cliente.getPassword(),cliente.getCpf());
-
+		
+		Usuario retorno = userDAO.loginCliente(usuario.getPassword(), usuario.getUser());
+		
 		if(retorno != null){
-			
-			cliente = retorno;
+			usuario = retorno;
 			
 			FacesContext fc = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-			session.setAttribute("cliente", cliente); //salva dados do cliente na sessão
+			session.setAttribute("usuario", usuario); //salva dados do usuario na sessão
 			
-			/*if(retorno.getTipoUsuario().getIdTipoUsuario() == 1){
-				return "loginOK";
-			} else {
-				return "loginOK2";
-			}*/
 			return "loginOK";
 
 		} else {
@@ -45,13 +38,12 @@ public class UsuarioController {
 		}
 	}
 
-	
-	public Usuario getUser() {
-		return user;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUser(Usuario user) {
-		this.user = user;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public UsuarioDAO getUserDAO() {
@@ -61,22 +53,5 @@ public class UsuarioController {
 	public void setUserDAO(UsuarioDAO userDAO) {
 		this.userDAO = userDAO;
 	}
-
-	public ClienteDAO getClienteDAO() {
-		return clienteDAO;
-	}
-
-	public void setClienteDAO(ClienteDAO clienteDAO) {
-		this.clienteDAO = clienteDAO;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	
 
 }

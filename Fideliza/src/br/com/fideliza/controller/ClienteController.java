@@ -97,13 +97,13 @@ public class ClienteController {
 			HttpSession session = (HttpSession) FacesContext
 					.getCurrentInstance().getExternalContext().getSession(true);
 
-			cliente = (Cliente) session.getAttribute("cliente"); // recupera dados da sessão
+			user = (Usuario) session.getAttribute("usuario"); // recupera dados da sessão
 
 			// método em teste!!!
 
-			if (cliente != null) { // se estiver logado, lista somente dados do cliente logado
+			if (user != null) { // se estiver logado, lista somente dados do cliente logado
 
-				int idCliente = cliente.getIdCliente(); // recupera id da sessão
+				int idCliente = user.getCliente().getIdCliente(); // recupera id da sessão
 				List<Cliente> cliente = new ClienteDAO()
 						.listaUmCliente(idCliente);
 				clienteLista = new ListDataModel<Cliente>(cliente);
@@ -131,5 +131,4 @@ public class ClienteController {
 	public void setClienteLista(DataModel<Cliente> clienteLista) {
 		this.clienteLista = clienteLista;
 	}
-
 }

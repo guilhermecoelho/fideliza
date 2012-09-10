@@ -19,10 +19,10 @@
 					
 			 
 			<h:outputText value="CPF" />
-			<p:inputMask value="#{usuarioController.cliente.cpf}" id="cpf" mask="999.999.999-99"/>
+			<p:inputMask value="#{usuarioController.usuario.user}" id="cpf" mask="999.999.999-99"/>
 			
 			<h:outputText for="password" value="senha" />
-			<p:password value="#{usuarioController.cliente.password}" id="password" label = "senha"  feedback="true" required="true"/>
+			<p:password value="#{usuarioController.usuario.password}" id="password" label = "senha"  required="true"/>
 			
 			
 			<p:commandButton value="teste" action="#{usuarioController.login}" />
