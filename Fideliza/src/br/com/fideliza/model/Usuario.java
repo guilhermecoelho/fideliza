@@ -16,11 +16,40 @@ public class Usuario implements Serializable{
 	private Administrador administrador;
 	private String password;
 	private String user;
+	private boolean permissaoAdministrador = false;
+	private boolean permissaoConsumidor = false;
+	private boolean permissaoEmpresa = false;
+	private boolean permissaoTerminal = false;
+	
 	
 	// gets e setters
 	
 	public int getIdUsuario() {
 		return idUsuario;
+	}
+	public boolean isPermissaoAdministrador() {
+		return permissaoAdministrador;
+	}
+	public void setPermissaoAdministrador(boolean permissaoAdministrador) {
+		this.permissaoAdministrador = permissaoAdministrador;
+	}
+	public boolean isPermissaoConsumidor() {
+		return permissaoConsumidor;
+	}
+	public void setPermissaoConsumidor(boolean permissaoConsumidor) {
+		this.permissaoConsumidor = permissaoConsumidor;
+	}
+	public boolean isPermissaoEmpresa() {
+		return permissaoEmpresa;
+	}
+	public void setPermissaoEmpresa(boolean permissaoEmpresa) {
+		this.permissaoEmpresa = permissaoEmpresa;
+	}
+	public boolean isPermissaoTerminal() {
+		return permissaoTerminal;
+	}
+	public void setPermissaoTerminal(boolean permissaoTerminal) {
+		this.permissaoTerminal = permissaoTerminal;
 	}
 	public String getUser() {
 		return user;
@@ -126,6 +155,4 @@ public class Usuario implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 }

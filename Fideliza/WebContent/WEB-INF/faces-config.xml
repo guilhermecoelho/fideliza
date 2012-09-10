@@ -25,6 +25,11 @@
 		<managed-bean-class>br.com.fideliza.controller.UsuarioController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>terminalController</managed-bean-name>
+		<managed-bean-class>br.com.fideliza.controller.TerminalController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 		<display-name>cadastro_cliente.xhtml</display-name>
@@ -67,19 +72,51 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>login.xhtml</display-name>
-		<from-view-id>/login.xhtml</from-view-id>
+		<display-name>login_consumidor.xhtml</display-name>
+		<from-view-id>/login_consumidor.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>errorLogin</from-outcome>
-			<to-view-id>/login.xhtml</to-view-id>
+			<to-view-id>/login_consumidor.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>login.xhtml</display-name>
-		<from-view-id>/login.xhtml</from-view-id>
+		<display-name>login_consumidor.xhtml</display-name>
+		<from-view-id>/login_consumidor.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>loginOK</from-outcome>
-			<to-view-id>/consulta_cliente.xhtml</to-view-id>
+			<to-view-id>/teste.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_empresa.xhtml</display-name>
+		<from-view-id>/login_empresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>errorLogin</from-outcome>
+			<to-view-id>/login_empresa.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>cadastro_terminal.xhtml</display-name>
+		<from-view-id>/cadastro_terminal.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>TerminalSalva</from-outcome>
+			<to-view-id>/teste.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>cadastro_terminal.xhtml</display-name>
+		<from-view-id>/cadastro_terminal.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/cadastro_terminal.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_empresa.xhtml</display-name>
+		<from-view-id>/login_empresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginOK</from-outcome>
+			<to-view-id>/cadastro_terminal.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
