@@ -6,16 +6,11 @@
     <class name="br.com.fideliza.model.Terminal" table="TERMINAL">
         <id name="idTerminal" type="int">
             <column name="INT_ID_TERMINAL_TER" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="empresa" class="br.com.fideliza.model.Empresa" fetch="join">
             <column name="INT_EMPRESA_TER" />
         </many-to-one>
-        <property name="nomeUsuario" type="java.lang.String">
-            <column name="STRING_NOMEUSUARIO_TER" />
-        </property>
-        <property name="password" type="java.lang.String">
-            <column name="STRING_PASSWORD_TER" />
-        </property>
+
     </class>
 </hibernate-mapping>

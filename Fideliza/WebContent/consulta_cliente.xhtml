@@ -14,8 +14,6 @@
 	<h:form id="form">
 		<p:panel header="Consulta" />
 
-		
-
 		<p:dataTable id="table" var="result"
 			value="#{clienteController.clienteLista}" paginator="true" rows="5" >
 			<p:column>
@@ -41,9 +39,7 @@
 				</f:facet>
 				<h:outputText value="#{result.email}" />
 			</p:column>
-			
-
-			
+					
 			<p:column headerText="Editar" style="width:50px">
 				<h:panelGrid styleClass="actions" cellspacing="2">
 					<p:commandButton id="selectButton" update=":form:display"

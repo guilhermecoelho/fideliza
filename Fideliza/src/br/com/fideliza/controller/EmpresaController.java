@@ -39,11 +39,12 @@ public class EmpresaController {
 			Empresa retorno = empresaDAO.BuscaPorCNPJ(empresa.getCnpj());
 			
 			if(retorno != null){
-				user.setEmpresa(retorno);
+				user.setEmpresa(retorno); // seta a FK do campo INT_EMPRESA_USR com o valor do campo INT_ID_EMPRESA_EMP da tabela EMPRESA
 				user.setUser(retorno.getEmail());
 				user.setPassword(retorno.getPassword());
+				user.setPermissaoEmpresa(true);
 				
-				usuarioDAO.adicionaUsuario(user);
+				usuarioDAO.adicionaUsuario(user); // cria usuario usando o email como user
 				
 				return "empresaSalva";
 			} else {

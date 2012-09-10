@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<h:form id="form">
+		<p:panel header="Cadastro cliente">
+		
+			<p:messages id="msgError" autoUpdate="true" />
+			
+			<h:panelGrid columns="3" cellpadding="5" process="@this">
+			
+				
+				<h:outputLabel for="email" value="email" />
+				<p:inputText value="#{terminalController.terminal.email}" id="email"
+					label="email" required="true" requiredMessage="Informe seu email" />
+				<p:message  for="email"/>
+				
+				<h:outputLabel for="emailConfirm" value="confirmar email" />
+				<p:inputText value="#{terminalController.terminal.emailConfirm}" id="emailConfirm"
+					label="emailConfirm" required="true" requiredMessage="Confirme seu email" />
+				<p:message  for="emailConfirm"/>
+				
+				<h:outputLabel for="password" value="senha" />
+				<p:password value="#{terminalController.terminal.password}" id="password"
+					label="senha" match="passwordConfirm" feedback="true"
+					promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
+					strongLabel="forte" required="true" requiredMessage="Digite uma senha" validatorMessage="Senha não bate"/>
+					<p:message  for="password"/>
+
+				<h:outputLabel for="password" value="confirmar senha" />
+				<p:password value="#{terminalController.terminal.password}"
+					id="passwordConfirm" label="confirmar senha" feedback="true"
+					promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
+					strongLabel="forte"  required="true" requiredMessage="Confirme a senha" />
+					<p:message  for="passwordConfirm"/>
+					
+				
+				<p:commandButton value="Salvar"
+					action="#{terminalController.salvaTerminal}" ajax="false"/>
+				<p:commandButton value="Limpar campos"
+					type="reset"/>
+
+			</h:panelGrid>
+			
+
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>

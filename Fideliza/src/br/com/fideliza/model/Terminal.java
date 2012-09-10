@@ -11,7 +11,9 @@ public class Terminal implements Serializable{
 	
 	private int idTerminal;
 	private Empresa empresa;
-	private String nomeUsuario;
+	private boolean status = false;
+	private String email;
+	private String emailConfirm;
 	private String password;
 	
 	// gets e setters
@@ -28,20 +30,29 @@ public class Terminal implements Serializable{
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public boolean isStatus() {
+		return status;
 	}
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getEmailConfirm() {
+		return emailConfirm;
+	}
+	public void setEmailConfirm(String emailConfirm) {
+		this.emailConfirm = emailConfirm;
 	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	
 	// hashCode
@@ -50,12 +61,14 @@ public class Terminal implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result
+				+ ((emailConfirm == null) ? 0 : emailConfirm.hashCode());
 		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + idTerminal;
 		result = prime * result
-				+ ((nomeUsuario == null) ? 0 : nomeUsuario.hashCode());
-		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result + (status ? 1231 : 1237);
 		return result;
 	}
 	@Override
@@ -67,6 +80,16 @@ public class Terminal implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Terminal other = (Terminal) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (emailConfirm == null) {
+			if (other.emailConfirm != null)
+				return false;
+		} else if (!emailConfirm.equals(other.emailConfirm))
+			return false;
 		if (empresa == null) {
 			if (other.empresa != null)
 				return false;
@@ -74,16 +97,14 @@ public class Terminal implements Serializable{
 			return false;
 		if (idTerminal != other.idTerminal)
 			return false;
-		if (nomeUsuario == null) {
-			if (other.nomeUsuario != null)
-				return false;
-		} else if (!nomeUsuario.equals(other.nomeUsuario))
-			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (status != other.status)
+			return false;
 		return true;
 	}
+	
 }
