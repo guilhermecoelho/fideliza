@@ -6,7 +6,7 @@
     <class name="br.com.fideliza.model.Empresa" table="EMPRESA">
         <id name="idEmpresa" type="int">
             <column name="INT_ID_EMPRESA_EMP" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="nome" type="java.lang.String">
             <column name="STRING_NOME_EMP" />
