@@ -39,24 +39,14 @@ public class TerminalController {
 		
 		System.out.println(usuario.getEmpresa().getIdEmpresa());
 		
-		//Terminal retorno = terminalDAO.BuscaPorEmpresa(usuario.getEmpresa().getIdEmpresa());
+		usuario.setUser(terminal.getEmail());
+		usuario.setPassword(terminal.getPassword());
+		usuario.setTerminal(terminal);
+		usuario.setPermissaoTerminal(true);
+		usuario.setPermissaoEmpresa(false);
 		
-		//System.out.println(retorno.getIdTerminal());
-		/*
-		if(retorno != null){
-			
-			usuario.setTerminal(retorno);
-			usuario.setPassword(retorno.getPassword());
-			usuario.setUser(retorno.getEmail());
-			usuario.setPermissaoTerminal(true);
-			
-			usuarioDAO.adicionaUsuario(usuario);
-			
-			return "TerminalSalva";
-			
-		} else {
-			return "error";
-		}*/
+		usuarioDAO.adicionaUsuario(usuario);
+
 		return "TerminalSalva";
 	}
 
