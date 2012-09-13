@@ -45,7 +45,7 @@ public class ClienteController {
 				user.setCliente(retorno); // seta a FK do campo INT_CLIENTE_USR com o valor do campo INT_ID_CLIENTE_CLI da tabela CLIENTE
 				user.setPassword(retorno.getPassword());
 				user.setUser(retorno.getCpf());
-				user.setPermissaoEmpresa(true);
+				user.setPermissaoConsumidor(true);
 
 				usuarioDAO.adicionaUsuario(user); // cria usuario usando o CPF como user
 

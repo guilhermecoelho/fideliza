@@ -33,18 +33,18 @@
 
 	<navigation-rule>
 		<display-name>cadastro_cliente.xhtml</display-name>
-		<from-view-id>/cadastro_cliente.xhtml</from-view-id>
+		<from-view-id>restrito/cadastro_cliente.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>error</from-outcome>
-			<to-view-id>/cadastro_cliente.xhtml</to-view-id>
+			<to-view-id>restrito/cadastro_cliente.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<display-name>cadastro_cliente.xhtml</display-name>
-		<from-view-id>/cadastro_cliente.xhtml</from-view-id>
+		<from-view-id>restrito/cadastro_cliente.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>save</from-outcome>
-			<to-view-id>/consulta_cliente.xhtml</to-view-id>
+			<to-view-id>restrito/consulta_cliente.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -119,5 +119,17 @@
 			<to-view-id>/cadastro_terminal.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>loginPage</from-outcome>
+			<to-view-id>/login_consumidor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<lifecycle>
+		<phase-listener>br.com.fideliza.filter.AuthorizationListener</phase-listener>
+	</lifecycle>
 
 </faces-config>
