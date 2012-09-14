@@ -1,53 +1,57 @@
+/*
+ * author: Guilherme Coelho
+ */
+
 package br.com.fideliza.controller;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import br.com.fideliza.DAO.TerminalDAO;
+import br.com.fideliza.DAO.FuncionarioDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
-import br.com.fideliza.model.Terminal;
+import br.com.fideliza.model.Funcionario;
 import br.com.fideliza.model.Usuario;
 
-public class TerminalController {
+public class FuncionarioController {
 
 	private Usuario usuario;
 	private UsuarioDAO usuarioDAO;
-	private Terminal terminal;
-	private TerminalDAO terminalDAO;
+	private Funcionario funcionario;
+	private FuncionarioDAO funcionarioDAO;
 	
 	
-	public TerminalController(){
-		this.terminal = new Terminal();
-		this.terminalDAO = new TerminalDAO();
+	public FuncionarioController(){
+		this.funcionario = new Funcionario();
+		this.funcionarioDAO = new FuncionarioDAO();
 		this.usuario = new Usuario();
 		this.usuarioDAO = new UsuarioDAO();
 	}
 	
 
-	public String salvaTerminal(){
+	public String salvaFuncionario(){
 			
-		terminal.setStatus(true);
+		funcionario.setStatus(true);
 		
 		
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
 		usuario = (Usuario) session.getAttribute("usuario");
 
-		terminal.setEmpresa(usuario.getEmpresa());
+		funcionario.setEmpresa(usuario.getEmpresa());
 		
-		terminalDAO.adicionaTerminal(terminal);
+		funcionarioDAO.adicionaFuncionario(funcionario);
 		
 		System.out.println(usuario.getEmpresa().getIdEmpresa());
 		
-		usuario.setUser(terminal.getEmail());
-		usuario.setPassword(terminal.getPassword());
-		usuario.setTerminal(terminal);
-		usuario.setPermissaoTerminal(true);
+		usuario.setUser(funcionario.getEmail());
+		usuario.setPassword(funcionario.getPassword());
+		usuario.setFuncionario(funcionario);
+		usuario.setPermissaoFuncionario(true);
 		usuario.setPermissaoEmpresa(false);
 		
 		usuarioDAO.adicionaUsuario(usuario);
 
-		return "TerminalSalva";
+		return "FuncionarioSalva";
 	}
 
 	//get e setter
@@ -60,11 +64,11 @@ public class TerminalController {
 		this.usuario = usuario;
 	}
 
-	public Terminal getTerminal() {
-		return terminal;
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
-	public void setTerminal(Terminal terminal) {
-		this.terminal = terminal;
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}	
 }

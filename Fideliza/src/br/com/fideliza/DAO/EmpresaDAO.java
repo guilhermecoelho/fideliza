@@ -1,3 +1,6 @@
+/*
+ * author: Guilherme Coelho
+ */
 package br.com.fideliza.DAO;
 
 import java.util.List;

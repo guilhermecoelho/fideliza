@@ -1,26 +1,30 @@
 <?xml version="1.0"?>
+<!-- 
+	author: guilherme coelho
+ -->
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 06/09/2012 08:24:49 by Hibernate Tools 3.4.0.CR1 -->
+
 <hibernate-mapping>
-    <class name="br.com.fideliza.model.Cliente" table="CLIENTE">
-        <id name="idCliente" type="int">
-            <column name="INT_ID_CLIENTE_CLI" />
+    <class name="br.com.fideliza.model.Consumidor" table="CONSUMIDOR">
+        <id name="idConsumidor" type="int">
+            <column name="INT_ID_CONSUMIDOR_CON" />
             <generator class="increment" />
         </id>
         <property name="nome" type="java.lang.String">
-            <column name="STRING_NOME_CLI" />
+            <column name="STRING_NOME_CON" />
         </property>
 
         <property name="email" type="java.lang.String">
-            <column name="STRING_EMAIL_CLI" />
+            <column name="STRING_EMAIL_CON" />
         </property>
         <property name="cpf" type="java.lang.String">
-            <column name="STRING_CPF_CLI" />
+            <column name="STRING_CPF_CON" />
         </property>
 
         <property name="status" type="boolean">
-            <column name="BOOL_STATUS_CLI" />
+            <column name="BOOL_STATUS_CON" />
         </property>
     </class>
 </hibernate-mapping>

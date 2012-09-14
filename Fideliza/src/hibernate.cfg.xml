@@ -1,4 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
+<!-- 
+	author: guilherme coelho
+ -->
 <!DOCTYPE hibernate-configuration PUBLIC
 "-//Hibernate/Hibernate Configuration DTD//EN"
 "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
@@ -18,7 +21,7 @@
 		<property name="use_sql_comments">true</property>
 			
 		<mapping resource="br/com/fideliza/hbm/Administrador.hbm.xml"/>
-		<mapping resource="br/com/fideliza/hbm/Cliente.hbm.xml"/>
+		<mapping resource="br/com/fideliza/hbm/Consumidor.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/Empresa.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/Promocao.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/Terminal.hbm.xml"/>

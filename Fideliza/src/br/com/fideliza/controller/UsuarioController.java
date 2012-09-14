@@ -1,3 +1,7 @@
+/*
+ * author: Guilherme Coelho
+ */
+
 package br.com.fideliza.controller;
 
 import javax.faces.application.FacesMessage;
@@ -35,7 +39,7 @@ public class UsuarioController {
 			if(usuario.isPermissaoConsumidor() == true){
 				tipoUser = "loginConsumidor";
 			}
-			else if(usuario.isPermissaoTerminal() == true){
+			else if(usuario.isPermissaoFuncionario() == true){
 				tipoUser = "loginFuncionario";
 			}
 			else if(usuario.isPermissaoEmpresa() == true){

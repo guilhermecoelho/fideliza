@@ -1,15 +1,18 @@
+/*
+ * author: Guilherme Coelho
+ */
 package br.com.fideliza.model;
 
 import java.io.Serializable;
 
-public class Terminal implements Serializable{
+public class Funcionario implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2344418007855024026L;
 	
-	private int idTerminal;
+	private int idFuncionario;
 	private Empresa empresa;
 	private boolean status = false;
 	private String email;
@@ -18,11 +21,11 @@ public class Terminal implements Serializable{
 	
 	// gets e setters
 	
-	public int getIdTerminal() {
-		return idTerminal;
+	public int getIdFuncionario() {
+		return idFuncionario;
 	}
-	public void setIdTerminal(int idTerminal) {
-		this.idTerminal = idTerminal;
+	public void setIdFuncionario(int idFuncionario) {
+		this.idFuncionario = idFuncionario;
 	}
 	public Empresa getEmpresa() {
 		return empresa;
@@ -65,7 +68,7 @@ public class Terminal implements Serializable{
 		result = prime * result
 				+ ((emailConfirm == null) ? 0 : emailConfirm.hashCode());
 		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
-		result = prime * result + idTerminal;
+		result = prime * result + idFuncionario;
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + (status ? 1231 : 1237);
@@ -79,7 +82,7 @@ public class Terminal implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Terminal other = (Terminal) obj;
+		Funcionario other = (Funcionario) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -95,7 +98,7 @@ public class Terminal implements Serializable{
 				return false;
 		} else if (!empresa.equals(other.empresa))
 			return false;
-		if (idTerminal != other.idTerminal)
+		if (idFuncionario != other.idFuncionario)
 			return false;
 		if (password == null) {
 			if (other.password != null)

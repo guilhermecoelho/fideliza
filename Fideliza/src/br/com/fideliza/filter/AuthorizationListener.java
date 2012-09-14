@@ -1,3 +1,6 @@
+/*
+ * author: Guilherme Coelho
+ */
 package br.com.fideliza.filter;
 
 import javax.faces.application.NavigationHandler;
@@ -55,7 +58,7 @@ public class AuthorizationListener implements PhaseListener{
 			}
 			
 			// se tentar acessar pagina restrito a funcionario sem ter permissão de funcionario
-			if(usuario == null || isRestricFuncionario == true &&  usuario.isPermissaoTerminal() != true){ 
+			if(usuario == null || isRestricFuncionario == true &&  usuario.isPermissaoFuncionario() != true){ 
 				NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
 				nh.handleNavigation(facesContext, null, "loginPage");
 			}
