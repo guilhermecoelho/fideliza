@@ -80,43 +80,11 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>login_consumidor.xhtml</display-name>
-		<from-view-id>/login_consumidor.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>loginOK</from-outcome>
-			<to-view-id>/teste.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
 		<display-name>login_empresa.xhtml</display-name>
 		<from-view-id>/login_empresa.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>errorLogin</from-outcome>
 			<to-view-id>/login_empresa.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>cadastro_terminal.xhtml</display-name>
-		<from-view-id>/cadastro_terminal.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>TerminalSalva</from-outcome>
-			<to-view-id>/teste.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>cadastro_terminal.xhtml</display-name>
-		<from-view-id>/cadastro_terminal.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>error</from-outcome>
-			<to-view-id>/cadastro_terminal.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>login_empresa.xhtml</display-name>
-		<from-view-id>/login_empresa.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>loginOK</from-outcome>
-			<to-view-id>/cadastro_terminal.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -125,6 +93,30 @@
 		<navigation-case>
 			<from-outcome>loginPage</from-outcome>
 			<to-view-id>/login_consumidor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_consumidor.xhtml</display-name>
+		<from-view-id>/login_consumidor.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginConsumidor</from-outcome>
+			<to-view-id>/restrito/consumidor/teste.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_empresa.xhtml</display-name>
+		<from-view-id>/login_empresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginFuncionario</from-outcome>
+			<to-view-id>/restrito/empresa/cadastro_promocao.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_empresa.xhtml</display-name>
+		<from-view-id>/login_empresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginEmpresa</from-outcome>
+			<to-view-id>/restrito/empresa/cadastro_terminal.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

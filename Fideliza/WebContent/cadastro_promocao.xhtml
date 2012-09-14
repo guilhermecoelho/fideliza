@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<h:form id="form">
+		<p:panel header="Cadastro cliente">
+		
+			<p:messages id="msgError" autoUpdate="true" />
+			
+			<h:panelGrid columns="3" cellpadding="5" process="@this">
+			
+				<h:outputLabel for="nome" value="nome *" />
+				<p:inputText value="#{promocaoController.promocao.nome}" id="nome"
+					label="nome" required="true" requiredMessage="O campo nome deve ser preenchido"/>
+				<p:message for="nome"  />
+				
+				<h:outputLabel for="descricao" value="descricao" />
+				<p:inputText value="#{promocaoController.promocao.descricao}" id="descricao"
+					label="descricao" required="true" requiredMessage="Informe seu descricao" />
+				<p:message  for="descricao"/>
+				
+				<h:outputLabel for="desconto" value="desconto" />
+				<p:inputText value="#{promocaoController.promocao.desconto}" id="desconto"
+					label="desconto" required="true" requiredMessage="Informe seu desconto" />
+				<p:message  for="desconto"/>
+				
+				<p:commandButton value="Salvar"
+					action="#{promocaoController.salvaPromocao}" ajax="false"/>
+				<p:commandButton value="Limpar campos"
+					type="reset"/>
+
+			</h:panelGrid>
+			
+
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>
