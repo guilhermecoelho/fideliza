@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!-- 
+	author: guilherme coelho
+ -->
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -19,44 +21,34 @@
 			
 			<h:panelGrid columns="3" cellpadding="5" process="@this">
 			
-				<h:outputLabel for="nome" value="nome *" />
-				<p:inputText value="#{clienteController.cliente.nome}" id="nome"
-					label="nome" required="true" requiredMessage="O campo nome deve ser preenchido"/>
-				<p:message for="nome"  />
-
-				<h:outputLabel for="cpf" value="CPF *" />
-				<p:inputMask value="#{clienteController.cliente.cpf}" id="cpf"
-					mask="999.999.999-99" label="cpf" required="true" requiredMessage="Informe seu CPF" />
-				<p:message  for="cpf"/>
 				
 				<h:outputLabel for="email" value="email" />
-				<p:inputText value="#{clienteController.cliente.email}" id="email"
+				<p:inputText value="#{funcionarioController.funcionario.email}" id="email"
 					label="email" required="true" requiredMessage="Informe seu email" />
 				<p:message  for="email"/>
 				
 				<h:outputLabel for="emailConfirm" value="confirmar email" />
-				<p:inputText value="#{clienteController.cliente.emailConfirm}" id="emailConfirm"
+				<p:inputText value="#{funcionarioController.funcionario.emailConfirm}" id="emailConfirm"
 					label="emailConfirm" required="true" requiredMessage="Confirme seu email" />
 				<p:message  for="emailConfirm"/>
 				
 				<h:outputLabel for="password" value="senha" />
-				<p:password value="#{clienteController.cliente.password}" id="password"
+				<p:password value="#{funcionarioController.funcionario.password}" id="password"
 					label="senha" match="passwordConfirm" feedback="true"
 					promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
 					strongLabel="forte" required="true" requiredMessage="Digite uma senha" validatorMessage="Senha não bate"/>
 					<p:message  for="password"/>
 
 				<h:outputLabel for="password" value="confirmar senha" />
-				<p:password value="#{clienteController.cliente.password}"
+				<p:password value="#{funcionarioController.funcionario.password}"
 					id="passwordConfirm" label="confirmar senha" feedback="true"
 					promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
 					strongLabel="forte"  required="true" requiredMessage="Confirme a senha" />
 					<p:message  for="passwordConfirm"/>
 					
 				
-				
 				<p:commandButton value="Salvar"
-					action="#{clienteController.salvaCliente}" ajax="false"/>
+					action="#{funcionarioController.salvaFuncionario}" ajax="false"/>
 				<p:commandButton value="Limpar campos"
 					type="reset"/>
 

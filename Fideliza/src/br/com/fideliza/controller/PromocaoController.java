@@ -1,3 +1,7 @@
+/*
+ * author: Guilherme Coelho
+ */
+
 package br.com.fideliza.controller;
 
 import java.io.Serializable;

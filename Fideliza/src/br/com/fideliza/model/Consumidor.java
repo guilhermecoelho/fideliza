@@ -1,3 +1,6 @@
+/*
+ * author: Guilherme Coelho
+ */
 package br.com.fideliza.model;
 
 import java.io.Serializable;
@@ -5,7 +8,7 @@ import java.io.Serializable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-public class Cliente implements Serializable {
+public class Consumidor implements Serializable {
 
 	/**
 	 * 
@@ -14,7 +17,7 @@ public class Cliente implements Serializable {
 	private static final long serialVersionUID = 4675927773047259047L;
 	@Id
 	@GeneratedValue
-	private int idCliente;
+	private int idConsumidor;
 	private String nome;
 	private String password;
 	private String email;
@@ -24,8 +27,8 @@ public class Cliente implements Serializable {
 	
 	//gets e setters
 	
-	public int getIdCliente() {
-		return idCliente;
+	public int getIdConsumidor() {
+		return idConsumidor;
 	}
 
 	public boolean isStatus() {
@@ -36,8 +39,8 @@ public class Cliente implements Serializable {
 		this.status = status;
 	}
 
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setIdConsumidor(int idConsumidor) {
+		this.idConsumidor = idConsumidor;
 	}
 
 	public String getNome() {
@@ -91,7 +94,7 @@ public class Cliente implements Serializable {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
 				+ ((emailConfirm == null) ? 0 : emailConfirm.hashCode());
-		result = prime * result + idCliente;
+		result = prime * result + idConsumidor;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
@@ -107,7 +110,7 @@ public class Cliente implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		Consumidor other = (Consumidor) obj;
 		if (cpf == null) {
 			if (other.cpf != null)
 				return false;
@@ -123,7 +126,7 @@ public class Cliente implements Serializable {
 				return false;
 		} else if (!emailConfirm.equals(other.emailConfirm))
 			return false;
-		if (idCliente != other.idCliente)
+		if (idConsumidor != other.idConsumidor)
 			return false;
 		if (nome == null) {
 			if (other.nome != null)

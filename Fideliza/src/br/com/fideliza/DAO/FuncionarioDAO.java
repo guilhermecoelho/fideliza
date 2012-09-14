@@ -1,37 +1,40 @@
+/*
+ * author: Guilherme Coelho
+ */
 package br.com.fideliza.DAO;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import br.com.fideliza.model.Terminal;
+import br.com.fideliza.model.Funcionario;
 import br.com.fideliza.util.HibernateUtil;
 
-public class TerminalDAO {
+public class FuncionarioDAO {
 	
 	private Session session;
 	private Transaction tx;
 
-	public TerminalDAO() {
+	public FuncionarioDAO() {
 
 		session = HibernateUtil.getSession();
 		tx = session.beginTransaction();
 
 	}
 	
-	public void adicionaTerminal(Terminal terminal){
-		session.save(terminal);
+	public void adicionaFuncionario(Funcionario funcionario){
+		session.save(funcionario);
 		tx.commit();
 		//session.close();
 	}
 	
-	public Terminal BuscaPorEmpresa(int idEmpresa){
+	public Funcionario BuscaPorEmpresa(int idEmpresa){
 
-		Terminal retorno;
-		String sql= "select terminal from Terminal as terminal where empresa = :idEmpresa";
+		Funcionario retorno;
+		String sql= "select funcionario from Funcionario as funcionario where empresa = :idEmpresa";
 		Query q = session.createQuery(sql);
 		q.setInteger("idEmpresa", idEmpresa);
-		retorno = (Terminal)  q.uniqueResult();
+		retorno = (Funcionario)  q.uniqueResult();
 		
 		return retorno;
 	}

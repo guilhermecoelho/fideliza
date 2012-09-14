@@ -1,3 +1,6 @@
+/*
+ * author: Guilherme Coelho
+ */
 package br.com.fideliza.DAO;
 
 import org.hibernate.Query;
@@ -37,5 +40,15 @@ public class UsuarioDAO {
 		return retorno;
 		
 	}
+	
+	public Usuario buscaPorUser(String user){
 
+		Usuario retorno;
+		String sql= "select usuario from Usuario as usuario where user = :user";
+		Query q = session.createQuery(sql);
+		q.setString("user", user);
+		retorno = (Usuario)  q.uniqueResult();
+		
+		return retorno;
+	}
 }

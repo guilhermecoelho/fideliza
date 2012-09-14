@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+<!-- 
+	author: guilherme coelho
+ -->
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 06/09/2012 08:24:49 by Hibernate Tools 3.4.0.CR1 -->
@@ -14,14 +17,14 @@
         <property name="password" type="java.lang.String">
             <column name="STRING_PASSWORD_USR" />
         </property>
-        <many-to-one name="cliente" class="br.com.fideliza.model.Cliente" fetch="join">
-            <column name="INT_CLIENTE_USR" />
+        <many-to-one name="consumidor" class="br.com.fideliza.model.Consumidor" fetch="join">
+            <column name="INT_CONSUMIDOR_USR" />
         </many-to-one>
          <many-to-one name="empresa" class="br.com.fideliza.model.Empresa" fetch="join">
             <column name="INT_EMPRESA_USR" />
         </many-to-one>
-        <many-to-one name="terminal" class="br.com.fideliza.model.Terminal" fetch="join">
-            <column name="INT_TERMINAL_USR" />
+        <many-to-one name="funcionario" class="br.com.fideliza.model.Funcionario" fetch="join">
+            <column name="INT_FUNCIONARIO_USR" />
         </many-to-one>
         <many-to-one name="administrador" class="br.com.fideliza.model.Administrador" fetch="join">
             <column name="INT_ADMINISTRADOR_USR" />
@@ -35,8 +38,8 @@
         <property name="permissaoEmpresa" type="boolean">
             <column name="BOOL_PERMISSAOEMPRESA_USR" />
         </property>
-        <property name="permissaoTerminal" type="boolean">
-            <column name="BOOL_PERMISSAOTERMINAL_USR" />
+        <property name="permissaoFuncionario" type="boolean">
+            <column name="BOOL_PERMISSAOFUNCIONARIO_USR" />
         </property>
     </class>
 </hibernate-mapping>

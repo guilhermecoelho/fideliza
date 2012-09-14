@@ -6,8 +6,8 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
     version="2.0">
 	<managed-bean>
-		<managed-bean-name>clienteController</managed-bean-name>
-		<managed-bean-class>br.com.fideliza.controller.ClienteController</managed-bean-class>
+		<managed-bean-name>consumidorController</managed-bean-name>
+		<managed-bean-class>br.com.fideliza.controller.ConsumidorController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
@@ -26,8 +26,8 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>terminalController</managed-bean-name>
-		<managed-bean-class>br.com.fideliza.controller.TerminalController</managed-bean-class>
+		<managed-bean-name>funcionarioController</managed-bean-name>
+		<managed-bean-class>br.com.fideliza.controller.FuncionarioController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 

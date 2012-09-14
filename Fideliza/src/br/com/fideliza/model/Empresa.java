@@ -1,3 +1,6 @@
+/*
+ * author: Guilherme Coelho
+ */
 package br.com.fideliza.model;
 
 import java.io.Serializable;

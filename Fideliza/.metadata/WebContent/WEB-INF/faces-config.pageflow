@@ -6,12 +6,12 @@
   <nodes xsi:type="pageflow:PFPage" name="consulta_empresa.xhtml" x="338" y="562" id="pf13456537766082" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf13456537766081" path="/consulta_empresa.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="cadastro_promocao.xhtml" x="122" y="946" id="pf13458046669940" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf13458046669941" path="/cadastro_promocao.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="consulta_promocao.xhtml" x="338" y="946" id="pf13458046669952" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf13458046669941" path="/consulta_promocao.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="login_consumidor.xhtml" x="144" y="1524" id="pf13472745051101" referenceLink="//@navigationRule.11/@navigationCase.0/@toViewId|" outlinks="pf13468427670452 pf13472745051100" inlinks="pf13468427670452 pf13475446472360" path="/login_consumidor.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="login_consumidor.xhtml" x="144" y="1524" id="pf13472745051101" referenceLink="//@navigationRule.8/@fromViewId|" outlinks="pf13468427670452 pf13472745051100" inlinks="pf13468427670452 pf13475446472360" path="/login_consumidor.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="login_empresa.xhtml" x="144" y="1416" id="pf13472745051102" referenceLink="//@navigationRule.10/@fromViewId|" outlinks="pf13472745051103 pf13475759256731 pf13475759256732" inlinks="pf13472745051103" path="/login_empresa.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="*" y="1524" id="pf13475446472361" referenceLink="//@navigationRule.11/@fromViewId|" outlinks="pf13475446472360" path="/*"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/consumidor/teste.xhtml" x="384" y="1524" id="pf13475757073540" inlinks="pf13472745051100" path="/restrito/consumidor/teste.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/cadastro_terminal.xhtml" x="359" y="1308" id="pf13475759256743" inlinks="pf13475759256732" path="/restrito/empresa/cadastro_terminal.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/cadastro_promocao.xhtml" x="348" y="1416" id="pf13475759256744" inlinks="pf13475759256731" path="/restrito/empresa/cadastro_promocao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" y="1524" id="pf13475446472361" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf13475446472360" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/consumidor/teste.xhtml" x="384" y="1524" id="pf13475757073540" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" inlinks="pf13472745051100" path="/restrito/consumidor/teste.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/cadastro_terminal.xhtml" x="359" y="1308" id="pf13475759256743" referenceLink="//@navigationRule.10/@navigationCase.0/@toViewId|" inlinks="pf13475759256732" path="/restrito/empresa/cadastro_terminal.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/cadastro_promocao.xhtml" x="348" y="1416" id="pf13475759256744" referenceLink="//@navigationRule.9/@navigationCase.0/@toViewId|" inlinks="pf13475759256731" path="/restrito/empresa/cadastro_promocao.xhtml"/>
   <links id="pf13450340358668" target="pf13451347882220" source="pf13450340124726" outcome="save"/>
   <links id="pf13456537766081" target="pf13456537766082" source="pf13456537766080" outcome="empresaSalva"/>
   <links id="pf13458046669941" target="pf13458046669952" source="pf13458046669940" outcome="save"/>
