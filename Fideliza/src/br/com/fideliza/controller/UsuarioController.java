@@ -26,17 +26,38 @@ public class UsuarioController {
 		if(retorno != null){
 			usuario = retorno;
 			
+			String tipoUser = null;
+			
 			FacesContext fc = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
 			session.setAttribute("usuario", usuario); //salva dados do usuario na sessão
 			
-			return "loginOK";
+			if(usuario.isPermissaoConsumidor() == true){
+				tipoUser = "loginConsumidor";
+			}
+			else if(usuario.isPermissaoTerminal() == true){
+				tipoUser = "loginFuncionario";
+			}
+			else if(usuario.isPermissaoEmpresa() == true){
+				tipoUser =  "loginEmpresa";
+			}
+			else if(usuario.isPermissaoAdministrador() == true){
+				tipoUser = "loginAdmin";
+			}
+			return tipoUser;
 
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Senha ou Usuario incorreto", null));
 			return "errorLogin";
 		}
 	}
+	
+	public String logout(){
+		return null;
+	}
+	
+	
+	//getters and setters
 
 	public Usuario getUsuario() {
 		return usuario;

@@ -23,7 +23,6 @@
 		<mapping resource="br/com/fideliza/hbm/Promocao.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/Terminal.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/Usuario.hbm.xml"/>
-		<mapping resource="br/com/fideliza/hbm/Autorizacoes.hbm.xml"/>
 
 		
 	</session-factory>
