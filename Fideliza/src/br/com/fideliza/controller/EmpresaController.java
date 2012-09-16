@@ -12,14 +12,18 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 import br.com.fideliza.DAO.EmpresaDAO;
+import br.com.fideliza.DAO.RegraPontuacaoDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
 import br.com.fideliza.model.Empresa;
+import br.com.fideliza.model.RegraPontuacao;
 import br.com.fideliza.model.Usuario;
 
 public class EmpresaController {
 
 	private Empresa empresa;
 	private EmpresaDAO empresaDAO;
+	private RegraPontuacao regraPontuacao;
+	private RegraPontuacaoDAO regraPontuacaoDAO;
 	private Usuario user;
 	private UsuarioDAO usuarioDAO;
 	private DataModel<Empresa> empresaLista; // lista empresas
@@ -28,6 +32,8 @@ public class EmpresaController {
 	public EmpresaController() {
 		this.empresa = new Empresa();
 		this.empresaDAO = new EmpresaDAO();
+		this.regraPontuacao = new RegraPontuacao();
+		this.regraPontuacaoDAO = new RegraPontuacaoDAO();
 		this.user = new Usuario();
 		this.usuarioDAO = new UsuarioDAO();
 	}
@@ -35,7 +41,10 @@ public class EmpresaController {
 	public String salvaEmpresa() {
 
 		if (verificaEmail() == true && verificaCNPJ() == true) {
-
+			
+			regraPontuacao = regraPontuacaoDAO.buscaPorId(1);
+			empresa.setRegraPontuacao(regraPontuacao);
+				
 			empresa.setStatus(true);
 			empresaDAO.adicionaEmpresa(empresa);
 

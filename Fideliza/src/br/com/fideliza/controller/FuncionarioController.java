@@ -32,7 +32,6 @@ public class FuncionarioController {
 			
 		funcionario.setStatus(true);
 		
-		
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
 		usuario = (Usuario) session.getAttribute("usuario");

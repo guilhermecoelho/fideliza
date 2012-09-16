@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/09/2012 10:32:40 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="br.com.fideliza.model.RegraPontuacao" table="REGRA_PONTUACAO">
+        <id name="idRegraPontuacao" type="int">
+            <column name="INT_ID_REGRAPONTUACAO_REP" />
+            <generator class="increment" />
+        </id>
+        <property name="nome" type="java.lang.String">
+            <column name="STRING_NOME_REP" />
+        </property>
+        <property name="valorReal" type="double">
+            <column name="DOUBLE_VALORREAL_REP" />
+        </property>
+        <property name="valorPonto" type="double">
+            <column name="DOUBLE_VALORPONTO_REP" />
+        </property>
+    </class>
+</hibernate-mapping>

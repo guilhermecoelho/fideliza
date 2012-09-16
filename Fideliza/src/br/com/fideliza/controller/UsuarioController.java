@@ -36,6 +36,7 @@ public class UsuarioController {
 			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
 			session.setAttribute("usuario", usuario); //salva dados do usuario na sessão
 			
+			
 			if(usuario.isPermissaoConsumidor() == true){
 				tipoUser = "loginConsumidor";
 			}

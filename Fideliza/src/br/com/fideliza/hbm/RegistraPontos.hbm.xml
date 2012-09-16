@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/09/2012 02:32:01 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="br.com.fideliza.model.RegistraPontos" table="REGISTRAPONTOS">
+        <id name="idRegistraPontos" type="int">
+            <column name="INT_IDREGISTRAPONTOS_REGP" />
+            <generator class="increment" />
+        </id>
+        <property name="quantidadePontos" type="double">
+            <column name="DOUBLE_QUANTIDADEPONTOS_REGP" />
+        </property>
+        <property name="valorCompra" type="double">
+            <column name="DOUBLE_VALORCOMPRA_REGP" />
+        </property>
+        <many-to-one name="funcionario" class="br.com.fideliza.model.Funcionario" fetch="join">
+            <column name="FUNCIONARIO_INT_FUNCIONARIO_REGP" />
+        </many-to-one>
+        <many-to-one name="consumidor" class="br.com.fideliza.model.Consumidor" fetch="join">
+            <column name="CONSUMIDOR_INT_CONSUMIDOR_REGP" />
+        </many-to-one>
+        <property name="dataRegistro" type="java.sql.Date">
+            <column name="DATE_DATAREGISTRO_REGP" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

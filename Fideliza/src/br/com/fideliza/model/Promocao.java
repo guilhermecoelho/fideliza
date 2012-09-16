@@ -16,65 +16,57 @@ public class Promocao implements Serializable {
 	private String nome;
 	private String descricao;
 	private double desconto;
-	private double saldoPontos;
-	private Empresa idEmpresa;
-
+	private double pontos;
+	private Empresa empresa;
+	private boolean status = false;
+	
 	// gets e setters
-
-	public Empresa getIdEmpresa() {
-		return idEmpresa;
-	}
-
-	public void setIdEmpresa(Empresa idEmpresa) {
-		this.idEmpresa = idEmpresa;
-	}
-
+	
 	public int getIdPromocao() {
 		return idPromocao;
 	}
-
 	public void setIdPromocao(int idPromocao) {
 		this.idPromocao = idPromocao;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getDescricao() {
 		return descricao;
 	}
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 	public double getDesconto() {
 		return desconto;
 	}
-
 	public void setDesconto(double desconto) {
 		this.desconto = desconto;
 	}
-
-	public double getSaldoPontos() {
-		return saldoPontos;
+	public double getPontos() {
+		return pontos;
 	}
-
-	public void setSaldoPontos(double saldoPontos) {
-		this.saldoPontos = saldoPontos;
+	public void setPontos(double pontos) {
+		this.pontos = pontos;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Empresa getEmpresa() {
+		return empresa;
 	}
-
-	// hashCode
-
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
+	//hashCode
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -84,15 +76,14 @@ public class Promocao implements Serializable {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result
 				+ ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result
-				+ ((idEmpresa == null) ? 0 : idEmpresa.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + idPromocao;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		temp = Double.doubleToLongBits(saldoPontos);
+		temp = Double.doubleToLongBits(pontos);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + (status ? 1231 : 1237);
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,10 +101,10 @@ public class Promocao implements Serializable {
 				return false;
 		} else if (!descricao.equals(other.descricao))
 			return false;
-		if (idEmpresa == null) {
-			if (other.idEmpresa != null)
+		if (empresa == null) {
+			if (other.empresa != null)
 				return false;
-		} else if (!idEmpresa.equals(other.idEmpresa))
+		} else if (!empresa.equals(other.empresa))
 			return false;
 		if (idPromocao != other.idPromocao)
 			return false;
@@ -122,10 +113,13 @@ public class Promocao implements Serializable {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (Double.doubleToLongBits(saldoPontos) != Double
-				.doubleToLongBits(other.saldoPontos))
+		if (Double.doubleToLongBits(pontos) != Double
+				.doubleToLongBits(other.pontos))
+			return false;
+		if (status != other.status)
 			return false;
 		return true;
 	}
-
+	
+	
 }
