@@ -5,18 +5,13 @@ package br.com.fideliza.model;
 
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 public class Consumidor implements Serializable {
 
 	/**
 	 * 
 	 */
-
 	private static final long serialVersionUID = 4675927773047259047L;
-	@Id
-	@GeneratedValue
+
 	private int idConsumidor;
 	private String nome;
 	private String password;
@@ -24,11 +19,20 @@ public class Consumidor implements Serializable {
 	private String emailConfirm;
 	private String cpf;
 	private boolean status;
+	private double pontos;
 	
 	//gets e setters
 	
 	public int getIdConsumidor() {
 		return idConsumidor;
+	}
+
+	public double getPontos() {
+		return pontos;
+	}
+
+	public void setPontos(double pontos) {
+		this.pontos = pontos;
 	}
 
 	public boolean isStatus() {
@@ -67,7 +71,6 @@ public class Consumidor implements Serializable {
 		this.email = email;
 	}
 
-
 	public String getCpf() {
 		return cpf;
 	}
@@ -83,9 +86,9 @@ public class Consumidor implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	//hashCode
 	
+	//hashCode
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -98,6 +101,9 @@ public class Consumidor implements Serializable {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(pontos);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + (status ? 1231 : 1237);
 		return result;
 	}
@@ -137,6 +143,9 @@ public class Consumidor implements Serializable {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (Double.doubleToLongBits(pontos) != Double
+				.doubleToLongBits(other.pontos))
 			return false;
 		if (status != other.status)
 			return false;

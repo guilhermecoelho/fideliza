@@ -20,11 +20,14 @@
         <property name="desconto" type="double">
             <column name="DOUBLE_DESCONTO_PRO" />
         </property>
-        <property name="saldoPontos" type="double">
-            <column name="DOUBLE_SALDOPONTOS_PRO" />
+        <property name="pontos" type="double">
+            <column name="DOUBLE_PONTOS_PRO" />
         </property>
-        <many-to-one name="idEmpresa" class="br.com.fideliza.model.Empresa" fetch="join">
-            <column name="INT_ID_EMPRESA_PRO" />
+        <property name="status" type="boolean">
+            <column name="BOOL_STATUS_PRO" />
+        </property>
+        <many-to-one name="empresa" class="br.com.fideliza.model.Empresa" fetch="join">
+            <column name="INT_EMPRESA_PRO" />
         </many-to-one>
     </class>
 </hibernate-mapping>

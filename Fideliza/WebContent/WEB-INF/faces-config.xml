@@ -30,93 +30,63 @@
 		<managed-bean-class>br.com.fideliza.controller.FuncionarioController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
-
+	<managed-bean>
+		<managed-bean-name>regraPontuacaoController</managed-bean-name>
+		<managed-bean-class>br.com.fideliza.controller.RegraPontuacaoController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>registraPontosController</managed-bean-name>
+		<managed-bean-class>br.com.fideliza.controller.RegistraPontosController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
-		<display-name>cadastro_cliente.xhtml</display-name>
-		<from-view-id>restrito/cadastro_cliente.xhtml</from-view-id>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>error</from-outcome>
-			<to-view-id>restrito/cadastro_cliente.xhtml</to-view-id>
+			<from-outcome>loginConsumidor</from-outcome>
+			<to-view-id>/restrito/consumidor/index.xhtml</to-view-id>
+			
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>cadastro_cliente.xhtml</display-name>
-		<from-view-id>restrito/cadastro_cliente.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>save</from-outcome>
-			<to-view-id>restrito/consulta_cliente.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
+			<display-name>login.xhtml</display-name>
+			<from-view-id>/login.xhtml</from-view-id>
+			<navigation-case>
+				<from-outcome>errorLogin</from-outcome>
+				<to-view-id>/login.xhtml</to-view-id>
+			</navigation-case>
+		</navigation-rule>
 	<navigation-rule>
-		<display-name>cadastro_empresa.xhtml</display-name>
-		<from-view-id>/cadastro_empresa.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>empresaSalva</from-outcome>
-			<to-view-id>/consulta_empresa.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>cadastro_empresa.xhtml</display-name>
-		<from-view-id>/cadastro_empresa.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>error</from-outcome>
-			<to-view-id>/cadastro_empresa.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>cadastro_promocao.xhtml</display-name>
-		<from-view-id>/cadastro_promocao.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>save</from-outcome>
-			<to-view-id>/consulta_promocao.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>login_consumidor.xhtml</display-name>
-		<from-view-id>/login_consumidor.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>errorLogin</from-outcome>
-			<to-view-id>/login_consumidor.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>login_empresa.xhtml</display-name>
-		<from-view-id>/login_empresa.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>errorLogin</from-outcome>
-			<to-view-id>/login_empresa.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
-	<navigation-rule>
+		<display-name>*</display-name>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>loginPage</from-outcome>
-			<to-view-id>/login_consumidor.xhtml</to-view-id>
+			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>login_consumidor.xhtml</display-name>
-		<from-view-id>/login_consumidor.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>loginConsumidor</from-outcome>
-			<to-view-id>/restrito/consumidor/teste.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>login_empresa.xhtml</display-name>
-		<from-view-id>/login_empresa.xhtml</from-view-id>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>loginFuncionario</from-outcome>
-			<to-view-id>/restrito/empresa/cadastro_promocao.xhtml</to-view-id>
+			<to-view-id>/restrito/funcionario/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>login_empresa.xhtml</display-name>
-		<from-view-id>/login_empresa.xhtml</from-view-id>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>loginEmpresa</from-outcome>
-			<to-view-id>/restrito/empresa/cadastro_terminal.xhtml</to-view-id>
+			<to-view-id>/restrito/empresa/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginAdmin</from-outcome>
+			<to-view-id>/restrito/admin/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

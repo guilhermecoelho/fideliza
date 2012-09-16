@@ -1,0 +1,49 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 
+	author: guilherme coelho
+ -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<h:body>	
+			<h:form id="form">
+		<p:panel header="Cadastro cliente">
+		
+			<p:messages id="msgError" autoUpdate="true" />
+			
+			<h:panelGrid columns="3" cellpadding="5" process="@this">
+				
+				<h:outputLabel for="cpf" value="CPF *" />
+				<p:inputMask value="#{registraPontosController.registraPontos.cpf}" id="cpf"
+					mask="999.999.999-99" label="cpf" required="true" requiredMessage="Informe seu CPF" />
+				<p:message  for="cpf"/>	
+				
+				<h:outputLabel for="valorCompra" value="valor da compra *" />
+				<p:inputText value="#{registraPontosController.registraPontos.valorCompra}" id="valorCompra"
+					label="valorCompra" required="true" requiredMessage="O campo nome deve ser preenchido"/>
+				<p:message for="valorCompra"  />
+				
+				<p:commandButton value="Salvar"
+					action="#{registraPontosController.registraPonto}" ajax="false"/>
+				<p:commandButton value="Limpar campos"
+					type="reset"/>
+
+			</h:panelGrid>
+			
+
+		</p:panel>
+	</h:form>
+		</h:body>
+		
+	</h:head>
+	
+	
+
+
+</html>

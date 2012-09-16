@@ -19,8 +19,13 @@
         <property name="email" type="java.lang.String">
             <column name="STRING_EMAIL_CON" />
         </property>
+        
         <property name="cpf" type="java.lang.String">
             <column name="STRING_CPF_CON" />
+        </property>
+        
+        <property name="pontos" type="double">
+            <column name="DOUBLE_PONTOS_CON" />
         </property>
 
         <property name="status" type="boolean">

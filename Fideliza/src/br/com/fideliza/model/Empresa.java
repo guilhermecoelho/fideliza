@@ -17,12 +17,19 @@ public class Empresa implements Serializable{
 	private String email;
 	private String ConfirmEmail;
 	private String password;
+	private RegraPontuacao regraPontuacao;
 	private boolean status;
 	
 	//gets e setters
 	
 	public int getIdEmpresa() {
 		return idEmpresa;
+	}
+	public RegraPontuacao getRegraPontuacao() {
+		return regraPontuacao;
+	}
+	public void setRegraPontuacao(RegraPontuacao regraPontuacao) {
+		this.regraPontuacao = regraPontuacao;
 	}
 	public boolean isStatus() {
 		return status;
@@ -81,6 +88,8 @@ public class Empresa implements Serializable{
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result
+				+ ((regraPontuacao == null) ? 0 : regraPontuacao.hashCode());
 		result = prime * result + (status ? 1231 : 1237);
 		return result;
 	}
@@ -119,6 +128,11 @@ public class Empresa implements Serializable{
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (regraPontuacao == null) {
+			if (other.regraPontuacao != null)
+				return false;
+		} else if (!regraPontuacao.equals(other.regraPontuacao))
 			return false;
 		if (status != other.status)
 			return false;

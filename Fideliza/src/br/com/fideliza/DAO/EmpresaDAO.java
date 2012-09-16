@@ -46,4 +46,14 @@ public class EmpresaDAO {
 		return retorno;
 	}
 
+	public Empresa BuscaPorId(int idEmpresa){
+
+		Empresa retorno;
+		String sql= "select empresa from Empresa as empresa where idEmpresa = :idEmpresa";
+		Query q = session.createQuery(sql);
+		q.setInteger("idEmpresa", idEmpresa);
+		retorno = (Empresa)  q.uniqueResult();
+		
+		return retorno;
+	}
 }

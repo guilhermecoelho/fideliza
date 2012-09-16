@@ -37,5 +37,17 @@ public class FuncionarioDAO {
 		retorno = (Funcionario)  q.uniqueResult();
 		
 		return retorno;
+		
+	}
+	
+	public Funcionario BuscaPorId(int idFuncionario){
+		
+		Funcionario retorno;
+		String sql= "select funcionario from Funcionario as funcionario where idFuncionario = :idFuncionario";
+		Query q = session.createQuery(sql);
+		q.setInteger("idFuncionario", idFuncionario);
+		retorno = (Funcionario)  q.uniqueResult();
+		
+		return retorno;
 	}
 }

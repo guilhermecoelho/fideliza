@@ -1,9 +1,9 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- 
 	author: guilherme coelho
  -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -37,13 +37,10 @@
 					label="desconto" required="true" requiredMessage="Informe seu desconto" />
 				<p:message  for="desconto"/>
 				
-					
-				<h:outputLabel value="Empresa"/>
-				<p:selectOneMenu value="#{promocaoController.promocao.idEmpresa}" id="idEmpresa">
-						
-					<f:selectItems value="#{empresaController.populaComboBox}" var="c" itemLabel="#{c.nome}"  itemValue="#{c.idEmpresa}"/>
-						
-				</p:selectOneMenu>
+				<h:outputLabel for="pontos" value="pontos" />
+				<p:inputText value="#{promocaoController.promocao.pontos}" id="pontos"
+					label="pontos" required="true" requiredMessage="Informe quantidade de pontos" />
+				<p:message  for="pontos"/>
 				
 				<p:commandButton value="Salvar"
 					action="#{promocaoController.salvaPromocao}" ajax="false"/>
