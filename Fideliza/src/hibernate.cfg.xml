@@ -23,11 +23,12 @@
 		<mapping resource="br/com/fideliza/hbm/Administrador.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/Consumidor.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/Empresa.hbm.xml"/>
+		<mapping resource="br/com/fideliza/hbm/Funcionario.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/Promocao.hbm.xml"/>
-		<mapping resource="br/com/fideliza/hbm/Terminal.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/Usuario.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/RegistraPontos.hbm.xml"/>
 		<mapping resource="br/com/fideliza/hbm/RegraPontuacao.hbm.xml"/>
+		<mapping resource="br/com/fideliza/hbm/UtilizaPontos.hbm.xml"/>
 
 		
 	</session-factory>

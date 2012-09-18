@@ -3,6 +3,9 @@
  */
 package br.com.fideliza.model;
 
+/*
+ * author: Guilherme Coelho
+ */
 import java.io.Serializable;
 import java.sql.Date;
 

@@ -30,16 +30,16 @@
             <column name="INT_ADMINISTRADOR_USR" />
         </many-to-one> 
                 <property name="permissaoAdministrador" type="boolean">
-            <column name="BOOL_PERMISSAOADMINISTRADOR_USR" />
+            <column name="BOOL_PERMISSAO_ADMINISTRADOR_USR" />
         </property>
         <property name="permissaoConsumidor" type="boolean">
-            <column name="BOOL_PERMISSAOCONSUMIDOR_USR" />
+            <column name="BOOL_PERMISSAO_CONSUMIDOR_USR" />
         </property>
         <property name="permissaoEmpresa" type="boolean">
-            <column name="BOOL_PERMISSAOEMPRESA_USR" />
+            <column name="BOOL_PERMISSAO_EMPRESA_USR" />
         </property>
         <property name="permissaoFuncionario" type="boolean">
-            <column name="BOOL_PERMISSAOFUNCIONARIO_USR" />
+            <column name="BOOL_PERMISSAO_FUNCIONARIO_USR" />
         </property>
     </class>
 </hibernate-mapping>

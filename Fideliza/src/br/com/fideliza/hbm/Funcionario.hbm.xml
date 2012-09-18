@@ -1,19 +1,21 @@
 <?xml version="1.0"?>
-<!-- 
-	author: guilherme coelho
- -->
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 06/09/2012 08:24:49 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 18/09/2012 07:27:11 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="br.com.fideliza.model.Funcionario" table="FUNCIONARIO">
         <id name="idFuncionario" type="int">
-            <column name="INT_ID_FUNCIONARIO_FUN" />
+            <column name="INT_ID_FUNCIONARIO_FUNC" />
             <generator class="increment" />
         </id>
         <many-to-one name="empresa" class="br.com.fideliza.model.Empresa" fetch="join">
-            <column name="INT_EMPRESA_FUN" />
+            <column name="INT_EMPRESA_FUNC" />
         </many-to-one>
-
+        <property name="status" type="boolean">
+            <column name="BOOL_STATUS_FUNC" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="STRING_EMAIL_FUNC" />
+        </property>
     </class>
 </hibernate-mapping>

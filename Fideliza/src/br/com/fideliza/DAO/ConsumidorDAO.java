@@ -50,8 +50,7 @@ public class ConsumidorDAO {
 	@SuppressWarnings("unchecked")
 	public List<Consumidor> listaUmConsumidor(int id) throws HibernateException{
 
-			return session.createCriteria(Consumidor.class)
-					.add(Restrictions.like("idConsumidor",id)).list();
+			return session.createCriteria(Consumidor.class).add(Restrictions.like("idConsumidor",id)).list();
 
 	}
 	

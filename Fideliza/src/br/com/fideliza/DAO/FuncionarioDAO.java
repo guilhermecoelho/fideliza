@@ -3,9 +3,11 @@
  */
 package br.com.fideliza.DAO;
 
-import org.hibernate.Query;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.fideliza.model.Funcionario;
 import br.com.fideliza.util.HibernateUtil;
@@ -28,26 +30,17 @@ public class FuncionarioDAO {
 		//session.close();
 	}
 	
-	public Funcionario BuscaPorEmpresa(int idEmpresa){
-
-		Funcionario retorno;
-		String sql= "select funcionario from Funcionario as funcionario where empresa = :idEmpresa";
-		Query q = session.createQuery(sql);
-		q.setInteger("idEmpresa", idEmpresa);
-		retorno = (Funcionario)  q.uniqueResult();
+	@SuppressWarnings("unchecked")
+	public List<Funcionario> listaFuncionarios(){
 		
-		return retorno;
+		return session.createCriteria(Funcionario.class).list();
 		
 	}
 	
-	public Funcionario BuscaPorId(int idFuncionario){
+	@SuppressWarnings("unchecked")
+	public List<Funcionario> BuscaPorEmpresa(int idEmpresa){
 		
-		Funcionario retorno;
-		String sql= "select funcionario from Funcionario as funcionario where idFuncionario = :idFuncionario";
-		Query q = session.createQuery(sql);
-		q.setInteger("idFuncionario", idFuncionario);
-		retorno = (Funcionario)  q.uniqueResult();
+		return session.createCriteria(Funcionario.class).add(Restrictions.like("empresa.idEmpresa",idEmpresa)).list();
 		
-		return retorno;
 	}
 }

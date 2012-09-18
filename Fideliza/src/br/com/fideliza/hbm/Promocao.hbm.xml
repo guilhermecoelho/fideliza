@@ -9,7 +9,7 @@
     <class name="br.com.fideliza.model.Promocao" table="PROMOCAO">
         <id name="idPromocao" type="int">
             <column name="INT_ID_PROMOCAO_PRO" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="nome" type="java.lang.String">
             <column name="STRING_NOME_PRO" />

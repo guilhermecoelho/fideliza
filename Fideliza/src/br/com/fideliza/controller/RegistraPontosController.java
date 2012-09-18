@@ -3,6 +3,7 @@
  */
 package br.com.fideliza.controller;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -35,8 +36,7 @@ public class RegistraPontosController {
 		// recupera usuario da sessão
 
 		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(
-				false);
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 		usuario = (Usuario) session.getAttribute("usuario");
 
 		registraPontos.setFuncionario(usuario.getFuncionario());
@@ -75,6 +75,7 @@ public class RegistraPontosController {
 			return "pontosRegistrados";
 			
 		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));
 			return "error";
 		}
 	}

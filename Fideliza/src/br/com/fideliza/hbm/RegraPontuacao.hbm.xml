@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="br.com.fideliza.model.RegraPontuacao" table="REGRA_PONTUACAO">
         <id name="idRegraPontuacao" type="int">
-            <column name="INT_ID_REGRAPONTUACAO_REP" />
+            <column name="INT_ID_REGRA_PONTUACAO_REP" />
             <generator class="increment" />
         </id>
         <property name="nome" type="java.lang.String">
