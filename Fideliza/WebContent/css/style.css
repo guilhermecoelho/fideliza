@@ -89,7 +89,7 @@ color:#FFF;
 }
 #conteudo {
 	width:880px;
-	height:741px;
+	height:800px;
 	margin: 0 auto;
 	padding:10px;
 	background:#FFF;
@@ -100,7 +100,7 @@ color:#FFF;
 	background:#F3F3F3;
 	float:left;
 	border: #C9C9C9 solid 1px;
-	
+	overflow:scroll;
 }
 #boxDireitaSuperior {
 	width:370px;
