@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/09/2012 11:30:18 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="br.com.fideliza.model.UtilizaPontos" table="UTILIZA_PONTOS">
+        <id name="idUtilizaPontos" type="int">
+            <column name="INT_ID_UTILIZA_PONTOS_UTIP" />
+            <generator class="increment" />
+        </id>
+        <property name="valorCompra" type="double">
+            <column name="DOUBLE_VALOR_COMPRA_UTIP" />
+        </property>
+
+        <many-to-one name="funcionario" class="br.com.fideliza.model.Funcionario" fetch="join">
+            <column name="INT_FUNCIONARIO_UTIP" />
+        </many-to-one>
+        <many-to-one name="consumidor" class="br.com.fideliza.model.Consumidor" fetch="join">
+            <column name="INT_CONSUMIDOR_UTIP" />
+        </many-to-one>
+        <many-to-one name="promocao" class="br.com.fideliza.model.Promocao" fetch="join">
+            <column name="INT_PROMOCAO_UTIP" />
+        </many-to-one>
+        <property name="dataRegistro" type="java.util.Date">
+            <column name="DATE_DATA_REGISTRO_UTIP" />
+        </property>
+    </class>
+</hibernate-mapping>

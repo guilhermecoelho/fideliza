@@ -99,8 +99,7 @@ public class ConsumidorController {
 	public DataModel<Consumidor> getConsumidorLista() { // lista todos consumidors
 		if (consumidorLista == null) {
 
-			HttpSession session = (HttpSession) FacesContext
-					.getCurrentInstance().getExternalContext().getSession(true);
+			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 
 			user = (Usuario) session.getAttribute("usuario"); // recupera dados da sessão
 
@@ -109,8 +108,7 @@ public class ConsumidorController {
 			if (user != null) { // se estiver logado, lista somente dados do consumidor logado
 
 				int idConsumidor = user.getConsumidor().getIdConsumidor(); // recupera id da sessão
-				List<Consumidor> consumidor = new ConsumidorDAO()
-						.listaUmConsumidor(idConsumidor);
+				List<Consumidor> consumidor = new ConsumidorDAO().listaUmConsumidor(idConsumidor);
 				consumidorLista = new ListDataModel<Consumidor>(consumidor);
 
 			} else { // lista todos consumidores

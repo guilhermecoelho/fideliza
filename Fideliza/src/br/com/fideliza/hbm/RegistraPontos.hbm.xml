@@ -3,9 +3,9 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 16/09/2012 02:32:01 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="br.com.fideliza.model.RegistraPontos" table="REGISTRAPONTOS">
+    <class name="br.com.fideliza.model.RegistraPontos" table="REGISTRA_PONTOS">
         <id name="idRegistraPontos" type="int">
-            <column name="INT_IDREGISTRAPONTOS_REGP" />
+            <column name="INT_ID_REGISTRA_PONTOS_REGP" />
             <generator class="increment" />
         </id>
         <property name="quantidadePontos" type="double">
@@ -21,7 +21,7 @@
             <column name="CONSUMIDOR_INT_CONSUMIDOR_REGP" />
         </many-to-one>
         <property name="dataRegistro" type="java.sql.Date">
-            <column name="DATE_DATAREGISTRO_REGP" />
+            <column name="DATE_DATA_REGISTRO_REGP" />
         </property>
         
     </class>

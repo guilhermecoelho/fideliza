@@ -27,7 +27,7 @@
             <column name="BOOL_STATUS_EMP" />
         </property>
          <many-to-one name="regraPontuacao" class="br.com.fideliza.model.RegraPontuacao" fetch="join">
-            <column name="REGRAAPONTUACAO_INT_REGRAPONTUACAO_EMP" />
+            <column name="REGRA_PONTUACAO_INT_REGRA_PONTUACAO_EMP" />
         </many-to-one>
     </class>
 </hibernate-mapping>

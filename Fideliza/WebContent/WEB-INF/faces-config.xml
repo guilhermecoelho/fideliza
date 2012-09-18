@@ -40,6 +40,11 @@
 		<managed-bean-class>br.com.fideliza.controller.RegistraPontosController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>utilizaPontosController</managed-bean-name>
+		<managed-bean-class>br.com.fideliza.controller.UtilizaPontosController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 		<display-name>login.xhtml</display-name>
 		<from-view-id>/login.xhtml</from-view-id>
