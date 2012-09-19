@@ -3,6 +3,8 @@
  */
 package br.com.fideliza.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
@@ -29,6 +31,7 @@ public class UtilizaPontosController {
 	private UtilizaPontos utilizaPontos;
 	private UtilizaPontosDAO utilizaPontosDAO;
 	private DataModel<Promocao> listaPromocao;
+	private ArrayList<Promocao> listaPromocao2;
 
 	public UtilizaPontosController() {
 
@@ -41,8 +44,7 @@ public class UtilizaPontosController {
 		this.utilizaPontosDAO = new UtilizaPontosDAO();
 
 		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(
-				false);
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 		usuario = (Usuario) session.getAttribute("usuario");
 
 	}
@@ -52,15 +54,24 @@ public class UtilizaPontosController {
 		consumidor = consumidorDAO.buscaPorCPF(utilizaPontos.getCpf());
 
 		if (consumidor != null) {
+			
+			FacesContext fc = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
+			session.setAttribute("consumidor", consumidor); //salva dados do usuario na sessão
+			
 			return "mostraPromocoes";
 		} else {
 			return "error";
 		}
 	}
 
-	public String registraUso() {
+	public void registraUso() throws IOException {
 		
-		return "registraUso";
+		
+		System.out.println(selectedPromocao.getIdPromocao());
+		
+		FacesContext.getCurrentInstance().getExternalContext().redirect("confirma_utiliza_pontos.xhtml");
+		//return "registraUso";
 
 	}
 
@@ -68,6 +79,19 @@ public class UtilizaPontosController {
 	
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public ArrayList<Promocao> getListaPromocao2() {
+		if (listaPromocao2 == null) {
+			List<Promocao> promocao = new PromocaoDAO().listaPorPontos(consumidor.getPontos());
+			listaPromocao2 = new ArrayList<Promocao>(promocao);
+			return listaPromocao2;
+		}
+		return listaPromocao2;
+	}
+
+	public void setListaPromocao2(ArrayList<Promocao> listaPromocao2) {
+		this.listaPromocao2 = listaPromocao2;
 	}
 
 	public Promocao getSelectedPromocao() {
@@ -100,12 +124,8 @@ public class UtilizaPontosController {
 
 	public DataModel<Promocao> getListaPromocao() {
 
-		utilizaPontos.setFuncionario(usuario.getFuncionario());
-
-		double pontos = consumidor.getPontos();
-
 		if (listaPromocao == null) {
-			List<Promocao> promocao = new PromocaoDAO().listaPorPontos(pontos);
+			List<Promocao> promocao = new PromocaoDAO().listaPorPontos(consumidor.getPontos());
 			listaPromocao = new ListDataModel<Promocao>(promocao);
 			return listaPromocao;
 		}

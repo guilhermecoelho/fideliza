@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.PromocaoDAO;
+import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Promocao;
 import br.com.fideliza.model.Usuario;
 
@@ -23,12 +24,15 @@ public class PromocaoController implements Serializable{
 	private static final long serialVersionUID = 5031783898741485634L;
 	
 	private Usuario usuario;
+	private Consumidor consumidor;
 	private Promocao promocao;
 	private PromocaoDAO promocaoDAO;
 	private ArrayList<Promocao> promocaoLista;
+	private ArrayList<Promocao> listaPromocao;
 	
 	public PromocaoController(){
 		this.usuario = new Usuario();
+		this.consumidor = new Consumidor();
 		this.promocao = new Promocao();
 		this.promocaoDAO = new PromocaoDAO();
 
@@ -55,6 +59,24 @@ public class PromocaoController implements Serializable{
 			promocaoLista = new ArrayList<Promocao>(promocao);
 		}
 		return promocaoLista;
+	}
+
+	public ArrayList<Promocao> getListaPromocao() {
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
+		consumidor = (Consumidor) session.getAttribute("consumidor");
+		
+		if (listaPromocao == null) {
+			List<Promocao> promocao = new PromocaoDAO().listaPorPontos(consumidor.getPontos());
+			listaPromocao = new ArrayList<Promocao>(promocao);
+			return listaPromocao;
+		}
+		return listaPromocao;
+	}
+
+	public void setListaPromocao(ArrayList<Promocao> listaPromocao) {
+		this.listaPromocao = listaPromocao;
 	}
 
 	public Promocao getPromocao() {
