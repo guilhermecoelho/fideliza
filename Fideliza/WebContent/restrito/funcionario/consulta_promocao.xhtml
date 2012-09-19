@@ -14,13 +14,28 @@
 <h:head>
 </h:head>
 <h:body>
+
 	<h:form id="form">
 		<p:panel header="Consulta" />
-
-		<p:dataTable id="table" var="result"
-			value="#{utilizaPontosController.listaPromocao}" paginator="true" rows="5" >
+	
+		<p:dataTable id="PromoTable" var="result"
+			value="#{promocaoController.listaPromocao}" rowKey="#{result.idPromocao}" selection="#{utilizaPontosController.selectedPromocao}"
+			 selectionMode="single" paginator="true" rows="6" >
+			 
+				 <f:facet name="header">  
+           			 Clique sobre a promoção que deseja usar e clique em confirmar 
+        		</f:facet>  
+        		
 			<p:column>
 				<p:rowToggler/>
+			</p:column>
+			
+				<p:column sortBy="#{result.idPromocao}">
+
+				<f:facet name="header">
+					<h:outputText value="id" />
+				</f:facet>
+				<h:outputText value="#{result.idPromocao}" />
 			</p:column>
 			
 			<p:column sortBy="#{result.nome}">
@@ -30,45 +45,41 @@
 				</f:facet>
 				<h:outputText value="#{result.nome}" />
 			</p:column>
-					
-			<p:column headerText="Editar" style="width:50px">
-				<h:panelGrid styleClass="actions" cellspacing="2">
-					<p:commandButton id="selectButton" update=":form:display"
-						oncomplete="promocaoDialog.show()" icon="ui-icon-search" title="View" process="@this">				
-						<f:setPropertyActionListener value="#{result}" target="#{utilizaPontosController.selectedPromocao}" />
-					</p:commandButton>
-				</h:panelGrid>
+			
+			<p:column sortBy="#{result.pontos}">
+
+				<f:facet name="header">
+					<h:outputText value="pontos" />
+				</f:facet>
+				<h:outputText value="#{result.pontos}" />
 			</p:column>
+			
+			<p:column sortBy="#{result.desconto}">
+
+				<f:facet name="header">
+					<h:outputText value="desconto" />
+				</f:facet>
+				<h:outputText value="#{result.desconto}" />
+			</p:column>
+					
+			<f:facet name="footer">
+				<p:commandButton actionListener="#{utilizaPontosController.registraUso}" value="confirmar" icon="ui-icon-search" />
+			</f:facet>
+			
 		<p:rowExpansion >
 		
-			<h:panelGrid columns="2" cellpadding="2" styleClass="ui-widget-content grid" id="display" >
+			<h:panelGrid columns="2" cellpadding="5" styleClass="ui-widget-content grid" id="display" >
 								
-				<h:outputLabel for="nome" value="nome" />
+				<h:outputText value="nome" />
 				<h:outputText value="#{result.nome}"/>
+				
+				<h:outputText value="descricao" />
+				<h:outputText value="#{result.descricao}"/>
 			
 			</h:panelGrid>
 		</p:rowExpansion>
 	
 		</p:dataTable>
-		
-		<p:dialog widgetVar="promocaoDialog" resizable="false" id="PromocaoDlg"
-			modal="true">
-			
-			<h:panelGrid columns="3" cellpadding="4" style="margin:0 auto;" id="display">
-		
-				
-			<p:column>
-
-				<f:facet name="header">
-					<h:outputText value="nome" />
-				</f:facet>
-				<h:outputText value="#{utilizaPontosController.selectedPromocao.nome}" />
-				
-			</p:column>
-					
-			</h:panelGrid>
-		</p:dialog>
-
 	</h:form>
 </h:body>
 </html>

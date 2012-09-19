@@ -110,6 +110,14 @@
 			<to-view-id>/restrito/funcionario/utiliza_pontos.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/funcionario/consulta_promocao.xhtml</display-name>
+		<from-view-id>/restrito/funcionario/consulta_promocao.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>registraUso</from-outcome>
+			<to-view-id>/restrito/funcionario/confirma_utiliza_pontos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	
 	<lifecycle>
 		<phase-listener>br.com.fideliza.filter.AuthorizationListener</phase-listener>

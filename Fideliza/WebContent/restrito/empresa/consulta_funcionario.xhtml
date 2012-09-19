@@ -31,7 +31,17 @@
 				<h:outputText value="#{result.email}" />
 			</p:column>
 		
+		<p:rowExpansion >
+		
+			<h:panelGrid columns="2" cellpadding="5" styleClass="ui-widget-content grid" id="display" >
+								
+				<h:outputText value="nome" />
+				<h:outputText value="#{result.email}"/>
+			
+			</h:panelGrid>
+		</p:rowExpansion>
 		</p:dataTable>
+		
 
 	</h:form>
 </h:body>
