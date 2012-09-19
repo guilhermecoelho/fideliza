@@ -94,6 +94,22 @@
 			<to-view-id>/restrito/admin/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/funcionario/utiliza_pontos.xhtml</display-name>
+		<from-view-id>/restrito/funcionario/utiliza_pontos.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>mostraPromocoes</from-outcome>
+			<to-view-id>/restrito/funcionario/consulta_promocao.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/funcionario/utiliza_pontos.xhtml</display-name>
+		<from-view-id>/restrito/funcionario/utiliza_pontos.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/restrito/funcionario/utiliza_pontos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	
 	<lifecycle>
 		<phase-listener>br.com.fideliza.filter.AuthorizationListener</phase-listener>
