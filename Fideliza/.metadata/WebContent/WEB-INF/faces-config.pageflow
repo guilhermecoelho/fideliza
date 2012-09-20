@@ -6,18 +6,18 @@
   <nodes xsi:type="pageflow:PFPage" name="restrito/admin/index.xhtml" x="404" y="168" id="pf134776975486512" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" inlinks="pf134776975486511" path="/restrito/admin/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/index.xhtml" x="398" y="96" id="pf134776975486513" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf13475759256731" path="/restrito/empresa/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/index.xhtml" x="390" y="12" id="pf134776975486514" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf13475759256732" path="/restrito/funcionario/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/consulta_promocao.xhtml" x="352" y="360" id="pf13480068891150" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" outlinks="pf13480635418860" inlinks="pf13480068891151" path="/restrito/funcionario/consulta_promocao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/consulta_promocao.xhtml" x="352" y="360" id="pf13480068891150" referenceLink="//@navigationRule.8/@fromViewId|" outlinks="pf13480635418860" inlinks="pf13480068891151" path="/restrito/funcionario/consulta_promocao.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/utiliza_pontos.xhtml" x="48" y="360" id="pf13480068891152" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" outlinks="pf13480068891151 pf13480068891153" inlinks="pf13480068891153" path="/restrito/funcionario/utiliza_pontos.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/confirma_utiliza_pontos.xhtml" x="600" y="360" id="pf13480635418861" inlinks="pf13480635418860" path="/restrito/funcionario/confirma_utiliza_pontos.xhtml"/>
-  <links id="pf13477686212377" target="pf13477675319566" source="pf13477686212378" outcome="loginConsumidor"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/confirma_utiliza_pontos.xhtml" x="600" y="360" id="pf13480635418861" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" inlinks="pf13480635418860" path="/restrito/funcionario/confirma_utiliza_pontos.xhtml"/>
+  <links id="pf13477686212377" target="pf13477675319566" source="pf13477686212378" outcome="loginConsumidor" redirect="true"/>
   <links id="pf13477686994829" target="pf13477686212378" source="pf13477686212378" outcome="errorLogin">
     <bendPoints d1Height="-36" d2Height="-36"/>
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
   <links id="pf13475446472360" target="pf13477686212378" source="pf13475446472361" outcome="loginPage"/>
-  <links id="pf13475759256732" target="pf134776975486514" source="pf13477686212378" outcome="loginFuncionario"/>
-  <links id="pf13475759256731" target="pf134776975486513" source="pf13477686212378" outcome="loginEmpresa"/>
+  <links id="pf13475759256732" target="pf134776975486514" source="pf13477686212378" outcome="loginFuncionario" redirect="true"/>
+  <links id="pf13475759256731" target="pf134776975486513" source="pf13477686212378" outcome="loginEmpresa" redirect="true"/>
   <links id="pf134776975486511" target="pf134776975486512" source="pf13477686212378" outcome="loginAdmin"/>
   <links id="pf13480068891151" target="pf13480068891150" source="pf13480068891152" outcome="mostraPromocoes"/>
   <links id="pf13480068891153" target="pf13480068891152" source="pf13480068891152" outcome="error">

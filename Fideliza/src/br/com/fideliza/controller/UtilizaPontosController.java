@@ -57,7 +57,7 @@ public class UtilizaPontosController {
 			
 			FacesContext fc = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-			session.setAttribute("consumidor", consumidor); //salva dados do usuario na sessão
+			session.setAttribute("cpf", consumidor.getCpf()); //salva dados do usuario na sessão
 			
 			return "mostraPromocoes";
 		} else {
@@ -66,9 +66,38 @@ public class UtilizaPontosController {
 	}
 
 	public void registraUso() throws IOException {
+				
+		//recupera dados da promoção selecionada
 		
+		promocao = promocaoDAO.buscaPorId(selectedPromocao.getIdPromocao());
 		
-		System.out.println(selectedPromocao.getIdPromocao());
+		//recupera informações do consumidor salvas na sessão
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+		String cpf = (String) session.getAttribute("cpf");
+		
+		consumidor = consumidorDAO.buscaPorCPF(cpf);
+		
+		//popula e salva no BD registro utiliza_pontos
+		
+		utilizaPontos.setConsumidor(consumidor);
+		utilizaPontos.setFuncionario(usuario.getFuncionario());
+		utilizaPontos.setPromocao(promocao);
+		
+		utilizaPontosDAO.SalvaRegistro(utilizaPontos);
+		
+		//atualiza saldo consumidor
+		
+		double pontosConsumidor = consumidor.getPontos();	
+		double novoSaldo = pontosConsumidor - promocao.getPontos();	
+		consumidor.setPontos(novoSaldo);
+		
+		consumidorDAO.editarConsumidor(consumidor);
+		
+		session.removeAttribute(cpf);
+		
+		//redireciona para pagina final
 		
 		FacesContext.getCurrentInstance().getExternalContext().redirect("confirma_utiliza_pontos.xhtml");
 		//return "registraUso";
