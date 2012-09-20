@@ -11,6 +11,7 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.PromocaoDAO;
 import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Promocao;
@@ -25,6 +26,7 @@ public class PromocaoController implements Serializable{
 	
 	private Usuario usuario;
 	private Consumidor consumidor;
+	private ConsumidorDAO consumidorDAO;
 	private Promocao promocao;
 	private PromocaoDAO promocaoDAO;
 	private ArrayList<Promocao> promocaoLista;
@@ -33,6 +35,7 @@ public class PromocaoController implements Serializable{
 	public PromocaoController(){
 		this.usuario = new Usuario();
 		this.consumidor = new Consumidor();
+		this.consumidorDAO = new ConsumidorDAO();
 		this.promocao = new Promocao();
 		this.promocaoDAO = new PromocaoDAO();
 
@@ -65,7 +68,9 @@ public class PromocaoController implements Serializable{
 		
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-		consumidor = (Consumidor) session.getAttribute("consumidor");
+		String cpf = (String) session.getAttribute("cpf");
+		
+		consumidor = consumidorDAO.buscaPorCPF(cpf);
 		
 		if (listaPromocao == null) {
 			List<Promocao> promocao = new PromocaoDAO().listaPorPontos(consumidor.getPontos());

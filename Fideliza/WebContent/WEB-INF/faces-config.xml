@@ -51,7 +51,7 @@
 		<navigation-case>
 			<from-outcome>loginConsumidor</from-outcome>
 			<to-view-id>/restrito/consumidor/index.xhtml</to-view-id>
-			
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -76,6 +76,7 @@
 		<navigation-case>
 			<from-outcome>loginFuncionario</from-outcome>
 			<to-view-id>/restrito/funcionario/index.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -84,6 +85,7 @@
 		<navigation-case>
 			<from-outcome>loginEmpresa</from-outcome>
 			<to-view-id>/restrito/empresa/index.xhtml</to-view-id>
+			<redirect></redirect>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

@@ -55,5 +55,8 @@ public class PromocaoDAO {
 	public List<Promocao> listaPorPontos(double pontos){
 		return session.createCriteria(Promocao.class).add(Restrictions.le("pontos", pontos)).list();
 	}
+	public Promocao buscaPorId(int idPromocao){
+		return (Promocao) session.createCriteria(Promocao.class).add(Restrictions.like("idPromocao", idPromocao)).uniqueResult();
+	}
 
 }
