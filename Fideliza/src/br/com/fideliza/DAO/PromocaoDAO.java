@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import br.com.fideliza.model.Empresa;
 import br.com.fideliza.model.Promocao;
 import br.com.fideliza.util.HibernateUtil;
 
@@ -35,10 +36,6 @@ public class PromocaoDAO {
 		return session.createCriteria(Promocao.class).list();
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Promocao> listaPromocao2(){
-		return session.createQuery("select promocao from Promocao as promocao left join fetch promocao.idEmpresa").list();
-	}
 	
 	public Promocao buscaPorEmpresa(int empresa){
 
@@ -52,11 +49,16 @@ public class PromocaoDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Promocao> listaPorPontos(double pontos){
-		return session.createCriteria(Promocao.class).add(Restrictions.le("pontos", pontos)).list();
+	public List<Promocao> listaPorPontos(double pontos, Empresa empresa){
+		return session.createCriteria(Promocao.class).add(Restrictions.le("pontos", pontos)).add(Restrictions.like("empresa",empresa)).list();
 	}
 	public Promocao buscaPorId(int idPromocao){
 		return (Promocao) session.createCriteria(Promocao.class).add(Restrictions.like("idPromocao", idPromocao)).uniqueResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Promocao> listaPorEmpresa(int idEmpresa){
+		return session.createCriteria(Promocao.class).add(Restrictions.like("empresa",idEmpresa)).list();
 	}
 
 }

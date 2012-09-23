@@ -38,15 +38,15 @@ public class PromocaoController implements Serializable{
 		this.consumidorDAO = new ConsumidorDAO();
 		this.promocao = new Promocao();
 		this.promocaoDAO = new PromocaoDAO();
-
-	}
-	
-	public String salvaPromocao(){
 		
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
 		usuario = (Usuario) session.getAttribute("usuario");
-		
+
+	}
+	
+	public String salvaPromocao(){
+			
 		promocao.setEmpresa(usuario.getEmpresa());
 		promocao.setStatus(true);
 		
@@ -71,9 +71,9 @@ public class PromocaoController implements Serializable{
 		String cpf = (String) session.getAttribute("cpf");
 		
 		consumidor = consumidorDAO.buscaPorCPF(cpf);
-		
+			
 		if (listaPromocao == null) {
-			List<Promocao> promocao = new PromocaoDAO().listaPorPontos(consumidor.getPontos());
+			List<Promocao> promocao = new PromocaoDAO().listaPorPontos(consumidor.getPontos(), usuario.getEmpresa());
 			listaPromocao = new ArrayList<Promocao>(promocao);
 			return listaPromocao;
 		}

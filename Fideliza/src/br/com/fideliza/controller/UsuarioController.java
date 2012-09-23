@@ -4,6 +4,8 @@
 
 package br.com.fideliza.controller;
 
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -57,8 +59,15 @@ public class UsuarioController {
 		}
 	}
 	
-	public String logout(){
-		return null;
+	public String logout() throws IOException{
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
+		session.invalidate(); 
+		
+		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+		
+		return "logout";
 	}
 	
 	
