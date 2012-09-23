@@ -60,6 +60,7 @@
 			<navigation-case>
 				<from-outcome>errorLogin</from-outcome>
 				<to-view-id>/login.xhtml</to-view-id>
+				<redirect></redirect>
 			</navigation-case>
 		</navigation-rule>
 	<navigation-rule>
@@ -118,6 +119,15 @@
 		<navigation-case>
 			<from-outcome>registraUso</from-outcome>
 			<to-view-id>/restrito/funcionario/confirma_utiliza_pontos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/funcionario/index.xhtml</display-name>
+		<from-view-id>/restrito/funcionario/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect></redirect>
 		</navigation-case>
 	</navigation-rule>
 	

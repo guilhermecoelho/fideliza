@@ -10,7 +10,7 @@
     <class name="br.com.fideliza.model.Administrador" table="ADMINISTRADOR">
         <id name="idAdministrador" type="int">
             <column name="INT_ID_ADMINISTRADOR_ADM" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="nome" type="java.lang.String">
             <column name="STRING_NOME_ADM" />
