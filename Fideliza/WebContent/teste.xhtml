@@ -12,38 +12,55 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
+	<link rel="stylesheet" type="text/css" href="css/style2.css" />
+	<style type="text/css">
+		 .ui-widget-content .ui-wiget-header{
+		 	background: #000 !important; 
+			background-image:url(imagens/fundo-azul.png); background-repeat:repeat-x !important;
+			
+		}
+	</style>
 </h:head>
 <h:body>
-	<h:form id="form">
-		<p:panel header="Regra de pontuação">
+	<div  id="header">
+	
+	</div>
+	<div id="banner">
+	</div>
+	<div id="page">
+	
+	<p:menubar >  
+        <p:submenu label="File" icon="ui-icon-document">  
+            <p:submenu label="New" icon="ui-icon-contact">  
+                <p:menuitem value="Project" url="#" />  
+                <p:menuitem value="Other" url="#" />  
+            </p:submenu>  
+            <p:menuitem value="Open" url="#" />  
+            <p:separator />  
+            <p:menuitem value="Quit" url="#" />  
+        </p:submenu>  
+  
+        <p:submenu label="Edit" icon="ui-icon-pencil">  
+            <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />  
+            <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />  
+        </p:submenu>  
+  
+        <p:submenu label="Help" icon="ui-icon-help">  
+            <p:menuitem value="Contents" url="#" />  
+            <p:submenu label="Search" icon="ui-icon-search">  
+                <p:submenu label="Text">  
+                    <p:menuitem value="Workspace" url="#" />  
+                </p:submenu>  
+                <p:menuitem value="File" url="#" />  
+            </p:submenu>  
+        </p:submenu>  
+        </p:menubar>
 		
-			<p:messages id="msgError" autoUpdate="true" />
-			
-			<h:panelGrid columns="3" cellpadding="5" process="@this">
-			
-				<h:outputLabel for="nome" value="nome *" />
-				<p:inputText value="#{regraPontuacaoController.regraPontuacao.nome}" id="nome"
-					label="nome" required="true" requiredMessage="O campo nome deve ser preenchido"/>
-				<p:message for="nome"  />
-
-				<h:outputLabel for="valorReal" value="Preço" />
-				<p:inputText value="#{regraPontuacaoController.regraPontuacao.valorReal}" id="valorReal"
-					label="nome" required="true" requiredMessage="O campo nome deve ser preenchido"/>
-				<p:message for="valorReal"  />
-				
-				<h:outputLabel for="valorPontos" value="Quantidade de pontos *" />
-				<p:inputText value="#{regraPontuacaoController.regraPontuacao.valorPonto}" id="valorPontos"
-					label="valorPontos" required="true" requiredMessage="O campo nome deve ser preenchido"/>
-				<p:message for="valorPontos"  />
-					
-				<p:commandButton value="Salvar"
-					action="#{regraPontuacaoController.adicionaRegraPontuacao}" ajax="false"/>
-				<p:commandButton value="Limpar campos"
-					type="reset"/>
-
-			</h:panelGrid>
-		</p:panel>
-
-	</h:form>
+	</div>
+	<div id="footer">
+	</div>
 </h:body>
+
+	
+
 </html>
