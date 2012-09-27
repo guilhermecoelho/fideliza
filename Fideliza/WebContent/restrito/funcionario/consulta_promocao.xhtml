@@ -26,7 +26,7 @@
            			 Clique sobre a promoção que deseja usar e clique em confirmar 
         		</f:facet>  
         		
-			<p:column>
+			<p:column exportable="false">
 				<p:rowToggler/>
 			</p:column>
 			
@@ -38,7 +38,7 @@
 				<h:outputText value="#{result.idPromocao}" />
 			</p:column>
 			
-			<p:column sortBy="#{result.nome}">
+			<p:column sortBy="#{result.nome}" exportable="false">
 
 				<f:facet name="header">
 					<h:outputText value="nome" />
@@ -80,6 +80,16 @@
 		</p:rowExpansion>
 	
 		</p:dataTable>
+		
+		<h:panelGrid columns="2">  
+    		<p:panel header="Exportar">  
+        		<h:commandLink>  
+            		<p:graphicImage value="/images/pdf.png" />  
+            		<p:dataExporter type="pdf" target="PromoTable" fileName="listaPromocao" excludeColumns="0,5"/>  
+       			 </h:commandLink> 
+       		</p:panel>
+       	</h:panelGrid> 
+  
 	</h:form>
 </h:body>
 </html>

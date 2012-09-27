@@ -7,6 +7,8 @@
 		width:100%;
 		height:150px;
 		background-image:url(imagens/fundo_topo.png); background-repeat:repeat-x;
+		background: none;
+		border: 0px;
 	}
 #topoMeio{
 	width:900px;
@@ -141,4 +143,16 @@ color:#FFF;
 }
 span.login {
 	float:right;
+}
+
+.ui-top, .ui-top .ui-layout, .ui-top .ui-layout-bd, .ui-top .ui-layout-unit {
+	border: 0px;
+   
+    background-color: red; 
+    }
+.ui-menubar {
+	mouseover: #ff0000;  
+	background: red; 
+	background-image:url(css/imagens/fundo_topo.png) !important; 
+	background-repeat:repeat-x
 }

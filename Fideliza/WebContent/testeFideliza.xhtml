@@ -11,17 +11,35 @@
 </h:head>
 <h:body>
 
-<h:form>
-	<h:panelGrid columns="2" cellpadding="5">
-
-		<h:outputText value="nome"/>
-		<h:inputText value="#{usuarioController.user.user}" id="user"/>
-		<h:outputText value="senha"/>
-		<h:inputText value="#{usuarioController.user.password}" id="password"/>
-		<h:commandButton value="teste" action="#{usuarioController.salvaUser}"/>
-
-	</h:panelGrid>
-</h:form>
+<p:layout fullPage="true">  
+  
+    <p:layoutUnit position="north" size="100">  
+       <ui:include src="teste.xhtml" />  
+    </p:layoutUnit>  
+  
+    <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
+        <h:outputText value="South unit content." />  
+    </p:layoutUnit>  
+  
+    <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">  
+        <h:form>  
+             
+        </h:form>  
+    </p:layoutUnit>  
+  
+    <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
+        <h:outputText value="Right unit content." />  
+    </p:layoutUnit>  
+  
+    <p:layoutUnit position="center">  
+        <h:form>  
+            This fullPage layout consists of five different layoutUnits which are resizable and closable by default.  
+  
+        </h:form>  
+    </p:layoutUnit>  
+  
+</p:layout>  
+                 
 
 </h:body>
 </html>

@@ -1,0 +1,35 @@
+@CHARSET "ISO-8859-1";
+*{
+	margin:0;
+	padding:0;
+}
+#header{
+	width:100%;
+	height:70px;
+	border: 0px;
+	background: #efefef;
+}
+#banner{
+	
+	width:100%;
+	height: 280px;
+	border:0px;
+	background-image:url(imagens/fundo-banner.png); background-repeat:repeat-x;
+}
+
+#page{
+	display: block;
+	min-height: 550px;
+	padding-bottom: 20px;
+	background: #efefef;
+}
+
+#footer{
+	box-shadow: 0px 1px 15px #ADADAD;
+	font-size: 12px;
+	font-weight: 700;
+	height: 70px;
+	margin: 0 auto;
+	padding: 5px 10px;
+	background: #ADADAD;
+}
