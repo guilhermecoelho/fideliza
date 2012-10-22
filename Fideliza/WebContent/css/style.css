@@ -5,84 +5,62 @@
 }
 #topo{
 		width:100%;
-		height:150px;
+		height:100px;
 		background-image:url(imagens/fundo_topo.png); background-repeat:repeat-x;
-		background: none;
+		background: #17a0ff;
 		border: 0px;
 	}
 #topoMeio{
 	width:900px;
-	height:150px;
+	height:100px;
 	margin:0 auto;
 	text-align:left;
 	
 }
+     
 #banner {
 	with:650px;
-	height:15opx;
+	height:100px;
 	float:left;
 }
 #login {
 	width:250px;
 	height:75px;
 	float:right;
-	padding-top:30px;
 	
 }
 #menu {
 	width:100%;
-	height:30px;
-	background-image:url(imagens/fundo_menu.png); background-repeat:repeat-x;
+	height:37px;
+	margin-top: 5px;
 
 }
 
 #menuBotao {
 	
-width:900px;
+	width:900px;
+	height:37px;
+	margin:0 auto;
 	
-height:30px;
 	
-margin:0 auto;
 
 }
 
-#menuBotao ul {
-	
-list-style:none;
-	
-height:15px;
-	
-padding-bottom:15px;
-	
-text-align:center;	
-
-}
-#menuBotao li a {
-	
-float:left;
-	
-height:30px;
-	
-padding:0px 25px;
-	
-line-height:30px;
-	
-text-decoration:none;
-	
-text-align:center;
-	
-color:#CCC;
-
-}
-
-#menuBotao li a:hover{
-	
-background:#CCC;
-	
-color:#FFF;
-
-}
-
+#menu .ui-menubar, #login .ui-menubutton, .ui-panel, .ui-datatable  {  
+    font-size: 12px !important;  
+    border: 0px;
+    -moz-box-shadow: 0px 1px 15px #ADADAD;
+	-webkit-box-shadow:0px 1px 15px #ADADAD;
+	box-shadow: 0px 1px 15px #ADADAD;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	background: #EDF3F6;
+	border-radius:6px;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#edf3f6',endColorstr='#d3e1e8');
+	background: -webkit-gradient(linear,left top,left bottom,from(#EDF3F6),to(#D3E1E8));
+	background: -moz-linear-gradient(top,#EDF3F6,#D3E1E8);
+    
+} 
 
 #fundo {
 	width:100%;
@@ -90,27 +68,55 @@ color:#FFF;
 	background-image:url(css/imagens/fundo.png); background-repeat:repeat-x;	
 }
 #conteudo {
-	width:880px;
+	width:900px;
 	height:800px;
 	margin: 0 auto;
 	padding:10px;
 	background:#FFF;
 }
+
+#grid {
+	margin: 40px auto;
+	
+}
+#grid ul{
+	list-style-type: none;
+	
+}
+#funcionario {
+	padding-left: 20%;
+}
+#grid li{
+	-moz-box-shadow: 0px 1px 15px #ADADAD;
+	-webkit-box-shadow:0px 1px 15px #ADADAD;
+	box-shadow: 0px 1px 15px #ADADAD;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	background: #EDF3F6;
+	border-radius:6px;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#edf3f6',endColorstr='#d3e1e8');
+	background: -webkit-gradient(linear,left top,left bottom,from(#EDF3F6),to(#D3E1E8));
+	background: -moz-linear-gradient(top,#EDF3F6,#D3E1E8);
+	float: left;height: 200px;margin-right:20px;
+	padding: 10px;width: 260px;
+}
+
 #boxEsquerda {
 	width:490px;
 	height:741px;
-	background:#F3F3F3;
 	float:left;
-	border: #C9C9C9 solid 1px;
-	overflow:scroll;
+	
 }
-#boxDireitaSuperior {
+#boxDireita {
 	width:370px;
-	height:290px;
-	background:#F3F3F3;
+	height:741px;
 	float:right;
-	padding-bottom:10px;
-	border:#C9C9C9 solid  1px;
+	margin: 40px auto;
+	
+}
+
+#boxDireita {
+	
 }
 #boxDireitaInferior {
 	width:370px;
@@ -124,35 +130,4 @@ color:#FFF;
 	height:75px;
 	background:#999;
 }
-#login form.login {
-	text-align:left;
-	display:block;
-}
-#login fieldset{
-	border:none;
-}
-#login label, input {
-	display:block;
-	float:left;
-}
-#login label {
-	text-align:right;
-	width:35px;
-	padding-right:20px;
-	padding-bottom:20px;
-}
-span.login {
-	float:right;
-}
 
-.ui-top, .ui-top .ui-layout, .ui-top .ui-layout-bd, .ui-top .ui-layout-unit {
-	border: 0px;
-   
-    background-color: red; 
-    }
-.ui-menubar {
-	mouseover: #ff0000;  
-	background: red; 
-	background-image:url(css/imagens/fundo_topo.png) !important; 
-	background-repeat:repeat-x
-}

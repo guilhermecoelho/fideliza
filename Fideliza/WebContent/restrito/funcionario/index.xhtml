@@ -8,42 +8,43 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+
 	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+
 </h:head>
 <h:body>
-	<div id="topo">
+<div id="topo">
  
 	<div id="topoMeio">
     	<div id="banner">
-     		 <h2> LOGOU!!!</h2>
+     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
         </div>
- 
-           
+ 	<div id="login">
+ 	<h:form>
+ 		<p:menuButton value="login">
+ 			<p:menuitem value="Consumidor" url="login_consumidor.xhtml" ajax="false"/>
+ 			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false"/>
+ 		</p:menuButton>
+ 	</h:form>
+ 	</div>
 	</div>
 </div>
-<div id="menu">
-	<div id="menuBotao">
-    	
-    </div>
-</div>
+
 <div id="fundo">
-	<div id="conteudo">
-    	<div id="boxEsquerda">
-         <h2> Conteudo</h2>
-         <h:form>
-         <p:panel>
-          <p:commandButton actionListener="#{usuarioController.logout}" value="logout" />
-          </p:panel>
-         </h:form>
+	<div id="conteudo">    
+         <div id="grid">
+         	<ul id="funcionario">
+         		<li>
+         			<p:button href="registra_pontos.xhtml" value="Registrar Pontos"></p:button>
+         		</li>
+         		<li>
+         			<p:button href="utiliza_pontos.xhtml" value="Utilizar Pontos"></p:button>
+         		</li>
+         	</ul>
+         </div>
         </div>
-        <div id="boxDireitaSuperior">
-         <h2> coluna lateral superior</h2>
-        </div>
-		<div id="boxDireitaInferior">
-         <h2> coluna lateral inferior</h2>
-		</div>
     </div>
-</div>
+
 <div id="rodape">
 <h2> rodapé</h2>
 </div>
