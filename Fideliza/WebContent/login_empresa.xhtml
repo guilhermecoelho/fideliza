@@ -5,31 +5,67 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
-<!-- 
-	author: guilherme coelho
- -->
+	xmlns:p="http://primefaces.org/ui">
+
 <h:head>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
 </h:head>
 <h:body>
-
-	<h:form>
-
-	<p:messages id="error" showDetail="true" autoUpdate="true"/>
-		<h:panelGrid columns="2" cellpadding="5">
-					
-			 
-			<h:outputText value="Usuario" />
-			<p:inputText value="#{usuarioController.usuario.user}" id="user"/>
+	<div id="topo">
+ 
+	<div id="topoMeio">
+    	<div id="banner">
+     		<img src="images/fideliza2.png" alt="" />
+        </div>
+ 	<div id="login">
+ 	<h:form>
+ 		<p:menuButton value="login">
+ 			<p:menuitem value="Consumidor" url="login_consumidor.xhtml" ajax="false"/>
+ 			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false"/>
+ 		</p:menuButton>
+ 	</h:form>
+ 	</div>
+	</div>
+</div>
+<div id="menu">
+	<div id="menuBotao">
+    	<ui:include src="menu.xhtml"/>
+    </div>
+</div>
+<div id="fundo">
+	<div id="conteudo">
+		<div id="boxEsquerdaSucesso">
 			
-			<h:outputText for="password" value="senha" />
-			<p:password value="#{usuarioController.usuario.password}" id="password" label = "senha"  required="true"/>
+			<h:form>
+				<p:messages id="error"  autoUpdate="true"/>
+				<h:panelGrid columns="2" cellpadding="5" process="@this">
 					
-			<p:commandButton value="teste" action="#{usuarioController.login}" />
+					<h:outputText value="Email"/>
+					<p:inputText value="#{usuarioController.usuario.user}" id="email" required="true" requiredMessage="Informe seu email"/>
+						
+					<h:outputText for="password" value="senha" />
+					<p:password value="#{usuarioController.usuario.password}" id="password" label = "senha"  required="true" requiredMessage="Preencha o campo senha"/>
+					
+					<p:commandButton value="Logar" action="#{usuarioController.login}"  />
 
-		</h:panelGrid>
-	</h:form>
+				</h:panelGrid>
+			</h:form>
+			
+		</div>
+		<div id="boxDireitaSucesso">
+			<div id ="grid">
+		    	<ul>		
+			    	<li>
+			    		Box1
+			    	</li>
+			    </ul>
+			</div>
+    	</div>
+	</div>
+</div>
+<div id="rodape">
+<h2> rodapé</h2>
+</div>
 
 
 </h:body>
