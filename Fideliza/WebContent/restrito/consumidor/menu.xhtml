@@ -12,7 +12,18 @@
 	
 	<h:head>
 		<h:body>	
-			menu consumidor
+			<h:form>
+				<p:menubar>
+					<p:menuitem value="Home" url="index.xhtml"/>
+					<p:submenu label="Historico">
+						<p:menuitem value="Pontos registrados" url="cadastro_promocao.xhtml"/>
+						<p:menuitem value="Pontos utilizados" url="consulta_promocao.xhtml"/>
+					</p:submenu>	
+					<p:menuitem value="promoções" url="consulta_promocao.xhtml"/>			
+					<p:menuitem value="Minha conta" url="editar_consumidor.xhtml"/>
+
+				</p:menubar>
+			</h:form>		
 		</h:body>
 		
 	</h:head>

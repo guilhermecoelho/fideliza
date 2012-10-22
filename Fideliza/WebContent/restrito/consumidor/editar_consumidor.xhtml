@@ -1,23 +1,49 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- 
 	author: guilherme coelho
  -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-	
-	<h:head>
-		<h:body>	
-			editar consumidor
-		</h:body>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+</h:head>
+<h:body>
+	<div id="topo">
+ 
+	<div id="topoMeio">
+    	<div id="banner">
+     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+        </div>
+ 	<div id="login">
+ 	<h:form>
+ 		<p:menuButton value="login">
+ 			<p:menuitem value="Consumidor" url="login_consumidor.xhtml" ajax="false"/>
+ 			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false"/>
+ 		</p:menuButton>
+ 	</h:form>
+ 	</div>
+	</div>
+</div>
+<div id="menu">
+	<div id="menuBotao">
+    	<ui:include src="menu.xhtml"/>
+    </div>
+</div>
+<div id="fundo">
+	<div id="conteudo">
+
 		
-	</h:head>
-	
-	
-
-
+	</div>
+</div>
+<div id="rodape">
+<h2> rodapé</h2>
+</div>
+</h:body>
 </html>

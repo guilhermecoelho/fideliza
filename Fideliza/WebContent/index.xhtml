@@ -8,16 +8,23 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
 </h:head>
 <h:body>
 	<div id="topo">
  
 	<div id="topoMeio">
     	<div id="banner">
-     		<img src="images/fideliza.gif" alt="" />
+     		<img src="images/fideliza2.png" alt="" />
         </div>
- 
+ 	<div id="login">
+ 	<h:form>
+ 		<p:menuButton value="login">
+ 			<p:menuitem value="Consumidor" url="login_consumidor.xhtml" ajax="false"/>
+ 			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false"/>
+ 		</p:menuButton>
+ 	</h:form>
+ 	</div>
 	</div>
 </div>
 <div id="menu">
@@ -27,15 +34,19 @@
 </div>
 <div id="fundo">
 	<div id="conteudo">
-    	<div id="boxEsquerda">
-         <h2> Conteudo</h2>
-        </div>
-        <div id="boxDireitaSuperior">
-         <h2> coluna lateral superior</h2>
-        </div>
-		<div id="boxDireitaInferior">
-         <h2> coluna lateral inferior</h2>
-		</div>
+    	<div id ="grid">
+	    	<ul>		
+		    	<li>
+		    		Box1
+		    	</li>
+		    	<li>
+		    		Box2
+		    	</li>
+		    	<li>
+		    		Box3
+		    	</li> 	
+	    	</ul>
+    	</div>
     </div>
 </div>
 <div id="rodape">

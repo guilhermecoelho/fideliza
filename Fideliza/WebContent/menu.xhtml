@@ -9,19 +9,22 @@
 <!-- 
 	author: guilherme coelho
  -->
-	<body>
-		<ul>
-        	<li><a href="">home</a></li>
-            <li><a href="">sobre fideliza</a></li>
-            <li><a href="sobreNos.xhtml">sobre nós</a></li>
-            <li><a href="cadastro_consumidor.xhtml">para você</a></li>
-            <li><a href="">para seu comercio</a></li>
-            <li><a href="cadastro.xhtml">cadastrar</a></li>
-            <li><a href="">contato</a></li>
-            <li><a href="login.xhtml">login</a></li>
-        </ul>
-	
-	</body>
+ <h:head>
+ 	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+ </h:head>
+	 <h:body>
+
+		<h:form>
+			<p:menubar>
+				<p:menuitem value="Home" url="index.xhtml"></p:menuitem>
+				<p:menuitem value="Sobre nós" url="index.xhtml"></p:menuitem>
+				<p:menuitem value="Para você" url="cadastro_consumidor.xhtml"></p:menuitem>
+				<p:menuitem value="Para seu comercio" url="cadastro_empresa.xhtml"></p:menuitem>
+				<p:menuitem value="Cadastre-se" url="index.xhtml"></p:menuitem>
+				<p:menuitem value="Contato" url="index.xhtml"></p:menuitem>
+			</p:menubar>
+		</h:form>		
+	</h:body>
 
 
 </html>
