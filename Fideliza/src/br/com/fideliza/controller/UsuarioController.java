@@ -39,6 +39,7 @@ public class UsuarioController {
 			session.setAttribute("usuario", usuario); //salva dados do usuario na sessão
 			
 			
+			
 			if(usuario.isPermissaoConsumidor() == true){
 				tipoUser = "loginConsumidor";
 			}
@@ -51,10 +52,14 @@ public class UsuarioController {
 			else if(usuario.isPermissaoAdministrador() == true){
 				tipoUser = "loginAdmin";
 			}
+			
+			this.usuario = new Usuario();
+			
 			return tipoUser;
 
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Senha ou Usuario incorreto", null));
+			this.usuario = new Usuario();
 			return "errorLogin";
 		}
 	}

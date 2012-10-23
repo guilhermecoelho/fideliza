@@ -23,10 +23,7 @@
         </div>
  	<div id="login">
  	<h:form>
- 		<p:menuButton value="login">
- 			<p:menuitem value="Consumidor" url="login_consumidor.xhtml" ajax="false"/>
- 			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false"/>
- 		</p:menuButton>
+ 		<p:button value="logout" action="#{usuarioController.logout}"/>
  	</h:form>
  	</div>
 	</div>
@@ -38,9 +35,20 @@
 </div>
 <div id="fundo">
 	<div id="conteudo">
-
-		
-	</div>
+    	<div id ="grid">
+	    	<ul>		
+		    	<li>
+		    		Box1
+		    	</li>
+		    	<li>
+		    		Box2
+		    	</li>
+		    	<li>
+		    		Box3
+		    	</li> 	
+	    	</ul>
+    	</div>
+    </div>
 </div>
 <div id="rodape">
 <h2> rodapé</h2>
