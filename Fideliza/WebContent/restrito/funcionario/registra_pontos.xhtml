@@ -33,7 +33,7 @@
 		</div>
 	</div>
 	<div id="conteudo">
-		<div id="grid">		
+			
 			<h:form id="form">
 				<p:panel header="Registra Pontos">
 		
@@ -46,8 +46,8 @@
 					mask="999.999.999-99" label="cpf" required="true" requiredMessage="Informe seu CPF" />
 				<p:message  for="cpf"/>	
 				
-				<h:outputLabel for="valorCompra" value="valor da compra *" />
-				<p:inputText value="#{registraPontosController.registraPontos.valorCompra}" id="valorCompra"
+				<h:outputLabel for="valorCompra" value="valor da compra" />
+				<p:inputMask  value="#{registraPontosController.registraPontos.valorCompra}" id="valorCompra"
 					label="valorCompra" required="true" requiredMessage="O campo nome deve ser preenchido"/>
 				<p:message for="valorCompra"  />
 				
@@ -62,7 +62,7 @@
 		</p:panel>
 	</h:form>
 			</div>
-		</div>
+		
 	<div id="rodape">
 		<h2> rodapé</h2>
 	</div>

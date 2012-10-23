@@ -46,57 +46,6 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
-		<display-name>login.xhtml</display-name>
-		<from-view-id>/login.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>loginConsumidor</from-outcome>
-			<to-view-id>/restrito/consumidor/index.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-			<display-name>login.xhtml</display-name>
-			<from-view-id>/login.xhtml</from-view-id>
-			<navigation-case>
-				<from-outcome>errorLogin</from-outcome>
-				<to-view-id>/login.xhtml</to-view-id>
-			</navigation-case>
-		</navigation-rule>
-	<navigation-rule>
-		<display-name>*</display-name>
-		<from-view-id>/*</from-view-id>
-		<navigation-case>
-			<from-outcome>loginPage</from-outcome>
-			<to-view-id>/login.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>login.xhtml</display-name>
-		<from-view-id>/login.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>loginFuncionario</from-outcome>
-			<to-view-id>/restrito/funcionario/index.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>login.xhtml</display-name>
-		<from-view-id>/login.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>loginEmpresa</from-outcome>
-			<to-view-id>/restrito/empresa/index.xhtml</to-view-id>
-			<redirect></redirect>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>login.xhtml</display-name>
-		<from-view-id>/login.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>loginAdmin</from-outcome>
-			<to-view-id>/restrito/admin/index.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
 		<display-name>restrito/funcionario/utiliza_pontos.xhtml</display-name>
 		<from-view-id>/restrito/funcionario/utiliza_pontos.xhtml</from-view-id>
 		<navigation-case>
@@ -143,6 +92,96 @@
 		<navigation-case>
 			<from-outcome>save</from-outcome>
 			<to-view-id>/sucesso.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_consumidor.xhtml</display-name>
+		<from-view-id>/login_consumidor.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginConsumidor</from-outcome>
+			<to-view-id>/restrito/consumidor/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_empresa.xhtml</display-name>
+		<from-view-id>/login_empresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginAdmin</from-outcome>
+			<to-view-id>/restrito/admin/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_empresa.xhtml</display-name>
+		<from-view-id>/login_empresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginEmpresa</from-outcome>
+			<to-view-id>/restrito/empresa/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_empresa.xhtml</display-name>
+		<from-view-id>/login_empresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginFuncionario</from-outcome>
+			<to-view-id>/restrito/funcionario/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_consumidor.xhtml</display-name>
+		<from-view-id>/login_consumidor.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>errorLogin</from-outcome>
+			<to-view-id>/login_consumidor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_empresa.xhtml</display-name>
+		<from-view-id>/login_empresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>errorLogin</from-outcome>
+			<to-view-id>/login_empresa.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/empresa/index.xhtml</display-name>
+		<from-view-id>/restrito/empresa/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/index.xhtml</display-name>
+		<from-view-id>/restrito/admin/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/consumidor/index.xhtml</display-name>
+		<from-view-id>/restrito/consumidor/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/funcionario/registra_pontos.xhtml</display-name>
+		<from-view-id>/restrito/funcionario/registra_pontos.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>pontosRegistrados</from-outcome>
+			<to-view-id>/restrito/funcionario/confirma_registra_pontos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>*</display-name>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<to-view-id>/login_empresa.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
