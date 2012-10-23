@@ -25,18 +25,27 @@
         </div>
  	<div id="login">
  	<h:form>
- 		<p:menuButton value="login">
- 			<p:menuitem value="Consumidor" url="login_consumidor.xhtml" ajax="false"/>
- 			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false"/>
- 		</p:menuButton>
+ 		<p:button value="logout" action="#{usuarioController.logout}"/>
  	</h:form>
  	</div>
 	</div>
 </div>
 
 <div id="fundo">
-	<div id="conteudo">    
-         
+	<div id="conteudo">
+		<div id="boxEsquerdaSucesso">
+			<p>Utilização de pontos efetuada com sucesso!</p>
+			<p:button href="index.xhtml" value="Voltar"/>
+		</div>
+		<div id="boxDireitaSucesso">
+	    	<div id ="grid">
+		    	<ul>		
+			    	<li>
+			    		Box1
+			    	</li>	
+		    	</ul>
+	    	</div>
+    	</div>
     </div>
 </div>
 
