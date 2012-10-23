@@ -28,16 +28,18 @@ public class RegistraPontosController {
 		this.consumidorDAO = new ConsumidorDAO();
 		this.registraPontos = new RegistraPontos();
 		this.registraPontosDAO = new RegistraPontosDAO();
+		
+		// recupera usuario da sessão
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+		usuario = (Usuario) session.getAttribute("usuario");
 
 	}
 
 	public String registraPonto() {
 
-		// recupera usuario da sessão
 
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-		usuario = (Usuario) session.getAttribute("usuario");
 
 		registraPontos.setFuncionario(usuario.getFuncionario());
 
@@ -74,10 +76,15 @@ public class RegistraPontosController {
 
 			return "pontosRegistrados";
 			
+			
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));
 			return "error";
 		}
+	}
+	
+	public void relatorioRegistro(){
+		
 	}
 
 	public RegistraPontos getRegistraPontos() {
