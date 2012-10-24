@@ -51,7 +51,7 @@ public class PromocaoController implements Serializable{
 		promocao.setStatus(true);
 		
 		promocaoDAO.adicionaPromocao(promocao);
-		return "save";
+		return "salvaPromocao";
 	}
 	
 	//gets e setters
