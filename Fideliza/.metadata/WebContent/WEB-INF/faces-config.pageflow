@@ -16,12 +16,12 @@
   <nodes xsi:type="pageflow:PFPage" name="login_empresa.xhtml" x="138" y="132" id="pf13509417769222" referenceLink="//@navigationRule.16/@navigationCase.0/@toViewId|" outlinks="pf134776975486511 pf13475759256731 pf13475759256732 pf13509417769223" inlinks="pf13509417769223 pf135101868487512" path="/login_empresa.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/confirma_registra_pontos.xhtml" x="504" y="600" id="pf13509421578247" referenceLink="//@navigationRule.15/@navigationCase.0/@toViewId|" inlinks="pf135094254422410" path="/restrito/funcionario/confirma_registra_pontos.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/registra_pontos.xhtml" x="60" y="600" id="pf13509421578249" referenceLink="//@navigationRule.15/@fromViewId|" outlinks="pf135094254422410" path="/restrito/funcionario/registra_pontos.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/cadastro_promocao.xhtml" x="69" y="672" id="pf13510268467750" outlinks="pf13510268467751" path="/restrito/empresa/cadastro_promocao.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/consultar_promocao.xhtml" x="525" y="672" id="pf13510268467752" inlinks="pf13510268467751" path="/restrito/empresa/consultar_promocao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/cadastro_promocao.xhtml" x="69" y="672" id="pf13510268467750" referenceLink="//@navigationRule.17/@fromViewId|" outlinks="pf13510268467751" path="/restrito/empresa/cadastro_promocao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/consultar_promocao.xhtml" x="525" y="672" id="pf13510268467752" referenceLink="//@navigationRule.17/@navigationCase.0/@toViewId|" inlinks="pf13510268467751" path="/restrito/empresa/consultar_promocao.xhtml"/>
   <links id="pf13477686212377" target="pf13477675319566" source="pf13509417769220" outcome="loginConsumidor" redirect="true"/>
   <links id="pf13475759256732" target="pf134776975486514" source="pf13509417769222" outcome="loginFuncionario" redirect="true"/>
   <links id="pf13475759256731" target="pf134776975486513" source="pf13509417769222" outcome="loginEmpresa" redirect="true"/>
-  <links id="pf134776975486511" target="pf134776975486512" source="pf13509417769222" outcome="loginAdmin"/>
+  <links id="pf134776975486511" target="pf134776975486512" source="pf13509417769222" outcome="loginAdmin" redirect="true"/>
   <links id="pf13480068891151" target="pf13480068891150" source="pf13480068891152" outcome="mostraPromocoes"/>
   <links id="pf13480068891153" target="pf13480068891152" source="pf13480068891152" outcome="error">
     <bendPoints d1Height="-36" d2Height="-36"/>

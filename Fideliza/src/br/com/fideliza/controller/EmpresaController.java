@@ -22,12 +22,15 @@ public class EmpresaController {
 
 	private Empresa empresa;
 	private EmpresaDAO empresaDAO;
+	private Empresa selectedEmpresa;
 	private RegraPontuacao regraPontuacao;
 	private RegraPontuacaoDAO regraPontuacaoDAO;
 	private Usuario user;
 	private UsuarioDAO usuarioDAO;
 	private DataModel<Empresa> empresaLista; // lista empresas
 	private ArrayList<Empresa> populaComboBox; // popula comboBox
+	private DataModel<Empresa> listaEmpresaDesativada;
+	private DataModel<Empresa> listaEmpresaNova;
 
 	public EmpresaController() {
 		this.empresa = new Empresa();
@@ -45,7 +48,8 @@ public class EmpresaController {
 			regraPontuacao = regraPontuacaoDAO.buscaPorId(1);
 			empresa.setRegraPontuacao(regraPontuacao);
 				
-			empresa.setStatus(true);
+			empresa.setStatus(false);
+			empresa.setNovaEmpresa(true);
 			empresaDAO.adicionaEmpresa(empresa);
 
 			Empresa retorno = empresaDAO.BuscaPorCNPJ(empresa.getCnpj());
@@ -97,15 +101,47 @@ public class EmpresaController {
 		}
 	}
 
+	public String ativarEmpresa (){
+		
+		empresa = selectedEmpresa;
+		empresa.setStatus(true);
+		empresa.setNovaEmpresa(false);
+		
+		empresaDAO.ativaEmpresa(empresa);
+		
+		return "ativarEmpresa";
+	}
+	
 	// gets e setters
 
-	public ArrayList<Empresa> getPopulaComboBox() { // popula comboBox
+ 	public ArrayList<Empresa> getPopulaComboBox() { // popula comboBox
 		if (populaComboBox == null) {
 			List<Empresa> empresa = new EmpresaDAO().listaEmpresas();
 			populaComboBox = new ArrayList<Empresa>(empresa);
 		}
 
 		return populaComboBox;
+	}
+
+	public DataModel<Empresa> getListaEmpresaNova() { // lista empresas novas aguardando ativação
+		
+		if (listaEmpresaNova == null) {	
+			List<Empresa> empresa = new EmpresaDAO().listaEmpresaDesativada();
+			listaEmpresaNova = new ListDataModel<Empresa>(empresa);
+		}
+		return listaEmpresaNova;
+	}
+
+	public void setListaEmpresaNova(DataModel<Empresa> listaEmpresaNova) {
+		this.listaEmpresaNova = listaEmpresaNova;
+	}
+
+	public Empresa getSelectedEmpresa() {
+		return selectedEmpresa;
+	}
+
+	public void setSelectedEmpresa(Empresa selectedEmpresa) {
+		this.selectedEmpresa = selectedEmpresa;
 	}
 
 	public void setPopulaComboBox(ArrayList<Empresa> populaComboBox) {
@@ -129,7 +165,8 @@ public class EmpresaController {
 	}
 
 	public DataModel<Empresa> getEmpresaLista() { // lista todas as empresas
-		if (empresaLista == null) {
+
+		if (empresaLista == null) {	
 			List<Empresa> empresa = new EmpresaDAO().listaEmpresas();
 			empresaLista = new ListDataModel<Empresa>(empresa);
 		}
@@ -140,4 +177,17 @@ public class EmpresaController {
 		this.empresaLista = empresaLista;
 	}
 
+	public DataModel<Empresa> getListaEmpresaDesativada() { // lista empresas desativadas
+		
+		if (listaEmpresaDesativada == null) {	
+			List<Empresa> empresa = new EmpresaDAO().listaEmpresaDesativada();
+			listaEmpresaDesativada = new ListDataModel<Empresa>(empresa);
+		}
+		return listaEmpresaDesativada;
+	}
+
+	public void setListaEmpresaDesativada(DataModel<Empresa> listaEmpresaDesativada) {
+		this.listaEmpresaDesativada = listaEmpresaDesativada;
+	}
+	
 }

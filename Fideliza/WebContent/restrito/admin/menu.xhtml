@@ -15,11 +15,24 @@
 			<h:form>
 				<p:menubar>
 					<p:menuitem value="Home" url="index.xhtml"/>
-					<p:submenu label="Historico">
-						<p:menuitem value="Pontos registrados" url="cadastro_promocao.xhtml"/>
-						<p:menuitem value="Pontos utilizados" url="consulta_promocao.xhtml"/>
-					</p:submenu>	
-					<p:menuitem value="promoções" url="consulta_promocao.xhtml"/>			
+					<p:submenu label="Empresas">
+						<p:menuitem value="Empresas ativas" url="consulta_empresa_ativa.xhtml"/>
+						<p:menuitem value="Empresas desativas" url="consulta_empresa_desativada.xhtml"/>
+						<p:menuitem value="Ativar novas empresas" url="empresasNovas.xhtml"/>
+					</p:submenu>
+					<p:submenu label="Consumidores">
+						<p:menuitem value="Consumidores ativos" url="consulta_empresa_ativa.xhtml"/>
+						<p:menuitem value="Consumidores desativos" url="consulta_empresa_desativada.xhtml"/>
+					</p:submenu>
+					<p:submenu label="Adminstradores">
+						<p:menuitem value="Cadastrar adminstrador" url="consulta_empresa_ativa.xhtml"/>
+						<p:menuitem value="Consultar adminstrador" url="consulta_empresa_desativa.xhtml"/>
+					</p:submenu>
+					<p:submenu label="Regra de pontos">
+						<p:menuitem value="Visualizar regras de pontos" url="consulta_empresa_ativa.xhtml"/>
+						<p:menuitem value="Nova regra de ponto" url="consulta_empresa_desativa.xhtml"/>
+					</p:submenu>		
+					<p:menuitem value="Relatórios" url="consulta_promocao.xhtml"/>			
 					<p:menuitem value="Minha conta" url="editar_consumidor.xhtml"/>
 
 				</p:menubar>

@@ -38,7 +38,7 @@
 			<p:panel header="Consulta" />
 	
 			<p:dataTable id="table" var="result"
-				value="#{empresaController.empresaLista}" paginator="true" rows="5" >
+				value="#{empresaController.listaEmpresaDesativada}" paginator="true" rows="5" >
 				<p:column>
 					<p:rowToggler/>
 				</p:column>
@@ -62,6 +62,13 @@
 					</f:facet>
 					<h:outputText value="#{result.email}" />
 				</p:column>
+				<p:column sortBy="#{result.status}" >
+					<f:facet name="header">
+						<h:outputText value="status"/>
+					</f:facet>
+					<h:outputText value="#{result.status}" />
+				</p:column>
+
 				<p:column headerText="Editar" style="width:50px">
 					<h:panelGrid styleClass="actions" cellspacing="2">
 						<p:commandButton id="selectButton" update=":form:display"
@@ -85,6 +92,10 @@
 					
 					<h:outputLabel for="email" value="email" />
 					<h:outputText value="#{result.email}"/>
+					
+					<h:outputLabel for="status" value="status" />
+					<h:outputText value="#{result.status}"/>
+					
 				
 				</h:panelGrid>
 			</p:rowExpansion>

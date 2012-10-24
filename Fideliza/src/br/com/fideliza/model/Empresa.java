@@ -5,7 +5,7 @@ package br.com.fideliza.model;
 
 import java.io.Serializable;
 
-public class Empresa implements Serializable{
+public class Empresa implements Serializable {
 
 	/**
 	 * 
@@ -18,58 +18,84 @@ public class Empresa implements Serializable{
 	private String ConfirmEmail;
 	private String password;
 	private RegraPontuacao regraPontuacao;
-	private boolean status;
-	
-	//gets e setters
+	private boolean status = false;
+	private boolean novaEmpresa = false;
+
+	// gets e setters
+
 	
 	public int getIdEmpresa() {
 		return idEmpresa;
 	}
+
+	public boolean isNovaEmpresa() {
+		return novaEmpresa;
+	}
+
+	public void setNovaEmpresa(boolean novaEmpresa) {
+		this.novaEmpresa = novaEmpresa;
+	}
+
 	public RegraPontuacao getRegraPontuacao() {
 		return regraPontuacao;
 	}
+
 	public void setRegraPontuacao(RegraPontuacao regraPontuacao) {
 		this.regraPontuacao = regraPontuacao;
 	}
+
 	public boolean isStatus() {
 		return status;
 	}
+
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+
 	public void setIdEmpresa(int idEmpresa) {
 		this.idEmpresa = idEmpresa;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getCnpj() {
 		return cnpj;
 	}
+
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getConfirmEmail() {
 		return ConfirmEmail;
 	}
+
 	public void setConfirmEmail(String confirmEmail) {
 		ConfirmEmail = confirmEmail;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -86,6 +112,7 @@ public class Empresa implements Serializable{
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + idEmpresa;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + (novaEmpresa ? 1231 : 1237);
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result
@@ -93,6 +120,7 @@ public class Empresa implements Serializable{
 		result = prime * result + (status ? 1231 : 1237);
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -123,6 +151,8 @@ public class Empresa implements Serializable{
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
+			return false;
+		if (novaEmpresa != other.novaEmpresa)
 			return false;
 		if (password == null) {
 			if (other.password != null)
