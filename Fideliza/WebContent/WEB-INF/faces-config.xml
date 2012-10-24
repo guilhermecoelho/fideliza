@@ -187,6 +187,15 @@
 			
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/empresa/cadastro_promocao.xhtml</display-name>
+		<from-view-id>/restrito/empresa/cadastro_promocao.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>salvaPromocao</from-outcome>
+			<to-view-id>/restrito/empresa/consultar_promocao.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
 	
 	<lifecycle>
 		<phase-listener>br.com.fideliza.filter.AuthorizationListener</phase-listener>
