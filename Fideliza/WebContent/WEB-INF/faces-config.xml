@@ -44,6 +44,11 @@
 		<managed-bean-class>br.com.fideliza.controller.UtilizaPontosController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>administradorController</managed-bean-name>
+		<managed-bean-class>br.com.fideliza.controller.AdministradorController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 		<display-name>restrito/funcionario/utiliza_pontos.xhtml</display-name>
 		<from-view-id>/restrito/funcionario/utiliza_pontos.xhtml</from-view-id>
@@ -201,8 +206,7 @@
 		<from-view-id>/restrito/admin/consulta_empresa_ativa.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>detalhaEmpresa</from-outcome>
-			<to-view-id>/restrito/admin/detalha_empresa.xhtml</to-view-id>
-			
+			<to-view-id>/restrito/admin/detalha_empresa.xhtml</to-view-id>		
 		</navigation-case>
 	</navigation-rule>
 	
