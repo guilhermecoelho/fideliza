@@ -99,7 +99,7 @@ public class EmpresaController {
 		}
 	}
 
-	public String ativarEmpresa (){
+/*	public String ativarEmpresa (){
 		
 		empresa = selectedEmpresa;
 		empresa.setStatus(true);
@@ -108,7 +108,7 @@ public class EmpresaController {
 		empresaDAO.ativaEmpresa(empresa);
 		
 		return "ativarEmpresa";
-	}
+	}*/
 	
 	public String detalhaEmpresa(){
 		
@@ -118,13 +118,14 @@ public class EmpresaController {
 		
 	}
 	
+	
 	// gets e setters
 
 
 	public DataModel<Empresa> getListaEmpresaNova() { // lista empresas novas aguardando ativação
 		
 		if (listaEmpresaNova == null) {	
-			List<Empresa> empresa = new EmpresaDAO().listaEmpresaDesativada();
+			List<Empresa> empresa = new EmpresaDAO().listaEmpresaNova();
 			listaEmpresaNova = new ListDataModel<Empresa>(empresa);
 		}
 		return listaEmpresaNova;

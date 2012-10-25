@@ -40,8 +40,8 @@
 			<h:form id="form">
 				
 			
-				<p:dataTable id="EmpresaTable" var="result"
-					value="#{empresaController.listaEmpresaNova}" rowKey="#{result.idEmpresa}" selection="#{empresaController.selectedEmpresa}"
+				<p:dataTable id="EmpresaTable" var="result"  
+					value="#{empresaController.listaEmpresaNova}" rowKey="#{result.idEmpresa}" selection="#{administradorController.selectedEmpresa}"
 					 selectionMode="single" paginator="true" rows="6" >
 					 
 						 <f:facet name="header">  
@@ -78,7 +78,7 @@
 					
 							
 					<f:facet name="footer">
-						<p:commandButton actionListener="#{empresaController.ativarEmpresa}" value="confirmar" icon="ui-icon-search" />
+						<p:commandButton action="#{administradorController.ativarEmpresa}" value="confirmar" icon="ui-icon-search"  />
 					</f:facet>
 			
 				</p:dataTable> 
