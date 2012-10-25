@@ -3,7 +3,6 @@
  */
 package br.com.fideliza.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -27,8 +26,7 @@ public class EmpresaController {
 	private RegraPontuacaoDAO regraPontuacaoDAO;
 	private Usuario user;
 	private UsuarioDAO usuarioDAO;
-	private DataModel<Empresa> empresaLista; // lista empresas
-	private ArrayList<Empresa> populaComboBox; // popula comboBox
+	private DataModel<Empresa> empresaLista; 
 	private DataModel<Empresa> listaEmpresaDesativada;
 	private DataModel<Empresa> listaEmpresaNova;
 
@@ -112,16 +110,16 @@ public class EmpresaController {
 		return "ativarEmpresa";
 	}
 	
+	public String detalhaEmpresa(){
+		
+		empresa = empresaDAO.BuscaPorId(selectedEmpresa.getIdEmpresa());
+		
+		return "detalhaEmpresa";
+		
+	}
+	
 	// gets e setters
 
- 	public ArrayList<Empresa> getPopulaComboBox() { // popula comboBox
-		if (populaComboBox == null) {
-			List<Empresa> empresa = new EmpresaDAO().listaEmpresas();
-			populaComboBox = new ArrayList<Empresa>(empresa);
-		}
-
-		return populaComboBox;
-	}
 
 	public DataModel<Empresa> getListaEmpresaNova() { // lista empresas novas aguardando ativação
 		
@@ -131,6 +129,7 @@ public class EmpresaController {
 		}
 		return listaEmpresaNova;
 	}
+
 
 	public void setListaEmpresaNova(DataModel<Empresa> listaEmpresaNova) {
 		this.listaEmpresaNova = listaEmpresaNova;
@@ -142,10 +141,6 @@ public class EmpresaController {
 
 	public void setSelectedEmpresa(Empresa selectedEmpresa) {
 		this.selectedEmpresa = selectedEmpresa;
-	}
-
-	public void setPopulaComboBox(ArrayList<Empresa> populaComboBox) {
-		this.populaComboBox = populaComboBox;
 	}
 
 	public Empresa getEmpresa() {

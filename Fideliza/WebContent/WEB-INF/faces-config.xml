@@ -196,6 +196,15 @@
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/consulta_empresa_ativa.xhtml</display-name>
+		<from-view-id>/restrito/admin/consulta_empresa_ativa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>detalhaEmpresa</from-outcome>
+			<to-view-id>/restrito/admin/detalha_empresa.xhtml</to-view-id>
+			
+		</navigation-case>
+	</navigation-rule>
 	
 	<lifecycle>
 		<phase-listener>br.com.fideliza.filter.AuthorizationListener</phase-listener>
