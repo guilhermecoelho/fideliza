@@ -37,7 +37,7 @@
 </div>
 	<div id="conteudo">
 		<div id="grid">	
-			<h:form id="form">
+			<h:form id="form" >
 				
 			
 				<p:dataTable id="EmpresaTable" var="result"
@@ -78,7 +78,7 @@
 					
 							
 					<f:facet name="footer">
-						<p:commandButton actionListener="#{empresaController.ativarEmpresa}" value="confirmar" icon="ui-icon-search" />
+						<p:commandButton action="#{empresaController.detalhaEmpresa}" value="confirmar" />
 					</f:facet>
 			
 				</p:dataTable> 
