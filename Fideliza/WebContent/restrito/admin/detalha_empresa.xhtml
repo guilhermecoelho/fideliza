@@ -41,20 +41,67 @@
 			<p:tab id="tab1" title="dados">
 				<p:panelGrid columns="2" >
 					<h:outputText value="nome:"/>
-					<h:outputText value="#{empresaController.empresa.nome}"/>
+					<h:outputText value="#{administradorController.empresa.nome}"/>
 					<h:outputText value="CNPJ"/>
-					<h:outputText value="CNPJ: #{empresaController.empresa.cnpj}"/>
+					<h:outputText value="#{administradorController.empresa.cnpj}"/>
 				</p:panelGrid>
+				
+				<p:commandButton  value="editar" onclick="editor.show();" type="button" />
+				
+				<p:dialog widgetVar="editor" >
+					<h:panelGrid columns="2">
+						
+						<h:outputText value="nome:"/>
+						<p:inputText value="#{administradorController.empresa.nome}"/>
+						<h:outputText value="CNPJ"/>
+						<p:inputText value="#{administradorController.empresa.cnpj}"/>
+						<h:outputText value="Email"/>
+						<p:inputText value="#{administradorController.empresa.email}"/>
+						<h:outputText value="status"/>
+						<p:inputText value="#{administradorController.empresa.status}"/>
+						<h:outputText value="nova empresa?"/>
+						<p:inputText value="#{administradorController.empresa.novaEmpresa}"/>
+						<h:outputText value="regra pontos"/>
+						<p:inputText value="#{administradorController.empresa.regraPontuacao.nome}"/>
+						
+				<p:commandButton value="Salvar"
+					actionListener="#{administradorController.editaEmpresa}" />
+				<p:commandButton value="Limpar campos" type="reset"/>
+					</h:panelGrid>
+					
+				</p:dialog>
 			</p:tab>
 			<p:tab id="tab2" title="Funcionarios" >
 				<h:form>
-					<p:dataTable value="">
-						
+					<p:dataTable var="result" value="#{administradorController.listaFuncionarioEmpresa}">
+						<p:column sortBy="#{result.email}">
+						<f:facet name="header">
+							<h:outputText value="email" />
+						</f:facet>
+						<h:outputText value="#{result.email}" />
+					</p:column>
+					
+					</p:dataTable>
+					
+				</h:form>
+					
+
+			</p:tab>
+			<p:tab id="tab3" title="Promoções" >
+				<h:form>
+					<p:dataTable var="result" value="#{administradorController.listaPromocaoEmpresa}">
+						<p:column sortBy="#{result.nome}">
+						<f:facet name="header">
+							<h:outputText value="nome" />
+						</f:facet>
+						<h:outputText value="#{result.nome}" />
+					</p:column>
 					</p:dataTable>
 				</h:form>
 			</p:tab>
 		</p:tabView>
 	</div>
+
 <div id="rodape">
 	<h2> rodapé</h2>
 </div>	

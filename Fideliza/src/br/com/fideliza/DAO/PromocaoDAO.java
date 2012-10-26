@@ -57,7 +57,7 @@ public class PromocaoDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Promocao> listaPorEmpresa(int idEmpresa){
+	public List<Promocao> listaPorEmpresa(Empresa idEmpresa){
 		return session.createCriteria(Promocao.class).add(Restrictions.like("empresa",idEmpresa)).list();
 	}
 

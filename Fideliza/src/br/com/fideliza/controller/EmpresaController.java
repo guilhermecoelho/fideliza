@@ -71,6 +71,8 @@ public class EmpresaController {
 	}
 
 	public void editaEmpresa() {
+		
+		empresaDAO.editaEmpresa(empresa);
 
 	}
 
@@ -110,13 +112,13 @@ public class EmpresaController {
 		return "ativarEmpresa";
 	}*/
 	
-	public String detalhaEmpresa(){
+/*	public String detalhaEmpresa(){
 		
 		empresa = empresaDAO.BuscaPorId(selectedEmpresa.getIdEmpresa());
 		
 		return "detalhaEmpresa";
 		
-	}
+	}*/
 	
 	
 	// gets e setters
