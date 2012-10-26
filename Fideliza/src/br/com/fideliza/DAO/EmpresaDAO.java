@@ -37,6 +37,12 @@ public class EmpresaDAO {
 			session.close();		
 	}
 	
+	public void editaEmpresa(Empresa empresa){
+		session.update(empresa);
+		tx.commit();
+		session.close();	
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Empresa> listaEmpresas(){
 

@@ -41,7 +41,7 @@
 				
 			
 				<p:dataTable id="EmpresaTable" var="result"
-					value="#{empresaController.empresaLista}" rowKey="#{result.idEmpresa}" selection="#{empresaController.selectedEmpresa}"
+					value="#{empresaController.empresaLista}" rowKey="#{result.idEmpresa}" selection="#{administradorController.selectedEmpresa}"
 					 selectionMode="single" paginator="true" rows="6" >
 					 
 						 <f:facet name="header">  
@@ -78,7 +78,7 @@
 					
 							
 					<f:facet name="footer">
-						<p:commandButton action="#{empresaController.detalhaEmpresa}" value="confirmar" />
+						<p:commandButton action="#{administradorController.detalhaEmpresa}" value="confirmar" />
 					</f:facet>
 			
 				</p:dataTable> 
