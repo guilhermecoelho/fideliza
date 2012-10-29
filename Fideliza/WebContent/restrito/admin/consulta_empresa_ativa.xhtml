@@ -35,15 +35,23 @@
     	<ui:include src="menu.xhtml"/>
     </div>
 </div>
+	<div id="fundo">
 	<div id="conteudo">
-		<div id="grid">	
+		
+		<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+              
+		<p:dialog modal="true" widgetVar="statusDialog"    
+        	draggable="false" closable="false">  
+    		<p:graphicImage value="/images/ajaxload.gif" />  
+		</p:dialog>
 			<h:form id="form" >
 				
 			
 				<p:dataTable id="EmpresaTable" var="result"
 					value="#{empresaController.empresaLista}" rowKey="#{result.idEmpresa}" selection="#{administradorController.selectedEmpresa}"
 					 selectionMode="single" paginator="true" rows="6" >
-					 
+					  
+        					
 						 <f:facet name="header">  
 		           			 Clique sobre a promoção que deseja ativar
 		        		</f:facet>  
