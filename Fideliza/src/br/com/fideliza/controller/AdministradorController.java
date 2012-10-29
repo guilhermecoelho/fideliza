@@ -21,6 +21,12 @@ public class AdministradorController {
 	private Empresa empresa;
 	private EmpresaDAO empresaDAO;
 	private Empresa selectedEmpresa;
+	private FuncionarioDAO funcionarioDAO;
+	private Funcionario funcionario;
+	private Funcionario selectedFuncionario;
+	private Promocao promocao;
+	private Promocao selectedPromocao;
+	private PromocaoDAO promocaoDAO;
 	private DataModel<Funcionario> listaFuncionarioEmpresa;
 	private DataModel<Promocao> listaPromocaoEmpresa;
 	
@@ -29,6 +35,8 @@ public class AdministradorController {
 		this.adminDAO = new AdministradorDAO();
 		this.empresa = new Empresa();
 		this.empresaDAO = new EmpresaDAO();
+		this.funcionarioDAO = new FuncionarioDAO();
+		this.promocaoDAO = new PromocaoDAO();
 	}
 	
 	public String ativarEmpresa (){
@@ -43,11 +51,21 @@ public class AdministradorController {
 	}
 	
 	public String detalhaEmpresa(){
-		
-		
+			
 		empresa = empresaDAO.BuscaPorId(selectedEmpresa.getIdEmpresa());
 		
 		return "detalhaEmpresa";
+		
+	}
+	public void detalhaFuncionario(){
+		
+		funcionario = funcionarioDAO.buscaPorId(selectedFuncionario.getIdFuncionario());
+		
+	}
+	
+	public void detalhaPromocao(){
+		
+		promocao = promocaoDAO.buscaPorId(selectedPromocao.getIdPromocao());
 		
 	}
 	
@@ -61,6 +79,22 @@ public class AdministradorController {
 	
 	public Empresa getSelectedEmpresa() {
 		return selectedEmpresa;
+	}
+
+	public Promocao getSelectedPromocao() {
+		return selectedPromocao;
+	}
+
+	public void setSelectedPromocao(Promocao selectedPromocao) {
+		this.selectedPromocao = selectedPromocao;
+	}
+
+	public Funcionario getSelectedFuncionario() {
+		return selectedFuncionario;
+	}
+
+	public void setSelectedFuncionario(Funcionario selectedFuncionario) {
+		this.selectedFuncionario = selectedFuncionario;
 	}
 
 	public DataModel<Promocao> getListaPromocaoEmpresa() { // lista promoções de uma empresa

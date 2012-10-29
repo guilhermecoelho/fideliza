@@ -73,7 +73,8 @@
 			</p:tab>
 			<p:tab id="tab2" title="Funcionarios" >
 				<h:form>
-					<p:dataTable var="result" value="#{administradorController.listaFuncionarioEmpresa}">
+					<p:dataTable var="result" value="#{administradorController.listaFuncionarioEmpresa}" rowKey="#{result.idFuncionario}" selection="#{administradorController.selectedFuncionario}"
+						selectionMode="single" paginator="true" rows="5">
 						<p:column sortBy="#{result.email}">
 						<f:facet name="header">
 							<h:outputText value="email" />
@@ -89,7 +90,9 @@
 			</p:tab>
 			<p:tab id="tab3" title="Promoções" >
 				<h:form>
-					<p:dataTable var="result" value="#{administradorController.listaPromocaoEmpresa}">
+					<p:dataTable var="result" value="#{administradorController.listaPromocaoEmpresa}" rowKey="#{result.idPromocao}" selection="#{administradorController.selectedPromocao}"
+						selectionMode="single" paginator="true" rows="5">
+						
 						<p:column sortBy="#{result.nome}">
 						<f:facet name="header">
 							<h:outputText value="nome" />

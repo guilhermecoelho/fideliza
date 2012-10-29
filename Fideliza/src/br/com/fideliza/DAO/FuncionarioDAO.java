@@ -43,4 +43,8 @@ public class FuncionarioDAO {
 		return session.createCriteria(Funcionario.class).add(Restrictions.like("empresa.idEmpresa",idEmpresa)).list();
 		
 	}
+	public Funcionario buscaPorId(int idFuncionario){
+		
+		return (Funcionario) session.createCriteria(Funcionario.class).add(Restrictions.eq("idFuncionario", idFuncionario)).uniqueResult();
+	}
 }
