@@ -5,7 +5,7 @@ package br.com.fideliza.DAO;
 
 import java.util.List;
 
-import org.hibernate.Query;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -26,39 +26,128 @@ public class PromocaoDAO {
 	}
 	
 	public void adicionaPromocao(Promocao promocao){
-		session.save(promocao);
-		tx.commit();
-		session.close();
+		try{
+			session.save(promocao);
+			tx.commit();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Promocao> listaPromocao(){
-		return session.createCriteria(Promocao.class).list();
+		try{
+			return session.createCriteria(Promocao.class).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 	
 	
 	public Promocao buscaPorEmpresa(int empresa){
 
-		Promocao retorno;
+	/*	Promocao retorno;
 		String sql= "select promocao from Promocao as promocao where empresa = :empresa";
 		Query q = session.createQuery(sql);
 		q.setInteger("empresa", empresa);
 		retorno = (Promocao)  q.uniqueResult();
 		
-		return retorno;
+		return retorno;*/
+		
+		try{
+			return (Promocao) session.createCriteria(Promocao.class).add(Restrictions.like("empresa.idEmpresa", empresa)).uniqueResult();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Promocao> listaPorPontos(double pontos, Empresa empresa){
-		return session.createCriteria(Promocao.class).add(Restrictions.le("pontos", pontos)).add(Restrictions.like("empresa",empresa)).list();
+		try{
+			return session.createCriteria(Promocao.class).add(Restrictions.le("pontos", pontos)).add(Restrictions.like("empresa",empresa)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 	public Promocao buscaPorId(int idPromocao){
-		return (Promocao) session.createCriteria(Promocao.class).add(Restrictions.like("idPromocao", idPromocao)).uniqueResult();
+		try{
+			return (Promocao) session.createCriteria(Promocao.class).add(Restrictions.like("idPromocao", idPromocao)).uniqueResult();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Promocao> listaPorEmpresa(Empresa idEmpresa){
-		return session.createCriteria(Promocao.class).add(Restrictions.like("empresa",idEmpresa)).list();
+		try{
+			return session.createCriteria(Promocao.class).add(Restrictions.like("empresa",idEmpresa)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<Promocao> listaPromocaoAtiva(){
+		try{
+			return session.createCriteria(Promocao.class).add(Restrictions.eq("status", true)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Promocao> listaPromocaoDesativada(){
+		try{
+			return session.createCriteria(Promocao.class).add(Restrictions.eq("status", false)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
+	}
 }

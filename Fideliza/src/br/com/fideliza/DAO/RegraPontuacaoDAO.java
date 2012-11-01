@@ -1,5 +1,8 @@
 package br.com.fideliza.DAO;
 
+import java.util.List;
+
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -36,6 +39,25 @@ public class RegraPontuacaoDAO {
 		retorno = (RegraPontuacao)  q.uniqueResult();
 		
 		return retorno;
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	public List<RegraPontuacao> listaRegras(){
+		
+		try{
+			
+			return session.createCriteria(RegraPontuacao.class).list();
+			
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 
 }

@@ -36,8 +36,9 @@
     </div>
 </div>
 	<div id="conteudo">
-	
-		<p:tabView id="tabView">
+	<h:form id="form">
+		<p:tabView id="tabView"  cache="true" >
+			
 			<p:tab id="tab1" title="dados">
 				<p:panelGrid columns="2" >
 					<h:outputText value="nome:"/>
@@ -49,7 +50,7 @@
 				<p:commandButton  value="editar" onclick="editor.show();" type="button" />
 				
 				<p:dialog widgetVar="editor" >
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" >
 						
 						<h:outputText value="nome:"/>
 						<p:inputText value="#{administradorController.empresa.nome}"/>
@@ -65,29 +66,46 @@
 						<p:inputText value="#{administradorController.empresa.regraPontuacao.nome}"/>
 						
 				<p:commandButton value="Salvar"
-					actionListener="#{administradorController.editaEmpresa}" />
+					action="#{administradorController.editaEmpresa}" />
 				<p:commandButton value="Limpar campos" type="reset"/>
 					</h:panelGrid>
 					
 				</p:dialog>
 			</p:tab>
-			<p:tab id="tab2" title="Funcionarios" >
-				<h:form>
-					<p:dataTable var="result" value="#{administradorController.listaFuncionarioEmpresa}" rowKey="#{result.idFuncionario}" selection="#{administradorController.selectedFuncionario}"
-						selectionMode="single" paginator="true" rows="5">
-						<p:column sortBy="#{result.email}">
+			<p:tab id="tab2" title="Funcionarios">
+				<h:form id="formFunc">
+					<p:dataTable id="dataFunc" var="func" value="#{administradorController.listaFuncionarioEmpresa}" rowKey="#{func.idFuncionario}" selection="#{administradorController.selectedFuncionario}"
+						selectionMode="single" paginator="true"  >
+						
+						<p:column sortBy="#{func.email}">
 						<f:facet name="header">
 							<h:outputText value="email" />
 						</f:facet>
-						<h:outputText value="#{result.email}" />
-					</p:column>
-					
-					</p:dataTable>
-					
+							<h:outputText value="#{func.email}" />
+						</p:column>
+						<p:column sortBy="#{func.idFuncionario}">
+						<f:facet name="header">
+							<h:outputText value="id" />
+						</f:facet>
+							<h:outputText value="#{func.idFuncionario}" />
+						</p:column>
+						<p:column style="width:4%">  
+                			<p:commandButton id="selectButton"  oncomplete="func1.show()" icon="ui-icon-search" title="Detalhar">  
+                				<f:setPropertyActionListener value="#{func}" target="#{administradorController.selectedFuncionario}" />  
+            				</p:commandButton>  
+        				</p:column>
+					</p:dataTable>	
 				</h:form>
-					
-
+					<p:dialog id="func1">
+						<h:form id="formFunc1">
+							<p:dataTable id="dataFunc1" var="func" >
+								<h:outputText value="nome:"/>
+								<h:outputText value="#{administradorController.selectedFuncionario.email}"/>	
+							</p:dataTable>
+						</h:form>
+					</p:dialog>
 			</p:tab>
+			
 			<p:tab id="tab3" title="Promoções" >
 				<h:form>
 					<p:dataTable var="result" value="#{administradorController.listaPromocaoEmpresa}" rowKey="#{result.idPromocao}" selection="#{administradorController.selectedPromocao}"
@@ -103,6 +121,7 @@
 				</h:form>
 			</p:tab>
 		</p:tabView>
+	</h:form>
 	</div>
 
 <div id="rodape">

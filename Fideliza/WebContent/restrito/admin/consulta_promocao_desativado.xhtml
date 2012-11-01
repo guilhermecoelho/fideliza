@@ -45,39 +45,47 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="EmpresaTable" var="result" value="#{empresaController.empresaLista}">
+						<p:dataTable id="EmpresaTable" var="result" value="#{administradorController.listaPromocaoDesativada}">
 							<f:facet name="header">	
-							 Empresas
+							 Promoções
 							</f:facet>
-								<p:column filterBy="#{result.idEmpresa}" headerText="ID" footerText="ID">
-									<h:outputText value="#{result.idEmpresa}" />
+								<p:column filterBy="#{result.idPromocao}" headerText="ID" footerText="ID">
+									<h:outputText value="#{result.idPromocao}" />
 								</p:column>
 								<p:column filterBy="#{result.nome}" headerText="Nome" footerText="Nome">
 									<h:outputText value="#{result.nome}" />
 								</p:column>
-								<p:column  filterBy="#{result.cnpj}" headerText="CNPJ" footerText="CNPJ">
-									<h:outputText value="#{result.cnpj}" />
+								<p:column filterBy="#{result.empresa.nome}" headerText="Empresa" footerText="Empresa">
+									<h:outputText value="#{result.empresa.nome}" />
 								</p:column>
-								<p:column  filterBy="#{result.email}" headerText="Email" footerText="Email">
-									<h:outputText value="#{result.email}" />
-								</p:column>	
+								<p:column  filterBy="#{result.descricao}" headerText="Descrição" footerText="Descrição">
+									<h:outputText value="#{result.descricao}" />
+								</p:column>
+								<p:column  filterBy="#{result.desconto}" headerText="Desconto" footerText="Desconto">
+									<h:outputText value="#{result.desconto}" />
+								</p:column>
+								<p:column  filterBy="#{result.pontos}" headerText="Pontos" footerText="Pontos">
+									<h:outputText value="#{result.pontos}" />
+								</p:column>
 								<p:column style="width:4%">  
 	                				<p:commandButton id="selectButton" update=":form:formData:empDialog" oncomplete="empresaDialog.show()"   icon="ui-icon-search" title="Detalhar">  
-	                					<f:setPropertyActionListener value="#{result}" target="#{administradorController.selectedEmpresa}" />  
+	                					<f:setPropertyActionListener value="#{result}" target="#{administradorController.selectedPromocao}" />  
 	            					</p:commandButton>  
 	        					</p:column>		
 						</p:dataTable>
 								
 						<p:dialog id="empDialog" header="Empresa" widgetVar="empresaDialog" >					
 								<h:panelGrid id="display" columns="2" cellpadding="20" >
-									<h:outputText value="nome:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.nome}"/>
-									<h:outputText value="cnpj:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.cnpj}"/>
-									<h:outputText value="email:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.email}"/>
-									<h:outputText value="status:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.status}"/>
+									<h:outputText value="Id: "/>
+									<h:outputText value="#{administradorController.selectedPromocao.idPromocao}"/>
+									<h:outputText value="nome: "/>
+									<h:outputText value="#{administradorController.selectedPromocao.nome}"/>
+									<h:outputText value="Descrição:  "/>
+									<h:outputText value="#{administradorController.selectedPromocao.descricao}"/>
+									<h:outputText value="Desconto: "/>
+									<h:outputText value="#{administradorController.selectedPromocao.desconto}"/>
+									<h:outputText value="Pontos: "/>
+									<h:outputText value="#{administradorController.selectedPromocao.pontos}"/>
 								</h:panelGrid>						
 						</p:dialog> 
 					</h:form>

@@ -5,6 +5,7 @@ package br.com.fideliza.DAO;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -26,27 +27,59 @@ public class EmpresaDAO {
 	}
 	
 	public void adicionaEmpresa(Empresa empresa){
-		session.save(empresa);
-		tx.commit();
-		//session.close();
+		try{
+			session.save(empresa);
+			tx.commit();
+			//session.close();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} 
 	}
 	
 	public void ativaEmpresa(Empresa empresa){
+			
+		try{
 			session.update(empresa);
-			tx.commit();
-			session.close();		
+			tx.commit();		
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
 	}
 	
 	public void editaEmpresa(Empresa empresa){
-		session.update(empresa);
-		tx.commit();
-		session.close();	
+		try{
+			session.update(empresa);
+			tx.commit();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Empresa> listaEmpresas(){
-
-		return session.createCriteria(Empresa.class).add(Restrictions.eq("status", true)).add(Restrictions.eq("novaEmpresa", false)).list();
+		try{
+			return session.createCriteria(Empresa.class).add(Restrictions.eq("status", true)).add(Restrictions.eq("novaEmpresa", false)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 	
 	public Empresa BuscaPorCNPJ(String cnpj){
@@ -73,13 +106,31 @@ public class EmpresaDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<Empresa> listaEmpresaDesativada(){
-		
-		return session.createCriteria(Empresa.class).add(Restrictions.eq("status", false)).add(Restrictions.eq("novaEmpresa", false)).list();
+		try{
+			return session.createCriteria(Empresa.class).add(Restrictions.eq("status", false)).add(Restrictions.eq("novaEmpresa", false)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Empresa> listaEmpresaNova(){
-		
-		return session.createCriteria(Empresa.class).add(Restrictions.eq("status", false)).add(Restrictions.eq("novaEmpresa", true)).list();
+		try{
+			return session.createCriteria(Empresa.class).add(Restrictions.eq("status", false)).add(Restrictions.eq("novaEmpresa", true)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 }

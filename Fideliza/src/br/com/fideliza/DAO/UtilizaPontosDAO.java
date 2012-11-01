@@ -3,6 +3,7 @@
  */
 package br.com.fideliza.DAO;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,12 +22,16 @@ public class UtilizaPontosDAO {
 	}
 	
 	public void SalvaRegistro(UtilizaPontos utilizaPontos ){
-		
-		session.save(utilizaPontos);
-		tx.commit();
-		session.close();
-		
+		try{
+			session.save(utilizaPontos);
+			tx.commit();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}	
 	}
-	
-
 }
