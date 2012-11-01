@@ -5,6 +5,7 @@ package br.com.fideliza.DAO;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -25,26 +26,87 @@ public class FuncionarioDAO {
 	}
 	
 	public void adicionaFuncionario(Funcionario funcionario){
-		session.save(funcionario);
-		tx.commit();
-		//session.close();
+		try{
+			session.save(funcionario);
+			tx.commit();
+			//session.close();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Funcionario> listaFuncionarios(){
-		
-		return session.createCriteria(Funcionario.class).list();
-		
+		try{
+			return session.createCriteria(Funcionario.class).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Funcionario> listaFuncionariosAtivos(){
+		try{
+			return session.createCriteria(Funcionario.class).add(Restrictions.eq("status", true)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Funcionario> listaFuncionariosDesativados(){
+		try{
+			return session.createCriteria(Funcionario.class).add(Restrictions.eq("status", false)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Funcionario> BuscaPorEmpresa(int idEmpresa){
-		
-		return session.createCriteria(Funcionario.class).add(Restrictions.like("empresa.idEmpresa",idEmpresa)).list();
-		
+		try{
+			return session.createCriteria(Funcionario.class).add(Restrictions.like("empresa.idEmpresa",idEmpresa)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 	public Funcionario buscaPorId(int idFuncionario){
-		
-		return (Funcionario) session.createCriteria(Funcionario.class).add(Restrictions.eq("idFuncionario", idFuncionario)).uniqueResult();
+		try{
+			return (Funcionario) session.createCriteria(Funcionario.class).add(Restrictions.eq("idFuncionario", idFuncionario)).uniqueResult();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 }

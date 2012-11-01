@@ -45,25 +45,28 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="EmpresaTable" var="result" value="#{empresaController.empresaLista}">
+						<p:dataTable id="EmpresaTable" var="result" value="#{administradorController.listaConsumidorAtivo}">
 							<f:facet name="header">	
-							 Empresas
+							 Consumidores
 							</f:facet>
-								<p:column filterBy="#{result.idEmpresa}" headerText="ID" footerText="ID">
-									<h:outputText value="#{result.idEmpresa}" />
+								<p:column filterBy="#{result.idConsumidor}" headerText="ID" footerText="ID">
+									<h:outputText value="#{result.idConsumidor}" />
 								</p:column>
 								<p:column filterBy="#{result.nome}" headerText="Nome" footerText="Nome">
 									<h:outputText value="#{result.nome}" />
 								</p:column>
-								<p:column  filterBy="#{result.cnpj}" headerText="CNPJ" footerText="CNPJ">
-									<h:outputText value="#{result.cnpj}" />
+								<p:column  filterBy="#{result.cpf}" headerText="CPF" footerText="CPF">
+									<h:outputText value="#{result.cpf}" />
 								</p:column>
 								<p:column  filterBy="#{result.email}" headerText="Email" footerText="Email">
 									<h:outputText value="#{result.email}" />
-								</p:column>	
+								</p:column>
+								<p:column  filterBy="#{result.pontos}" headerText="Saldo" footerText="Saldo">
+									<h:outputText value="#{result.pontos}" />
+								</p:column>
 								<p:column style="width:4%">  
 	                				<p:commandButton id="selectButton" update=":form:formData:empDialog" oncomplete="empresaDialog.show()"   icon="ui-icon-search" title="Detalhar">  
-	                					<f:setPropertyActionListener value="#{result}" target="#{administradorController.selectedEmpresa}" />  
+	                					<f:setPropertyActionListener value="#{result}" target="#{administradorController.selectedConsumidor}" />  
 	            					</p:commandButton>  
 	        					</p:column>		
 						</p:dataTable>
@@ -71,13 +74,14 @@
 						<p:dialog id="empDialog" header="Empresa" widgetVar="empresaDialog" >					
 								<h:panelGrid id="display" columns="2" cellpadding="20" >
 									<h:outputText value="nome:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.nome}"/>
-									<h:outputText value="cnpj:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.cnpj}"/>
-									<h:outputText value="email:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.email}"/>
-									<h:outputText value="status:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.status}"/>
+									<h:outputText value="#{administradorController.selectedConsumidor.nome}"/>
+									<h:outputText value="email: "/>
+									<h:outputText value="#{administradorController.selectedConsumidor.email}"/>
+									<h:outputText value="CPF: "/>
+									<h:outputText value="#{administradorController.selectedConsumidor.cpf}"/>
+									<h:outputText value="Saldo: "/>
+									<h:outputText value="#{administradorController.selectedConsumidor.pontos}"/>
+
 								</h:panelGrid>						
 						</p:dialog> 
 					</h:form>

@@ -36,22 +36,79 @@ public class ConsumidorDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<Consumidor> listaConsumidors(){
-		return session.createCriteria(Consumidor.class).list();
+		try{
+			return session.createCriteria(Consumidor.class).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 
 	}
 	
 	public void editarConsumidor (Consumidor consumidor){
-		session.update(consumidor);
-		tx.commit();
-		session.close();
+
+		try{
+			session.update(consumidor);
+			tx.commit();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
 		
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Consumidor> listaConsumidorAtivo(){
+		try{
+			return session.createCriteria(Consumidor.class).add(Restrictions.eq("status", true)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Consumidor> listaConsumidorDesativado(){
+		try{
+			return session.createCriteria(Consumidor.class).add(Restrictions.eq("status", false)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Consumidor> listaUmConsumidor(int id) throws HibernateException{
-
-			return session.createCriteria(Consumidor.class).add(Restrictions.like("idConsumidor",id)).list();
-
+			try{
+				return session.createCriteria(Consumidor.class).add(Restrictions.like("idConsumidor",id)).list();
+			}catch (HibernateException e){
+				e.printStackTrace();
+			}catch (Exception e){
+				e.printStackTrace();
+			} finally{
+				session.flush();
+				session.close();
+			}
+			return null;
 	}
 	
 	public Consumidor buscaPorCPF(String cpf){

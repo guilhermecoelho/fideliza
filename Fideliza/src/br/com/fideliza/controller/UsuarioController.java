@@ -27,44 +27,46 @@ public class UsuarioController {
 	
 	public String login(){
 		
-		Usuario retorno = userDAO.loginCliente(usuario.getPassword(), usuario.getUser());
 		
-		if(retorno != null){
-			usuario = retorno;
+			Usuario retorno = userDAO.loginCliente(usuario.getPassword(), usuario.getUser());
 			
-			String tipoUser = null;
-			
-			FacesContext fc = FacesContext.getCurrentInstance();
-			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-			session.setAttribute("usuario", usuario); //salva dados do usuario na sessão
-			
-			
-			
-			if(usuario.isPermissaoConsumidor() == true){
-				tipoUser = "loginConsumidor";
-			}
-			else if(usuario.isPermissaoFuncionario() == true){
-				tipoUser = "loginFuncionario";
-			}
-			else if(usuario.isPermissaoEmpresa() == true){
-				tipoUser =  "loginEmpresa";
-			}
-			else if(usuario.isPermissaoAdministrador() == true){
-				tipoUser = "loginAdmin";
-			}
-			
-			this.usuario = new Usuario();
-			
-			return tipoUser;
+			if(retorno != null){
+				usuario = retorno;
+				
+				String tipoUser = null;
+				
+				FacesContext fc = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
+				session.setAttribute("usuario", usuario); //salva dados do usuario na sessão
+				
+				if(usuario.isPermissaoConsumidor() == true){
+					tipoUser = "loginConsumidor";
+				}
+				else if(usuario.isPermissaoFuncionario() == true){
+					tipoUser = "loginFuncionario";
+				}
+				else if(usuario.isPermissaoEmpresa() == true){
+					tipoUser =  "loginEmpresa";
+				}
+				else if(usuario.isPermissaoAdministrador() == true){
+					tipoUser = "loginAdmin";
+				}
+				
+				this.usuario = new Usuario();
+				
+				return tipoUser;
 
-		} else {
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Senha ou Usuario incorreto", null));
-			this.usuario = new Usuario();
-			return "errorLogin";
-		}
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Senha ou Usuario incorreto", null));
+				this.usuario = new Usuario();
+				return "errorLogin";
+			}
+		
 	}
 	
 	public String logout() throws IOException{
+		
+		userDAO.logout();
 		
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
@@ -74,7 +76,6 @@ public class UsuarioController {
 		
 		return "logout";
 	}
-	
 	
 	//getters and setters
 
