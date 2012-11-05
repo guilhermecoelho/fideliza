@@ -77,6 +77,10 @@ public class UsuarioController {
 		return "logout";
 	}
 	
+	
+	public void BuscaPorEmpresa(){
+		
+	}
 	//getters and setters
 
 	public Usuario getUsuario() {

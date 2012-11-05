@@ -8,6 +8,9 @@
             <column name="INT_ID_FUNCIONARIO_FUNC" />
             <generator class="increment" />
         </id>
+         <property name="nome" type="java.lang.String">
+            <column name="STRING_NOME_FUNC" />
+        </property>
         <many-to-one name="empresa" class="br.com.fideliza.model.Empresa" fetch="join">
             <column name="INT_EMPRESA_FUNC" />
         </many-to-one>

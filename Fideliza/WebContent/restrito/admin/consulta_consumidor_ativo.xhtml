@@ -65,12 +65,22 @@
 									<h:outputText value="#{result.pontos}" />
 								</p:column>
 								<p:column style="width:4%">  
-	                				<p:commandButton id="selectButton" update=":form:formData:empDialog" oncomplete="empresaDialog.show()"   icon="ui-icon-search" title="Detalhar">  
+	                				<p:commandButton id="selectButton" update=":form:formData:dialogView:empDialog" oncomplete="empresaDialog.show()"   icon="ui-icon-search" title="Detalhar">  
 	                					<f:setPropertyActionListener value="#{result}" target="#{administradorController.selectedConsumidor}" />  
+	            					</p:commandButton>  
+	        					</p:column>	
+	        					<p:column style="width:4%">  
+	                				<p:commandButton id="editButton" update=":form:formData:dialogEdit:empEditDialog" oncomplete="consumidorEditDialog.show()"   icon="ui-icon-search" title="editar">  
+	                					<f:setPropertyActionListener value="#{result}" target="#{consumidorController.consumidor}" />  
+	            					</p:commandButton>  
+	        					</p:column>
+	        					<p:column style="width:4%">  
+	                				<p:commandButton id="editButton2" action="#{administradorController.editaConsumidor}"   icon="ui-icon-search" title="editar">  
+	                					<f:setPropertyActionListener value="#{result}" target="#{consumidorController.consumidor}" />  
 	            					</p:commandButton>  
 	        					</p:column>		
 						</p:dataTable>
-								
+						<h:form id="dialogView">
 						<p:dialog id="empDialog" header="Empresa" widgetVar="empresaDialog" >					
 								<h:panelGrid id="display" columns="2" cellpadding="20" >
 									<h:outputText value="nome:"/>
@@ -84,6 +94,26 @@
 
 								</h:panelGrid>						
 						</p:dialog> 
+						</h:form>
+						<h:form id="dialogEdit">
+						<p:dialog id="empEditDialog" header="Consumidor" widgetVar="consumidorEditDialog" >					
+								<h:panelGrid id="displayEdit" columns="2" cellpadding="20">
+									<h:outputText value="id: "/>
+									<p:inputText value="#{consumidorController.consumidor.idConsumidor}"/>
+									<h:outputText value="nome:"/>
+									<p:inputText value="#{consumidorController.consumidor.nome}"/>
+									<h:outputText value="email: "/>
+									<p:inputText value="#{consumidorController.consumidor.email}"/>
+									<h:outputText value="CPF: "/>
+									<p:inputText value="#{consumidorController.consumidor.cpf}"/>
+									<h:outputText value="Saldo: "/>
+									<p:inputText value="#{consumidorController.consumidor.pontos}"/>
+									<p:commandButton value="Salvar" actionListener="#{consumidorController.editaConsumidor}" oncomplete="consumidorEditDialog.hide();" />
+										<p:commandButton value="Limpar campos" type="reset"/>
+	
+								</h:panelGrid>
+						</p:dialog> 
+						</h:form>
 					</h:form>
 				</h:form>
 			</div>
