@@ -6,6 +6,7 @@ package br.com.fideliza.controller;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -15,9 +16,11 @@ import br.com.fideliza.DAO.FuncionarioDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
 import br.com.fideliza.model.Funcionario;
 import br.com.fideliza.model.Usuario;
+import br.com.fideliza.util.Verificador;
 
-public class FuncionarioController {
-
+public class FuncionarioController{
+	
+	public Verificador verificador;
 	private Usuario usuario;
 	private UsuarioDAO usuarioDAO;
 	private Funcionario funcionario;
@@ -39,6 +42,7 @@ public class FuncionarioController {
 
 	public String salvaFuncionario(){
 			
+		if(verificaEmail(funcionario.getEmail(), funcionario.getEmailConfirm()) == true){
 		funcionario.setStatus(true);
 
 		funcionario.setEmpresa(usuario.getEmpresa());
@@ -55,8 +59,28 @@ public class FuncionarioController {
 		usuarioDAO.adicionaUsuario(usuario);
 
 		return "FuncionarioSalva";
+		} else {
+			return "error";
+		}
+		
 	}
+	
+	public void editaFuncionario(){
+		funcionarioDAO.editaFuncionario(funcionario);
+	}
+	
+	public boolean verificaEmail(String email, String confirmEmail) { //verifica se email está correto nos dois campos e se já existe algum cadastrado
 
+		if (!email.equals(confirmEmail)) {
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));			
+			return false;
+		}else if(usuarioDAO.buscaPorUser(email) != null){
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email já cadastrado", null));			
+			return false;
+		} else {
+			return true;
+		}
+	}
 	//get e setter
 	
 	public Usuario getUsuario() {

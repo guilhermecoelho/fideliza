@@ -1,164 +1,125 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- 
-	author: guilherme coelho
- -->
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-
+<!-- 
+	author: guilherme coelho
+ -->
 <h:head>
+
 	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+
 </h:head>
 <h:body>
 	<div id="topo">
- 
-	<div id="topoMeio">
-    	<div id="banner">
-     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
-        </div>
- 	<div id="login">
- 	<h:form>
- 		<p:button value="logout" action="#{usuarioController.logout}"/>
- 	</h:form>
- 	</div>
+	 
+		<div id="topoMeio">
+	    	<div id="banner">
+	     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+	        </div>
+	 	<div id="login">
+	 	<h:form>
+	 		<p:button value="logout" action="#{usuarioController.logout}"/>
+	 	</h:form>
+	 	</div>
+		</div>
 	</div>
-</div>
 <div id="menu">
 	<div id="menuBotao">
     	<ui:include src="menu.xhtml"/>
     </div>
 </div>
-<div id="fundo">
-	<div id="conteudo">
-		<h:form id="form">
-			<p:panel header="Consulta" />
-	
-			<p:dataTable id="table" var="result"
-				value="#{empresaController.listaEmpresaDesativada}" paginator="true" rows="5" >
-				<p:column>
-					<p:rowToggler/>
-				</p:column>
-				
-				<p:column sortBy="#{result.nome}">
-	
-					<f:facet name="header">
-						<h:outputText value="nome" />
-					</f:facet>
-					<h:outputText value="#{result.nome}" />
-				</p:column>
-				<p:column sortBy="#{result.cnpj}">
-					<f:facet name="header">
-						<h:outputText value="cnpj" />
-					</f:facet>
-					<h:outputText value="#{result.cnpj}" />
-				</p:column>
-				<p:column sortBy="#{result.email}">
-					<f:facet name="header">
-						<h:outputText value="email" />
-					</f:facet>
-					<h:outputText value="#{result.email}" />
-				</p:column>
-				<p:column sortBy="#{result.status}" >
-					<f:facet name="header">
-						<h:outputText value="status"/>
-					</f:facet>
-					<h:outputText value="#{result.status}" />
-				</p:column>
-
-				<p:column headerText="Editar" style="width:50px">
-					<h:panelGrid styleClass="actions" cellspacing="2">
-						<p:commandButton id="selectButton" update=":form:display"
-							oncomplete="empresaDialog.show()" icon="ui-icon-search" title="View" process="@this">				
-							<f:setPropertyActionListener value="#{result}" target="#{empresaController.empresa}" />
-						</p:commandButton>
-					</h:panelGrid>
-				</p:column>
-			<p:rowExpansion >
+	<div id="fundo">
+		<div id="conteudo">
 			
-				<h:panelGrid columns="2" cellpadding="2" styleClass="ui-widget-content grid" id="display" >
-					
-					<h:outputLabel for="nome" value="Id" />
-					<h:outputText value="#{result.idEmpresa}"/>
+				<h:form id="form">
+					<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+					<p:dialog modal="true" widgetVar="statusDialog"    
+	        			draggable="false" closable="false">  
+	    				<p:graphicImage value="/images/ajaxload.gif" />  
+					</p:dialog>
+					<h:form id="formData">				
+						<p:dataTable id="empresaTable" var="result" value="#{empresaController.listaEmpresaDesativada}">
+							<f:facet name="header">	
+							 Empresas
+							</f:facet>
+								<p:column filterBy="#{result.idEmpresa}" headerText="ID" footerText="ID">
+									<h:outputText value="#{result.idEmpresa}" />
+								</p:column>
+								<p:column filterBy="#{result.nome}" headerText="Nome" footerText="Nome">
+									<h:outputText value="#{result.nome}" />
+								</p:column>
+								<p:column  filterBy="#{result.cnpj}" headerText="CNPJ" footerText="CNPJ">
+									<h:outputText value="#{result.cnpj}" />
+								</p:column>
+								<p:column  filterBy="#{result.email}" headerText="Email" footerText="Email">
+									<h:outputText value="#{result.email}" />
+								</p:column>	
+								<p:column style="width:4%">  
+	                				<p:commandButton id="selectButton" update=":form:formData:empDialog" oncomplete="empresaDialog.show()"   icon="ui-icon-search" title="Detalhar">  
+	                					<f:setPropertyActionListener value="#{result}" target="#{administradorController.selectedEmpresa}" />  
+	            					</p:commandButton>  
+	        					</p:column>
+	        					<p:column style="width:4%">  
+	                				<p:commandButton id="editButton" update=":form:formData:dialogEdit:empEditDialog"   oncomplete="empresaEditDialog.show()"    title="Editar">  
+	                					<f:setPropertyActionListener value="#{result}" target="#{empresaController.empresa}"  />  
+	            					</p:commandButton>  
+	        					</p:column>			
+						</p:dataTable>
 								
-					<h:outputLabel for="nome" value="nome *" />
-					<h:outputText value="#{result.nome}"/>
-	
-					<h:outputLabel for="cpf" value="CNPJ *" />
-					<h:outputText value="#{result.cnpj}"/>
-					
-					<h:outputLabel for="email" value="email" />
-					<h:outputText value="#{result.email}"/>
-					
-					<h:outputLabel for="status" value="status" />
-					<h:outputText value="#{result.status}"/>
-					
-				
-				</h:panelGrid>
-			</p:rowExpansion>
-		
-			</p:dataTable>
-			
-			<p:dialog widgetVar="empresaDialog" resizable="false" id="empresaDlg"
-				modal="true">
-				
-				<h:panelGrid columns="3" cellpadding="5" style="margin:0 auto;" id="display">
-				<p:messages id="msgError" autoUpdate="true" />
-					
-					
-					<h:outputLabel for="nome" value="nome *" />
-					<p:inputText value="#{empresaController.empresa.nome}" id="nome"
-						label="nome" required="true" requiredMessage="O campo nome deve ser preenchido"/>
-					<p:message for="nome"  />
-	
-					<h:outputLabel for="cpf" value="CPF *" />
-					<p:inputMask value="#{empresaController.empresa.cnpj}" id="cpf"
-						mask="999.999.999-99" label="cpf" required="true" requiredMessage="Informe o CNPJ" />
-					<p:message  for="cpf"/>
-					
-					<h:outputLabel for="email" value="email" />
-					<p:inputText value="#{empresaController.empresa.email}" id="email"
-						label="email" required="true" requiredMessage="Informe seu email" />
-					<p:message  for="email"/>
-					
-					<h:outputLabel for="emailConfirm" value="confirmar email" />
-					<p:inputText value="#{empresaController.empresa.confirmEmail}" id="emailConfirm"
-						label="emailConfirm" required="true" requiredMessage="Confirme seu email" />
-					<p:message  for="emailConfirm"/>
-					
-					<h:outputLabel for="password" value="senha" />
-					<p:password value="#{empresaController.empresa.password}" id="password"
-						label="senha" match="passwordConfirm" 
-						promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
-						strongLabel="forte" required="true" feedback="true" requiredMessage="Digite uma senha" validatorMessage="Senha não bate"/>
-						<p:message  for="password"/>
-	
-					<h:outputLabel for="password" value="confirmar senha" />
-					<p:password value="#{empresaController.empresa.password}"
-						id="passwordConfirm" label="confirmar senha" 
-						promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
-						strongLabel="forte"  feedback="true" requiredMessage="Confirme a senha" />
-						<p:message  for="passwordConfirm"/>
+						<p:dialog id="empDialog" header="Empresa" widgetVar="empresaDialog" >					
+								<h:panelGrid id="display" columns="2" cellpadding="20" >
+									<h:outputText value="nome:"/>
+									<h:outputText value="#{administradorController.selectedEmpresa.nome}"/>
+									<h:outputText value="cnpj:"/>
+									<h:outputText value="#{administradorController.selectedEmpresa.cnpj}"/>
+									<h:outputText value="email:"/>
+									<h:outputText value="#{administradorController.selectedEmpresa.email}"/>
+									<h:outputText value="status:"/>
+									<h:outputText value="#{administradorController.selectedEmpresa.status}"/>
+									<h:outputText value="regra:"/>
+									<h:outputText value="#{administradorController.selectedEmpresa.regraPontuacao.idRegraPontuacao}"/>
+								</h:panelGrid>						
+						</p:dialog> 
 						
-					
-					<p:commandButton value="Salvar"
-						action="#{empresaController.editaEmpresa}" ajax="false"/>
-					<p:commandButton value="Limpar campos"
-						type="reset"/>
-						
-						
-				</h:panelGrid>
-			</p:dialog>
-
-	</h:form>
-		
+						<h:form id="dialogEdit">
+						<p:dialog id="empEditDialog"  header="Consumidor" widgetVar="empresaEditDialog" >					
+								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
+									
+									<h:inputHidden value="#{empresaController.empresa.idEmpresa}"/>
+									<h:inputHidden value="#{empresaController.empresa.status}"/>
+									<h:inputHidden />
+									<h:inputHidden value="#{empresaController.empresa.email}"/>
+									
+									<h:outputText value="Nome: "/>
+									<p:inputText value="#{empresaController.empresa.nome}"/>
+									<h:outputText value="CNPJ"/>
+									<p:inputText value="#{empresaController.empresa.cnpj}"/>
+									<h:outputText value="Status"/>
+									<p:selectOneRadio id="status" value="#{empresaController.empresa.status}">
+										<f:selectItem itemLabel="Ativada" itemValue="true"/>
+										<f:selectItem itemLabel="Desativada" itemValue="false"/>
+									</p:selectOneRadio>
+									
+									
+									<p:commandButton value="Salvar" actionListener="#{empresaController.editaEmpresa}" oncomplete="empresaEditDialog.hide();" update=":form:formData:empresaTable" />
+										<p:commandButton value="Limpar campos" type="reset"/>
+	
+								</h:panelGrid>
+						</p:dialog> 
+						</h:form>
+					</h:form>
+				</h:form>
+			</div>
 	</div>
-</div>
 <div id="rodape">
-<h2> rodapé</h2>
-</div>
+	<h2> rodapé</h2>
+</div>	
 </h:body>
 </html>

@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import br.com.fideliza.model.Empresa;
 import br.com.fideliza.model.Usuario;
 import br.com.fideliza.util.HibernateUtil;
 
@@ -23,17 +24,11 @@ public class UsuarioDAO {
 	}
 	
 	public void adicionaUsuario(Usuario user){
-		try{
+			tx.begin();
 			session.save(user);
-			tx.commit();
-		}catch (HibernateException e){
-			e.printStackTrace();
-		}catch (Exception e){
-			e.printStackTrace();
-		} finally{
 			session.flush();
+			tx.commit();
 			session.close();
-		}
 	}
 	
 	public Usuario loginCliente(String password, String user){
@@ -47,8 +42,7 @@ public class UsuarioDAO {
 		
 		return retorno; */
 
-		try{
-			
+		try{	
 			return (Usuario) session.createCriteria(Usuario.class).add(Restrictions.like("password",password)).add(Restrictions.like("user",user)).uniqueResult();
 		}catch (HibernateException e){
 			e.printStackTrace();
@@ -88,8 +82,9 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		} finally{
 			session.flush();
-			session.close();
+			//session.close();
 		}
 		return null;
 	}
+	
 }

@@ -15,6 +15,7 @@ public class Funcionario implements Serializable{
 	private int idFuncionario;
 	private Empresa empresa;
 	private boolean status = false;
+	private String nome;
 	private String email;
 	private String emailConfirm;
 	private String password;
@@ -23,6 +24,12 @@ public class Funcionario implements Serializable{
 	
 	public int getIdFuncionario() {
 		return idFuncionario;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	public void setIdFuncionario(int idFuncionario) {
 		this.idFuncionario = idFuncionario;
@@ -69,6 +76,7 @@ public class Funcionario implements Serializable{
 				+ ((emailConfirm == null) ? 0 : emailConfirm.hashCode());
 		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + idFuncionario;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + (status ? 1231 : 1237);
@@ -100,6 +108,11 @@ public class Funcionario implements Serializable{
 			return false;
 		if (idFuncionario != other.idFuncionario)
 			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -109,5 +122,4 @@ public class Funcionario implements Serializable{
 			return false;
 		return true;
 	}
-	
 }

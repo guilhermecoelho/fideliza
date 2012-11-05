@@ -37,36 +37,36 @@
 <div id="conteudo">
 	<div id="grid">
 	<h:form id="form">
-		<p:panel header="Cadastro Funcionario">
+		<p:panel header="Cadastro Adminstrador">
 		
 			<p:messages id="msgError" autoUpdate="true" />
 			
 			<h:panelGrid columns="3" cellpadding="5" process="@this">
 			
 				<h:outputLabel for="nome" value="nome" />
-				<p:inputText value="#{funcionarioController.funcionario.nome}" id="nome"
-					label="email" required="true" requiredMessage="Informe nome funcionario" />
+				<p:inputText value="#{administradorController.admin.nome}" id="nome"
+					label="email" required="true" requiredMessage="Informe nome administrador" />
 				<p:message  for="nome"/>
 				
 				<h:outputLabel for="email" value="email" />
-				<p:inputText value="#{funcionarioController.funcionario.email}" id="email"
+				<p:inputText value="#{administradorController.admin.email}" id="email"
 					label="email" required="true" requiredMessage="Informe seu email" />
 				<p:message  for="email"/>
 				
 				<h:outputLabel for="emailConfirm" value="confirmar email" />
-				<p:inputText value="#{funcionarioController.funcionario.emailConfirm}" id="emailConfirm"
+				<p:inputText value="#{administradorController.admin.confirmEmail}" id="emailConfirm"
 					label="emailConfirm" required="true" requiredMessage="Confirme seu email" />
 				<p:message  for="emailConfirm"/>
 				
 				<h:outputLabel for="password" value="senha" />
-				<p:password value="#{funcionarioController.funcionario.password}" id="password"
+				<p:password value="#{administradorController.admin.password}" id="password"
 					label="senha" match="passwordConfirm" feedback="true"
 					promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
 					strongLabel="forte" required="true" requiredMessage="Digite uma senha" validatorMessage="Senha não bate"/>
 					<p:message  for="password"/>
 
 				<h:outputLabel for="password" value="confirmar senha" />
-				<p:password value="#{funcionarioController.funcionario.password}"
+				<p:password value="#{administradorController.admin.password}"
 					id="passwordConfirm" label="confirmar senha" feedback="true"
 					promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
 					strongLabel="forte"  required="true" requiredMessage="Confirme a senha" />
@@ -74,7 +74,7 @@
 					
 				
 				<p:commandButton value="Salvar"
-					action="#{funcionarioController.salvaFuncionario}" ajax="false"/>
+					action="#{administradorController.salvaAdmin}" ajax="false"/>
 				<p:commandButton value="Limpar campos"
 					type="reset"/>
 

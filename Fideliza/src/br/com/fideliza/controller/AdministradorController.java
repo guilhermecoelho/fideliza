@@ -2,6 +2,8 @@ package br.com.fideliza.controller;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -13,17 +15,23 @@ import br.com.fideliza.DAO.EmpresaDAO;
 import br.com.fideliza.DAO.FuncionarioDAO;
 import br.com.fideliza.DAO.PromocaoDAO;
 import br.com.fideliza.DAO.RegraPontuacaoDAO;
+import br.com.fideliza.DAO.UsuarioDAO;
 import br.com.fideliza.model.Administrador;
 import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Empresa;
 import br.com.fideliza.model.Funcionario;
 import br.com.fideliza.model.Promocao;
 import br.com.fideliza.model.RegraPontuacao;
+import br.com.fideliza.model.Usuario;
+import br.com.fideliza.util.Verificador;
 
 public class AdministradorController {
 	
+	private Verificador verificador;
 	private Administrador admin;
 	private AdministradorDAO adminDAO;
+	private Usuario user;
+	private UsuarioDAO usuarioDAO;
 	private Empresa empresa;
 	private EmpresaDAO empresaDAO;
 	private Empresa selectedEmpresa;
@@ -33,7 +41,9 @@ public class AdministradorController {
 	private Promocao promocao;
 	private Promocao selectedPromocao;
 	private PromocaoDAO promocaoDAO;
+	private Consumidor consumidor;
 	private Consumidor selectedConsumidor;
+	private ConsumidorDAO consumidorDAO;
 	private RegraPontuacao selectedRegra;
 	private DataModel<Funcionario> listaFuncionarioEmpresa;
 	private DataModel<Promocao> listaPromocaoEmpresa;
@@ -53,6 +63,33 @@ public class AdministradorController {
 		this.empresaDAO = new EmpresaDAO();
 		this.funcionarioDAO = new FuncionarioDAO();
 		this.promocaoDAO = new PromocaoDAO();
+		this.user = new Usuario();
+		this.usuarioDAO = new UsuarioDAO();
+		this.verificador = new Verificador();
+		this.consumidorDAO = new ConsumidorDAO();
+	}
+	
+	public String salvaAdmin(){
+		
+
+		if(verificaEmail(admin.getEmail(), admin.getConfirmEmail()) == true){
+			
+			admin.setStatus(true);
+			
+			user.setAdministrador(admin);
+			user.setUser(admin.getEmail());
+			user.setPassword(admin.getPassword());
+			user.setPermissaoAdministrador(true);
+			
+			adminDAO.salvaAdmin(admin);	
+			usuarioDAO.adicionaUsuario(user);	
+			
+			
+			return "salvaAdmin";
+			
+		} else {
+			return "errorAdmin";
+		}
 	}
 	
 	public String ativarEmpresa (){
@@ -96,11 +133,48 @@ public class AdministradorController {
 	public void onTabChange(TabChangeEvent event){
 		event.getTab();
 	}
+	
+	public boolean verificaEmail(String email, String confirmEmail) { //verifica se email está correto nos dois campos e se já existe algum cadastrado
+
+		if (!email.equals(confirmEmail)) {
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));			
+			return false;
+		}else if(usuarioDAO.buscaPorUser(email) != null){
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email já cadastrado", null));			
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public String editaConsumidor(){
+		
+		//consumidorDAO.editarConsumidor(consumidor);
+		
+		return "editaConsumidor";
+	}
+	
 
 	//get e set
 	
 	public Empresa getSelectedEmpresa() {
 		return selectedEmpresa;
+	}
+
+	public Consumidor getConsumidor() {
+		return consumidor;
+	}
+
+	public void setConsumidor(Consumidor consumidor) {
+		this.consumidor = consumidor;
+	}
+
+	public Administrador getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Administrador admin) {
+		this.admin = admin;
 	}
 
 	public RegraPontuacao getSelectedRegra() {

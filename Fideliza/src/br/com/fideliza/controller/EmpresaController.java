@@ -5,8 +5,6 @@ package br.com.fideliza.controller;
 
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -16,9 +14,11 @@ import br.com.fideliza.DAO.UsuarioDAO;
 import br.com.fideliza.model.Empresa;
 import br.com.fideliza.model.RegraPontuacao;
 import br.com.fideliza.model.Usuario;
+import br.com.fideliza.util.Verificador;
 
 public class EmpresaController {
-
+	
+	private Verificador verificador;
 	private Empresa empresa;
 	private EmpresaDAO empresaDAO;
 	private Empresa selectedEmpresa;
@@ -41,85 +41,37 @@ public class EmpresaController {
 
 	public String salvaEmpresa() {
 
-		if (verificaEmail() == true && verificaCNPJ() == true) {
+		
+		if(verificador.verificaEmail(empresa.getEmail(), empresa.getConfirmEmail()) == true && verificador.verificaCNPJ(empresa.getCnpj()) == true){
 			
 			regraPontuacao = regraPontuacaoDAO.buscaPorId(1);
 			empresa.setRegraPontuacao(regraPontuacao);
 				
 			empresa.setStatus(false);
 			empresa.setNovaEmpresa(true);
+			
+			user.setEmpresa(empresa);
+			user.setUser(empresa.getEmail());
+			user.setPassword(empresa.getPassword());
+			user.setPermissaoEmpresa(true);
+			
 			empresaDAO.adicionaEmpresa(empresa);
-
-			Empresa retorno = empresaDAO.BuscaPorCNPJ(empresa.getCnpj());
-
-			if (retorno != null) {
-				user.setEmpresa(retorno); // seta a FK do campo INT_EMPRESA_USR com o valor do campo INT_ID_EMPRESA_EMP da tabela EMPRESA
-				user.setUser(retorno.getEmail());
-				user.setPassword(retorno.getPassword());
-				user.setPermissaoEmpresa(true);
-
-				usuarioDAO.adicionaUsuario(user); // cria usuario usando o email como user
-
-				return "empresaSalva";
-			} else {
-				return "error";
-			}
-
+			usuarioDAO.adicionaUsuario(user);
+			
+			return "empresaSalva";
+			
 		} else {
 			return "error";
 		}
 	}
 
 	public void editaEmpresa() {
+		regraPontuacao = regraPontuacaoDAO.buscaPorId(1);
+		empresa.setRegraPontuacao(regraPontuacao);
 		
 		empresaDAO.editaEmpresa(empresa);
-
+		
 	}
-
-	public boolean verificaEmail() {
-
-		if (!empresa.getEmail().equals(empresa.getConfirmEmail())) {
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));			
-			return false;
-		}else if(usuarioDAO.buscaPorUser(empresa.getEmail()) != null){
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email já cadastrado", null));			
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	public boolean verificaCNPJ() {
-
-		Empresa retorno = empresaDAO.BuscaPorCNPJ(empresa.getCnpj());
-
-		if (retorno != null) {
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"CNPJ já cadastrado", null));
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-/*	public String ativarEmpresa (){
-		
-		empresa = selectedEmpresa;
-		empresa.setStatus(true);
-		empresa.setNovaEmpresa(false);
-		
-		empresaDAO.ativaEmpresa(empresa);
-		
-		return "ativarEmpresa";
-	}*/
-	
-/*	public String detalhaEmpresa(){
-		
-		empresa = empresaDAO.BuscaPorId(selectedEmpresa.getIdEmpresa());
-		
-		return "detalhaEmpresa";
-		
-	}*/
-	
 	
 	// gets e setters
 

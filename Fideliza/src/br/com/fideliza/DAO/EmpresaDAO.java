@@ -27,15 +27,9 @@ public class EmpresaDAO {
 	}
 	
 	public void adicionaEmpresa(Empresa empresa){
-		try{
 			session.save(empresa);
 			tx.commit();
 			//session.close();
-		}catch (HibernateException e){
-			e.printStackTrace();
-		}catch (Exception e){
-			e.printStackTrace();
-		} 
 	}
 	
 	public void ativaEmpresa(Empresa empresa){
@@ -84,13 +78,14 @@ public class EmpresaDAO {
 	
 	public Empresa BuscaPorCNPJ(String cnpj){
 
-		Empresa retorno;
+		/*Empresa retorno;
 		String sql= "select empresa from Empresa as empresa where cnpj = :cnpj";
 		Query q = session.createQuery(sql);
 		q.setString("cnpj", cnpj);
 		retorno = (Empresa)  q.uniqueResult();
 		
-		return retorno;
+		return retorno;*/
+		return (Empresa) session.createCriteria(Empresa.class).add(Restrictions.like("cnpj", cnpj)).uniqueResult();
 	}
 
 	public Empresa BuscaPorId(int idEmpresa){

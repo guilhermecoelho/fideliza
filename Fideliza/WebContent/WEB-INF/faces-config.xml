@@ -86,7 +86,7 @@
 		<display-name>cadastro_empresa.xhtml</display-name>
 		<from-view-id>/cadastro_empresa.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>save</from-outcome>
+			<from-outcome>empresaSalva</from-outcome>
 			<to-view-id>/sucesso.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
@@ -207,6 +207,46 @@
 		<navigation-case>
 			<from-outcome>detalhaEmpresa</from-outcome>
 			<to-view-id>/restrito/admin/detalha_empresa.xhtml</to-view-id>		
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/detalha_empresa.xhtml</display-name>
+		<from-view-id>/restrito/admin/detalha_empresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>detalhaFuncionario</from-outcome>
+			<to-view-id>/restrito/admin/detalhaFuncionario.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/cadastro_admin.xhtml</display-name>
+		<from-view-id>/restrito/admin/cadastro_admin.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>salvaAdmin</from-outcome>
+			<to-view-id>/restrito/admin/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/cadastro_admin.xhtml</display-name>
+		<from-view-id>/restrito/admin/cadastro_admin.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>errorAdmin</from-outcome>
+			<to-view-id>/restrito/admin/cadastro_admin.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/consulta_consumidor_ativo.xhtml</display-name>
+		<from-view-id>/restrito/admin/consulta_consumidor_ativo.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>editaConsumidor</from-outcome>
+			<to-view-id>/restrito/admin/edita_consumidor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/edita_consumidor.xhtml</display-name>
+		<from-view-id>/restrito/admin/edita_consumidor.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>editadoConsumidor</from-outcome>
+			<to-view-id>/restrito/admin/consulta_consumidor_ativo.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

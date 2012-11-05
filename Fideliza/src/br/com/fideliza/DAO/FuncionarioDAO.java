@@ -37,6 +37,19 @@ public class FuncionarioDAO {
 		}
 	}
 	
+	public void editaFuncionario(Funcionario funcionario){
+		try{
+			session.update(funcionario);
+			tx.commit();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.close();
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Funcionario> listaFuncionarios(){
 		try{

@@ -6,7 +6,6 @@ package br.com.fideliza.controller;
 
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -16,6 +15,7 @@ import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
 import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Usuario;
+import br.com.fideliza.util.Verificador;
 
 public class ConsumidorController {
 
@@ -23,6 +23,7 @@ public class ConsumidorController {
 	private ConsumidorDAO consumidorDAO;
 	private UsuarioDAO usuarioDAO;
 	private Usuario user;
+	private Verificador verificador;
 
 	private DataModel<Consumidor> consumidorLista;
 
@@ -36,28 +37,19 @@ public class ConsumidorController {
 
 	public String salvaConsumidor() {
 
-		if (verificaEmail() == true && verificaCPF() == true) { // se o email e CPF estão certos, salva cadastro
-
+		if(verificador.verificaEmail(consumidor.getEmail(), consumidor.getEmailConfirm()) == true && verificador.verificaCPF(consumidor.getCpf()) == true){	//verifica email e cpf
+			
 			consumidor.setStatus(true);
 			
+			user.setConsumidor(consumidor); 
+			user.setPassword(consumidor.getPassword());
+			user.setUser(consumidor.getCpf());
+			user.setPermissaoConsumidor(true);
+
+			usuarioDAO.adicionaUsuario(user); // cria usuario usando o CPF como user
 			consumidorDAO.adicionaConsumidor(consumidor);
-
-			Consumidor retorno = consumidorDAO.buscaPorCPF(consumidor.getCpf()); // recupera o cadastro recem-criado no banco de dados, necessario para poder recuperar o ID criado no banco de dados
 			
-			if (retorno != null) {
-
-				user.setConsumidor(retorno); // seta a FK do campo INT_CLIENTE_USR com o valor do campo INT_ID_CLIENTE_CLI da tabela CLIENTE
-				user.setPassword(retorno.getPassword());
-				user.setUser(retorno.getCpf());
-				user.setPermissaoConsumidor(true);
-
-				usuarioDAO.adicionaUsuario(user); // cria usuario usando o CPF como user
-
-				return "save";
-				
-			} else {
-				return "erro";
-			}
+			return "save";
 
 		} else {
 			return "erro";
@@ -67,33 +59,9 @@ public class ConsumidorController {
 	public String editaConsumidor() {
 
 		consumidorDAO.editarConsumidor(consumidor);
-		return "save";
-	}
-
-	public boolean verificaEmail() { // verifica se os campos "email" e "confirma email" são iguais
-
-		if (!consumidor.getEmail().equals(consumidor.getEmailConfirm())) {
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	public boolean verificaCPF() { // verifica se cpf já esta cadastrado
-
-		Consumidor retorno = consumidorDAO.buscaPorCPF(consumidor.getCpf());
-
-		if (retorno != null) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"CPF já cadastrado", null));
-			return false;
-		} else {
-			return true;
-		}
+		
+		return "editadoConsumidor";
+		
 	}
 
 	public DataModel<Consumidor> getConsumidorLista() { // lista todos consumidors
@@ -115,9 +83,7 @@ public class ConsumidorController {
 
 				List<Consumidor> consumidor = new ConsumidorDAO().listaConsumidors();
 				consumidorLista = new ListDataModel<Consumidor>(consumidor);
-
 			}
-
 		}
 		return consumidorLista;
 
