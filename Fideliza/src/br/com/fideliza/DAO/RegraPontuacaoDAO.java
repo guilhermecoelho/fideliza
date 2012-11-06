@@ -55,7 +55,7 @@ public class RegraPontuacaoDAO {
 			e.printStackTrace();
 		} finally{
 			session.flush();
-			session.close();
+			//session.close();
 		}
 		return null;
 	}

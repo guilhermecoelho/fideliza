@@ -93,8 +93,6 @@
 								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
 									
 									<h:inputHidden value="#{empresaController.empresa.idEmpresa}"/>
-									<h:inputHidden value="#{empresaController.empresa.status}"/>
-									<h:inputHidden />
 									<h:inputHidden value="#{empresaController.empresa.email}"/>
 									
 									<h:outputText value="Nome: "/>
@@ -106,8 +104,10 @@
 										<f:selectItem itemLabel="Ativada" itemValue="true"/>
 										<f:selectItem itemLabel="Desativada" itemValue="false"/>
 									</p:selectOneRadio>
-									
-									
+									<h:outputText value="Regra Pontuação"/>
+									<p:selectOneMenu  value="#{empresaController.empresa.regraPontuacao.idRegraPontuacao}" id="regra">      
+                   							 <f:selectItems  value="#{regraPontuacaoController.listaRegra}"  var="regra" itemLabel="#{regra.idRegraPontuacao}" itemValue="#{regra.idRegraPontuacao}" />  
+									</p:selectOneMenu> 
 									<p:commandButton value="Salvar" actionListener="#{empresaController.editaEmpresa}" oncomplete="empresaEditDialog.hide();" update=":form:formData:empresaTable" />
 										<p:commandButton value="Limpar campos" type="reset"/>
 	

@@ -249,7 +249,13 @@
 			<to-view-id>/restrito/admin/consulta_consumidor_ativo.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+	<converter>  
+     <description>Um converter</description>  
+     <converter-id>EmpresaConverter</converter-id>  
+     	<converter-class>  
+     	br.com.fideliza.converter.EmpresaConverter
+     	</converter-class>
+     </converter>
 	<lifecycle>
 		<phase-listener>br.com.fideliza.filter.AuthorizationListener</phase-listener>
 	</lifecycle>
