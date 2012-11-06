@@ -50,7 +50,9 @@ public class RegistraPontosController {
 		if (consumidor != null) {
 			
 			registraPontos.setConsumidor(consumidor);
-
+		
+			registraPontos.setEmpresa(usuario.getFuncionario().getEmpresa());
+			
 			// recupera regra de pontos
 
 			double valorPontos = registraPontos.getFuncionario().getEmpresa().getRegraPontuacao().getValorPonto();

@@ -84,6 +84,7 @@ public class UtilizaPontosController {
 		utilizaPontos.setConsumidor(consumidor);
 		utilizaPontos.setFuncionario(usuario.getFuncionario());
 		utilizaPontos.setPromocao(promocao);
+		utilizaPontos.setEmpresa(usuario.getFuncionario().getEmpresa());
 		
 		utilizaPontosDAO.SalvaRegistro(utilizaPontos);
 		
@@ -109,8 +110,6 @@ public class UtilizaPontosController {
 	public Usuario getUsuario() {
 		return usuario;
 	}
-
-
 
 	public Promocao getSelectedPromocao() {
 		return selectedPromocao;

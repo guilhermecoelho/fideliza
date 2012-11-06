@@ -22,6 +22,7 @@ public class RegistraPontos implements Serializable{
 	private String cpf;
 	private Funcionario funcionario;
 	private Consumidor consumidor;
+	private Empresa empresa;
 	private Date dataRegistro;
 	
 	//getters e setters
@@ -68,8 +69,14 @@ public class RegistraPontos implements Serializable{
 	public void setDataRegistro(Date dataRegistro) {
 		this.dataRegistro = dataRegistro;
 	}
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
 	
-	//hashCode
+	//hashcode
 	
 	@Override
 	public int hashCode() {
@@ -80,6 +87,7 @@ public class RegistraPontos implements Serializable{
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result
 				+ ((dataRegistro == null) ? 0 : dataRegistro.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result
 				+ ((funcionario == null) ? 0 : funcionario.hashCode());
 		result = prime * result + idRegistraPontos;
@@ -113,6 +121,11 @@ public class RegistraPontos implements Serializable{
 			if (other.dataRegistro != null)
 				return false;
 		} else if (!dataRegistro.equals(other.dataRegistro))
+			return false;
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
 			return false;
 		if (funcionario == null) {
 			if (other.funcionario != null)
