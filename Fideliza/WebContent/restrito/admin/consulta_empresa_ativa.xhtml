@@ -45,7 +45,7 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="empresaTable" var="result" value="#{empresaController.empresaLista}">
+						<p:dataTable id="empresaTable" var="result" value="#{empresaController.empresaLista}" rowKey="#{result.idEmpresa}" selection="#{administradorController.selectedEmpresa}" selectionMode="single">
 							<f:facet name="header">	
 							 Empresas
 							</f:facet>
@@ -61,59 +61,14 @@
 								<p:column  filterBy="#{result.email}" headerText="Email" footerText="Email">
 									<h:outputText value="#{result.email}" />
 								</p:column>	
-								<p:column style="width:4%">  
-	                				<p:commandButton id="selectButton" update=":form:formData:empDialog" oncomplete="empresaDialog.show()"   icon="ui-icon-search" title="Detalhar">  
-	                					<f:setPropertyActionListener value="#{result}" target="#{administradorController.selectedEmpresa}" />  
-	            					</p:commandButton>  
-	        					</p:column>
-	        					<p:column style="width:4%">  
-	                				<p:commandButton id="editButton" update=":form:formData:dialogEdit:empEditDialog"   oncomplete="empresaEditDialog.show()"    title="Editar">  
-	                					<f:setPropertyActionListener value="#{result}" target="#{empresaController.empresa}"  />  
-	            					</p:commandButton>  
-	        					</p:column>			
+
+	        					<f:facet name="footer">
+	        						<p:commandButton value="detalhar" update=":form" action="#{administradorController.detalhaEmpresa}" ajax="false"></p:commandButton>
+	        					</f:facet>		
 						</p:dataTable>
 								
-						<p:dialog id="empDialog" header="Empresa" widgetVar="empresaDialog" >					
-								<h:panelGrid id="display" columns="2" cellpadding="20" >
-									<h:outputText value="nome:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.nome}"/>
-									<h:outputText value="cnpj:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.cnpj}"/>
-									<h:outputText value="email:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.email}"/>
-									<h:outputText value="status:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.status}"/>
-									<h:outputText value="regra:"/>
-									<h:outputText value="#{administradorController.selectedEmpresa.regraPontuacao.idRegraPontuacao}"/>
-								</h:panelGrid>						
-						</p:dialog> 
 						
-						<h:form id="dialogEdit">
-						<p:dialog id="empEditDialog"  header="Consumidor" widgetVar="empresaEditDialog" >					
-								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
-									
-									<h:inputHidden value="#{empresaController.empresa.idEmpresa}"/>
-									<h:inputHidden value="#{empresaController.empresa.email}"/>
-									
-									<h:outputText value="Nome: "/>
-									<p:inputText value="#{empresaController.empresa.nome}"/>
-									<h:outputText value="CNPJ"/>
-									<p:inputText value="#{empresaController.empresa.cnpj}"/>
-									<h:outputText value="Status"/>
-									<p:selectOneRadio id="status" value="#{empresaController.empresa.status}">
-										<f:selectItem itemLabel="Ativada" itemValue="true"/>
-										<f:selectItem itemLabel="Desativada" itemValue="false"/>
-									</p:selectOneRadio>
-									<h:outputText value="Regra Pontuação"/>
-									<p:selectOneMenu  value="#{empresaController.empresa.regraPontuacao.idRegraPontuacao}" id="regra">      
-                   							 <f:selectItems  value="#{regraPontuacaoController.listaRegra}"  var="regra" itemLabel="#{regra.idRegraPontuacao}" itemValue="#{regra.idRegraPontuacao}" />  
-									</p:selectOneMenu> 
-									<p:commandButton value="Salvar" actionListener="#{empresaController.editaEmpresa}" oncomplete="empresaEditDialog.hide();" update=":form:formData:empresaTable" />
-										<p:commandButton value="Limpar campos" type="reset"/>
-	
-								</h:panelGrid>
-						</p:dialog> 
-						</h:form>
+						
 					</h:form>
 				</h:form>
 			</div>

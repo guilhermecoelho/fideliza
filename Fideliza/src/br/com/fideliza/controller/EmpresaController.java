@@ -117,7 +117,7 @@ public class EmpresaController {
 	public DataModel<Empresa> getEmpresaLista() { // lista todas as empresas
 
 		if (empresaLista == null) {	
-			List<Empresa> empresa = new EmpresaDAO().listaEmpresas2();
+			List<Empresa> empresa = new EmpresaDAO().listaEmpresas();
 			empresaLista = new ListDataModel<Empresa>(empresa);
 		}
 		return empresaLista;

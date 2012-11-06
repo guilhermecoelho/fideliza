@@ -1,5 +1,6 @@
 package br.com.fideliza.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -8,21 +9,26 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 import org.primefaces.event.TabChangeEvent;
+import org.primefaces.model.chart.PieChartModel;
 
 import br.com.fideliza.DAO.AdministradorDAO;
 import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.EmpresaDAO;
 import br.com.fideliza.DAO.FuncionarioDAO;
 import br.com.fideliza.DAO.PromocaoDAO;
+import br.com.fideliza.DAO.RegistraPontosDAO;
 import br.com.fideliza.DAO.RegraPontuacaoDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
+import br.com.fideliza.DAO.UtilizaPontosDAO;
 import br.com.fideliza.model.Administrador;
 import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Empresa;
 import br.com.fideliza.model.Funcionario;
 import br.com.fideliza.model.Promocao;
+import br.com.fideliza.model.RegistraPontos;
 import br.com.fideliza.model.RegraPontuacao;
 import br.com.fideliza.model.Usuario;
+import br.com.fideliza.model.UtilizaPontos;
 import br.com.fideliza.util.Verificador;
 
 public class AdministradorController {
@@ -45,6 +51,7 @@ public class AdministradorController {
 	private Consumidor selectedConsumidor;
 	private ConsumidorDAO consumidorDAO;
 	private RegraPontuacao selectedRegra;
+	private RegistraPontos registraPontos;
 	private DataModel<Funcionario> listaFuncionarioEmpresa;
 	private DataModel<Promocao> listaPromocaoEmpresa;
 	private DataModel<Funcionario> listaFuncionariosAtivos;
@@ -54,6 +61,8 @@ public class AdministradorController {
 	private DataModel<Promocao> listaPromocaoAtiva;
 	private DataModel<Promocao> listaPromocaoDesativada;
 	private DataModel<RegraPontuacao> listaRegras;
+	private DataModel<RegistraPontos> listaRegistrosEmpresa;
+	private DataModel<UtilizaPontos> listaUtilizaPontosEmpresa;
 	
 
 	public AdministradorController(){
@@ -153,12 +162,49 @@ public class AdministradorController {
 		
 		return "editaConsumidor";
 	}
+
 	
 
 	//get e set
 	
 	public Empresa getSelectedEmpresa() {
 		return selectedEmpresa;
+	}
+
+	public DataModel<UtilizaPontos> getListaUtilizaPontosEmpresa() { //lista histórico de promoções utilizadas por empresa
+		if(listaUtilizaPontosEmpresa == null){
+			if (listaUtilizaPontosEmpresa == null){
+				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosEmpresa(selectedEmpresa);
+				listaUtilizaPontosEmpresa = new ListDataModel<UtilizaPontos>(utilizaPontos);
+			}
+		}
+		return listaUtilizaPontosEmpresa;
+	}
+
+	public void setListaUtilizaPontosEmpresa(
+			DataModel<UtilizaPontos> listaUtilizaPontosEmpresa) {
+		this.listaUtilizaPontosEmpresa = listaUtilizaPontosEmpresa;
+	}
+
+	public RegistraPontos getRegistraPontos() {
+		return registraPontos;
+	}
+
+	public void setRegistraPontos(RegistraPontos registraPontos) {
+		this.registraPontos = registraPontos;
+	}
+
+	public DataModel<RegistraPontos> getListaRegistrosEmpresa() { // lista histórico de registro de pontos
+		if (listaRegistrosEmpresa == null){
+			List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroEmpresa(selectedEmpresa);
+			listaRegistrosEmpresa = new ListDataModel<RegistraPontos>(registraPontos);
+		}
+		return listaRegistrosEmpresa;
+	}
+
+	public void setListaRegistrosEmpresa(
+			DataModel<RegistraPontos> listaRegistrosEmpresa) {
+		this.listaRegistrosEmpresa = listaRegistrosEmpresa;
 	}
 
 	public Consumidor getConsumidor() {

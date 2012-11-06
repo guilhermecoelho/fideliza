@@ -15,6 +15,9 @@
         <many-to-one name="funcionario" class="br.com.fideliza.model.Funcionario" fetch="join">
             <column name="INT_FUNCIONARIO_UTIP" />
         </many-to-one>
+        <many-to-one name="empresa" class="br.com.fideliza.model.Empresa" fetch="join">
+            <column name="INT_EMPRESA_UTIP" />
+        </many-to-one>
         <many-to-one name="consumidor" class="br.com.fideliza.model.Consumidor" fetch="join">
             <column name="INT_CONSUMIDOR_UTIP" />
         </many-to-one>

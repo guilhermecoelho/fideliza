@@ -17,15 +17,21 @@ public class UtilizaPontos implements Serializable{
 	private double valorCompra;
 	private String cpf;
 	private Funcionario funcionario;
+	private Empresa empresa;
 	private Consumidor consumidor;
 	private Promocao promocao;
 	private Date dataRegistro;
 	
 	//getters and setters
 	
-	
 	public int getIdUtilizaPontos() {
 		return idUtilizaPontos;
+	}
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 	public void setIdUtilizaPontos(int idUtilizaPontos) {
 		this.idUtilizaPontos = idUtilizaPontos;
@@ -78,6 +84,7 @@ public class UtilizaPontos implements Serializable{
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result
 				+ ((dataRegistro == null) ? 0 : dataRegistro.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result
 				+ ((funcionario == null) ? 0 : funcionario.hashCode());
 		result = prime * result + idUtilizaPontos;
@@ -111,6 +118,11 @@ public class UtilizaPontos implements Serializable{
 			if (other.dataRegistro != null)
 				return false;
 		} else if (!dataRegistro.equals(other.dataRegistro))
+			return false;
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
 			return false;
 		if (funcionario == null) {
 			if (other.funcionario != null)
