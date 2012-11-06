@@ -75,6 +75,20 @@ public class EmpresaDAO {
 		}
 		return null;
 	}
+	@SuppressWarnings("unchecked")
+	public List<Empresa> listaEmpresas2(){
+		try{
+			return session.createCriteria(Empresa.class).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
+	}
 	
 	public Empresa BuscaPorCNPJ(String cnpj){
 

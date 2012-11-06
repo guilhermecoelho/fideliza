@@ -83,20 +83,27 @@
 								</h:panelGrid>						
 						</p:dialog> 
 						
-						<h:form id="dialogEdit">
-							<p:dialog id="funcEditDialog"  header="Consumidor" widgetVar="funcionarioEditDialog" >					
-									<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
+						<h:form id="dialogEdit" >
+							<p:dialog id="funcEditDialog"  header="Consumidor" widgetVar="funcionarioEditDialog">					
+									<h:panelGrid  id="displayEdit" columns="2" cellpadding="20">
 										
 										<h:inputHidden value="#{funcionarioController.funcionario.idFuncionario}"/>
 										<h:inputHidden value="#{funcionarioController.funcionario.email}"/>
-										<h:inputHidden value="#{funcionarioController.funcionario.empresa.idEmpresa}"/>
+										
 										<h:outputText value="Nome: "/>
 										<p:inputText value="#{funcionarioController.funcionario.nome}"/>
 										<h:outputText value="Status"/>
-										<p:selectOneRadio id="status" value="#{funcionarioController.funcionario.status}">
+										<p:selectOneRadio id="status" value="#{funcionarioController.funcionario.status}" >
 											<f:selectItem itemLabel="Ativada" itemValue="true"/>
 											<f:selectItem itemLabel="Desativada" itemValue="false"/>
+										
 										</p:selectOneRadio>
+										<h:outputText value="Empresa"/>
+										<p:selectOneMenu  value="#{funcionarioController.funcionario.empresa.idEmpresa}" converter="EmpresaConverter" id="empresa">    
+                   							  
+                   							 <f:selectItems  value="#{empresaController.empresaLista}"  var="emp" itemLabel="#{emp.idEmpresa}" itemValue="#{emp.idEmpresa}"/>  
+										</p:selectOneMenu> 
+										
 										<p:commandButton value="Salvar" actionListener="#{funcionarioController.editaFuncionario}" oncomplete="funcEditDialog.hide();"  />
 										<p:commandButton value="Limpar campos" type="reset"/>
 		
