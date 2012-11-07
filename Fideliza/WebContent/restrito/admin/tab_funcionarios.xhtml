@@ -13,6 +13,11 @@
 	<h:head>
 		<h:body>	
 			<h:form id="formFunc">
+				<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+					<p:dialog modal="true" widgetVar="statusDialog"    
+	        			draggable="false" closable="false">  
+	    			<p:graphicImage value="/images/ajaxload.gif" />  
+				</p:dialog>
 					<p:dataTable id="dataFunc" var="func" value="#{administradorController.listaFuncionarioEmpresa}" rowKey="#{func.idFuncionario}" selection="#{administradorController.selectedFuncionario}"
 						selectionMode="single" paginator="true" >
 						

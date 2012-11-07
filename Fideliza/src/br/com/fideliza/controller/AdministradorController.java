@@ -77,6 +77,7 @@ public class AdministradorController {
 		this.usuarioDAO = new UsuarioDAO();
 		this.verificador = new Verificador();
 		this.consumidorDAO = new ConsumidorDAO();
+		
 	}
 	
 	public String salvaAdmin(){
@@ -124,17 +125,39 @@ public class AdministradorController {
 		return "detalhaEmpresa";
 		
 	}
-	public void detalhaFuncionario(){
-		
+	public String detalhaFuncionario(){
 		
 		funcionario = funcionarioDAO.buscaPorId(selectedFuncionario.getIdFuncionario());
 		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
+		session.setAttribute("funcionario", funcionario); //salva dados do usuario na sessão
+		
+		return "detalhaFuncionario";
+		
 	}
 	
-	public void detalhaPromocao(){
+	public String detalhaPromocao(){
 		
 		promocao = promocaoDAO.buscaPorId(selectedPromocao.getIdPromocao());
 		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
+		session.setAttribute("promocao", promocao); //salva dados do usuario na sessão
+		
+		return "detalhaPromocao";
+		
+	}
+	
+	public String detalhaConsumidor(){
+		
+		consumidor = consumidorDAO.buscaPorCPF(selectedConsumidor.getCpf());
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
+		session.setAttribute("consumidor", consumidor); //salva dados do usuario na sessão
+		
+		return "detalhaConsumidor";
 	}
 	
 	public void editaEmpresa() {
@@ -168,7 +191,18 @@ public class AdministradorController {
 	}
 
 	
+	public Empresa recuperaSessaoEmpresa(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
+		return empresa = (Empresa) session.getAttribute("empresaTeste");
 
+	}
+	
+	public Consumidor recuperaSessaoConsumidor(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
+		return consumidor = (Consumidor) session.getAttribute("consumidor");
+	}
 	//get e set
 	
 	public Empresa getSelectedEmpresa() {
@@ -200,7 +234,8 @@ public class AdministradorController {
 
 	public DataModel<RegistraPontos> getListaRegistrosEmpresa() { // lista histórico de registro de pontos
 		if (listaRegistrosEmpresa == null){
-			List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroEmpresa(selectedEmpresa);
+			empresa = recuperaSessaoEmpresa();
+			List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroEmpresa(empresa);
 			listaRegistrosEmpresa = new ListDataModel<RegistraPontos>(registraPontos);
 		}
 		return listaRegistrosEmpresa;
@@ -322,6 +357,7 @@ public class AdministradorController {
 
 	public DataModel<Funcionario> getListaFuncionariosAtivos() { // lista todos funcionarios ativos
 		if(listaFuncionariosAtivos == null){
+			
 			List<Funcionario> funcionario = new FuncionarioDAO().listaFuncionariosAtivos();
 			listaFuncionariosAtivos = new ListDataModel<Funcionario>(funcionario);
 		}
@@ -367,7 +403,8 @@ public class AdministradorController {
 	public DataModel<Promocao> getListaPromocaoEmpresa() { // lista promoções de uma empresa
 		
 		if(listaPromocaoEmpresa == null){
-			List<Promocao> promocao = new PromocaoDAO().listaPorEmpresa(selectedEmpresa);
+			empresa = recuperaSessaoEmpresa();
+			List<Promocao> promocao = new PromocaoDAO().listaPorEmpresa(empresa);
 			listaPromocaoEmpresa = new ListDataModel<Promocao>(promocao);
 		}
 		return listaPromocaoEmpresa;
@@ -380,12 +417,8 @@ public class AdministradorController {
 	public DataModel<Funcionario> getListaFuncionarioEmpresa() { //lista funcionarios de uma empresa
 		
 		if(listaFuncionarioEmpresa == null){
-				FacesContext fc = FacesContext.getCurrentInstance();
-				HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-				empresa = (Empresa) session.getAttribute("empresaTeste");
-	
-			
-			System.out.println("EMP: "+empresa.getIdEmpresa());
+
+			empresa = recuperaSessaoEmpresa();
 			
 			List<Funcionario> funcionario = new FuncionarioDAO().BuscaPorEmpresa(empresa.getIdEmpresa());
 			listaFuncionarioEmpresa = new ListDataModel<Funcionario>(funcionario);

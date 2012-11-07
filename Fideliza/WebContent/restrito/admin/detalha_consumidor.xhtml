@@ -36,22 +36,24 @@
     </div>
 </div>
 	<div id="fundo">
-	<div id="conteudo">
-		
-		<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
-              
-		<p:dialog modal="true" widgetVar="statusDialog"    
-        	draggable="false" closable="false">  
-    		<p:graphicImage value="/images/ajaxload.gif" />  
-		</p:dialog>
-			<h:form id="form" >
-				<p:panelGrid columns="2" >
-					<h:outputText value="nome:"/>
-					<h:outputText value="#{administradorController.funcionario.email}"/>
-					
-				</p:panelGrid>
+		<div id="conteudo">
+			<p:tabView id="tabView" cache="true" >
+			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+				<p:dialog modal="true" widgetVar="statusDialog"    
+	        		draggable="false" closable="false">  
+	    		<p:graphicImage value="/images/ajaxload.gif" />  
+			</p:dialog>
+			<p:tab id="tab1" title="dados" >	
+				<ui:include src="tab_dados_consumidor.xhtml"/>
+			</p:tab>
+			<p:tab id="tab2" title="Pontos registrados" >
+				<ui:include src="tab_pontos_consumidor.xhtml"/>
+			</p:tab>
+			<p:tab id="tab5" title="Histórico promoções">
+				<ui:include src="tab_utilizapontos_consumidor.xhtml"/>
+			</p:tab>
+		</p:tabView>
 				
-			</h:form>
 		</div>
 	</div>
 <div id="rodape">

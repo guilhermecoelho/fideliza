@@ -22,8 +22,8 @@
   <nodes xsi:type="pageflow:PFPage" name="restrito/admin/detalha_empresa.xhtml" x="540" y="744" id="pf13510996128832" referenceLink="//@navigationRule.19/@fromViewId|" outlinks="pf13515477630463" inlinks="pf13510996128831" path="/restrito/admin/detalha_empresa.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/admin/detalhaFuncionario.xhtml" x="768" y="744" id="pf13515477630464" referenceLink="//@navigationRule.19/@navigationCase.0/@toViewId|" inlinks="pf13515477630463" path="/restrito/admin/detalhaFuncionario.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/admin/cadastro_admin.xhtml" x="672" y="264" id="pf13518667047891" referenceLink="//@navigationRule.21/@navigationCase.0/@toViewId|" outlinks="pf13518667047870 pf13518667221012" inlinks="pf13518667221012" path="/restrito/admin/cadastro_admin.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/admin/consulta_consumidor_ativo.xhtml" x="41" y="819" id="pf13519740802445" referenceLink="//@navigationRule.23/@navigationCase.0/@toViewId|" outlinks="pf13519743124166" inlinks="pf13519747654258" path="/restrito/admin/consulta_consumidor_ativo.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/admin/edita_consumidor.xhtml" x="537" y="819" id="pf13519743124167" referenceLink="//@navigationRule.23/@fromViewId|" outlinks="pf13519747654258" inlinks="pf13519743124166" path="/restrito/admin/edita_consumidor.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/admin/consulta_consumidor_ativo.xhtml" x="41" y="819" id="pf13519740802445" referenceLink="//@navigationRule.23/@navigationCase.0/@toViewId|" outlinks="pf13522941092840" path="/restrito/admin/consulta_consumidor_ativo.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/admin/detalha_consumidor.xhtml" x="540" y="819" id="pf13522941092851" inlinks="pf13522941092840" path="/restrito/admin/detalha_consumidor.xhtml"/>
   <links id="pf13477686212377" target="pf13477675319566" source="pf13509417769220" outcome="loginConsumidor" redirect="true"/>
   <links id="pf13475759256732" target="pf134776975486514" source="pf13509417769222" outcome="loginFuncionario" redirect="true"/>
   <links id="pf13475759256731" target="pf134776975486513" source="pf13509417769222" outcome="loginEmpresa" redirect="true"/>
@@ -62,6 +62,5 @@
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
-  <links id="pf13519743124166" target="pf13519743124167" source="pf13519740802445" outcome="editaConsumidor"/>
-  <links id="pf13519747654258" target="pf13519740802445" source="pf13519743124167" outcome="editadoConsumidor"/>
+  <links id="pf13522941092840" target="pf13522941092851" source="pf13519740802445" outcome="detalhaConsumidor"/>
 </pageflow:Pageflow>
