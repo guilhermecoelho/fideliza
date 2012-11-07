@@ -26,6 +26,7 @@ public class ConsumidorController {
 	private Verificador verificador;
 
 	private DataModel<Consumidor> consumidorLista;
+	private DataModel<Consumidor> listaConsumidorAtivo;
 
 	public ConsumidorController() {
 
@@ -63,7 +64,9 @@ public class ConsumidorController {
 		return "editadoConsumidor";
 		
 	}
-
+	
+	//gets e setters
+	
 	public DataModel<Consumidor> getConsumidorLista() { // lista todos consumidors
 		if (consumidorLista == null) {
 
@@ -87,6 +90,18 @@ public class ConsumidorController {
 		}
 		return consumidorLista;
 
+	}
+
+	public DataModel<Consumidor> getListaConsumidorAtivo() {
+		if(listaConsumidorAtivo == null){
+			List<Consumidor> consumidor = new ConsumidorDAO().listaConsumidorAtivo();
+			listaConsumidorAtivo = new ListDataModel<Consumidor>(consumidor);
+		}
+		return listaConsumidorAtivo;
+	}
+
+	public void setListaConsumidorAtivo(DataModel<Consumidor> listaConsumidorAtivo) {
+		this.listaConsumidorAtivo = listaConsumidorAtivo;
 	}
 
 	public Consumidor getConsumidor() {

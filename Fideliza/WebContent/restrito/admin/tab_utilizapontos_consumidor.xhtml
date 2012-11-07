@@ -18,35 +18,37 @@
 	    		<p:graphicImage value="/images/ajaxload.gif" />  
 			</p:dialog>
 		<p:panelGrid columns="2" >
-					<h:inputHidden value="#{administradorController.empresa.idEmpresa}"/>
-					<h:inputHidden value="#{administradorController.empresa.email}"/>
+					<h:inputHidden value="#{administradorController.consumidor.idConsumidor}"/>
 					<h:outputText value="nome:"/>
-					<h:outputText value="#{administradorController.empresa.nome}"/>
-					<h:outputText value="CNPJ"/>
-					<h:outputText value="#{administradorController.empresa.cnpj}"/>
+					<h:outputText value="#{administradorController.consumidor.nome}"/>
+					<h:outputText value="Email"/>
+					<h:outputText value="#{administradorController.consumidor.email}"/>
+					<h:outputText value="CPF"/>
+					<h:outputText value="#{administradorController.consumidor.cpf}"/>
+					<h:outputText value="Saldo"/>
+					<h:outputText value="#{administradorController.consumidor.pontos}"/>
 				</p:panelGrid>
 				
 				<p:commandButton  value="editar" onclick="editor.show();" type="button" >
-					<f:setPropertyActionListener target="#{administradorController.empresa}" value="#{administradorController.empresa}"></f:setPropertyActionListener>
+					<f:setPropertyActionListener target="#{administradorController.consumidor}" value="#{administradorController.consumidor}"></f:setPropertyActionListener>
 				</p:commandButton>
 				
 					<h:form id="dialogEdit">
 						<p:dialog id="empEditDialog"  header="Consumidor" widgetVar="editor" >					
 								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
 									
-									<h:inputHidden value="#{administradorController.empresa.idEmpresa}"/>
-									<h:inputHidden value="#{administradorController.empresa.email}"/>
+									<h:inputHidden value="#{administradorController.consumidor.idConsumidor}"/>
+									<h:inputHidden value="#{administradorController.consumidor.cpf}"/>
 									
-									<h:outputText value="Nome: "/>
-									<p:inputText value="#{administradorController.empresa.nome}"/>
-									<h:outputText value="CNPJ"/>
-									<p:inputText value="#{administradorController.empresa.cnpj}"/>
+									<h:outputText value="Nome "/>
+									<p:inputText value="#{administradorController.consumidor.nome}"/>
+
 									<h:outputText value="Status"/>
-									<p:selectOneRadio id="status" value="#{administradorController.empresa.status}">
+									<p:selectOneRadio id="status" value="#{administradorController.consumidor.status}">
 										<f:selectItem itemLabel="Ativada" itemValue="true"/>
 										<f:selectItem itemLabel="Desativada" itemValue="false"/>
 									</p:selectOneRadio>
-									<p:commandButton value="Salvar" actionListener="#{empresaController.editaEmpresa}" oncomplete="editor.hide();" />
+									<p:commandButton value="Salvar" actionListener="#{consumidorController.editaConsumidor}" oncomplete="editor.hide();" />
 									
 	
 								</h:panelGrid>

@@ -35,9 +35,9 @@
     	<ui:include src="menu.xhtml"/>
     </div>
 </div>
-	<div id="conteudo">
-	<h:form id="form">
-		<p:tabView id="tabView" cache="true" >
+	<div id="fundo">
+		<div id="conteudo">
+			<p:tabView id="tabView" cache="true" >
 			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
 				<p:dialog modal="true" widgetVar="statusDialog"    
 	        		draggable="false" closable="false">  
@@ -53,7 +53,6 @@
 				<ui:include src="tab_funcionarios.xhtml"/>
 				
 			</p:tab>
-			
 			<p:tab id="tab3" title="Promoções" >
 				<ui:include src="tab_promocao.xhtml"/>
 			</p:tab>
@@ -64,9 +63,9 @@
 				<ui:include src="tab_utiliza_pontos.xhtml"/>
 			</p:tab>
 		</p:tabView>
-	</h:form>
+				
+		</div>
 	</div>
-
 <div id="rodape">
 	<h2> rodapé</h2>
 </div>	
