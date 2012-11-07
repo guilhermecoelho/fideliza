@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.model.chart.PieChartModel;
@@ -116,6 +117,9 @@ public class AdministradorController {
 			
 		empresa = empresaDAO.BuscaPorId(selectedEmpresa.getIdEmpresa());
 		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
+		session.setAttribute("empresaTeste", empresa); //salva dados do usuario na sessão
 		
 		return "detalhaEmpresa";
 		
@@ -361,6 +365,7 @@ public class AdministradorController {
 	}
 
 	public DataModel<Promocao> getListaPromocaoEmpresa() { // lista promoções de uma empresa
+		
 		if(listaPromocaoEmpresa == null){
 			List<Promocao> promocao = new PromocaoDAO().listaPorEmpresa(selectedEmpresa);
 			listaPromocaoEmpresa = new ListDataModel<Promocao>(promocao);
@@ -373,10 +378,16 @@ public class AdministradorController {
 	}
 
 	public DataModel<Funcionario> getListaFuncionarioEmpresa() { //lista funcionarios de uma empresa
-		System.out.println("EMP: "+empresa.getIdEmpresa());
+		
 		if(listaFuncionarioEmpresa == null){
+				FacesContext fc = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
+				empresa = (Empresa) session.getAttribute("empresaTeste");
+	
 			
-			List<Funcionario> funcionario = new FuncionarioDAO().BuscaPorEmpresa(selectedEmpresa.getIdEmpresa());
+			System.out.println("EMP: "+empresa.getIdEmpresa());
+			
+			List<Funcionario> funcionario = new FuncionarioDAO().BuscaPorEmpresa(empresa.getIdEmpresa());
 			listaFuncionarioEmpresa = new ListDataModel<Funcionario>(funcionario);
 		}
 		return listaFuncionarioEmpresa;

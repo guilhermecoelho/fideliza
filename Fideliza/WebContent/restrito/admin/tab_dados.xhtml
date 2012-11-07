@@ -1,0 +1,57 @@
+<!-- 
+	author: guilherme coelho
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<h:body>	
+		<p:panelGrid columns="2" >
+					<h:inputHidden value="#{administradorController.empresa.idEmpresa}"/>
+					<h:inputHidden value="#{administradorController.empresa.email}"/>
+					<h:outputText value="nome:"/>
+					<h:outputText value="#{administradorController.empresa.nome}"/>
+					<h:outputText value="CNPJ"/>
+					<h:outputText value="#{administradorController.empresa.cnpj}"/>
+				</p:panelGrid>
+				
+				<p:commandButton  value="editar" onclick="editor.show();" type="button" >
+					<f:setPropertyActionListener target="#{administradorController.empresa}" value="#{administradorController.empresa}"></f:setPropertyActionListener>
+				</p:commandButton>
+				
+					<h:form id="dialogEdit">
+						<p:dialog id="empEditDialog"  header="Consumidor" widgetVar="editor" >					
+								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
+									
+									<h:inputHidden value="#{administradorController.empresa.idEmpresa}"/>
+									<h:inputHidden value="#{administradorController.empresa.email}"/>
+									
+									<h:outputText value="Nome: "/>
+									<p:inputText value="#{administradorController.empresa.nome}"/>
+									<h:outputText value="CNPJ"/>
+									<p:inputText value="#{administradorController.empresa.cnpj}"/>
+									<h:outputText value="Status"/>
+									<p:selectOneRadio id="status" value="#{administradorController.empresa.status}">
+										<f:selectItem itemLabel="Ativada" itemValue="true"/>
+										<f:selectItem itemLabel="Desativada" itemValue="false"/>
+									</p:selectOneRadio>
+									<p:commandButton value="Salvar" actionListener="#{empresaController.editaEmpresa}" oncomplete="editor.hide();" />
+									
+	
+								</h:panelGrid>
+						</p:dialog> 
+					</h:form>
+		</h:body>
+		
+	</h:head>
+	
+	
+
+
+</html>

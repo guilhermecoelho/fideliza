@@ -37,145 +37,27 @@
 </div>
 	<div id="conteudo">
 	<h:form id="form">
-		<p:tabView id="tabView"  cache="true" >
+		<p:tabView id="tabView" cache="true" >
 			
-			<p:tab id="tab1" title="dados">
+			<p:tab id="tab1" title="dados" >
 			
-				<p:panelGrid columns="2" >
-					<h:outputText value="nome:"/>
-					<h:outputText value="#{administradorController.empresa.nome}"/>
-					<h:outputText value="CNPJ"/>
-					<h:outputText value="#{administradorController.empresa.cnpj}"/>
-				</p:panelGrid>
-				
-				<p:commandButton  value="editar" onclick="editor.show();" type="button" >
-					<f:setPropertyActionListener target="#{administradorController.empresa}" value="#{administradorController.empresa}"></f:setPropertyActionListener>
-				</p:commandButton>
-				
-					<h:form id="dialogEdit">
-						<p:dialog id="empEditDialog"  header="Consumidor" widgetVar="editor" >					
-								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
-									
-									<h:inputHidden value="#{administradorController.empresa.idEmpresa}"/>
-									<h:inputHidden value="#{administradorController.empresa.email}"/>
-									
-									<h:outputText value="Nome: "/>
-									<p:inputText value="#{administradorController.empresa.nome}"/>
-									<h:outputText value="CNPJ"/>
-									<p:inputText value="#{administradorController.empresa.cnpj}"/>
-									<h:outputText value="Status"/>
-									<p:selectOneRadio id="status" value="#{administradorController.empresa.status}">
-										<f:selectItem itemLabel="Ativada" itemValue="true"/>
-										<f:selectItem itemLabel="Desativada" itemValue="false"/>
-									</p:selectOneRadio>
-									<p:commandButton value="Salvar" actionListener="#{empresaController.editaEmpresa}" oncomplete="editor.hide();" />
-									
-	
-								</h:panelGrid>
-						</p:dialog> 
-					</h:form>
+				<ui:include src="tab_dados.xhtml"/>
 				
 			</p:tab>
 			<p:tab id="tab2" title="Funcionarios">
-				<h:form id="formFunc">
-					<p:dataTable id="dataFunc" var="func" value="#{administradorController.listaFuncionarioEmpresa}" rowKey="#{func.idFuncionario}" selection="#{administradorController.selectedFuncionario}"
-						selectionMode="single" paginator="true" >
-						
-						<p:column filterBy="#{func.email}">
-						<f:facet name="header">
-							<h:outputText value="email" />
-						</f:facet>
-							<h:outputText value="#{func.email}" />
-						</p:column>
-						<p:column filterBy="#{func.idFuncionario}">
-						<f:facet name="header">
-							<h:outputText value="id" />
-						</f:facet>
-							<h:outputText value="#{func.idFuncionario}" />
-						</p:column>
-						<p:column style="width:4%">  
-                			<p:commandButton id="selectButton" oncomplete="func1.show()" icon="ui-icon-search" title="Detalhar">  
-                				<f:setPropertyActionListener value="#{func}" target="#{administradorController.selectedFuncionario}" />  
-            				</p:commandButton>  
-        				</p:column>
-        				<f:facet name="footer">
-        					<p:commandButton value="detalhar" oncomplete="func1.show()"></p:commandButton>
-        				</f:facet>
-					</p:dataTable>	
-				</h:form>
-					<p:dialog id="func1">
-						<h:form id="formFunc1">
-							<p:dataTable id="dataFunc1" var="func" >
-								<h:outputText value="nome:"/>
-								<h:outputText value="#{administradorController.selectedFuncionario.email}"/>	
-							</p:dataTable>
-						</h:form>
-					</p:dialog>
+				
+				<ui:include src="tab_funcionarios.xhtml"/>
+				
 			</p:tab>
 			
 			<p:tab id="tab3" title="Promoções" >
-				<h:form>
-					<p:dataTable var="result" value="#{administradorController.listaPromocaoEmpresa}" rowKey="#{result.idPromocao}" selection="#{administradorController.selectedPromocao}"
-						selectionMode="single" paginator="true" rows="5">
-						
-						<p:column filterBy="#{result.nome}">
-						<f:facet name="header">
-							<h:outputText value="nome" />
-						</f:facet>
-						<h:outputText value="#{result.nome}" />
-					</p:column>
-					</p:dataTable>
-				</h:form>
+				<ui:include src="tab_promocao.xhtml"/>
 			</p:tab>
 			<p:tab id="tab4" title="Pontos registrados" >
-				<h:form>
-					<p:dataTable var="result" value="#{administradorController.listaRegistrosEmpresa}" rowKey="#{result.idRegistraPontos}" selection="#{administradorController.registraPontos}"
-						selectionMode="single" paginator="true" rows="5">
-						
-						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
-							<h:outputText value="#{result.empresa.nome}" />
-						</p:column>
-						<p:column filterBy="#{result.funcionario.nome}" headerText="Funcionario">
-							<h:outputText value="#{result.funcionario.nome}" />
-						</p:column>
-						<p:column filterBy="#{result.consumidor.cpf}" headerText="Consumidor">
-							<h:outputText value="#{result.consumidor.cpf}" />
-						</p:column>
-						<p:column filterBy="#{result.valorCompra}" headerText="Valor Compra">
-							<h:outputText value="R$ #{result.valorCompra}" />
-						</p:column>
-						<p:column filterBy="#{result.quantidadePontos}" headerText="Pontos Registrados">
-							<h:outputText value="#{result.quantidadePontos}" />
-						</p:column>
-					</p:dataTable>
-					<p:pieChart value="#{administradorController.listaRegistrosEmpresa}" var="registro" >
-						
-					</p:pieChart>
-				</h:form>
+				<ui:include src="tab_pontos.xhtml"/>
 			</p:tab>
 			<p:tab id="tab5" title="Histórico promoções">
-				<h:form>
-					<p:dataTable var="result" value="#{administradorController.listaUtilizaPontosEmpresa}">
-						<p:column filterBy="#{result.promocao.nome}" headerText="Promoção">
-							<h:outputText value="#{result.promocao.nome}" />
-						</p:column>
-						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
-							<h:outputText value="#{result.empresa.nome}" />
-						</p:column>
-						<p:column filterBy="#{result.funcionario.nome}" headerText="Funcionario">
-							<h:outputText value="#{result.funcionario.nome}" />
-						</p:column>
-						<p:column filterBy="#{result.consumidor.cpf}" headerText="Consumidor">
-							<h:outputText value="#{result.consumidor.cpf}" />
-						</p:column>
-						<p:column filterBy="#{result.promocao.pontos}" headerText="Pontos">
-							<h:outputText value="#{result.promocao.pontos}" />
-						</p:column>
-						<p:column filterBy="#{result.valorCompra}" headerText="Valor Compra">
-							<h:outputText value="R$ #{result.valorCompra}" />
-						</p:column>
-					</p:dataTable>
-				</h:form>
+				<ui:include src="tab_utiliza_pontos.xhtml"/>
 			</p:tab>
 		</p:tabView>
 	</h:form>
