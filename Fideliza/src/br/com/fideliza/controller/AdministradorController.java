@@ -1,6 +1,5 @@
 package br.com.fideliza.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -8,9 +7,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpSession;
-
-import org.primefaces.event.TabChangeEvent;
-import org.primefaces.model.chart.PieChartModel;
 
 import br.com.fideliza.DAO.AdministradorDAO;
 import br.com.fideliza.DAO.ConsumidorDAO;
@@ -30,11 +26,9 @@ import br.com.fideliza.model.RegistraPontos;
 import br.com.fideliza.model.RegraPontuacao;
 import br.com.fideliza.model.Usuario;
 import br.com.fideliza.model.UtilizaPontos;
-import br.com.fideliza.util.Verificador;
 
 public class AdministradorController {
 	
-	private Verificador verificador;
 	private Administrador admin;
 	private AdministradorDAO adminDAO;
 	private Usuario user;
@@ -55,16 +49,13 @@ public class AdministradorController {
 	private RegistraPontos registraPontos;
 	private DataModel<Funcionario> listaFuncionarioEmpresa;
 	private DataModel<Promocao> listaPromocaoEmpresa;
-	private DataModel<Funcionario> listaFuncionariosAtivos;
-	private DataModel<Funcionario> listaFuncionariosDesativados;
-	private DataModel<Consumidor> listaConsumidorAtivo;
-	private DataModel<Consumidor> listaConsumidorDesativado;
 	private DataModel<Promocao> listaPromocaoAtiva;
 	private DataModel<Promocao> listaPromocaoDesativada;
 	private DataModel<RegraPontuacao> listaRegras;
 	private DataModel<RegistraPontos> listaRegistrosEmpresa;
 	private DataModel<UtilizaPontos> listaUtilizaPontosEmpresa;
-	
+	private DataModel<RegistraPontos> listaRegistrosConsumidor;
+	private DataModel<UtilizaPontos> listaUtilizaPontosConsumidor;
 
 	public AdministradorController(){
 		this.admin = new Administrador();
@@ -75,7 +66,6 @@ public class AdministradorController {
 		this.promocaoDAO = new PromocaoDAO();
 		this.user = new Usuario();
 		this.usuarioDAO = new UsuarioDAO();
-		this.verificador = new Verificador();
 		this.consumidorDAO = new ConsumidorDAO();
 		
 	}
@@ -125,6 +115,7 @@ public class AdministradorController {
 		return "detalhaEmpresa";
 		
 	}
+	
 	public String detalhaFuncionario(){
 		
 		funcionario = funcionarioDAO.buscaPorId(selectedFuncionario.getIdFuncionario());
@@ -134,6 +125,17 @@ public class AdministradorController {
 		session.setAttribute("funcionario", funcionario); //salva dados do usuario na sessão
 		
 		return "detalhaFuncionario";
+		
+	}
+	public String detalhaFuncionarioDesativado(){
+		
+		funcionario = funcionarioDAO.buscaPorId(selectedFuncionario.getIdFuncionario());
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
+		session.setAttribute("funcionario", funcionario); //salva dados do usuario na sessão
+		
+		return "detalhaFuncionarioDesativado";
 		
 	}
 	
@@ -159,6 +161,16 @@ public class AdministradorController {
 		
 		return "detalhaConsumidor";
 	}
+	public String detalhaConsumidorDesativado(){
+		
+		consumidor = consumidorDAO.buscaPorCPF(selectedConsumidor.getCpf());
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
+		session.setAttribute("consumidor", consumidor); //salva dados do usuario na sessão
+		
+		return "detalhaConsumidorDesativado";
+	}
 	
 	public void editaEmpresa() {
 		
@@ -166,9 +178,6 @@ public class AdministradorController {
 
 	}
 	
-	public void onTabChange(TabChangeEvent event){
-		event.getTab();
-	}
 	
 	public boolean verificaEmail(String email, String confirmEmail) { //verifica se email está correto nos dois campos e se já existe algum cadastrado
 
@@ -203,10 +212,49 @@ public class AdministradorController {
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
 		return consumidor = (Consumidor) session.getAttribute("consumidor");
 	}
+	
+	public Funcionario recuperaSessaoFuncionario(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
+		return funcionario = (Funcionario) session.getAttribute("funcionario");
+	}
+	
 	//get e set
 	
 	public Empresa getSelectedEmpresa() {
 		return selectedEmpresa;
+	}
+
+	public DataModel<UtilizaPontos> getListaUtilizaPontosConsumidor() { //lista histórico de promoções utilizadas de um consumidor
+		if(listaUtilizaPontosConsumidor == null){
+			consumidor = recuperaSessaoConsumidor();
+			if (listaUtilizaPontosConsumidor == null){
+				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosConsumidor(consumidor);
+				listaUtilizaPontosConsumidor = new ListDataModel<UtilizaPontos>(utilizaPontos);
+			}
+		}
+		return listaUtilizaPontosConsumidor;
+	}
+
+	public void setListaUtilizaPontosConsumidor(
+			DataModel<UtilizaPontos> listaUtilizaPontosConsumidor) {
+		this.listaUtilizaPontosConsumidor = listaUtilizaPontosConsumidor;
+	}
+
+	public DataModel<RegistraPontos> getListaRegistrosConsumidor() { // lista histórico de pontos registrados de um consumidor
+		if(listaRegistrosConsumidor == null){
+			consumidor = recuperaSessaoConsumidor();
+			if (listaRegistrosConsumidor == null){
+				List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroConsumidor(consumidor);
+				listaRegistrosConsumidor = new ListDataModel<RegistraPontos>(registraPontos);
+			}
+		}
+		return listaRegistrosConsumidor;
+	}
+
+	public void setListaRegistrosConsumidor(
+			DataModel<RegistraPontos> listaRegistrosConsumidor) {
+		this.listaRegistrosConsumidor = listaRegistrosConsumidor;
 	}
 
 	public DataModel<UtilizaPontos> getListaUtilizaPontosEmpresa() { //lista histórico de promoções utilizadas por empresa
@@ -315,59 +363,6 @@ public class AdministradorController {
 		this.selectedConsumidor = selectedConsumidor;
 	}
 
-	public DataModel<Consumidor> getListaConsumidorAtivo() { //lista consumidores ativos
-		if(listaConsumidorAtivo == null){
-			List<Consumidor> consumidor = new ConsumidorDAO().listaConsumidorAtivo();
-			listaConsumidorAtivo = new ListDataModel<Consumidor>(consumidor);
-		}
-		
-		return listaConsumidorAtivo;
-	}
-
-	public void setListaConsumidorAtivo(DataModel<Consumidor> listaConsumidorAtivo) {
-		this.listaConsumidorAtivo = listaConsumidorAtivo;
-	}
-
-	public DataModel<Consumidor> getListaConsumidorDesativado() { //lista consumidores desativos
-		if(listaConsumidorDesativado == null){
-			List<Consumidor> consumidor = new ConsumidorDAO().listaConsumidorDesativado();
-			listaConsumidorDesativado = new ListDataModel<Consumidor>(consumidor);
-		}
-		return listaConsumidorDesativado;
-	}
-
-	public void setListaConsumidorDesativado(
-			DataModel<Consumidor> listaConsumidorDesativado) {
-		this.listaConsumidorDesativado = listaConsumidorDesativado;
-	}
-
-	public DataModel<Funcionario> getListaFuncionariosDesativados() { // lista todos funcionarios desativados
-		if(listaFuncionariosDesativados == null){
-			List<Funcionario> funcionario = new FuncionarioDAO().listaFuncionariosDesativados();
-			listaFuncionariosDesativados = new ListDataModel<Funcionario>(funcionario);
-		}
-		
-		return listaFuncionariosDesativados;
-	}
-
-	public void setListaFuncionariosDesativados(
-			DataModel<Funcionario> listaFuncionariosDesativados) {
-		this.listaFuncionariosDesativados = listaFuncionariosDesativados;
-	}
-
-	public DataModel<Funcionario> getListaFuncionariosAtivos() { // lista todos funcionarios ativos
-		if(listaFuncionariosAtivos == null){
-			
-			List<Funcionario> funcionario = new FuncionarioDAO().listaFuncionariosAtivos();
-			listaFuncionariosAtivos = new ListDataModel<Funcionario>(funcionario);
-		}
-		return listaFuncionariosAtivos;
-	}
-
-	public void setListaFuncionariosAtivos(DataModel<Funcionario> listaFuncionariosAtivos) {
-		this.listaFuncionariosAtivos = listaFuncionariosAtivos;
-	}
-
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
@@ -442,6 +437,4 @@ public class AdministradorController {
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-	
-
 }

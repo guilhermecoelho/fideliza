@@ -27,6 +27,7 @@ public class ConsumidorController {
 
 	private DataModel<Consumidor> consumidorLista;
 	private DataModel<Consumidor> listaConsumidorAtivo;
+	private DataModel<Consumidor> listaConsumidorDesativado;
 
 	public ConsumidorController() {
 
@@ -90,6 +91,19 @@ public class ConsumidorController {
 		}
 		return consumidorLista;
 
+	}
+
+	public DataModel<Consumidor> getListaConsumidorDesativado() {
+		if(listaConsumidorDesativado == null){
+			List<Consumidor> consumidor = new ConsumidorDAO().listaConsumidorDesativado();
+			listaConsumidorDesativado = new ListDataModel<Consumidor>(consumidor);
+		}
+		return listaConsumidorDesativado;
+	}
+
+	public void setListaConsumidorDesativado(
+			DataModel<Consumidor> listaConsumidorDesativado) {
+		this.listaConsumidorDesativado = listaConsumidorDesativado;
 	}
 
 	public DataModel<Consumidor> getListaConsumidorAtivo() {

@@ -241,6 +241,14 @@
 			<to-view-id>/restrito/admin/detalha_consumidor.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/consulta_consumidor_desativado.xhtml</display-name>
+		<from-view-id>/restrito/admin/consulta_consumidor_desativado.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>detalhaConsumidorDesativado</from-outcome>
+			<to-view-id>/restrito/admin/detalha_consumidor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	<converter>  
      <description>Um converter</description>  
      <converter-id>EmpresaConverter</converter-id>  

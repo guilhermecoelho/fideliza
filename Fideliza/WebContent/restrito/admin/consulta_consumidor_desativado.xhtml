@@ -45,7 +45,7 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="EmpresaTable" var="result" value="#{administradorController.listaConsumidorDesativado}">
+						<p:dataTable id="consumidorTable" var="result" value="#{consumidorController.listaConsumidorDesativado}" rowKey="#{result.idConsumidor}" selection="#{administradorController.selectedConsumidor}" selectionMode="single">
 							<f:facet name="header">	
 							 Consumidores
 							</f:facet>
@@ -64,28 +64,13 @@
 								<p:column  filterBy="#{result.pontos}" headerText="Saldo" footerText="Saldo">
 									<h:outputText value="#{result.pontos}" />
 								</p:column>
-								<p:column style="width:4%">  
-	                				<p:commandButton id="selectButton" update=":form:formData:empDialog" oncomplete="empresaDialog.show()"   icon="ui-icon-search" title="Detalhar">  
-	                					<f:setPropertyActionListener value="#{result}" target="#{administradorController.selectedConsumidor}" />  
-	            					</p:commandButton>  
-	        					</p:column>		
-						</p:dataTable>
-								
-						<p:dialog id="empDialog" header="Empresa" widgetVar="empresaDialog" >					
-								<h:panelGrid id="display" columns="2" cellpadding="20" >
-									<h:outputText value="nome:"/>
-									<h:outputText value="#{administradorController.selectedConsumidor.nome}"/>
-									<h:outputText value="email: "/>
-									<h:outputText value="#{administradorController.selectedConsumidor.email}"/>
-									<h:outputText value="CPF: "/>
-									<h:outputText value="#{administradorController.selectedConsumidor.cpf}"/>
-									<h:outputText value="Saldo: "/>
-									<h:outputText value="#{administradorController.selectedConsumidor.pontos}"/>
-
-								</h:panelGrid>						
-						</p:dialog> 
+								<f:facet name="footer">
+	        						<p:commandButton value="detalhar" action="#{administradorController.detalhaConsumidorDesativado}" ajax="false"></p:commandButton>
+	        					</f:facet>	
+								</p:dataTable>
+						</h:form>
 					</h:form>
-				</h:form>
+				
 			</div>
 	</div>
 <div id="rodape">
