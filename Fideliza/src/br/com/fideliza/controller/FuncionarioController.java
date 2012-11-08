@@ -27,6 +27,8 @@ public class FuncionarioController{
 	private FuncionarioDAO funcionarioDAO;
 	
 	private DataModel<Funcionario> listaFuncionarioPorEmpresa;
+	private DataModel<Funcionario> listaFuncionariosAtivos;
+	private DataModel<Funcionario> listaFuncionariosDesativados;
 	
 	
 	public FuncionarioController(){
@@ -81,13 +83,41 @@ public class FuncionarioController{
 			return true;
 		}
 	}
+	
 	//get e setter
+	
 	
 	public Usuario getUsuario() {
 		return usuario;
 	}
 	
 	
+	public DataModel<Funcionario> getListaFuncionariosAtivos() { // lista todos funcionarios ativos
+		if(listaFuncionariosAtivos == null){
+			List<Funcionario> funcionario = new FuncionarioDAO().listaFuncionariosAtivos();
+			listaFuncionariosAtivos = new ListDataModel<Funcionario>(funcionario);
+		}
+		return listaFuncionariosAtivos;
+	}
+
+	public void setListaFuncionariosAtivos(
+			DataModel<Funcionario> listaFuncionariosAtivos) {
+		this.listaFuncionariosAtivos = listaFuncionariosAtivos;
+	}
+
+	public DataModel<Funcionario> getListaFuncionariosDesativados() {
+		if(listaFuncionariosDesativados == null){
+			List<Funcionario> funcionario = new FuncionarioDAO().listaFuncionariosDesativados();
+			listaFuncionariosDesativados = new ListDataModel<Funcionario>(funcionario);
+		}
+		return listaFuncionariosDesativados;
+	}
+
+	public void setListaFuncionariosDesativados(
+			DataModel<Funcionario> listaFuncionariosDesativados) {
+		this.listaFuncionariosDesativados = listaFuncionariosDesativados;
+	}
+
 	public DataModel<Funcionario> getListaFuncionarioPorEmpresa() {
 		
 		if(listaFuncionarioPorEmpresa == null){

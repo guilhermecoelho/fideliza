@@ -12,48 +12,33 @@
 	
 	<h:head>
 		<h:body>	
-			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
-				<p:dialog modal="true" widgetVar="statusDialog"    
-	        		draggable="false" closable="false">  
-	    		<p:graphicImage value="/images/ajaxload.gif" />  
-			</p:dialog>
-		<p:panelGrid columns="2" >
-					<h:inputHidden value="#{administradorController.consumidor.idConsumidor}"/>
-					<h:outputText value="nome:"/>
-					<h:outputText value="#{administradorController.consumidor.nome}"/>
-					<h:outputText value="Email"/>
-					<h:outputText value="#{administradorController.consumidor.email}"/>
-					<h:outputText value="CPF"/>
-					<h:outputText value="#{administradorController.consumidor.cpf}"/>
-					<h:outputText value="Saldo"/>
-					<h:outputText value="#{administradorController.consumidor.pontos}"/>
-				</p:panelGrid>
-				
-				<p:commandButton  value="editar" onclick="editor.show();" type="button" >
-					<f:setPropertyActionListener target="#{administradorController.consumidor}" value="#{administradorController.consumidor}"></f:setPropertyActionListener>
-				</p:commandButton>
-				
-					<h:form id="dialogEdit">
-						<p:dialog id="empEditDialog"  header="Consumidor" widgetVar="editor" >					
-								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
-									
-									<h:inputHidden value="#{administradorController.consumidor.idConsumidor}"/>
-									<h:inputHidden value="#{administradorController.consumidor.cpf}"/>
-									
-									<h:outputText value="Nome "/>
-									<p:inputText value="#{administradorController.consumidor.nome}"/>
-
-									<h:outputText value="Status"/>
-									<p:selectOneRadio id="status" value="#{administradorController.consumidor.status}">
-										<f:selectItem itemLabel="Ativada" itemValue="true"/>
-										<f:selectItem itemLabel="Desativada" itemValue="false"/>
-									</p:selectOneRadio>
-									<p:commandButton value="Salvar" actionListener="#{consumidorController.editaConsumidor}" oncomplete="editor.hide();" />
-									
-	
-								</h:panelGrid>
-						</p:dialog> 
-					</h:form>
+			<h:form>
+				<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+					<p:dialog modal="true" widgetVar="statusDialog"    
+	        			draggable="false" closable="false">  
+	    			<p:graphicImage value="/images/ajaxload.gif" />  
+				</p:dialog>
+					<p:dataTable var="result" value="#{administradorController.listaUtilizaPontosConsumidor}">
+						<p:column filterBy="#{result.promocao.nome}" headerText="Promoção">
+							<h:outputText value="#{result.promocao.nome}" />
+						</p:column>
+						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
+							<h:outputText value="#{result.empresa.nome}" />
+						</p:column>
+						<p:column filterBy="#{result.funcionario.nome}" headerText="Funcionario">
+							<h:outputText value="#{result.funcionario.nome}" />
+						</p:column>
+						<p:column filterBy="#{result.consumidor.cpf}" headerText="Consumidor">
+							<h:outputText value="#{result.consumidor.cpf}" />
+						</p:column>
+						<p:column filterBy="#{result.promocao.pontos}" headerText="Pontos">
+							<h:outputText value="#{result.promocao.pontos}" />
+						</p:column>
+						<p:column filterBy="#{result.valorCompra}" headerText="Valor Compra">
+							<h:outputText value="R$ #{result.valorCompra}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
 		</h:body>
 		
 	</h:head>

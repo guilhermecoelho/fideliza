@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.fideliza.model.Empresa;
 import br.com.fideliza.model.Usuario;
 import br.com.fideliza.util.HibernateUtil;
 
