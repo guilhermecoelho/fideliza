@@ -45,7 +45,7 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="funcTable" var="result" value="#{administradorController.listaFuncionariosAtivos}">
+						<p:dataTable id="funcTable" var="result" value="#{funcionarioController.listaFuncionariosAtivos}" rowKey="#{result.idFuncionario}" selection="#{administradorController.selectedFuncionario}" selectionMode="single">
 							<f:facet name="header">	
 							 Funcionarios
 							</f:facet>
@@ -59,57 +59,11 @@
 								<p:column  filterBy="#{result.email}" headerText="Email" footerText="Email">
 									<h:outputText value="#{result.email}" />
 								</p:column>
-								<p:column style="width:4%">  
-	                				<p:commandButton id="selectButton" update=":form:formData:empDialog" oncomplete="empresaDialog.show()"   icon="ui-icon-search" title="Detalhar">  
-	                					<f:setPropertyActionListener value="#{result}" target="#{administradorController.selectedFuncionario}" />  
-	            					</p:commandButton>  
-	        					</p:column>
-	        					<p:column style="width:4%">  
-	                				<p:commandButton id="editButton" process="@this" update=":form:formData:dialogEdit:funcEditDialog" oncomplete="funcionarioEditDialog.show()"   icon="ui-icon-search" title="Detalhar">  
-	                					<f:setPropertyActionListener value="#{result}" target="#{funcionarioController.funcionario}" />  
-	            					</p:commandButton>  
-	        					</p:column>			
+	        					<f:facet name="footer">
+	        						<p:commandButton value="detalhar" update=":form" action="#{administradorController.detalhaFuncionario}" ajax="false"/>
+	        					</f:facet>			
 						</p:dataTable>
-								
-						<p:dialog id="empDialog" header="Empresa" widgetVar="empresaDialog" >					
-								<h:panelGrid id="display" columns="2" cellpadding="20" >
-									<h:outputText value="nome:"/>
-									<h:outputText value="#{administradorController.selectedFuncionario.nome}"/>
-									<h:outputText value="email: "/>
-									<h:outputText value="#{administradorController.selectedFuncionario.email}"/>
-									<h:outputText value="Empresa: "/>
-									<h:outputText value="#{administradorController.selectedFuncionario.empresa.nome}"/>
-
-								</h:panelGrid>						
-						</p:dialog> 
-						
-						<h:form id="dialogEdit" >
-							<p:dialog id="funcEditDialog"  header="Consumidor" widgetVar="funcionarioEditDialog">					
-									<h:panelGrid  id="displayEdit" columns="2" cellpadding="20">
-										
-										<h:inputHidden value="#{funcionarioController.funcionario.idFuncionario}"/>
-										<h:inputHidden value="#{funcionarioController.funcionario.email}"/>
-										
-										<h:outputText value="Nome: "/>
-										<p:inputText value="#{funcionarioController.funcionario.nome}"/>
-										<h:outputText value="Status"/>
-										<p:selectOneRadio id="status" value="#{funcionarioController.funcionario.status}" >
-											<f:selectItem itemLabel="Ativada" itemValue="true"/>
-											<f:selectItem itemLabel="Desativada" itemValue="false"/>
-										
-										</p:selectOneRadio>
-										<h:outputText value="Empresa"/>
-										<p:selectOneMenu  value="#{funcionarioController.funcionario.empresa.idEmpresa}" converter="EmpresaConverter" id="empresa">    
-                   							  
-                   							 <f:selectItems  value="#{empresaController.empresaLista}"  var="emp" itemLabel="#{emp.idEmpresa}" itemValue="#{emp.idEmpresa}"/>  
-										</p:selectOneMenu> 
-										
-										<p:commandButton value="Salvar" actionListener="#{funcionarioController.editaFuncionario}" oncomplete="funcEditDialog.hide();"  />
-										<p:commandButton value="Limpar campos" type="reset"/>
-		
-									</h:panelGrid>
-							</p:dialog> 
-						</h:form>
+								 
 					</h:form>
 				</h:form>
 			</div>

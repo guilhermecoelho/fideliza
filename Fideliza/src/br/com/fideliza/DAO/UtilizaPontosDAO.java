@@ -12,6 +12,8 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Empresa;
+import br.com.fideliza.model.Funcionario;
+import br.com.fideliza.model.Promocao;
 import br.com.fideliza.model.UtilizaPontos;
 import br.com.fideliza.util.HibernateUtil;
 
@@ -44,6 +46,36 @@ public class UtilizaPontosDAO {
 	public List<UtilizaPontos> listaUtilizaPontosEmpresa(Empresa empresa){
 		try{
 			return session.createCriteria(UtilizaPontos.class).add(Restrictions.like("empresa", empresa)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}	
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<UtilizaPontos> listaUtilizaPontosFuncionario(Funcionario funcionario){
+		try{
+			return session.createCriteria(UtilizaPontos.class).add(Restrictions.like("funcionario", funcionario)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}	
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<UtilizaPontos> listaUtilizaPontosPromocao(Promocao promocao){
+		try{
+			return session.createCriteria(UtilizaPontos.class).add(Restrictions.like("promocao", promocao)).list();
 		}catch (HibernateException e){
 			e.printStackTrace();
 		}catch (Exception e){

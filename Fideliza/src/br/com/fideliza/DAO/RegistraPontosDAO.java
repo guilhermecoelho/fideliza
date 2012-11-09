@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Empresa;
+import br.com.fideliza.model.Funcionario;
 import br.com.fideliza.model.RegistraPontos;
 import br.com.fideliza.util.HibernateUtil;
 
@@ -42,9 +43,9 @@ public class RegistraPontosDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<RegistraPontos> listaRegistroFuncionario(int funcionario){
+	public List<RegistraPontos> listaRegistroFuncionario(Funcionario funcionario){
 		try{
-			return session.createCriteria(RegistraPontos.class).add(Restrictions.eq("funcionario", funcionario)).list();
+			return session.createCriteria(RegistraPontos.class).add(Restrictions.like("funcionario", funcionario)).list();
 		}catch (HibernateException e){
 			e.printStackTrace();
 		}catch (Exception e){

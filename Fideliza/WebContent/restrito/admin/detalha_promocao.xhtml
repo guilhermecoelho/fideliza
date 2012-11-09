@@ -38,21 +38,16 @@
 	<div id="fundo">
 		<div id="conteudo">
 			<p:tabView id="tabView" cache="true" >
-
-			<p:tab id="tab1" title="Dados" >
-			
-				<ui:include src="tab_dados_funcionario.xhtml"/>
-				
+			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+				<p:dialog modal="true" widgetVar="statusDialog"    
+	        		draggable="false" closable="false">  
+	    		<p:graphicImage value="/images/ajaxload.gif" />  
+			</p:dialog>
+			<p:tab id="tab1" title="dados" >	
+				<ui:include src="tab_dados_promocao.xhtml"/>
 			</p:tab>
-			<p:tab id="tab2" title="Pontos registrados">
-				
-				<ui:include src="tab_pontos_funcionario.xhtml"/>
-				
-			</p:tab>
-			<p:tab id="tab3" title="Pontos registrados">
-				
-				<ui:include src="tab_utilizapontos_funcionario.xhtml"/>
-				
+			<p:tab id="tab2" title="Histórico promoções">
+				<ui:include src="tab_utilizapontos_promocao.xhtml"/>
 			</p:tab>
 		</p:tabView>
 				

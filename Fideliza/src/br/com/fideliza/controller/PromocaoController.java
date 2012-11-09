@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.ConsumidorDAO;
@@ -31,6 +33,8 @@ public class PromocaoController implements Serializable{
 	private PromocaoDAO promocaoDAO;
 	private ArrayList<Promocao> promocaoLista;
 	private ArrayList<Promocao> listaPromocao;
+	private DataModel<Promocao> listaPromocaoAtiva;
+	private DataModel<Promocao> listaPromocaoDesativada;
 	
 	public PromocaoController(){
 		this.usuario = new Usuario();
@@ -55,7 +59,32 @@ public class PromocaoController implements Serializable{
 	}
 	
 	//gets e setters
+	
+	public DataModel<Promocao> getListaPromocaoAtiva() { // lista promoçoes ativas
+		if(listaPromocaoAtiva == null){
+			List<Promocao> promocao = new PromocaoDAO().listaPromocaoAtiva();
+			listaPromocaoAtiva = new ListDataModel<Promocao>(promocao);
+		}
+		return listaPromocaoAtiva;
+	}
 
+	public void setListaPromocaoAtiva(DataModel<Promocao> listaPromocaoAtiva) {
+		this.listaPromocaoAtiva = listaPromocaoAtiva;
+	}
+
+	public DataModel<Promocao> getListaPromocaoDesativada() { // lista promocoes desativadas
+		if(listaPromocaoDesativada == null){
+			List<Promocao> promocao = new PromocaoDAO().listaPromocaoDesativada();
+			listaPromocaoDesativada = new ListDataModel<Promocao>(promocao);
+		}
+		return listaPromocaoDesativada;
+	}
+
+	public void setListaPromocaoDesativada(
+			DataModel<Promocao> listaPromocaoDesativada) {
+		this.listaPromocaoDesativada = listaPromocaoDesativada;
+	}
+	
 	public ArrayList<Promocao> getPromocaoLista() {
 		if(promocaoLista == null){
 			List<Promocao> promocao = new PromocaoDAO().listaPromocao();

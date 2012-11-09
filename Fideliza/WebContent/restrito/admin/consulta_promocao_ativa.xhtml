@@ -45,7 +45,7 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="EmpresaTable" var="result" value="#{administradorController.listaPromocaoAtiva}">
+						<p:dataTable id="EmpresaTable" var="result" value="#{promocaoController.listaPromocaoAtiva}" rowKey="#{result.idPromocao}" selection="#{administradorController.selectedPromocao}" selectionMode="single">
 							<f:facet name="header">	
 							 Promoções
 							</f:facet>
@@ -67,27 +67,10 @@
 								<p:column  filterBy="#{result.pontos}" headerText="Pontos" footerText="Pontos">
 									<h:outputText value="#{result.pontos}" />
 								</p:column>
-								<p:column style="width:4%">  
-	                				<p:commandButton id="selectButton" update=":form:formData:empDialog" oncomplete="empresaDialog.show()"   icon="ui-icon-search" title="Detalhar">  
-	                					<f:setPropertyActionListener value="#{result}" target="#{administradorController.selectedPromocao}" />  
-	            					</p:commandButton>  
-	        					</p:column>		
+								<f:facet name="footer">
+	        						<p:commandButton value="detalhar" update=":form" action="#{administradorController.detalhaPromocao}" ajax="false"/>
+	        					</f:facet>	
 						</p:dataTable>
-								
-						<p:dialog id="empDialog" header="Empresa" widgetVar="empresaDialog" >					
-								<h:panelGrid id="display" columns="2" cellpadding="20" >
-									<h:outputText value="Id: "/>
-									<h:outputText value="#{administradorController.selectedPromocao.idPromocao}"/>
-									<h:outputText value="nome: "/>
-									<h:outputText value="#{administradorController.selectedPromocao.nome}"/>
-									<h:outputText value="Descrição:  "/>
-									<h:outputText value="#{administradorController.selectedPromocao.descricao}"/>
-									<h:outputText value="Desconto: "/>
-									<h:outputText value="#{administradorController.selectedPromocao.desconto}"/>
-									<h:outputText value="Pontos: "/>
-									<h:outputText value="#{administradorController.selectedPromocao.pontos}"/>
-								</h:panelGrid>						
-						</p:dialog> 
 					</h:form>
 				</h:form>
 			</div>
