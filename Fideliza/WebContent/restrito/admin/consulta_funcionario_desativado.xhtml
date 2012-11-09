@@ -45,37 +45,25 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="EmpresaTable" var="result" value="#{administradorController.listaFuncionariosDesativados}">
+						<p:dataTable id="funcTable" var="result" value="#{funcionarioController.listaFuncionariosDesativados}" rowKey="#{result.idFuncionario}" selection="#{administradorController.selectedFuncionario}" selectionMode="single">
 							<f:facet name="header">	
 							 Funcionarios
 							</f:facet>
 								<p:column filterBy="#{result.idFuncionario}" headerText="ID" footerText="ID">
 									<h:outputText value="#{result.idFuncionario}" />
 								</p:column>
+
 								<p:column filterBy="#{result.empresa.nome}" headerText="Empresa" footerText="Empresa">
 									<h:outputText value="#{result.empresa.nome}" />
 								</p:column>
 								<p:column  filterBy="#{result.email}" headerText="Email" footerText="Email">
 									<h:outputText value="#{result.email}" />
 								</p:column>
-								<p:column style="width:4%">  
-	                				<p:commandButton id="selectButton" update=":form:formData:empDialog" oncomplete="empresaDialog.show()"   icon="ui-icon-search" title="Detalhar">  
-	                					<f:setPropertyActionListener value="#{result}" target="#{administradorController.selectedFuncionario}" />  
-	            					</p:commandButton>  
-	        					</p:column>		
+	        					<f:facet name="footer">
+	        						<p:commandButton value="detalhar" update=":form" action="#{administradorController.detalhaFuncionarioDesativado}" ajax="false"/>
+	        					</f:facet>			
 						</p:dataTable>
-								
-						<p:dialog id="empDialog" header="Empresa" widgetVar="empresaDialog" >					
-								<h:panelGrid id="display" columns="2" cellpadding="20" >
-									<h:outputText value="nome:"/>
-									<h:outputText value="#{administradorController.selectedFuncionario.email}"/>
-									<h:outputText value="email: "/>
-									<h:outputText value="#{administradorController.selectedFuncionario.email}"/>
-									<h:outputText value="Empresa: "/>
-									<h:outputText value="#{administradorController.selectedFuncionario.empresa.nome}"/>
-
-								</h:panelGrid>						
-						</p:dialog> 
+								 
 					</h:form>
 				</h:form>
 			</div>

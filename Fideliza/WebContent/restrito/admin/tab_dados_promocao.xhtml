@@ -1,0 +1,71 @@
+<!-- 
+	author: guilherme coelho
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<h:body>	
+			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+				<p:dialog modal="true" widgetVar="statusDialog"    
+	        		draggable="false" closable="false">  
+	    		<p:graphicImage value="/images/ajaxload.gif" />  
+			</p:dialog>
+		<p:panelGrid columns="2" >
+					<h:inputHidden value="#{administradorController.promocao.idPromocao}"/>
+					<h:inputHidden></h:inputHidden>
+					<h:outputText value="nome:"/>
+					<h:outputText value="#{administradorController.promocao.nome}"/>
+					<h:outputText value="email:"/>
+					<h:outputText value="#{administradorController.promocao.descricao}"/>
+					<h:outputText value="Empresa"/>
+					<h:outputText value="#{administradorController.promocao.empresa.nome}"/>
+					<h:outputText value="Desconto"/>
+					<h:outputText value="#{administradorController.promocao.desconto}"/>
+					<h:outputText value="Empresa"/>
+					<h:outputText value="#{administradorController.promocao.pontos}"/>
+				</p:panelGrid>
+				
+				<p:commandButton  value="editar" onclick="editor.show();" type="button" >
+					<f:setPropertyActionListener target="#{administradorController.promocao}" value="#{administradorController.promocao}"/>
+				</p:commandButton>
+				
+					<h:form id="dialogEdit">
+						<p:dialog id="funcEditDialog"  header="Consumidor" widgetVar="editor" >					
+								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
+									
+									<h:inputHidden value="#{administradorController.promocao.idPromocao}"/>
+									
+									<h:outputText value="Nome: "/>
+									<p:inputText value="#{administradorController.promocao.nome}"/>
+									<h:outputText value="Descrição"/>
+									<p:inputText value="#{administradorController.promocao.descricao}"/>
+									<h:outputText value="Desconto"/>
+									<p:inputText value="#{administradorController.promocao.desconto}"/>
+									<h:outputText value="Pontos"/>
+									<p:inputText value="#{administradorController.promocao.pontos}"/>
+									<h:outputText value="Status"/>
+									<p:selectOneRadio id="status" value="#{administradorController.promocao.status}">
+										<f:selectItem itemLabel="Ativada" itemValue="true"/>
+										<f:selectItem itemLabel="Desativada" itemValue="false"/>
+									</p:selectOneRadio>
+									<p:commandButton value="Salvar" actionListener="#{promocaoController.editaPromocao}" oncomplete="editor.hide();" />
+									
+	
+								</h:panelGrid>
+						</p:dialog> 
+					</h:form>
+		</h:body>
+		
+	</h:head>
+	
+	
+
+
+</html>

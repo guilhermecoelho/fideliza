@@ -249,6 +249,38 @@
 			<to-view-id>/restrito/admin/detalha_consumidor.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/consulta_funcionario_ativo.xhtml</display-name>
+		<from-view-id>/restrito/admin/consulta_funcionario_ativo.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>detalhaFuncionario</from-outcome>
+			<to-view-id>/restrito/admin/detalha_funcionario.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/consulta_promocao_ativa.xhtml</display-name>
+		<from-view-id>/restrito/admin/consulta_promocao_ativa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>detalhaPromocao</from-outcome>
+			<to-view-id>/restrito/admin/detalha_promocao.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/consulta_promocao_desativado.xhtml</display-name>
+		<from-view-id>/restrito/admin/consulta_promocao_desativado.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>detalhaPromocaoDesativado</from-outcome>
+			<to-view-id>/restrito/admin/detalha_promocao.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/consulta_funcionario_desativado.xhtml</display-name>
+		<from-view-id>/restrito/admin/consulta_funcionario_desativado.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>detalhaFuncionarioDesativado</from-outcome>
+			<to-view-id>/restrito/admin/detalha_funcionario.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	<converter>  
      <description>Um converter</description>  
      <converter-id>EmpresaConverter</converter-id>  

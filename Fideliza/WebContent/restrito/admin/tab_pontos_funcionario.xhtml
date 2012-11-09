@@ -1,0 +1,45 @@
+<!-- 
+	author: guilherme coelho
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<h:body>	
+			<h:form>
+					<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+						<p:dialog modal="true" widgetVar="statusDialog"    
+		        			draggable="false" closable="false">  
+		    			<p:graphicImage value="/images/ajaxload.gif" />  
+					</p:dialog>
+					<p:dataTable var="result" value="#{administradorController.listaRegistrosConsumidor}" 
+						selectionMode="single" paginator="true" rows="5">
+						
+						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
+							<h:outputText value="#{result.empresa.nome}" />
+						</p:column>
+						<p:column filterBy="#{result.funcionario.nome}" headerText="Funcionario">
+							<h:outputText value="#{result.funcionario.nome}" />
+						</p:column>
+						<p:column filterBy="#{result.consumidor.cpf}" headerText="Consumidor">
+							<h:outputText value="#{result.consumidor.cpf}" />
+						</p:column>
+						<p:column filterBy="#{result.valorCompra}" headerText="Valor Compra">
+							<h:outputText value="R$ #{result.valorCompra}" />
+						</p:column>
+						<p:column filterBy="#{result.quantidadePontos}" headerText="Pontos Registrados">
+							<h:outputText value="#{result.quantidadePontos}" />
+						</p:column>
+					</p:dataTable>
+
+			</h:form>
+		</h:body>
+		
+	</h:head>
+</html>
