@@ -45,7 +45,7 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="EmpresaTable" var="result" value="#{promocaoController.listaPromocaoDesativada}" rowKey="#{result.idPromocao}" selection="#{administradorController.selectedPromocao}" selectionMode="single">
+						<p:dataTable id="EmpresaTable" var="result" value="#{promocaoController.listaPromocaoAtivaPorEmpresa}" rowKey="#{result.idPromocao}" selection="#{empresaController.selectedPromocao}" selectionMode="single">
 							<f:facet name="header">	
 							 Promoções
 							</f:facet>
@@ -68,7 +68,7 @@
 									<h:outputText value="#{result.pontos}" />
 								</p:column>
 								<f:facet name="footer">
-	        						<p:commandButton value="detalhar" update=":form" action="#{administradorController.detalhaPromocaoDesativada}" ajax="false"/>
+	        						<p:commandButton value="detalhar" update=":form" action="#{empresaController.detalhaPromocao}" ajax="false"/>
 	        					</f:facet>	
 						</p:dataTable>
 					</h:form>

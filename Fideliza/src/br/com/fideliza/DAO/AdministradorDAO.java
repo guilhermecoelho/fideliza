@@ -32,6 +32,16 @@ public class AdministradorDAO {
 
 	}
 	
+	public void editaAdmin(Administrador admin){
+		
+		tx.begin();
+		
+		session.update(admin);
+		
+		session.flush();
+		tx.commit();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Administrador> listaAdmin(){
 		try{
@@ -57,7 +67,7 @@ public class AdministradorDAO {
 			e.printStackTrace();
 		} finally{
 			session.flush();
-			//session.close();
+			session.close();
 		}
 		return null;
 	}

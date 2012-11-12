@@ -109,6 +109,22 @@ public class FuncionarioDAO {
 		}
 		return null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Funcionario> buscaFuncionarioAtivoPorEmpresa(int idEmpresa){
+		try{
+			return session.createCriteria(Funcionario.class).add(Restrictions.eq("status", true)).add(Restrictions.like("empresa.idEmpresa",idEmpresa)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
+	}
+	
 	public Funcionario buscaPorId(int idFuncionario){
 		try{
 			return (Funcionario) session.createCriteria(Funcionario.class).add(Restrictions.eq("idFuncionario", idFuncionario)).uniqueResult();

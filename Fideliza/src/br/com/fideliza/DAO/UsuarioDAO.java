@@ -47,6 +47,8 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}catch (Exception e){
 			e.printStackTrace();
+		} finally {
+			session.clear();
 		}
 		return null;
 		
@@ -81,7 +83,7 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		} finally{
 			session.flush();
-			//session.close();
+			session.close();
 		}
 		return null;
 	}

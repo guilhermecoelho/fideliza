@@ -45,32 +45,25 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="EmpresaTable" var="result" value="#{promocaoController.listaPromocaoDesativada}" rowKey="#{result.idPromocao}" selection="#{administradorController.selectedPromocao}" selectionMode="single">
+						<p:dataTable id="funcTable" var="result" value="#{funcionarioController.listaFuncionariosDesativados}" rowKey="#{result.idFuncionario}" selection="#{administradorController.selectedFuncionario}" selectionMode="single">
 							<f:facet name="header">	
-							 Promoções
+							 Funcionarios
 							</f:facet>
-								<p:column filterBy="#{result.idPromocao}" headerText="ID" footerText="ID">
-									<h:outputText value="#{result.idPromocao}" />
+								<p:column filterBy="#{result.idFuncionario}" headerText="ID" footerText="ID">
+									<h:outputText value="#{result.idFuncionario}" />
 								</p:column>
-								<p:column filterBy="#{result.nome}" headerText="Nome" footerText="Nome">
-									<h:outputText value="#{result.nome}" />
-								</p:column>
+
 								<p:column filterBy="#{result.empresa.nome}" headerText="Empresa" footerText="Empresa">
 									<h:outputText value="#{result.empresa.nome}" />
 								</p:column>
-								<p:column  filterBy="#{result.descricao}" headerText="Descrição" footerText="Descrição">
-									<h:outputText value="#{result.descricao}" />
+								<p:column  filterBy="#{result.email}" headerText="Email" footerText="Email">
+									<h:outputText value="#{result.email}" />
 								</p:column>
-								<p:column  filterBy="#{result.desconto}" headerText="Desconto" footerText="Desconto">
-									<h:outputText value="#{result.desconto}" />
-								</p:column>
-								<p:column  filterBy="#{result.pontos}" headerText="Pontos" footerText="Pontos">
-									<h:outputText value="#{result.pontos}" />
-								</p:column>
-								<f:facet name="footer">
-	        						<p:commandButton value="detalhar" update=":form" action="#{administradorController.detalhaPromocaoDesativada}" ajax="false"/>
-	        					</f:facet>	
+	        					<f:facet name="footer">
+	        						<p:commandButton value="detalhar" update=":form" action="#{administradorController.detalhaFuncionarioDesativado}" ajax="false"/>
+	        					</f:facet>			
 						</p:dataTable>
+								 
 					</h:form>
 				</h:form>
 			</div>

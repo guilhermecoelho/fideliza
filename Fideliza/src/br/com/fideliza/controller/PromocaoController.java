@@ -35,6 +35,8 @@ public class PromocaoController implements Serializable{
 	private ArrayList<Promocao> listaPromocao;
 	private DataModel<Promocao> listaPromocaoAtiva;
 	private DataModel<Promocao> listaPromocaoDesativada;
+	private DataModel<Promocao> listaPromocaoAtivaPorEmpresa;
+
 	
 	public PromocaoController(){
 		this.usuario = new Usuario();
@@ -66,6 +68,22 @@ public class PromocaoController implements Serializable{
 			listaPromocaoAtiva = new ListDataModel<Promocao>(promocao);
 		}
 		return listaPromocaoAtiva;
+	}
+
+
+
+	public DataModel<Promocao> getListaPromocaoAtivaPorEmpresa() { // lista promoções ativas de uma empresa
+		if(listaPromocaoAtivaPorEmpresa == null){
+			
+			List<Promocao> promocao = new PromocaoDAO().listaPromocaoAtivaPorEmpresa(usuario.getEmpresa());
+			listaPromocaoAtivaPorEmpresa = new ListDataModel<Promocao>(promocao);
+		}
+		return listaPromocaoAtivaPorEmpresa;
+	}
+
+	public void setListaPromocaoAtivaPorEmpresa(
+			DataModel<Promocao> listaPromocaoAtivaPorEmpresa) {
+		this.listaPromocaoAtivaPorEmpresa = listaPromocaoAtivaPorEmpresa;
 	}
 
 	public void setListaPromocaoAtiva(DataModel<Promocao> listaPromocaoAtiva) {

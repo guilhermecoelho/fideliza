@@ -9,7 +9,6 @@ import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.AdministradorDAO;
-import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.EmpresaDAO;
 import br.com.fideliza.DAO.FuncionarioDAO;
 import br.com.fideliza.DAO.PromocaoDAO;
@@ -26,9 +25,11 @@ import br.com.fideliza.model.RegistraPontos;
 import br.com.fideliza.model.RegraPontuacao;
 import br.com.fideliza.model.Usuario;
 import br.com.fideliza.model.UtilizaPontos;
+import br.com.fideliza.util.RecuperaSessao;
+import br.com.fideliza.util.detalhaObjeto;
 
 public class AdministradorController {
-	
+
 	private Administrador admin;
 	private AdministradorDAO adminDAO;
 	private Usuario user;
@@ -36,15 +37,15 @@ public class AdministradorController {
 	private Empresa empresa;
 	private EmpresaDAO empresaDAO;
 	private Empresa selectedEmpresa;
-	private FuncionarioDAO funcionarioDAO;
+
 	private Funcionario funcionario;
 	private Funcionario selectedFuncionario;
 	private Promocao promocao;
 	private Promocao selectedPromocao;
-	private PromocaoDAO promocaoDAO;
+
 	private Consumidor consumidor;
 	private Consumidor selectedConsumidor;
-	private ConsumidorDAO consumidorDAO;
+
 	private RegraPontuacao selectedRegra;
 	private RegistraPontos registraPontos;
 	private DataModel<Funcionario> listaFuncionarioEmpresa;
@@ -58,222 +59,185 @@ public class AdministradorController {
 	private DataModel<UtilizaPontos> listaUtilizaPontosFuncionario;
 	private DataModel<UtilizaPontos> listaUtilizaPontosPromocao;
 
-	public AdministradorController(){
+	public AdministradorController() {
 		this.admin = new Administrador();
 		this.adminDAO = new AdministradorDAO();
 		this.empresa = new Empresa();
 		this.empresaDAO = new EmpresaDAO();
-		this.funcionarioDAO = new FuncionarioDAO();
-		this.promocaoDAO = new PromocaoDAO();
 		this.user = new Usuario();
 		this.usuarioDAO = new UsuarioDAO();
-		this.consumidorDAO = new ConsumidorDAO();
 		
-	}
-	
-	public String salvaAdmin(){
-		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
+		user = (Usuario) session.getAttribute("usuario");
 
-		if(verificaEmail(admin.getEmail(), admin.getConfirmEmail()) == true){
-			
+	}
+
+	public String salvaAdmin() {
+
+		if (verificaEmail(admin.getEmail(), admin.getConfirmEmail()) == true) {
+
 			admin.setStatus(true);
-			
+
 			user.setAdministrador(admin);
 			user.setUser(admin.getEmail());
 			user.setPassword(admin.getPassword());
 			user.setPermissaoAdministrador(true);
-			
-			adminDAO.salvaAdmin(admin);	
-			usuarioDAO.adicionaUsuario(user);	
-			
-			
+
+			adminDAO.salvaAdmin(admin);
+			usuarioDAO.adicionaUsuario(user);
+
 			return "salvaAdmin";
-			
+
 		} else {
 			return "errorAdmin";
 		}
 	}
-	
-	public String ativarEmpresa (){
-		
+
+	public void editaAdmin() {
+
+		adminDAO.editaAdmin(admin);
+	}
+
+	public String ativarEmpresa() {
+
 		empresa = selectedEmpresa;
 		empresa.setStatus(true);
 		empresa.setNovaEmpresa(false);
-		
+
 		empresaDAO.ativaEmpresa(empresa);
-		
+
 		return "ativarEmpresa";
 	}
-	
-	public String detalhaEmpresa(){
-			
-		empresa = empresaDAO.BuscaPorId(selectedEmpresa.getIdEmpresa());
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-		session.setAttribute("empresaTeste", empresa); //salva dados do usuario na sessão
-		
+
+	public String detalhaEmpresa() {
+
+		empresa = new detalhaObjeto().detalhaEmpresa(selectedEmpresa.getIdEmpresa());
+
 		return "detalhaEmpresa";
-		
+
 	}
-	public String detalhaEmpresaDesativada(){
-		
-		empresa = empresaDAO.BuscaPorId(selectedEmpresa.getIdEmpresa());
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-		session.setAttribute("empresaTeste", empresa); //salva dados do usuario na sessão
-		
+
+	public String detalhaEmpresaDesativada() {
+
+		empresa = new detalhaObjeto().detalhaEmpresaDesativada(selectedEmpresa.getIdEmpresa());
+
 		return "detalhaEmpresaDesativada";
-		
+
 	}
-	
-	public String detalhaFuncionario(){
-		
-		funcionario = funcionarioDAO.buscaPorId(selectedFuncionario.getIdFuncionario());
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-		session.setAttribute("funcionario", funcionario); //salva dados do usuario na sessão
-		
+
+	public String detalhaFuncionario() {
+
+		funcionario = new detalhaObjeto().detalhaFuncionario(selectedFuncionario.getIdFuncionario());
+
 		return "detalhaFuncionario";
-		
+
 	}
-	public String detalhaFuncionarioDesativado(){
-		
-		funcionario = funcionarioDAO.buscaPorId(selectedFuncionario.getIdFuncionario());
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-		session.setAttribute("funcionario", funcionario); //salva dados do usuario na sessão
-		
+
+	public String detalhaFuncionarioDesativado() {
+
+		funcionario = new detalhaObjeto().detalhaFuncionarioDesativado(selectedFuncionario.getIdFuncionario());
+
 		return "detalhaFuncionarioDesativado";
-		
+
 	}
-	
-	public String detalhaPromocao(){
-		
-		promocao = promocaoDAO.buscaPorId(selectedPromocao.getIdPromocao());
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-		session.setAttribute("promocao", promocao); //salva dados do usuario na sessão
-		
+
+	public String detalhaPromocao() {
+
+		promocao = new detalhaObjeto().detalhaPromocao(selectedPromocao.getIdPromocao());
+
 		return "detalhaPromocao";
-		
+
 	}
-	public String detalhaPromocaoDesativada(){
-		
-		promocao = promocaoDAO.buscaPorId(selectedPromocao.getIdPromocao());
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-		session.setAttribute("promocao", promocao); //salva dados do usuario na sessão
-		
+
+	public String detalhaPromocaoDesativada() {
+
+		promocao = new detalhaObjeto().detalhaPromocaoDesativada(selectedPromocao.getIdPromocao());
+
 		return "detalhaPromocaoDesativada";
-		
+
 	}
-	
-	public String detalhaConsumidor(){
-		
-		consumidor = consumidorDAO.buscaPorCPF(selectedConsumidor.getCpf());
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-		session.setAttribute("consumidor", consumidor); //salva dados do usuario na sessão
-		
+
+	public String detalhaConsumidor() {
+
+		consumidor = new detalhaObjeto().detalhaConsumidor(selectedConsumidor.getCpf());
+
 		return "detalhaConsumidor";
 	}
-	public String detalhaConsumidorDesativado(){
-		
-		consumidor = consumidorDAO.buscaPorCPF(selectedConsumidor.getCpf());
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-		session.setAttribute("consumidor", consumidor); //salva dados do usuario na sessão
-		
+
+	public String detalhaConsumidorDesativado() {
+
+
+		consumidor = new detalhaObjeto().detalhaConsumidorDesativado(selectedConsumidor.getCpf());
+
 		return "detalhaConsumidorDesativado";
 	}
-	
+
 	public void editaEmpresa() {
-		
+
 		empresaDAO.editaEmpresa(empresa);
 
 	}
-	
-	
-	public boolean verificaEmail(String email, String confirmEmail) { //verifica se email está correto nos dois campos e se já existe algum cadastrado
+
+	public boolean verificaEmail(String email, String confirmEmail) { // verifica se email está correto nosdois campos e se já existe algum cadastrado
 
 		if (!email.equals(confirmEmail)) {
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));			
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"email invalido", null));
 			return false;
-		}else if(usuarioDAO.buscaPorUser(email) != null){
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email já cadastrado", null));			
+		} else if (usuarioDAO.buscaPorUser(email) != null) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"email já cadastrado", null));
 			return false;
 		} else {
 			return true;
 		}
 	}
-	
-	public String editaConsumidor(){
-		
-		//consumidorDAO.editarConsumidor(consumidor);
-		
+
+	public String editaConsumidor() {
+
+		// consumidorDAO.editarConsumidor(consumidor);
+
 		return "editaConsumidor";
 	}
 
-	
-	public Empresa recuperaSessaoEmpresa(){
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-		return empresa = (Empresa) session.getAttribute("empresaTeste");
+	// get e set
 
-	}
-	
-	public Consumidor recuperaSessaoConsumidor(){
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-		return consumidor = (Consumidor) session.getAttribute("consumidor");
-	}
-	
-	public Funcionario recuperaSessaoFuncionario(){
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-		return funcionario = (Funcionario) session.getAttribute("funcionario");
-	}
-	
-	public Promocao recuperaSessaoPromocao(){
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-		return promocao = (Promocao) session.getAttribute("promocao");
-	}
-	
-	//get e set
-	
 	public Empresa getSelectedEmpresa() {
 		return selectedEmpresa;
 	}
 
-	public DataModel<UtilizaPontos> getListaUtilizaPontosPromocao() { //lista histórico de uso de uma promoção 
-		if(listaUtilizaPontosPromocao == null){
-			promocao = recuperaSessaoPromocao();
-			List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosPromocao(promocao);
-			listaUtilizaPontosPromocao = new ListDataModel<UtilizaPontos>(utilizaPontos);
+	public DataModel<UtilizaPontos> getListaUtilizaPontosPromocao() { // lista histórico de uso de uma promoção
+
+		if (listaUtilizaPontosPromocao == null) {
+			promocao = new RecuperaSessao().retornaPromocao();
+			List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO()
+					.listaUtilizaPontosPromocao(promocao);
+			listaUtilizaPontosPromocao = new ListDataModel<UtilizaPontos>(
+					utilizaPontos);
 		}
 		return listaUtilizaPontosPromocao;
 	}
 
-	public void setListaUtilizaPontosPromocao(DataModel<UtilizaPontos> listaUtilizaPontosPromocao) {
+	public void setListaUtilizaPontosPromocao(
+			DataModel<UtilizaPontos> listaUtilizaPontosPromocao) {
 		this.listaUtilizaPontosPromocao = listaUtilizaPontosPromocao;
 	}
 
-	public DataModel<UtilizaPontos> getListaUtilizaPontosFuncionario() { //lista histórico de registro de promoções por um funcionario
-		if(listaUtilizaPontosFuncionario == null){
-			funcionario = recuperaSessaoFuncionario();
-			if(listaUtilizaPontosFuncionario == null){
-				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosFuncionario(funcionario);
-				listaUtilizaPontosFuncionario = new ListDataModel<UtilizaPontos>(utilizaPontos);
+	public DataModel<UtilizaPontos> getListaUtilizaPontosFuncionario() { // lista historico de registro de promoções por um funcionario
+
+		if (listaUtilizaPontosFuncionario == null) {
+
+			funcionario = new RecuperaSessao().retornaFuncionario();
+			if (listaUtilizaPontosFuncionario == null) {
+				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO()
+						.listaUtilizaPontosFuncionario(funcionario);
+				listaUtilizaPontosFuncionario = new ListDataModel<UtilizaPontos>(
+						utilizaPontos);
 			}
 		}
 		return listaUtilizaPontosFuncionario;
@@ -284,12 +248,16 @@ public class AdministradorController {
 		this.listaUtilizaPontosFuncionario = listaUtilizaPontosFuncionario;
 	}
 
-	public DataModel<RegistraPontos> getListaRegistrosFuncionario() { // lista todos os registros de pontos de um funcionario
-		if(listaRegistrosFuncionario == null){
-			funcionario = recuperaSessaoFuncionario();
-			if(listaRegistrosFuncionario == null){
-				List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroFuncionario(funcionario);
-				listaRegistrosFuncionario = new ListDataModel<RegistraPontos>(registraPontos);
+	public DataModel<RegistraPontos> getListaRegistrosFuncionario() { // lista todos os registro de pontos de um funcinario
+
+		if (listaRegistrosFuncionario == null) {
+			// funcionario = recuperaSessaoFuncionario();
+			funcionario = new RecuperaSessao().retornaFuncionario();
+			if (listaRegistrosFuncionario == null) {
+				List<RegistraPontos> registraPontos = new RegistraPontosDAO()
+						.listaRegistroFuncionario(funcionario);
+				listaRegistrosFuncionario = new ListDataModel<RegistraPontos>(
+						registraPontos);
 			}
 		}
 		return listaRegistrosFuncionario;
@@ -300,12 +268,16 @@ public class AdministradorController {
 		this.listaRegistrosFuncionario = listaRegistrosFuncionario;
 	}
 
-	public DataModel<UtilizaPontos> getListaUtilizaPontosConsumidor() { //lista histórico de promoções utilizadas de um consumidor
-		if(listaUtilizaPontosConsumidor == null){
-			consumidor = recuperaSessaoConsumidor();
-			if (listaUtilizaPontosConsumidor == null){
-				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosConsumidor(consumidor);
-				listaUtilizaPontosConsumidor = new ListDataModel<UtilizaPontos>(utilizaPontos);
+	public DataModel<UtilizaPontos> getListaUtilizaPontosConsumidor() { // lista histórico de promoções utilizadas por um consumidor
+
+		if (listaUtilizaPontosConsumidor == null) {
+
+			consumidor = new RecuperaSessao().retornaConsumidor();
+			if (listaUtilizaPontosConsumidor == null) {
+				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO()
+						.listaUtilizaPontosConsumidor(consumidor);
+				listaUtilizaPontosConsumidor = new ListDataModel<UtilizaPontos>(
+						utilizaPontos);
 			}
 		}
 		return listaUtilizaPontosConsumidor;
@@ -317,11 +289,15 @@ public class AdministradorController {
 	}
 
 	public DataModel<RegistraPontos> getListaRegistrosConsumidor() { // lista histórico de pontos registrados de um consumidor
-		if(listaRegistrosConsumidor == null){
-			consumidor = recuperaSessaoConsumidor();
-			if (listaRegistrosConsumidor == null){
-				List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroConsumidor(consumidor);
-				listaRegistrosConsumidor = new ListDataModel<RegistraPontos>(registraPontos);
+		
+		if (listaRegistrosConsumidor == null) {
+			// consumidor = recuperaSessaoConsumidor();
+			consumidor = new RecuperaSessao().retornaConsumidor();
+			if (listaRegistrosConsumidor == null) {
+				List<RegistraPontos> registraPontos = new RegistraPontosDAO()
+						.listaRegistroConsumidor(consumidor);
+				listaRegistrosConsumidor = new ListDataModel<RegistraPontos>(
+						registraPontos);
 			}
 		}
 		return listaRegistrosConsumidor;
@@ -332,11 +308,14 @@ public class AdministradorController {
 		this.listaRegistrosConsumidor = listaRegistrosConsumidor;
 	}
 
-	public DataModel<UtilizaPontos> getListaUtilizaPontosEmpresa() { //lista histórico de promoções utilizadas por empresa
-		if(listaUtilizaPontosEmpresa == null){
-			if (listaUtilizaPontosEmpresa == null){
-				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosEmpresa(selectedEmpresa);
-				listaUtilizaPontosEmpresa = new ListDataModel<UtilizaPontos>(utilizaPontos);
+	public DataModel<UtilizaPontos> getListaUtilizaPontosEmpresa() { // lista histórico de promoções utilizadas por empresa
+
+		if (listaUtilizaPontosEmpresa == null) {
+			if (listaUtilizaPontosEmpresa == null) {
+				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO()
+						.listaUtilizaPontosEmpresa(selectedEmpresa);
+				listaUtilizaPontosEmpresa = new ListDataModel<UtilizaPontos>(
+						utilizaPontos);
 			}
 		}
 		return listaUtilizaPontosEmpresa;
@@ -356,10 +335,14 @@ public class AdministradorController {
 	}
 
 	public DataModel<RegistraPontos> getListaRegistrosEmpresa() { // lista histórico de registro de pontos
-		if (listaRegistrosEmpresa == null){
-			empresa = recuperaSessaoEmpresa();
-			List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroEmpresa(empresa);
-			listaRegistrosEmpresa = new ListDataModel<RegistraPontos>(registraPontos);
+		
+		if (listaRegistrosEmpresa == null) {
+
+			empresa = new RecuperaSessao().retornaEmpresa();
+			List<RegistraPontos> registraPontos = new RegistraPontosDAO()
+					.listaRegistroEmpresa(empresa);
+			listaRegistrosEmpresa = new ListDataModel<RegistraPontos>(
+					registraPontos);
 		}
 		return listaRegistrosEmpresa;
 	}
@@ -394,8 +377,10 @@ public class AdministradorController {
 	}
 
 	public DataModel<RegraPontuacao> getListaRegras() { // lista regras de pontuação
-		if(listaRegras == null){
-			List<RegraPontuacao> regraPontuacao = new RegraPontuacaoDAO().listaRegras();
+
+		if (listaRegras == null) {
+			List<RegraPontuacao> regraPontuacao = new RegraPontuacaoDAO()
+					.listaRegras();
 			listaRegras = new ListDataModel<RegraPontuacao>(regraPontuacao);
 		}
 		return listaRegras;
@@ -404,7 +389,6 @@ public class AdministradorController {
 	public void setListaRegras(DataModel<RegraPontuacao> listaRegras) {
 		this.listaRegras = listaRegras;
 	}
-
 
 	public Consumidor getSelectedConsumidor() {
 		return selectedConsumidor;
@@ -447,10 +431,11 @@ public class AdministradorController {
 	}
 
 	public DataModel<Promocao> getListaPromocaoEmpresa() { // lista promoções de uma empresa
-		
-		if(listaPromocaoEmpresa == null){
-			empresa = recuperaSessaoEmpresa();
-			List<Promocao> promocao = new PromocaoDAO().listaPorEmpresa(empresa);
+
+		if (listaPromocaoEmpresa == null) {
+			empresa = new RecuperaSessao().retornaEmpresa();
+			List<Promocao> promocao = new PromocaoDAO()
+					.listaPorEmpresa(empresa);
 			listaPromocaoEmpresa = new ListDataModel<Promocao>(promocao);
 		}
 		return listaPromocaoEmpresa;
@@ -460,14 +445,15 @@ public class AdministradorController {
 		this.listaPromocaoEmpresa = listaPromocaoEmpresa;
 	}
 
-	public DataModel<Funcionario> getListaFuncionarioEmpresa() { //lista funcionarios de uma empresa
-		
-		if(listaFuncionarioEmpresa == null){
+	public DataModel<Funcionario> getListaFuncionarioEmpresa() { // lista funcionarios de uma empresa
 
-			empresa = recuperaSessaoEmpresa();
-			
-			List<Funcionario> funcionario = new FuncionarioDAO().BuscaPorEmpresa(empresa.getIdEmpresa());
-			listaFuncionarioEmpresa = new ListDataModel<Funcionario>(funcionario);
+		if (listaFuncionarioEmpresa == null) {
+
+			empresa = new RecuperaSessao().retornaEmpresa();
+			List<Funcionario> funcionario = new FuncionarioDAO()
+					.BuscaPorEmpresa(empresa.getIdEmpresa());
+			listaFuncionarioEmpresa = new ListDataModel<Funcionario>(
+					funcionario);
 		}
 		return listaFuncionarioEmpresa;
 	}

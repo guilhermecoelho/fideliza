@@ -56,14 +56,6 @@ public class PromocaoDAO {
 	
 	
 	public Promocao buscaPorEmpresa(int empresa){
-
-	/*	Promocao retorno;
-		String sql= "select promocao from Promocao as promocao where empresa = :empresa";
-		Query q = session.createQuery(sql);
-		q.setInteger("empresa", empresa);
-		retorno = (Promocao)  q.uniqueResult();
-		
-		return retorno;*/
 		
 		try{
 			return (Promocao) session.createCriteria(Promocao.class).add(Restrictions.like("empresa.idEmpresa", empresa)).uniqueResult();
@@ -110,6 +102,21 @@ public class PromocaoDAO {
 	public List<Promocao> listaPorEmpresa(Empresa idEmpresa){
 		try{
 			return session.createCriteria(Promocao.class).add(Restrictions.like("empresa",idEmpresa)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Promocao> listaPromocaoAtivaPorEmpresa(Empresa idEmpresa){
+		try{
+			return session.createCriteria(Promocao.class).add(Restrictions.like("empresa",idEmpresa)).add(Restrictions.eq("status", true)).list();
 		}catch (HibernateException e){
 			e.printStackTrace();
 		}catch (Exception e){
