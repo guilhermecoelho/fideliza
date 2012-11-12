@@ -8,6 +8,7 @@ package br.com.fideliza.model;
  */
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Time;
 
 public class RegistraPontos implements Serializable{
 
@@ -24,11 +25,18 @@ public class RegistraPontos implements Serializable{
 	private Consumidor consumidor;
 	private Empresa empresa;
 	private Date dataRegistro;
+	private Time horaRegistro;
 	
 	//getters e setters
 	
 	public double getQuantidadePontos() {
 		return quantidadePontos;
+	}
+	public Time getHoraRegistro() {
+		return horaRegistro;
+	}
+	public void setHoraRegistro(Time horaRegistro) {
+		this.horaRegistro = horaRegistro;
 	}
 	public String getCpf() {
 		return cpf;
@@ -90,6 +98,8 @@ public class RegistraPontos implements Serializable{
 		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result
 				+ ((funcionario == null) ? 0 : funcionario.hashCode());
+		result = prime * result
+				+ ((horaRegistro == null) ? 0 : horaRegistro.hashCode());
 		result = prime * result + idRegistraPontos;
 		long temp;
 		temp = Double.doubleToLongBits(quantidadePontos);
@@ -131,6 +141,11 @@ public class RegistraPontos implements Serializable{
 			if (other.funcionario != null)
 				return false;
 		} else if (!funcionario.equals(other.funcionario))
+			return false;
+		if (horaRegistro == null) {
+			if (other.horaRegistro != null)
+				return false;
+		} else if (!horaRegistro.equals(other.horaRegistro))
 			return false;
 		if (idRegistraPontos != other.idRegistraPontos)
 			return false;

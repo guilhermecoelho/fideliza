@@ -12,9 +12,14 @@ import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.ConsumidorDAO;
+import br.com.fideliza.DAO.RegistraPontosDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
+import br.com.fideliza.DAO.UtilizaPontosDAO;
 import br.com.fideliza.model.Consumidor;
+import br.com.fideliza.model.RegistraPontos;
 import br.com.fideliza.model.Usuario;
+import br.com.fideliza.model.UtilizaPontos;
+import br.com.fideliza.util.RecuperaSessao;
 import br.com.fideliza.util.Verificador;
 
 public class ConsumidorController {
@@ -28,6 +33,8 @@ public class ConsumidorController {
 	private DataModel<Consumidor> consumidorLista;
 	private DataModel<Consumidor> listaConsumidorAtivo;
 	private DataModel<Consumidor> listaConsumidorDesativado;
+	private DataModel<RegistraPontos> listaRegistroConsumidor;
+	private DataModel<UtilizaPontos> listaUtilizaPontosFuncionario;
 
 	public ConsumidorController() {
 
@@ -35,6 +42,10 @@ public class ConsumidorController {
 		this.consumidorDAO = new ConsumidorDAO();
 		this.usuarioDAO = new UsuarioDAO();
 		this.user = new Usuario();
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
+		user = (Usuario) session.getAttribute("usuario");
 	}
 
 	public String salvaConsumidor() {
@@ -68,6 +79,24 @@ public class ConsumidorController {
 	
 	//gets e setters
 	
+	public DataModel<UtilizaPontos> getListaUtilizaPontosFuncionario() { // lista historico de registro de promoções por um funcionario
+
+		if (listaUtilizaPontosFuncionario == null) {
+
+			consumidor = user.getConsumidor();
+			if (listaUtilizaPontosFuncionario == null) {
+				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosConsumidor(consumidor);
+				listaUtilizaPontosFuncionario = new ListDataModel<UtilizaPontos>(utilizaPontos);
+			}
+		}
+		return listaUtilizaPontosFuncionario;
+	}
+
+	public void setListaUtilizaPontosFuncionario(
+			DataModel<UtilizaPontos> listaUtilizaPontosFuncionario) {
+		this.listaUtilizaPontosFuncionario = listaUtilizaPontosFuncionario;
+	}
+	
 	public DataModel<Consumidor> getConsumidorLista() { // lista todos consumidors
 		if (consumidorLista == null) {
 
@@ -91,6 +120,19 @@ public class ConsumidorController {
 		}
 		return consumidorLista;
 
+	}
+
+	public DataModel<RegistraPontos> getListaRegistroConsumidor() { //lista registros de um consumidor
+		if(listaRegistroConsumidor == null){
+			List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroConsumidor(user.getConsumidor());
+			listaRegistroConsumidor = new ListDataModel<RegistraPontos>(registraPontos);
+		}
+		return listaRegistroConsumidor;
+	}
+
+	public void setListaRegistroConsumidor(
+			DataModel<RegistraPontos> listaRegistroConsumidor) {
+		this.listaRegistroConsumidor = listaRegistroConsumidor;
 	}
 
 	public DataModel<Consumidor> getListaConsumidorDesativado() {

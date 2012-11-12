@@ -5,16 +5,27 @@ package br.com.fideliza.controller;
 
 import java.util.List;
 
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.EmpresaDAO;
+import br.com.fideliza.DAO.FuncionarioDAO;
+import br.com.fideliza.DAO.RegistraPontosDAO;
 import br.com.fideliza.DAO.RegraPontuacaoDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
+import br.com.fideliza.DAO.UtilizaPontosDAO;
 import br.com.fideliza.model.Empresa;
+import br.com.fideliza.model.Funcionario;
+import br.com.fideliza.model.Promocao;
+import br.com.fideliza.model.RegistraPontos;
 import br.com.fideliza.model.RegraPontuacao;
 import br.com.fideliza.model.Usuario;
+import br.com.fideliza.model.UtilizaPontos;
+import br.com.fideliza.util.RecuperaSessao;
 import br.com.fideliza.util.Verificador;
+import br.com.fideliza.util.detalhaObjeto;
 
 public class EmpresaController {
 	
@@ -26,9 +37,16 @@ public class EmpresaController {
 	private RegraPontuacaoDAO regraPontuacaoDAO;
 	private Usuario user;
 	private UsuarioDAO usuarioDAO;
+	private Funcionario funcionario;
+	private Funcionario selectedFuncionario;
+	private Promocao promocao;
+	private Promocao selectedPromocao;
 	private DataModel<Empresa> empresaLista; 
 	private DataModel<Empresa> listaEmpresaDesativada;
 	private DataModel<Empresa> listaEmpresaNova;
+	private DataModel<Funcionario> listaFuncionarioPorEmpresa;
+	private DataModel<RegistraPontos> listaRegistrosFuncionario;
+	private DataModel<UtilizaPontos> listaHistoricoPromocao;
 
 	public EmpresaController() {
 		this.empresa = new Empresa();
@@ -37,6 +55,10 @@ public class EmpresaController {
 		this.regraPontuacaoDAO = new RegraPontuacaoDAO();
 		this.user = new Usuario();
 		this.usuarioDAO = new UsuarioDAO();
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
+		user = (Usuario) session.getAttribute("usuario");
 	}
 
 	public String salvaEmpresa() {
@@ -73,9 +95,102 @@ public class EmpresaController {
 		
 	}
 	
+	public String detalhaFuncionario(){
+		
+		funcionario = new detalhaObjeto().detalhaFuncionario(selectedFuncionario.getIdFuncionario());
+		
+		return "detalhaFuncionario";
+		
+	}
+	public String detalhaFuncionarioDesativado(){
+		
+		funcionario = new detalhaObjeto().detalhaFuncionarioDesativado(selectedFuncionario.getIdFuncionario());
+		
+		return "detalhaFuncionarioDesativado";
+		
+	}
+	
+	public String detalhaPromocao(){
+		
+		promocao = new detalhaObjeto().detalhaPromocao(selectedPromocao.getIdPromocao());
+		
+		return "detalhaPromocao";
+		
+	}
+	
+	
 	// gets e setters
+	
+	public DataModel<UtilizaPontos> getListaHistoricoPromocao() {
+		if(listaHistoricoPromocao == null){
+			promocao = new RecuperaSessao().retornaPromocao();
+			List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosPromocao(promocao);
+			listaHistoricoPromocao = new ListDataModel<UtilizaPontos>(utilizaPontos);
+		}
+		return listaHistoricoPromocao;
+	}
+
+	public void setListaHistoricoPromocao(
+			DataModel<UtilizaPontos> listaHistoricoPromocao) {
+		this.listaHistoricoPromocao = listaHistoricoPromocao;
+	}
+	
+	public DataModel<RegistraPontos> getListaRegistrosFuncionario() { // lista todos os registros de pontos de um funcionario
+		if(listaRegistrosFuncionario == null){
+			funcionario = new RecuperaSessao().retornaFuncionario();
+			if(listaRegistrosFuncionario == null){
+				List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroFuncionario(funcionario);
+				listaRegistrosFuncionario = new ListDataModel<RegistraPontos>(registraPontos);
+			}
+		}
+		return listaRegistrosFuncionario;
+	}
+
+	public Promocao getPromocao() {
+		return promocao;
+	}
+
+	public void setPromocao(Promocao promocao) {
+		this.promocao = promocao;
+	}
+
+	public Promocao getSelectedPromocao() {
+		return selectedPromocao;
+	}
+
+	public void setSelectedPromocao(Promocao selectedPromocao) {
+		this.selectedPromocao = selectedPromocao;
+	}
+
+	public void setListaRegistrosFuncionario(
+			DataModel<RegistraPontos> listaRegistrosFuncionario) {
+		this.listaRegistrosFuncionario = listaRegistrosFuncionario;
+	}
+	
+	public Funcionario getSelectedFuncionario() {
+		return selectedFuncionario;
+	}
+
+	public DataModel<Funcionario> getListaFuncionarioPorEmpresa() { // lista funcionarios de uma empresa
+		if(listaFuncionarioPorEmpresa == null){
+			empresa.setIdEmpresa(user.getEmpresa().getIdEmpresa());
+			List<Funcionario> funcionario = new FuncionarioDAO().buscaFuncionarioAtivoPorEmpresa(empresa.getIdEmpresa());
+			listaFuncionarioPorEmpresa = new ListDataModel<Funcionario>(funcionario);
+		}
+		return listaFuncionarioPorEmpresa;
+	}
+
+	public void setListaFuncionarioPorEmpresa(
+			DataModel<Funcionario> listaFuncionarioPorEmpresa) {
+		this.listaFuncionarioPorEmpresa = listaFuncionarioPorEmpresa;
+	}
+
+	public void setSelectedFuncionario(Funcionario selectedFuncionario) {
+		this.selectedFuncionario = selectedFuncionario;
+	}
 
 
+	
 	public DataModel<Empresa> getListaEmpresaNova() { // lista empresas novas aguardando ativação
 		
 		if (listaEmpresaNova == null) {	
@@ -85,6 +200,14 @@ public class EmpresaController {
 		return listaEmpresaNova;
 	}
 
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
 
 	public void setListaEmpresaNova(DataModel<Empresa> listaEmpresaNova) {
 		this.listaEmpresaNova = listaEmpresaNova;

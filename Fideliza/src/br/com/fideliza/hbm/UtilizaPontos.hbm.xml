@@ -24,8 +24,11 @@
         <many-to-one name="promocao" class="br.com.fideliza.model.Promocao" fetch="join">
             <column name="INT_PROMOCAO_UTIP" />
         </many-to-one>
-        <property name="dataRegistro" type="java.util.Date">
+        <property name="dataRegistro" type="java.sql.Date">
             <column name="DATE_DATA_REGISTRO_UTIP" />
+        </property>
+        <property name="horaRegistro" type="java.sql.Time">
+            <column name="TIME_HORA_REGISTRO_UTIP" />
         </property>
     </class>
 </hibernate-mapping>

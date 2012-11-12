@@ -4,8 +4,11 @@
 package br.com.fideliza.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -61,47 +64,51 @@ public class UtilizaPontosController {
 			return "mostraPromocoes";
 			
 		} else {
-			return "error";
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"CPF invalido", null));
+			return "errorUtiliza";
 		}
 	}
 
 	public void registraUso() throws IOException {
-				
+		
+		
 		//recupera dados da promoção selecionada
 		
 		promocao = promocaoDAO.buscaPorId(selectedPromocao.getIdPromocao());
-		
-		//recupera informações do consumidor salvas na sessão
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-		String cpf = (String) session.getAttribute("cpf");
-		
-		consumidor = consumidorDAO.buscaPorCPF(cpf);
-		
-		//popula e salva no BD registro utiliza_pontos
-		
-		utilizaPontos.setConsumidor(consumidor);
-		utilizaPontos.setFuncionario(usuario.getFuncionario());
-		utilizaPontos.setPromocao(promocao);
-		utilizaPontos.setEmpresa(usuario.getFuncionario().getEmpresa());
-		
-		utilizaPontosDAO.SalvaRegistro(utilizaPontos);
-		
-		//atualiza saldo consumidor
-		
-		double pontosConsumidor = consumidor.getPontos();	
-		double novoSaldo = pontosConsumidor - promocao.getPontos();	
-		consumidor.setPontos(novoSaldo);
-		
-		consumidorDAO.editarConsumidor(consumidor);
-		
-		session.removeAttribute(cpf);
-		
-		//redireciona para pagina final
-		
-		FacesContext.getCurrentInstance().getExternalContext().redirect("confirma_utiliza_pontos.xhtml");
-		//return "registraUso";
+	
+			//recupera informações do consumidor salvas na sessão
+			
+			FacesContext fc = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+			String cpf = (String) session.getAttribute("cpf");
+			
+			consumidor = consumidorDAO.buscaPorCPF(cpf);
+			
+			//popula e salva no BD registro utiliza_pontos
+			
+			utilizaPontos.setConsumidor(consumidor);
+			utilizaPontos.setFuncionario(usuario.getFuncionario());
+			utilizaPontos.setPromocao(promocao);
+			utilizaPontos.setEmpresa(usuario.getFuncionario().getEmpresa());
+			utilizaPontos.setDataRegistro(new Date(System.currentTimeMillis()));
+			utilizaPontos.setHoraRegistro(new Time(System.currentTimeMillis()));
+			
+			utilizaPontosDAO.SalvaRegistro(utilizaPontos);
+			
+			//atualiza saldo consumidor
+			
+			double pontosConsumidor = consumidor.getPontos();	
+			double novoSaldo = pontosConsumidor - promocao.getPontos();	
+			consumidor.setPontos(novoSaldo);
+			
+			consumidorDAO.editarConsumidor(consumidor);
+			
+			session.removeAttribute(cpf);
+			
+			//redireciona para pagina final
+			
+			FacesContext.getCurrentInstance().getExternalContext().redirect("confirma_utiliza_pontos.xhtml");
+			//return "registraUso";
 
 	}
 

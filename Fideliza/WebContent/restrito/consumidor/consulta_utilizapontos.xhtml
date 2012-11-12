@@ -36,14 +36,15 @@
 <div id="fundo">
 	<div id="conteudo">
 			<h:form>
-					<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
-						<p:dialog modal="true" widgetVar="statusDialog"    
-		        			draggable="false" closable="false">  
-		    			<p:graphicImage value="/images/ajaxload.gif" />  
-					</p:dialog>
-					<p:dataTable var="result" value="#{consumidorController.listaRegistroConsumidor}" 
-						 paginator="true" rows="10">
-						
+				<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+					<p:dialog modal="true" widgetVar="statusDialog"    
+	        			draggable="false" closable="false">  
+	    			<p:graphicImage value="/images/ajaxload.gif" />  
+				</p:dialog>
+					<p:dataTable var="result" value="#{consumidorController.listaUtilizaPontosFuncionario}">
+						<p:column filterBy="#{result.promocao.nome}" headerText="Promoção">
+							<h:outputText value="#{result.promocao.nome}" />
+						</p:column>
 						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
 							<h:outputText value="#{result.empresa.nome}" />
 						</p:column>
@@ -53,15 +54,14 @@
 						<p:column filterBy="#{result.consumidor.cpf}" headerText="Consumidor">
 							<h:outputText value="#{result.consumidor.cpf}" />
 						</p:column>
+						<p:column filterBy="#{result.promocao.pontos}" headerText="Pontos">
+							<h:outputText value="#{result.promocao.pontos}" />
+						</p:column>
 						<p:column filterBy="#{result.valorCompra}" headerText="Valor Compra">
 							<h:outputText value="R$ #{result.valorCompra}" />
 						</p:column>
-						<p:column filterBy="#{result.quantidadePontos}" headerText="Pontos Registrados">
-							<h:outputText value="#{result.quantidadePontos}" />
-						</p:column>
 					</p:dataTable>
-
-			</h:form>
+				</h:form>
 		
 	</div>
 </div>

@@ -26,6 +26,9 @@
         <property name="dataRegistro" type="java.sql.Date">
             <column name="DATE_DATA_REGISTRO_REGP" />
         </property>
+        <property name="horaRegistro" type="java.sql.Time">
+            <column name="TIME_HORA_REGISTRO_REGP" />
+        </property>
         
     </class>
 </hibernate-mapping>

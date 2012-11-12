@@ -4,6 +4,7 @@
 package br.com.fideliza.model;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 
 public class UtilizaPontos implements Serializable{
@@ -21,11 +22,18 @@ public class UtilizaPontos implements Serializable{
 	private Consumidor consumidor;
 	private Promocao promocao;
 	private Date dataRegistro;
+	private Time horaRegistro;
 	
 	//getters and setters
 	
 	public int getIdUtilizaPontos() {
 		return idUtilizaPontos;
+	}
+	public Time getHoraRegistro() {
+		return horaRegistro;
+	}
+	public void setHoraRegistro(Time horaRegistro) {
+		this.horaRegistro = horaRegistro;
 	}
 	public Empresa getEmpresa() {
 		return empresa;
@@ -87,6 +95,8 @@ public class UtilizaPontos implements Serializable{
 		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result
 				+ ((funcionario == null) ? 0 : funcionario.hashCode());
+		result = prime * result
+				+ ((horaRegistro == null) ? 0 : horaRegistro.hashCode());
 		result = prime * result + idUtilizaPontos;
 		result = prime * result
 				+ ((promocao == null) ? 0 : promocao.hashCode());
@@ -128,6 +138,11 @@ public class UtilizaPontos implements Serializable{
 			if (other.funcionario != null)
 				return false;
 		} else if (!funcionario.equals(other.funcionario))
+			return false;
+		if (horaRegistro == null) {
+			if (other.horaRegistro != null)
+				return false;
+		} else if (!horaRegistro.equals(other.horaRegistro))
 			return false;
 		if (idUtilizaPontos != other.idUtilizaPontos)
 			return false;
