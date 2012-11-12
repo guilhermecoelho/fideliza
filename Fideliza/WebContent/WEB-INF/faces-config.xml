@@ -185,14 +185,6 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>*</display-name>
-		<from-view-id>/*</from-view-id>
-		<navigation-case>
-			<to-view-id>/login_empresa.xhtml</to-view-id>
-			
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
 		<display-name>restrito/empresa/cadastro_promocao.xhtml</display-name>
 		<from-view-id>/restrito/empresa/cadastro_promocao.xhtml</from-view-id>
 		<navigation-case>
@@ -325,6 +317,7 @@
 		<display-name>restrito/empresa/consulta_promocao_desativado.xhtml</display-name>
 		<from-view-id>/restrito/empresa/consulta_promocao_desativado.xhtml</from-view-id>
 		<navigation-case>
+			<from-outcome>detalhaPromocaoDesativada</from-outcome>
 			<to-view-id>/restrito/empresa/detalha_promocao.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
@@ -344,13 +337,16 @@
 			<to-view-id>/restrito/funcionario/consulta_promocao.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	<converter>  
-     <description>Um converter</description>  
-     <converter-id>EmpresaConverter</converter-id>  
-     	<converter-class>  
-     	br.com.fideliza.converter.EmpresaConverter
-     	</converter-class>
-     </converter>
+	<navigation-rule>
+		<display-name>*</display-name>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>loginPage</from-outcome>
+			<to-view-id>index.xhtml</to-view-id>
+			
+		</navigation-case>
+	</navigation-rule>
+	
 	<lifecycle>
 		<phase-listener>br.com.fideliza.filter.AuthorizationListener</phase-listener>
 	</lifecycle>

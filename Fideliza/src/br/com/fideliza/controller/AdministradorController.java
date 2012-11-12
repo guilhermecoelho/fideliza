@@ -9,6 +9,7 @@ import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.AdministradorDAO;
+import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.EmpresaDAO;
 import br.com.fideliza.DAO.FuncionarioDAO;
 import br.com.fideliza.DAO.PromocaoDAO;
@@ -39,14 +40,17 @@ public class AdministradorController {
 	private Empresa selectedEmpresa;
 
 	private Funcionario funcionario;
+	private FuncionarioDAO funcionarioDAO;
 	private Funcionario selectedFuncionario;
 	private Promocao promocao;
 	private Promocao selectedPromocao;
 
 	private Consumidor consumidor;
+	private ConsumidorDAO consumidorDAO;
 	private Consumidor selectedConsumidor;
 
 	private RegraPontuacao selectedRegra;
+	private RegraPontuacao regraPontuacao;
 	private RegistraPontos registraPontos;
 	private DataModel<Funcionario> listaFuncionarioEmpresa;
 	private DataModel<Promocao> listaPromocaoEmpresa;
@@ -66,6 +70,10 @@ public class AdministradorController {
 		this.empresaDAO = new EmpresaDAO();
 		this.user = new Usuario();
 		this.usuarioDAO = new UsuarioDAO();
+		this.consumidor = new Consumidor();
+		this.consumidorDAO = new ConsumidorDAO();
+		this.funcionario = new Funcionario();
+		this.funcionarioDAO = new FuncionarioDAO();
 		
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
@@ -167,16 +175,31 @@ public class AdministradorController {
 
 	public String detalhaConsumidorDesativado() {
 
-
 		consumidor = new detalhaObjeto().detalhaConsumidorDesativado(selectedConsumidor.getCpf());
 
 		return "detalhaConsumidorDesativado";
 	}
 
 	public void editaEmpresa() {
-
+		regraPontuacao = new RegraPontuacaoDAO().buscaPorId(1);
+		empresa.setRegraPontuacao(regraPontuacao);
+		
 		empresaDAO.editaEmpresa(empresa);
 
+	}
+	
+	public void editaConsumidor() {
+		
+		consumidorDAO.editarConsumidor(consumidor);
+		
+	}
+	
+	public void editaFuncionario(){
+		
+		System.out.println("ID "+funcionario.getIdFuncionario());
+		Funcionario retorno = funcionarioDAO.buscaPorId(funcionario.getIdFuncionario());
+		System.out.println("ID: "+retorno.getEmpresa().getIdEmpresa());
+		funcionarioDAO.editaFuncionario(funcionario);
 	}
 
 	public boolean verificaEmail(String email, String confirmEmail) { // verifica se email está correto nosdois campos e se já existe algum cadastrado
@@ -196,13 +219,6 @@ public class AdministradorController {
 		} else {
 			return true;
 		}
-	}
-
-	public String editaConsumidor() {
-
-		// consumidorDAO.editarConsumidor(consumidor);
-
-		return "editaConsumidor";
 	}
 
 	// get e set

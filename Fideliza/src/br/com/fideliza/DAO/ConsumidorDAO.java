@@ -56,16 +56,16 @@ public class ConsumidorDAO {
 	public void editarConsumidor (Consumidor consumidor){
 
 		try{
-			tx.begin();
+			
 			session.update(consumidor);
-			session.flush();
+			
 			tx.commit();
 		}catch (HibernateException e){
 			e.printStackTrace();
 		}catch (Exception e){
 			e.printStackTrace();
 		} finally{
-			
+			session.flush();
 			session.close();
 		}
 		
@@ -117,15 +117,17 @@ public class ConsumidorDAO {
 	}
 	
 	public Consumidor buscaPorCPF(String cpf){
-
-		/*Consumidor retorno;
-		String sql= "select consumidor from Consumidor as consumidor where cpf = :cpf";
-		Query q = session.createQuery(sql);
-		q.setString("cpf", cpf);
-		retorno = (Consumidor)  q.uniqueResult();
 		
-		return retorno;*/
-		
-		return (Consumidor) session.createCriteria(Consumidor.class).add(Restrictions.like("cpf", cpf)).uniqueResult();
+		try{
+			return (Consumidor) session.createCriteria(Consumidor.class).add(Restrictions.like("cpf", cpf)).uniqueResult();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 }

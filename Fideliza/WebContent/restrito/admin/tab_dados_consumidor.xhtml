@@ -11,15 +11,16 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<h:head>
-		<h:body>	
-			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
-				<p:dialog modal="true" widgetVar="statusDialog"    
-	        		draggable="false" closable="false">  
-	    		<p:graphicImage value="/images/ajaxload.gif" />  
-			</p:dialog>
-		<p:panelGrid columns="2" >
+		<h:body>
+			<h:form>	
+				<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+					<p:dialog modal="true" widgetVar="statusDialog"    
+		        		draggable="false" closable="false">  
+		    		<p:graphicImage value="/images/ajaxload.gif" />  
+				</p:dialog>
+				<p:panelGrid columns="2" >
 					<h:inputHidden value="#{administradorController.consumidor.idConsumidor}"/>
-					<h:inputHidden value="#{administradorController.consumidor.idConsumidor}"/>
+					<h:inputHidden/>
 					<h:outputText value="nome:"/>
 					<h:outputText value="#{administradorController.consumidor.nome}"/>
 					<h:outputText value="Email"/>
@@ -31,30 +32,28 @@
 				</p:panelGrid>
 				
 				<p:commandButton  value="editar" onclick="editor.show();" type="button" >
-					<f:setPropertyActionListener target="#{administradorController.consumidor}" value="#{administradorController.consumidor}"></f:setPropertyActionListener>
+					<f:setPropertyActionListener target="#{administradorController.consumidor}" value="#{administradorController.consumidor}"/>
 				</p:commandButton>
-				
 					<h:form id="dialogEdit">
 						<p:dialog id="empEditDialog"  header="Consumidor" widgetVar="editor" >					
 								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
 									
 									<h:inputHidden value="#{administradorController.consumidor.idConsumidor}"/>
 									<h:inputHidden value="#{administradorController.consumidor.cpf}"/>
+									<h:inputHidden value="#{administradorController.consumidor.pontos}"/>
 									
 									<h:outputText value="Nome "/>
 									<p:inputText value="#{administradorController.consumidor.nome}"/>
-
 									<h:outputText value="Status"/>
 									<p:selectOneRadio id="status" value="#{administradorController.consumidor.status}">
 										<f:selectItem itemLabel="Ativada" itemValue="true"/>
 										<f:selectItem itemLabel="Desativada" itemValue="false"/>
 									</p:selectOneRadio>
-									<p:commandButton value="Salvar" actionListener="#{consumidorController.editaConsumidor}" oncomplete="editor.hide();" />
-									
-	
+									<p:commandButton value="Salvar" actionListener="#{administradorController.editaConsumidor}" oncomplete="editor.hide();"/>
 								</h:panelGrid>
 						</p:dialog> 
 					</h:form>
+				</h:form>
 		</h:body>
 		
 	</h:head>

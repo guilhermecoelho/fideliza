@@ -37,6 +37,7 @@
 </div>
 	<div id="fundo">
 		<div id="conteudo">
+		<h:form>
 			<p:tabView id="tabView" cache="true" >
 
 			<p:tab id="tab1" title="Dados" >
@@ -49,13 +50,13 @@
 				<ui:include src="tab_pontos_funcionario.xhtml"/>
 				
 			</p:tab>
-			<p:tab id="tab3" title="Pontos registrados">
+			<p:tab id="tab3" title="Histórico promoções">
 				
 				<ui:include src="tab_utilizapontos_funcionario.xhtml"/>
 				
 			</p:tab>
 		</p:tabView>
-				
+		</h:form>
 		</div>
 	</div>
 <div id="rodape">

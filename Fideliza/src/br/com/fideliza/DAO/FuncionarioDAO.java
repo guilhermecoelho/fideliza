@@ -46,6 +46,7 @@ public class FuncionarioDAO {
 		}catch (Exception e){
 			e.printStackTrace();
 		} finally{
+			session.flush();
 			session.close();
 		}
 	}

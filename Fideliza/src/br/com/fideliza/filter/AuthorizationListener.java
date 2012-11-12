@@ -34,7 +34,7 @@ public class AuthorizationListener implements PhaseListener{
 		
 		if(isRestric ==  true){ // se estiver acessando area restrita, verifica se está logado
 			
-			boolean isLoginPage = (currentPage.lastIndexOf("login_consumidor.xhtml") > -1);
+			boolean isLoginPage = (currentPage.lastIndexOf("/index.xhtml") > -1);
 			
 			HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 			Usuario usuario = (Usuario) session.getAttribute("usuario");

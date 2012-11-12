@@ -101,6 +101,7 @@ public class EmpresaDAO {
 		return retorno;*/
 		return (Empresa) session.createCriteria(Empresa.class).add(Restrictions.like("cnpj", cnpj)).uniqueResult();
 	}
+	
 
 	public Empresa BuscaPorId(int idEmpresa){
 

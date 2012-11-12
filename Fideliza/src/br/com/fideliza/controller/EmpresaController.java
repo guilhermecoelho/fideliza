@@ -95,6 +95,8 @@ public class EmpresaController {
 		
 	}
 	
+
+	
 	public String detalhaFuncionario(){
 		
 		funcionario = new detalhaObjeto().detalhaFuncionario(selectedFuncionario.getIdFuncionario());
