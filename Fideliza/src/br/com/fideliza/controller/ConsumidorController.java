@@ -19,7 +19,6 @@ import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.RegistraPontos;
 import br.com.fideliza.model.Usuario;
 import br.com.fideliza.model.UtilizaPontos;
-import br.com.fideliza.util.RecuperaSessao;
 import br.com.fideliza.util.Verificador;
 
 public class ConsumidorController {

@@ -65,7 +65,7 @@
 									<h:outputText value="#{result.pontos}" />
 								</p:column>
 								<f:facet name="footer">
-	        						<p:commandButton value="detalhar" action="#{administradorController.detalhaConsumidor}" ajax="false"></p:commandButton>
+	        						<p:commandButton value="detalhar" update=":form" action="#{administradorController.detalhaConsumidor}" ajax="false"/>
 	        					</f:facet>	
 								</p:dataTable>
 						</h:form>

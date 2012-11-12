@@ -20,9 +20,6 @@
         <property name="email" type="java.lang.String">
             <column name="STRING_EMAIL_EMP" />
         </property>
-        <property name="password" type="java.lang.String">
-            <column name="STRING_PASSWORD_EMP" />
-        </property>
         <property name="status" type="boolean">
             <column name="BOOL_STATUS_EMP" />
         </property>

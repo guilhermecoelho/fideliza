@@ -19,7 +19,7 @@
 		    			<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<p:dataTable var="result" value="#{administradorController.listaRegistrosConsumidor}" 
-						selectionMode="single" paginator="true" rows="5">
+					paginator="true" rows="5">
 						
 						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
 							<h:outputText value="#{result.empresa.nome}" />

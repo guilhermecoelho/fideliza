@@ -35,36 +35,33 @@
     	<ui:include src="menu.xhtml"/>
     </div>
 </div>
+<div id="fundo">
 	<div id="conteudo">
-	<h:form id="form">
-		<p:tabView id="tabView" cache="true" >
-			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
-				<p:dialog modal="true" widgetVar="statusDialog"    
-	        		draggable="false" closable="false">  
-	    		<p:graphicImage value="/images/ajaxload.gif" />  
-			</p:dialog>
-			<p:tab id="tab1" title="dados" >
-			
-				<ui:include src="tab_dados.xhtml"/>
-				
-			</p:tab>
-			<p:tab id="tab2" title="Funcionarios">
-				
-				<ui:include src="tab_funcionarios.xhtml"/>
-				
-			</p:tab>
-			
-			<p:tab id="tab3" title="Promoções" >
-				<ui:include src="tab_promocao.xhtml"/>
-			</p:tab>
-			<p:tab id="tab4" title="Pontos registrados" >
-				<ui:include src="tab_pontos.xhtml"/>
-			</p:tab>
-			<p:tab id="tab5" title="Histórico promoções">
-				<ui:include src="tab_utiliza_pontos.xhtml"/>
-			</p:tab>
-		</p:tabView>
-	</h:form>
+		<h:form id="form">
+			<p:tabView id="tabView" cache="true" >
+				<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+					<p:dialog modal="true" widgetVar="statusDialog"    
+		        		draggable="false" closable="false">  
+		    		<p:graphicImage value="/images/ajaxload.gif" />  
+				</p:dialog>
+				<p:tab id="tab1" title="dados">
+					<ui:include src="tab_dados.xhtml"/>
+				</p:tab>
+				<p:tab id="tab2" title="Funcionarios">
+					<ui:include src="tab_funcionarios.xhtml"/>
+				</p:tab>
+				<p:tab id="tab3" title="Promoções" >
+					<ui:include src="tab_promocao.xhtml"/>
+				</p:tab>
+				<p:tab id="tab4" title="Pontos registrados" >
+					<ui:include src="tab_pontos.xhtml"/>
+				</p:tab>
+				<p:tab id="tab5" title="Histórico promoções">
+					<ui:include src="tab_utiliza_pontos.xhtml"/>
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</div>
 	</div>
 
 <div id="rodape">
