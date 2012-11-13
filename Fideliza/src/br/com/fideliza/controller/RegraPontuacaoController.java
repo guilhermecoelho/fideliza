@@ -13,13 +13,13 @@ import br.com.fideliza.model.RegraPontuacao;
 
 public class RegraPontuacaoController {
 
-	private RegraPontuacao regraPontuacao;
-	private RegraPontuacaoDAO regraPontuacaoDAO;
+	private RegraPontuacao regraPontuacao = new RegraPontuacao();
+	private RegraPontuacaoDAO regraPontuacaoDAO = new RegraPontuacaoDAO();
+	
 	private DataModel<RegraPontuacao> listaRegra;
 
 	public RegraPontuacaoController() {
-		this.regraPontuacao = new RegraPontuacao();
-		this.regraPontuacaoDAO = new RegraPontuacaoDAO();
+
 	}
 
 	public String adicionaRegraPontuacao() {

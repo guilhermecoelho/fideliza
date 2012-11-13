@@ -6,6 +6,7 @@ package br.com.fideliza.controller;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -19,15 +20,14 @@ import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.RegistraPontos;
 import br.com.fideliza.model.Usuario;
 import br.com.fideliza.model.UtilizaPontos;
-import br.com.fideliza.util.Verificador;
+import br.com.fideliza.util.RecuperaSessao;
 
 public class ConsumidorController {
 
-	private Consumidor consumidor;
-	private ConsumidorDAO consumidorDAO;
-	private UsuarioDAO usuarioDAO;
-	private Usuario user;
-	private Verificador verificador;
+	private Consumidor consumidor = new Consumidor();
+	private ConsumidorDAO consumidorDAO = new ConsumidorDAO();
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private Usuario user = new Usuario();
 
 	private DataModel<Consumidor> consumidorLista;
 	private DataModel<Consumidor> listaConsumidorAtivo;
@@ -37,19 +37,11 @@ public class ConsumidorController {
 
 	public ConsumidorController() {
 
-		this.consumidor = new Consumidor();
-		this.consumidorDAO = new ConsumidorDAO();
-		this.usuarioDAO = new UsuarioDAO();
-		this.user = new Usuario();
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-		user = (Usuario) session.getAttribute("usuario");
 	}
 
 	public String salvaConsumidor() {
 
-		if(verificador.verificaEmail(consumidor.getEmail(), consumidor.getEmailConfirm()) == true && verificador.verificaCPF(consumidor.getCpf()) == true){	//verifica email e cpf
+		if(verificaEmail(consumidor.getEmail(), consumidor.getEmailConfirm()) == true && verificaCPF(consumidor.getCpf()) == true){	//verifica email e cpf
 			
 			consumidor.setStatus(true);
 			
@@ -57,14 +49,41 @@ public class ConsumidorController {
 			user.setPassword(consumidor.getPassword());
 			user.setUser(consumidor.getCpf());
 			user.setPermissaoConsumidor(true);
-
-			usuarioDAO.adicionaUsuario(user); // cria usuario usando o CPF como user
-			consumidorDAO.adicionaConsumidor(consumidor);
 			
-			return "save";
+			consumidorDAO.adicionaConsumidor(consumidor);
+			usuarioDAO.adicionaUsuario(user); // cria usuario usando o CPF como user
+			
+			
+			return "salvaConsumidor";
 
 		} else {
-			return "erro";
+			return "erroConsumidor";
+		}
+	}
+	
+	public boolean verificaEmail(String email, String confirmEmail) { //verifica se email está correto nos dois campos e se já existe algum cadastrado
+
+		if (!email.equals(confirmEmail)) {
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));			
+			return false;
+		}else if(usuarioDAO.buscaPorUser(email) != null){
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email já cadastrado", null));			
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean verificaCPF(String cpf) { // verifica se cpf já esta cadastrado
+
+		Consumidor retorno = consumidorDAO.buscaPorCPF(cpf);
+
+		if (retorno != null) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"CPF já cadastrado", null));
+			return false;
+			
+		} else {
+			return true;
 		}
 	}
 
@@ -81,7 +100,7 @@ public class ConsumidorController {
 	public DataModel<UtilizaPontos> getListaUtilizaPontosFuncionario() { // lista historico de registro de promoções por um funcionario
 
 		if (listaUtilizaPontosFuncionario == null) {
-
+			user = new RecuperaSessao().retornaUsuario();
 			consumidor = user.getConsumidor();
 			if (listaUtilizaPontosFuncionario == null) {
 				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosConsumidor(consumidor);
@@ -123,6 +142,7 @@ public class ConsumidorController {
 
 	public DataModel<RegistraPontos> getListaRegistroConsumidor() { //lista registros de um consumidor
 		if(listaRegistroConsumidor == null){
+			user = new RecuperaSessao().retornaUsuario();
 			List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroConsumidor(user.getConsumidor());
 			listaRegistroConsumidor = new ListDataModel<RegistraPontos>(registraPontos);
 		}

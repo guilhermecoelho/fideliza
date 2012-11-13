@@ -18,6 +18,7 @@ import br.com.fideliza.DAO.PromocaoDAO;
 import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Promocao;
 import br.com.fideliza.model.Usuario;
+import br.com.fideliza.util.RecuperaSessao;
 
 public class PromocaoController implements Serializable{
 
@@ -26,11 +27,12 @@ public class PromocaoController implements Serializable{
 	 */
 	private static final long serialVersionUID = 5031783898741485634L;
 	
-	private Usuario usuario;
-	private Consumidor consumidor;
-	private ConsumidorDAO consumidorDAO;
-	private Promocao promocao;
-	private PromocaoDAO promocaoDAO;
+	private Usuario usuario = new Usuario();
+	private Consumidor consumidor = new Consumidor();
+	private ConsumidorDAO consumidorDAO = new ConsumidorDAO();
+	private Promocao promocao = new Promocao();
+	private PromocaoDAO promocaoDAO = new PromocaoDAO();
+	
 	private ArrayList<Promocao> promocaoLista;
 	private ArrayList<Promocao> listaPromocao;
 	private DataModel<Promocao> listaPromocaoAtiva;
@@ -39,20 +41,13 @@ public class PromocaoController implements Serializable{
 
 	
 	public PromocaoController(){
-		this.usuario = new Usuario();
-		this.consumidor = new Consumidor();
-		this.consumidorDAO = new ConsumidorDAO();
-		this.promocao = new Promocao();
-		this.promocaoDAO = new PromocaoDAO();
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-		usuario = (Usuario) session.getAttribute("usuario");
 
 	}
 	
 	public String salvaPromocao(){
-			
+		
+		usuario = new RecuperaSessao().retornaUsuario();	
+		
 		promocao.setEmpresa(usuario.getEmpresa());
 		promocao.setStatus(true);
 		
@@ -74,7 +69,7 @@ public class PromocaoController implements Serializable{
 
 	public DataModel<Promocao> getListaPromocaoAtivaPorEmpresa() { // lista promoções ativas de uma empresa
 		if(listaPromocaoAtivaPorEmpresa == null){
-			
+			usuario = new RecuperaSessao().retornaUsuario();
 			List<Promocao> promocao = new PromocaoDAO().listaPromocaoAtivaPorEmpresa(usuario.getEmpresa());
 			listaPromocaoAtivaPorEmpresa = new ListDataModel<Promocao>(promocao);
 		}
@@ -120,6 +115,7 @@ public class PromocaoController implements Serializable{
 		consumidor = consumidorDAO.buscaPorCPF(cpf);
 			
 		if (listaPromocao == null) {
+			usuario = new RecuperaSessao().retornaUsuario();
 			List<Promocao> promocao = new PromocaoDAO().listaPorPontos(consumidor.getPontos(), usuario.getEmpresa());
 			listaPromocao = new ArrayList<Promocao>(promocao);
 			return listaPromocao;

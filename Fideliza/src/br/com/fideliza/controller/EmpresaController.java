@@ -5,10 +5,10 @@ package br.com.fideliza.controller;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.EmpresaDAO;
 import br.com.fideliza.DAO.FuncionarioDAO;
@@ -24,23 +24,21 @@ import br.com.fideliza.model.RegraPontuacao;
 import br.com.fideliza.model.Usuario;
 import br.com.fideliza.model.UtilizaPontos;
 import br.com.fideliza.util.RecuperaSessao;
-import br.com.fideliza.util.Verificador;
 import br.com.fideliza.util.detalhaObjeto;
 
 public class EmpresaController {
 	
-	private Verificador verificador;
-	private Empresa empresa;
-	private EmpresaDAO empresaDAO;
-	private Empresa selectedEmpresa;
-	private RegraPontuacao regraPontuacao;
-	private RegraPontuacaoDAO regraPontuacaoDAO;
-	private Usuario user;
-	private UsuarioDAO usuarioDAO;
-	private Funcionario funcionario;
-	private Funcionario selectedFuncionario;
-	private Promocao promocao;
-	private Promocao selectedPromocao;
+	private Empresa empresa = new Empresa();
+	private EmpresaDAO empresaDAO = new EmpresaDAO();
+	private Empresa selectedEmpresa = new Empresa();
+	private RegraPontuacao regraPontuacao = new RegraPontuacao();
+	private RegraPontuacaoDAO regraPontuacaoDAO = new RegraPontuacaoDAO();
+	private Usuario user = new Usuario();
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private Funcionario funcionario = new Funcionario();
+	private Funcionario selectedFuncionario = new Funcionario();
+	private Promocao promocao = new Promocao();
+	private Promocao selectedPromocao = new Promocao();
 	private DataModel<Empresa> empresaLista; 
 	private DataModel<Empresa> listaEmpresaDesativada;
 	private DataModel<Empresa> listaEmpresaNova;
@@ -49,22 +47,14 @@ public class EmpresaController {
 	private DataModel<UtilizaPontos> listaHistoricoPromocao;
 
 	public EmpresaController() {
-		this.empresa = new Empresa();
-		this.empresaDAO = new EmpresaDAO();
-		this.regraPontuacao = new RegraPontuacao();
-		this.regraPontuacaoDAO = new RegraPontuacaoDAO();
-		this.user = new Usuario();
-		this.usuarioDAO = new UsuarioDAO();
 		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-		user = (Usuario) session.getAttribute("usuario");
+
 	}
 
 	public String salvaEmpresa() {
 
 		
-		if(verificador.verificaEmail(empresa.getEmail(), empresa.getConfirmEmail()) == true && verificador.verificaCNPJ(empresa.getCnpj()) == true){
+		if(verificaEmail(empresa.getEmail(), empresa.getConfirmEmail()) == true && verificaCNPJ(empresa.getCnpj()) == true){
 			
 			regraPontuacao = regraPontuacaoDAO.buscaPorId(1);
 			empresa.setRegraPontuacao(regraPontuacao);
@@ -83,7 +73,32 @@ public class EmpresaController {
 			return "empresaSalva";
 			
 		} else {
-			return "error";
+			return "erroEmpresa";
+		}
+	}
+	
+	public boolean verificaEmail(String email, String confirmEmail) { //verifica se email está correto nos dois campos e se já existe algum cadastrado
+
+		if (!email.equals(confirmEmail)) {
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));			
+			return false;
+		}else if(usuarioDAO.buscaPorUser(email) != null){
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email já cadastrado", null));			
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean verificaCNPJ(String cnpj) { // verifica se CNPJ já está cadastrado
+
+		Empresa retorno = empresaDAO.BuscaPorCNPJ(cnpj);
+
+		if (retorno != null) {
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"CNPJ já cadastrado", null));
+			return false;
+		} else {
+			return true;
 		}
 	}
 
@@ -175,6 +190,7 @@ public class EmpresaController {
 
 	public DataModel<Funcionario> getListaFuncionarioPorEmpresa() { // lista funcionarios de uma empresa
 		if(listaFuncionarioPorEmpresa == null){
+			user = new RecuperaSessao().retornaUsuario();
 			empresa.setIdEmpresa(user.getEmpresa().getIdEmpresa());
 			List<Funcionario> funcionario = new FuncionarioDAO().buscaFuncionarioAtivoPorEmpresa(empresa.getIdEmpresa());
 			listaFuncionarioPorEmpresa = new ListDataModel<Funcionario>(funcionario);

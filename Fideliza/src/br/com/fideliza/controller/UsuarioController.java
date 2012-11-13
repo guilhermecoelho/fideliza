@@ -16,17 +16,14 @@ import br.com.fideliza.model.Usuario;
 public class UsuarioController {
 	
 
-	private Usuario usuario;
-	private UsuarioDAO userDAO;
+	private Usuario usuario = new Usuario();
+	private UsuarioDAO userDAO = new UsuarioDAO();
 	
 	public UsuarioController(){
 
-		this.usuario = new Usuario();
-		this.userDAO = new UsuarioDAO();
 	}
 	
 	public String login(){
-		
 		
 			Usuario retorno = userDAO.loginCliente(usuario.getPassword(), usuario.getUser());
 			
@@ -40,18 +37,35 @@ public class UsuarioController {
 				session.setAttribute("usuario", usuario); //salva dados do usuario na sessão
 				
 				if(usuario.isPermissaoConsumidor() == true){
-					tipoUser = "loginConsumidor";
+					
+					if(usuario.getConsumidor().isStatus() == false){
+						tipoUser="consumidorDesativado";
+					}else {
+						tipoUser = "loginConsumidor";
+					}
+					
 				}
 				else if(usuario.isPermissaoFuncionario() == true){
-					tipoUser = "loginFuncionario";
+					if(usuario.getFuncionario().isStatus() == false){
+						tipoUser="FuncionarioDesativado";
+					}else {
+						tipoUser = "loginFuncionario";
+					}
 				}
 				else if(usuario.isPermissaoEmpresa() == true){
-					tipoUser =  "loginEmpresa";
+					if(usuario.getEmpresa().isStatus() == false){
+						tipoUser="EmpresaDesativado";
+					}else {
+						tipoUser =  "loginEmpresa";
+					}
 				}
 				else if(usuario.isPermissaoAdministrador() == true){
-					tipoUser = "loginAdmin";
-				}
-				
+					if(usuario.getAdministrador().isStatus() == false){
+						tipoUser="AdminDesativado";
+					}else {
+						tipoUser = "loginAdmin";
+					}
+				}	
 				this.usuario = new Usuario();
 				
 				return tipoUser;

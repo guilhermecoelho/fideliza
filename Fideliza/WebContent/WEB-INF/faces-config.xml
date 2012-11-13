@@ -94,7 +94,7 @@
 		<display-name>cadastro_consumidor.xhtml</display-name>
 		<from-view-id>/cadastro_consumidor.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>save</from-outcome>
+			<from-outcome>salvaConsumidor</from-outcome>
 			<to-view-id>/sucesso.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
@@ -342,8 +342,32 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>loginPage</from-outcome>
-			<to-view-id>index.xhtml</to-view-id>
+			<to-view-id>/index.xhtml</to-view-id>
 			
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>cadastro_consumidor.xhtml</display-name>
+		<from-view-id>/cadastro_consumidor.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>erroConsumidor</from-outcome>
+			<to-view-id>/cadastro_consumidor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>cadastro_empresa.xhtml</display-name>
+		<from-view-id>/cadastro_empresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>erroEmpresa</from-outcome>
+			<to-view-id>/cadastro_empresa.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_consumidor.xhtml</display-name>
+		<from-view-id>/login_consumidor.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>consumidorDesativado</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
