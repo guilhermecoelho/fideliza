@@ -10,21 +10,21 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.FuncionarioDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
 import br.com.fideliza.model.Funcionario;
 import br.com.fideliza.model.Usuario;
+import br.com.fideliza.util.RecuperaSessao;
 import br.com.fideliza.util.Verificador;
 
 public class FuncionarioController{
 	
 	public Verificador verificador;
-	private Usuario usuario;
-	private UsuarioDAO usuarioDAO;
-	private Funcionario funcionario;
-	private FuncionarioDAO funcionarioDAO;
+	private Usuario usuario = new Usuario();
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private Funcionario funcionario = new Funcionario();
+	private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 	
 	private DataModel<Funcionario> listaFuncionarioPorEmpresa;
 	private DataModel<Funcionario> listaFuncionariosAtivos;
@@ -32,35 +32,30 @@ public class FuncionarioController{
 	
 	
 	public FuncionarioController(){
-		this.funcionario = new Funcionario();
-		this.funcionarioDAO = new FuncionarioDAO();
-		this.usuario = new Usuario();
-		this.usuarioDAO = new UsuarioDAO();
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-		usuario = (Usuario) session.getAttribute("usuario");
+
 	}
 
 	public String salvaFuncionario(){
 			
 		if(verificaEmail(funcionario.getEmail(), funcionario.getEmailConfirm()) == true){
-		funcionario.setStatus(true);
-
-		funcionario.setEmpresa(usuario.getEmpresa());
-		
-		funcionarioDAO.adicionaFuncionario(funcionario);
-		
-		usuario.setUser(funcionario.getEmail());
-		usuario.setPassword(funcionario.getPassword());
-		usuario.setFuncionario(funcionario);
-		
-		usuario.setPermissaoFuncionario(true);
-		usuario.setPermissaoEmpresa(false);
-		
-		usuarioDAO.adicionaUsuario(usuario);
-
-		return "FuncionarioSalva";
+			usuario = new RecuperaSessao().retornaUsuario();
+			
+			funcionario.setStatus(true);
+	
+			funcionario.setEmpresa(usuario.getEmpresa());
+			
+			funcionarioDAO.adicionaFuncionario(funcionario);
+			
+			usuario.setUser(funcionario.getEmail());
+			usuario.setPassword(funcionario.getPassword());
+			usuario.setFuncionario(funcionario);
+			
+			usuario.setPermissaoFuncionario(true);
+			usuario.setPermissaoEmpresa(false);
+			
+			usuarioDAO.adicionaUsuario(usuario);
+	
+			return "FuncionarioSalva";
 		} else {
 			return "error";
 		}
@@ -121,7 +116,7 @@ public class FuncionarioController{
 	public DataModel<Funcionario> getListaFuncionarioPorEmpresa() {
 		
 		if(listaFuncionarioPorEmpresa == null){
-			
+			usuario = new RecuperaSessao().retornaUsuario();
 			int idEmpresa = usuario.getEmpresa().getIdEmpresa();
 			List<Funcionario> funcionario = new FuncionarioDAO().BuscaPorEmpresa(idEmpresa);
 			listaFuncionarioPorEmpresa = new ListDataModel<Funcionario> (funcionario);

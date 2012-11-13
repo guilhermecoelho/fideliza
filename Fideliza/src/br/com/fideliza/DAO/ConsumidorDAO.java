@@ -31,7 +31,7 @@ public class ConsumidorDAO {
 		
 		session.save(consumidor);
 		
-		session.flush();
+		//session.flush();
 		tx.commit();
 
 
@@ -125,8 +125,8 @@ public class ConsumidorDAO {
 		}catch (Exception e){
 			e.printStackTrace();
 		} finally{
-			session.flush();
-			session.close();
+			//session.flush();
+			//session.clear();
 		}
 		return null;
 	}

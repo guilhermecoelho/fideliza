@@ -21,33 +21,23 @@ import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Promocao;
 import br.com.fideliza.model.Usuario;
 import br.com.fideliza.model.UtilizaPontos;
+import br.com.fideliza.util.RecuperaSessao;
 
 public class UtilizaPontosController {
 
-	private Usuario usuario;
-	private Consumidor consumidor;
-	private ConsumidorDAO consumidorDAO;
-	private Promocao promocao;
-	private Promocao selectedPromocao;
-	private PromocaoDAO promocaoDAO;
-	private UtilizaPontos utilizaPontos;
-	private UtilizaPontosDAO utilizaPontosDAO;
+	private Usuario usuario = new Usuario();
+	private Consumidor consumidor = new Consumidor();
+	private ConsumidorDAO consumidorDAO = new ConsumidorDAO();
+	private Promocao promocao = new Promocao();
+	private Promocao selectedPromocao = new Promocao();
+	private PromocaoDAO promocaoDAO = new PromocaoDAO();
+	private UtilizaPontos utilizaPontos = new UtilizaPontos();
+	private UtilizaPontosDAO utilizaPontosDAO = new UtilizaPontosDAO();
+	
 	private DataModel<Promocao> listaPromocao;
 
 
 	public UtilizaPontosController() {
-
-		this.usuario = new Usuario();
-		this.consumidor = new Consumidor();
-		this.consumidorDAO = new ConsumidorDAO();
-		this.promocao = new Promocao();
-		this.promocaoDAO = new PromocaoDAO();
-		this.utilizaPontos = new UtilizaPontos();
-		this.utilizaPontosDAO = new UtilizaPontosDAO();
-
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-		usuario = (Usuario) session.getAttribute("usuario");
 
 	}
 
@@ -71,7 +61,7 @@ public class UtilizaPontosController {
 
 	public void registraUso() throws IOException {
 		
-		
+		usuario = new RecuperaSessao().retornaUsuario();
 		//recupera dados da promoção selecionada
 		
 		promocao = promocaoDAO.buscaPorId(selectedPromocao.getIdPromocao());
@@ -149,6 +139,7 @@ public class UtilizaPontosController {
 	public DataModel<Promocao> getListaPromocao() {
 
 		if (listaPromocao == null) {
+			usuario = new RecuperaSessao().retornaUsuario();
 			List<Promocao> promocao = new PromocaoDAO().listaPorPontos(consumidor.getPontos(), usuario.getEmpresa());
 			listaPromocao = new ListDataModel<Promocao>(promocao);
 			return listaPromocao;

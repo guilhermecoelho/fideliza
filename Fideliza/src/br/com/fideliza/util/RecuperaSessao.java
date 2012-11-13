@@ -7,6 +7,7 @@ import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Empresa;
 import br.com.fideliza.model.Funcionario;
 import br.com.fideliza.model.Promocao;
+import br.com.fideliza.model.Usuario;
 
 public class RecuperaSessao {
 	
@@ -14,6 +15,13 @@ public class RecuperaSessao {
 	private Consumidor consumidor = new Consumidor();
 	private Funcionario funcionario = new Funcionario();
 	private Promocao promocao = new Promocao();
+	private Usuario user = new Usuario();
+	
+	public Usuario retornaUsuario(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
+		return user = (Usuario) session.getAttribute("usuario");
+	}
 	
 	public Empresa retornaEmpresa(){
 		FacesContext fc = FacesContext.getCurrentInstance();

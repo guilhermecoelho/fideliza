@@ -23,23 +23,14 @@ public class UsuarioDAO {
 	}
 	
 	public void adicionaUsuario(Usuario user){
-			tx.begin();
+			//tx.begin();
 			session.save(user);
-			session.flush();
+			//session.flush();
 			tx.commit();
 			session.close();
 	}
 	
 	public Usuario loginCliente(String password, String user){
-		
-	/*	Usuario retorno;
-		String sql = "select usuario from Usuario as usuario where password = :password and user = :user";
-		Query q = session.createQuery(sql);
-		q.setString("user", user);
-		q.setString("password", password);
-		retorno = (Usuario) q.uniqueResult();
-		
-		return retorno; */
 
 		try{	
 			return (Usuario) session.createCriteria(Usuario.class).add(Restrictions.like("password",password)).add(Restrictions.like("user",user)).uniqueResult();
@@ -68,13 +59,6 @@ public class UsuarioDAO {
 	
 	public Usuario buscaPorUser(String user){
 
-	/*	Usuario retorno;
-		String sql= "select usuario from Usuario as usuario where user = :user";
-		Query q = session.createQuery(sql);
-		q.setString("user", user);
-		retorno = (Usuario)  q.uniqueResult();
-		
-		return retorno;*/
 		try{
 			return (Usuario) session.createCriteria(Usuario.class).add(Restrictions.like("user",user)).uniqueResult();
 		}catch (HibernateException e){
@@ -82,8 +66,8 @@ public class UsuarioDAO {
 		}catch (Exception e){
 			e.printStackTrace();
 		} finally{
-			session.flush();
-			session.close();
+			//session.flush();
+			//session.clear();
 		}
 		return null;
 	}

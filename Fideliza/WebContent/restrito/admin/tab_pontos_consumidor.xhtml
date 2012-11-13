@@ -18,7 +18,7 @@
 		        			draggable="false" closable="false">  
 		    			<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
-					<p:dataTable var="result" value="#{administradorController.listaRegistrosConsumidor}" 
+					<p:dataTable var="result" value="#{administradorController.listaRegistrosConsumidor}"
 						 paginator="true" rows="5">
 						
 						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
@@ -35,6 +35,9 @@
 						</p:column>
 						<p:column filterBy="#{result.quantidadePontos}" headerText="Pontos Registrados">
 							<h:outputText value="#{result.quantidadePontos}" />
+						</p:column>
+						<p:column filterBy="#{result.dataRegistro}" headerText="Data">
+							<h:outputText value="#{result.dataRegistro}" />
 						</p:column>
 					</p:dataTable>
 

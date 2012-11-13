@@ -6,7 +6,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.AdministradorDAO;
 import br.com.fideliza.DAO.ConsumidorDAO;
@@ -31,27 +30,28 @@ import br.com.fideliza.util.detalhaObjeto;
 
 public class AdministradorController {
 
-	private Administrador admin;
-	private AdministradorDAO adminDAO;
-	private Usuario user;
-	private UsuarioDAO usuarioDAO;
-	private Empresa empresa;
-	private EmpresaDAO empresaDAO;
-	private Empresa selectedEmpresa;
+	private Administrador admin = new Administrador();
+	private AdministradorDAO adminDAO = new AdministradorDAO();
+	private Usuario user = new Usuario();
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private Empresa empresa = new Empresa();
+	private EmpresaDAO empresaDAO = new EmpresaDAO();
+	private Empresa selectedEmpresa = new Empresa();
 
-	private Funcionario funcionario;
-	private FuncionarioDAO funcionarioDAO;
-	private Funcionario selectedFuncionario;
-	private Promocao promocao;
-	private Promocao selectedPromocao;
+	private Funcionario funcionario = new Funcionario();
+	private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+	private Funcionario selectedFuncionario = new Funcionario();
+	private Promocao promocao = new Promocao();
+	private Promocao selectedPromocao = new Promocao();
 
-	private Consumidor consumidor;
-	private ConsumidorDAO consumidorDAO;
-	private Consumidor selectedConsumidor;
+	private Consumidor consumidor = new Consumidor();
+	private ConsumidorDAO consumidorDAO = new ConsumidorDAO();
+	private Consumidor selectedConsumidor = new Consumidor();
 
-	private RegraPontuacao selectedRegra;
-	private RegraPontuacao regraPontuacao;
-	private RegistraPontos registraPontos;
+	private RegraPontuacao selectedRegra = new RegraPontuacao();
+	private RegraPontuacao regraPontuacao = new RegraPontuacao();
+	private RegistraPontos registraPontos = new RegistraPontos();
+	
 	private DataModel<Funcionario> listaFuncionarioEmpresa;
 	private DataModel<Promocao> listaPromocaoEmpresa;
 	private DataModel<RegraPontuacao> listaRegras;
@@ -64,20 +64,6 @@ public class AdministradorController {
 	private DataModel<UtilizaPontos> listaUtilizaPontosPromocao;
 
 	public AdministradorController() {
-		this.admin = new Administrador();
-		this.adminDAO = new AdministradorDAO();
-		this.empresa = new Empresa();
-		this.empresaDAO = new EmpresaDAO();
-		this.user = new Usuario();
-		this.usuarioDAO = new UsuarioDAO();
-		this.consumidor = new Consumidor();
-		this.consumidorDAO = new ConsumidorDAO();
-		this.funcionario = new Funcionario();
-		this.funcionarioDAO = new FuncionarioDAO();
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-		user = (Usuario) session.getAttribute("usuario");
 
 	}
 

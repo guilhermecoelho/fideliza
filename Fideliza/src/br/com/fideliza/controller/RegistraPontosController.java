@@ -10,40 +10,29 @@ import java.sql.Time;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.RegistraPontosDAO;
 import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.RegistraPontos;
 import br.com.fideliza.model.Usuario;
+import br.com.fideliza.util.RecuperaSessao;
 
 public class RegistraPontosController {
 
-	private Usuario usuario;
-	private Consumidor consumidor;
-	private ConsumidorDAO consumidorDAO;
-	private RegistraPontos registraPontos;
-	private RegistraPontosDAO registraPontosDAO;
+	private Usuario usuario = new Usuario();
+	private Consumidor consumidor = new Consumidor();
+	private ConsumidorDAO consumidorDAO = new ConsumidorDAO();
+	private RegistraPontos registraPontos = new RegistraPontos();
+	private RegistraPontosDAO registraPontosDAO = new RegistraPontosDAO();
 
 	public RegistraPontosController() {
-		
-		this.usuario = new Usuario();
-		this.consumidor = new Consumidor();
-		this.consumidorDAO = new ConsumidorDAO();
-		this.registraPontos = new RegistraPontos();
-		this.registraPontosDAO = new RegistraPontosDAO();
-		
-		// recupera usuario da sessão
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-		usuario = (Usuario) session.getAttribute("usuario");
 
 	}
 
 	public String registraPonto() {
-
+		usuario = new RecuperaSessao().retornaUsuario();
+		
 		registraPontos.setFuncionario(usuario.getFuncionario());
 
 		// recupera consumidor
