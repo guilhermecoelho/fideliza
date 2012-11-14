@@ -7,7 +7,7 @@
 		width:100%;
 		height:100px;
 		background-image:url(imagens/fundo_topo.png); background-repeat:repeat-x;
-		background: #17a0ff;
+		
 		border: 0px;
 	}
 #topoMeio{
@@ -88,7 +88,12 @@
 	float: left;height: 200px;margin-right:20px;
 	padding: 10px;width: 260px;
 }
-
+#menu .ui-menu, .ui-menu-list{
+	background-image:url(imagens/fundo_menu.png)  !important;
+	background-repeat: repeat !important; 
+	background: scroll 50%;
+	
+}
 #boxEsquerda {
 	width:490px;
 	height:741px;

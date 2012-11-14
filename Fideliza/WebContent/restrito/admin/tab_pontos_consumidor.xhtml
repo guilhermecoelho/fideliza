@@ -13,12 +13,8 @@
 	<h:head>
 		<h:body>	
 			<h:form>
-					<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
-						<p:dialog modal="true" widgetVar="statusDialog"    
-		        			draggable="false" closable="false">  
-		    			<p:graphicImage value="/images/ajaxload.gif" />  
-					</p:dialog>
-					<p:dataTable var="result" value="#{administradorController.listaRegistrosConsumidor}"
+
+					<p:dataTable id="pontosConsumidor" var="result" value="#{administradorController.listaRegistrosConsumidor}"
 						 paginator="true" rows="5">
 						
 						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
@@ -40,13 +36,7 @@
 							<h:outputText value="#{result.dataRegistro}" />
 						</p:column>
 					</p:dataTable>
-
 			</h:form>
 		</h:body>
-		
 	</h:head>
-	
-	
-
-
 </html>

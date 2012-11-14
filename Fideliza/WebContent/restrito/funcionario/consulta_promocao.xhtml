@@ -97,6 +97,14 @@
 				</p:rowExpansion>
 			
 				</p:dataTable> 
+				<h:panelGrid columns="2">
+	    		<p:panel header="Exportar">
+        		<h:commandLink>
+	            		<p:graphicImage value="/images/pdf.png" />
+	            		<p:dataExporter type="pdf" target="PromoTable" fileName="listaPromocao" excludeColumns="0,5"/>
+	       			 </h:commandLink>
+	       		</p:panel>
+	       	</h:panelGrid>
 			</h:form>
 		</div>
 	</div>

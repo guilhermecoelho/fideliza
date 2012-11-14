@@ -86,7 +86,7 @@ public class UsuarioController {
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
 		session.invalidate(); 
 		
-		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+		//FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 		
 		return "logout";
 	}
