@@ -68,6 +68,14 @@
 	        						<p:commandButton value="detalhar" update=":form" action="#{administradorController.detalhaConsumidor}" ajax="false"/>
 	        					</f:facet>	
 								</p:dataTable>
+   									<h:panelGrid columns="2">  
+						                <p:panel header="Exportar">  
+						                        <h:commandLink>  
+						                        	<p:graphicImage value="/images/pdf.png" />  
+						                        	<p:dataExporter type="pdf" target="consumidorTable" fileName="consumidores" />  
+						                         </h:commandLink> 
+						                </p:panel>
+						        </h:panelGrid> 		
 						</h:form>
 					</h:form>
 				
