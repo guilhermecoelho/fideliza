@@ -35,8 +35,15 @@
 </div>
 <div id="fundo">
 	<div id="conteudo">
-
-		
+		<h:form id="editar">
+			<p:dataTable var="result" value="#{usuarioController.listaUmUsuario}">	
+			
+			<p:column filterBy="#{result.idUsuario}" headerText="Empresa">
+							<h:outputText value="#{result.idUsuario}" />
+						</p:column>
+			</p:dataTable>
+				
+		</h:form>	
 	</div>
 </div>
 <div id="rodape">
