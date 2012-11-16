@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.fideliza.DAO.UsuarioDAO;
+import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Usuario;
 
 public class UsuarioController {
@@ -18,6 +19,7 @@ public class UsuarioController {
 
 	private Usuario usuario = new Usuario();
 	private UsuarioDAO userDAO = new UsuarioDAO();
+	private Consumidor consumidor = new Consumidor();
 	
 	public UsuarioController(){
 
@@ -95,10 +97,19 @@ public class UsuarioController {
 	public void BuscaPorEmpresa(){
 		
 	}
+	
 	//getters and setters
 
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public Consumidor getConsumidor() {
+		return consumidor;
+	}
+
+	public void setConsumidor(Consumidor consumidor) {
+		this.consumidor = consumidor;
 	}
 
 	public void setUsuario(Usuario usuario) {
