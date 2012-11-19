@@ -45,7 +45,7 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="consumidorTable" var="result" value="#{consumidorController.listaConsumidorDesativado}" rowKey="#{result.idConsumidor}" selection="#{administradorController.selectedConsumidor}" selectionMode="single">
+						<p:dataTable id="consumidorTable" var="result" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" value="#{consumidorController.listaConsumidorDesativado}" rowKey="#{result.idConsumidor}" selection="#{administradorController.selectedConsumidor}" selectionMode="single">
 							<f:facet name="header">	
 							 Consumidores
 							</f:facet>

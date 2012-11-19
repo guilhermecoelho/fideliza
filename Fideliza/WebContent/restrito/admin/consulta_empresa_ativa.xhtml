@@ -45,7 +45,7 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="empresaTable" var="result" value="#{empresaController.empresaLista}" rowKey="#{result.idEmpresa}" selection="#{administradorController.selectedEmpresa}" selectionMode="single">
+						<p:dataTable id="empresaTable" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" var="result" value="#{empresaController.empresaLista}" rowKey="#{result.idEmpresa}" selection="#{administradorController.selectedEmpresa}" selectionMode="single" >
 							<f:facet name="header">	
 							 Empresas
 							</f:facet>

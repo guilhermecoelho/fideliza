@@ -45,7 +45,7 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="funcTable" var="result" value="#{funcionarioController.listaFuncionariosDesativados}" rowKey="#{result.idFuncionario}" selection="#{administradorController.selectedFuncionario}" selectionMode="single">
+						<p:dataTable id="funcTable" var="result" value="#{funcionarioController.listaFuncionariosDesativados}" rowKey="#{result.idFuncionario}" selection="#{administradorController.selectedFuncionario}" selectionMode="single" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" >
 							<f:facet name="header">	
 							 Funcionarios
 							</f:facet>

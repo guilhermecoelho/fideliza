@@ -18,15 +18,26 @@
 	        			draggable="false" closable="false">  
 	    			<p:graphicImage value="/images/ajaxload.gif" />  
 				</p:dialog>
-					<p:dataTable var="result" value="#{administradorController.listaPromocaoEmpresa}" rowKey="#{result.idPromocao}" selection="#{administradorController.selectedPromocao}"
-						selectionMode="single" paginator="true" rows="5">
+					<p:dataTable var="result" value="#{administradorController.listaPromocaoEmpresa}"  emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
 						
-						<p:column filterBy="#{result.nome}">
-						<f:facet name="header">
-							<h:outputText value="nome" />
-						</f:facet>
-						<h:outputText value="#{result.nome}" />
-					</p:column>
+							<p:column filterBy="#{result.idPromocao}" headerText="ID" footerText="ID">
+									<h:outputText value="#{result.idPromocao}" />
+								</p:column>
+								<p:column filterBy="#{result.nome}" headerText="Nome" footerText="Nome">
+									<h:outputText value="#{result.nome}" />
+								</p:column>
+								<p:column filterBy="#{result.empresa.nome}" headerText="Empresa" footerText="Empresa">
+									<h:outputText value="#{result.empresa.nome}" />
+								</p:column>
+								<p:column  filterBy="#{result.descricao}" headerText="Descrição" footerText="Descrição">
+									<h:outputText value="#{result.descricao}" />
+								</p:column>
+								<p:column  filterBy="#{result.desconto}" headerText="Desconto" footerText="Desconto">
+									<h:outputText value="#{result.desconto}" />
+								</p:column>
+								<p:column  filterBy="#{result.pontos}" headerText="Pontos" footerText="Pontos">
+									<h:outputText value="#{result.pontos}" />
+								</p:column>
 					</p:dataTable>
 				</h:form>
 		</h:body>

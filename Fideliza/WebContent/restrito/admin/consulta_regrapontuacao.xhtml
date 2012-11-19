@@ -45,7 +45,7 @@
 	    				<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<h:form id="formData">				
-						<p:dataTable id="EmpresaTable" var="result" value="#{administradorController.listaRegras}">
+						<p:dataTable id="EmpresaTable" var="result" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" value="#{administradorController.listaRegras}">
 							<f:facet name="header">	
 							 Funcionarios
 							</f:facet>

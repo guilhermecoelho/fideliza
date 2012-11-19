@@ -37,7 +37,7 @@
 		<h:form id="form">
 		<p:panel header="Consulta" />
 		<p:dataTable id="table" var="result"
-			value="#{funcionarioController.listaFuncionarioPorEmpresa}" paginator="true" rows="5" >
+			value="#{funcionarioController.listaFuncionarioPorEmpresa}" paginator="true" rows="5" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" >
 			<p:column>
 				<p:rowToggler />
 			</p:column>
