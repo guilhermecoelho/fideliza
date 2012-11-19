@@ -42,7 +42,7 @@
 			
 				<p:dataTable id="EmpresaTable" var="result"  
 					value="#{empresaController.listaEmpresaNova}" rowKey="#{result.idEmpresa}" selection="#{administradorController.selectedEmpresa}"
-					 selectionMode="single" paginator="true" rows="6" >
+					 selectionMode="single" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" >
 					 
 						 <f:facet name="header">  
 		           			 Clique sobre a empresa que deseja ativar

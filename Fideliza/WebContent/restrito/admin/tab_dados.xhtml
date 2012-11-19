@@ -19,10 +19,11 @@
 		    		<p:graphicImage value="/images/ajaxload.gif" />  
 				</p:dialog>
 				<p:panelGrid columns="2" >
-					<h:inputHidden value="#{administradorController.empresa.idEmpresa}"/>
-					<h:inputHidden value="#{administradorController.empresa.email}"/>
-					<h:outputText value="nome:"/>
+
+					<h:outputText value="nome"/>
 					<h:outputText value="#{administradorController.empresa.nome}"/>
+					<h:outputText value="email"/>
+					<h:outputText value="#{administradorController.empresa.email}"/>
 					<h:outputText value="CNPJ"/>
 					<h:outputText value="#{administradorController.empresa.cnpj}"/>
 				</p:panelGrid>
@@ -33,7 +34,7 @@
 				
 					<h:form id="dialogEdit">
 						<p:dialog id="empEditDialog"  header="Empresa" widgetVar="editor" >					
-								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
+								<h:panelGrid  id="displayEdit" columns="2" cellpadding="50" >
 									
 									<h:inputHidden value="#{administradorController.empresa.idEmpresa}"/>
 									<h:inputHidden value="#{administradorController.empresa.email}"/>

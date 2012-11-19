@@ -11,11 +11,15 @@ import java.sql.Time;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.mail.EmailException;
+
 import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.RegistraPontosDAO;
 import br.com.fideliza.model.Consumidor;
+import br.com.fideliza.model.Mensagem;
 import br.com.fideliza.model.RegistraPontos;
 import br.com.fideliza.model.Usuario;
+import br.com.fideliza.util.EmailUtil;
 import br.com.fideliza.util.RecuperaSessao;
 
 public class RegistraPontosController {
@@ -25,11 +29,13 @@ public class RegistraPontosController {
 	private ConsumidorDAO consumidorDAO = new ConsumidorDAO();
 	private RegistraPontos registraPontos = new RegistraPontos();
 	private RegistraPontosDAO registraPontosDAO = new RegistraPontosDAO();
+	private Mensagem mensagem = new Mensagem();
 
 	public RegistraPontosController() {
 
 	}
 
+	@SuppressWarnings("static-access")
 	public String registraPonto() {
 		usuario = new RecuperaSessao().retornaUsuario();
 		
@@ -77,6 +83,23 @@ public class RegistraPontosController {
 				//Salva registro
 				
 				registraPontosDAO.SalvaRegistro(registraPontos);
+				
+				mensagem.setDestino(consumidor.getEmail());
+				mensagem.setTitulo("Registro de Pontos Realizado Sistema Fideliza");
+				mensagem.setMensagem("Caro sr." +consumidor.getNome()+", o sitema fideliza informa que houve um registro de pontos em sua conta. Segue as informações sobre a operação \n\n" +
+								"Estabelecimento: "+registraPontos.getEmpresa().getNome()+"\n\n"+
+								"Valor da compra :"+registraPontos.getValorCompra()+"\n\n"+
+								"Pontos registrados: "+registraPontos.getQuantidadePontos()+"\n\n"+
+								"Data: " +registraPontos.getDataRegistro()+"\n\n"+
+								"Hora: "+registraPontos.getHoraRegistro()+"\n\n"+
+								"Saldo de pontos: "+registraPontos.getConsumidor().getPontos());
+				
+				try{
+					new EmailUtil().enviaEmail(mensagem);
+				}catch (EmailException ex) {
+					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erro! Occoreu um erro ao enviar a mensagem.","Erro"));
+				}
+				
 	
 				return "pontosRegistrados";
 			}
@@ -90,8 +113,6 @@ public class RegistraPontosController {
 	public void relatorioRegistro(){
 		
 	}
-	
-
 	
 	public RegistraPontos getRegistraPontos() {
 		return registraPontos;

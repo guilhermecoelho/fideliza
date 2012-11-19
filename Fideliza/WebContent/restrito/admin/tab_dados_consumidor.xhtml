@@ -12,16 +12,15 @@
 	
 	<h:head>
 		<h:body>
-			<h:form>	
+			<h:form id="dados">	
 				<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
 					<p:dialog modal="true" widgetVar="statusDialog"    
 		        		draggable="false" closable="false">  
 		    		<p:graphicImage value="/images/ajaxload.gif" />  
 				</p:dialog>
 				<p:panelGrid columns="2" >
-					<h:inputHidden value="#{administradorController.consumidor.idConsumidor}"/>
-					<h:inputHidden/>
-					<h:outputText value="nome:"/>
+
+					<h:outputText value="nome"/>
 					<h:outputText value="#{administradorController.consumidor.nome}"/>
 					<h:outputText value="Email"/>
 					<h:outputText value="#{administradorController.consumidor.email}"/>
@@ -41,15 +40,17 @@
 									<h:inputHidden value="#{administradorController.consumidor.idConsumidor}"/>
 									<h:inputHidden value="#{administradorController.consumidor.cpf}"/>
 									<h:inputHidden value="#{administradorController.consumidor.pontos}"/>
-									
+									<h:inputHidden/>
 									<h:outputText value="Nome "/>
 									<p:inputText value="#{administradorController.consumidor.nome}"/>
+									<h:outputText value="Email"/>
+									<p:inputText value="#{administradorController.consumidor.email}"/>
 									<h:outputText value="Status"/>
 									<p:selectOneRadio id="status" value="#{administradorController.consumidor.status}">
 										<f:selectItem itemLabel="Ativada" itemValue="true"/>
 										<f:selectItem itemLabel="Desativada" itemValue="false"/>
 									</p:selectOneRadio>
-									<p:commandButton value="Salvar" actionListener="#{administradorController.editaConsumidor}" oncomplete="editor.hide();"/>
+									<p:commandButton value="Salvar" actionListener="#{administradorController.editaConsumidor}" oncomplete="editor.hide();" />
 								</h:panelGrid>
 						</p:dialog> 
 					</h:form>

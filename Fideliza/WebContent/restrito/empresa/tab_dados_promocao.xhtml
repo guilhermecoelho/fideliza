@@ -38,7 +38,7 @@
 				</p:commandButton>
 				
 					<h:form id="dialogEdit">
-						<p:dialog id="funcEditDialog"  header="Consumidor" widgetVar="editor" >					
+						<p:dialog id="funcEditDialog"  header="Consumidor" widgetVar="editor" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" >					
 								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
 									
 									<h:inputHidden value="#{empresaController.promocao.idPromocao}"/>

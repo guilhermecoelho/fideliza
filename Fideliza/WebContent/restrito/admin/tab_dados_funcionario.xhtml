@@ -19,7 +19,7 @@
 		    		<p:graphicImage value="/images/ajaxload.gif" />  
 				</p:dialog>
 				<p:panelGrid columns="2" >
-						<h:inputHidden value="#{administradorController.funcionario.idFuncionario}"/>
+						
 						<h:outputText value="nome:"/>
 						<h:outputText value="#{administradorController.funcionario.nome}"/>
 						<h:outputText value="email:"/>
@@ -35,10 +35,11 @@
 						<p:dialog id="funcEditDialog"  header="Consumidor" widgetVar="editor" >					
 								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >							
 									<h:inputHidden value="#{administradorController.funcionario.idFuncionario}"/>
-									<h:inputHidden value="#{administradorController.funcionario.email}"/>				
+									<h:inputHidden value="#{administradorController.funcionario.email}"/>	
+										
 									<h:outputText value="Nome "/>
 									<p:inputText value="#{administradorController.funcionario.nome}"/>
-									<h:outputText value="CNPJ"/>
+									
 									<h:outputText value="Status"/>
 									<p:selectOneRadio id="status" value="#{administradorController.funcionario.status}">
 										<f:selectItem itemLabel="Ativada" itemValue="true"/>

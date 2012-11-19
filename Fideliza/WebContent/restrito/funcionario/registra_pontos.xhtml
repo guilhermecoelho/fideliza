@@ -32,6 +32,11 @@
 	<div id="conteudo">
 			
 			<h:form id="form">
+					<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+					<p:dialog modal="true" widgetVar="statusDialog"    
+	        			draggable="false" closable="false">  
+	    				<p:graphicImage value="/images/ajaxload.gif" />  
+					</p:dialog>
 				<p:panel header="Registra Pontos">
 		
 				<p:messages id="msgError" autoUpdate="true" />

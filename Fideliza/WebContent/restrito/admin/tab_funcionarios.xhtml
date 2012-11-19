@@ -18,39 +18,28 @@
 	        			draggable="false" closable="false">  
 	    			<p:graphicImage value="/images/ajaxload.gif" />  
 				</p:dialog>
-					<p:dataTable id="dataFunc" var="func" value="#{administradorController.listaFuncionarioEmpresa}" rowKey="#{func.idFuncionario}" selection="#{administradorController.selectedFuncionario}"
-						selectionMode="single" paginator="true" >
-						
-						<p:column filterBy="#{func.email}">
-						<f:facet name="header">
-							<h:outputText value="email" />
-						</f:facet>
-							<h:outputText value="#{func.email}" />
-						</p:column>
-						<p:column filterBy="#{func.idFuncionario}">
-						<f:facet name="header">
-							<h:outputText value="id" />
-						</f:facet>
-							<h:outputText value="#{func.idFuncionario}" />
-						</p:column>
-						<p:column style="width:4%">  
-                			<p:commandButton id="selectButton" oncomplete="func1.show()" icon="ui-icon-search" title="Detalhar">  
-                				<f:setPropertyActionListener value="#{func}" target="#{administradorController.selectedFuncionario}" />  
-            				</p:commandButton>  
-        				</p:column>
-        				<f:facet name="footer">
-        					<p:commandButton value="detalhar" oncomplete="func1.show()"></p:commandButton>
-        				</f:facet>
-					</p:dataTable>	
+					<h:form id="formData">				
+						<p:dataTable id="funcTable" var="result" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" value="#{administradorController.listaFuncionarioEmpresa}" rowKey="#{result.idFuncionario}" selection="#{administradorController.selectedFuncionario}" selectionMode="single">
+							<f:facet name="header">	
+							 Funcionarios
+							</f:facet>
+								<p:column filterBy="#{result.idFuncionario}" headerText="ID" footerText="ID">
+									<h:outputText value="#{result.idFuncionario}" />
+								</p:column>
+
+								<p:column filterBy="#{result.empresa.nome}" headerText="Empresa" footerText="Empresa">
+									<h:outputText value="#{result.empresa.nome}" />
+								</p:column>
+								<p:column  filterBy="#{result.email}" headerText="Email" footerText="Email">
+									<h:outputText value="#{result.email}" />
+								</p:column>
+	        					<f:facet name="footer">
+	        						<p:commandButton value="detalhar" update=":formFunc" action="#{administradorController.detalhaFuncionario}" ajax="false"/>
+	        					</f:facet>			
+						</p:dataTable>
+								 
+					</h:form>
 				</h:form>
-					<p:dialog id="func1">
-						<h:form id="formFunc1">
-							<p:dataTable id="dataFunc1" var="func" >
-								<h:outputText value="nome:"/>
-								<h:outputText value="#{administradorController.selectedFuncionario.email}"/>	
-							</p:dataTable>
-						</h:form>
-					</p:dialog>
 		</h:body>
 		
 	</h:head>

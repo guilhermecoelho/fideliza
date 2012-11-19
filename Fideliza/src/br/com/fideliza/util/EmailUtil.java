@@ -13,9 +13,9 @@ import br.com.fideliza.model.Mensagem;
 public class EmailUtil {
 	
 	private static String HOSTEMAIL = "smtp.gmail.com";
-	private static String USERNAME = "guilhermecoelho2";
-	private static String PASSWORD = "coelhito02*";
-	private static String EMAILORIGEM = "guilhermecoelho2@gmail.com";
+	private static String USERNAME = "fidelizaweb";
+	private static String PASSWORD = "fideliza01*";
+	private static String EMAILORIGEM = "fidelizaweb@gmail.com";
 	
 	public static Email conectaEmail() throws EmailException{
 		Email email = new SimpleEmail();

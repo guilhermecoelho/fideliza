@@ -17,9 +17,9 @@
 	        		draggable="false" closable="false">  
 	    		<p:graphicImage value="/images/ajaxload.gif" />  
 			</p:dialog>
-		<p:panelGrid columns="2" >
-					<h:inputHidden value="#{administradorController.promocao.idPromocao}"/>
-					<h:inputHidden></h:inputHidden>
+			<h:form>
+				<p:panelGrid columns="2" >
+
 					<h:outputText value="nome:"/>
 					<h:outputText value="#{administradorController.promocao.nome}"/>
 					<h:outputText value="email:"/>
@@ -27,11 +27,11 @@
 					<h:outputText value="Empresa"/>
 					<h:outputText value="#{administradorController.promocao.empresa.nome}"/>
 					<h:outputText value="Desconto"/>
-					<h:outputText value="#{administradorController.promocao.desconto}"/>
+					<h:outputText value="#{administradorController.promocao.desconto}%"/>
 					<h:outputText value="Empresa"/>
 					<h:outputText value="#{administradorController.promocao.pontos}"/>
 				</p:panelGrid>
-				
+			</h:form>
 				<p:commandButton  value="editar" onclick="editor.show();" type="button" >
 					<f:setPropertyActionListener target="#{administradorController.promocao}" value="#{administradorController.promocao}"/>
 				</p:commandButton>
@@ -41,13 +41,13 @@
 								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
 									
 									<h:inputHidden value="#{administradorController.promocao.idPromocao}"/>
-									
+									<h:inputHidden/>
 									<h:outputText value="Nome: "/>
 									<p:inputText value="#{administradorController.promocao.nome}"/>
 									<h:outputText value="Descrição"/>
 									<p:inputText value="#{administradorController.promocao.descricao}"/>
 									<h:outputText value="Desconto"/>
-									<p:inputText value="#{administradorController.promocao.desconto}"/>
+									<p:inputText value="#{administradorController.promocao.desconto}%"/>
 									<h:outputText value="Pontos"/>
 									<p:inputText value="#{administradorController.promocao.pontos}"/>
 									<h:outputText value="Status"/>
@@ -56,8 +56,6 @@
 										<f:selectItem itemLabel="Desativada" itemValue="false"/>
 									</p:selectOneRadio>
 									<p:commandButton value="Salvar" actionListener="#{promocaoController.editaPromocao}" oncomplete="editor.hide();" />
-									
-	
 								</h:panelGrid>
 						</p:dialog> 
 					</h:form>

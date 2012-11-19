@@ -313,9 +313,10 @@ public class AdministradorController {
 	public DataModel<UtilizaPontos> getListaUtilizaPontosEmpresa() { // lista histórico de promoções utilizadas por empresa
 
 		if (listaUtilizaPontosEmpresa == null) {
+			empresa = new RecuperaSessao().retornaEmpresa();
 			if (listaUtilizaPontosEmpresa == null) {
 				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO()
-						.listaUtilizaPontosEmpresa(selectedEmpresa);
+						.listaUtilizaPontosEmpresa(empresa);
 				listaUtilizaPontosEmpresa = new ListDataModel<UtilizaPontos>(
 						utilizaPontos);
 			}

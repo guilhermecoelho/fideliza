@@ -19,7 +19,7 @@
 		    			<p:graphicImage value="/images/ajaxload.gif" />  
 					</p:dialog>
 					<p:dataTable var="result" value="#{empresaController.listaRegistrosFuncionario}" 
-						 paginator="true" rows="10">
+						 emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" >
 						
 						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
 							<h:outputText value="#{result.empresa.nome}" />
