@@ -374,6 +374,14 @@
 			<redirect></redirect>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/empresa/cadastro_promocao.xhtml</display-name>
+		<from-view-id>/restrito/empresa/cadastro_promocao.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>errorPromocao</from-outcome>
+			<to-view-id>/restrito/empresa/cadastro_promocao.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	
 	<lifecycle>
 		<phase-listener>br.com.fideliza.filter.AuthorizationListener</phase-listener>

@@ -19,11 +19,18 @@ public class Promocao implements Serializable {
 	private double pontos;
 	private Empresa empresa;
 	private boolean status = false;
+	private boolean enviaEmail = false;
 	
 	// gets e setters
 	
 	public int getIdPromocao() {
 		return idPromocao;
+	}
+	public boolean isEnviaEmail() {
+		return enviaEmail;
+	}
+	public void setEnviaEmail(boolean enviaEmail) {
+		this.enviaEmail = enviaEmail;
 	}
 	public void setIdPromocao(int idPromocao) {
 		this.idPromocao = idPromocao;
