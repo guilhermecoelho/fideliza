@@ -102,6 +102,21 @@ public class ConsumidorDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Consumidor> listaPorPontos(Double pontos){
+		try{
+			return session.createCriteria(Consumidor.class).add(Restrictions.ge("pontos", pontos)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Consumidor> listaUmConsumidor(int id) throws HibernateException{
 			try{
 				return session.createCriteria(Consumidor.class).add(Restrictions.like("idConsumidor",id)).list();

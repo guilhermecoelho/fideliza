@@ -8,16 +8,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.EmailException;
+
 import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.PromocaoDAO;
 import br.com.fideliza.model.Consumidor;
+import br.com.fideliza.model.Mensagem;
 import br.com.fideliza.model.Promocao;
 import br.com.fideliza.model.Usuario;
+import br.com.fideliza.util.EmailUtil;
 import br.com.fideliza.util.RecuperaSessao;
 
 public class PromocaoController implements Serializable{
@@ -27,6 +32,7 @@ public class PromocaoController implements Serializable{
 	 */
 	private static final long serialVersionUID = 5031783898741485634L;
 	
+	private Mensagem mensagem = new Mensagem();
 	private Usuario usuario = new Usuario();
 	private Consumidor consumidor = new Consumidor();
 	private ConsumidorDAO consumidorDAO = new ConsumidorDAO();
@@ -38,21 +44,51 @@ public class PromocaoController implements Serializable{
 	private DataModel<Promocao> listaPromocaoAtiva;
 	private DataModel<Promocao> listaPromocaoDesativada;
 	private DataModel<Promocao> listaPromocaoAtivaPorEmpresa;
+	private ArrayList<Consumidor> listaConsumidor;
 
 	
 	public PromocaoController(){
 
 	}
 	
+	@SuppressWarnings("static-access")
 	public String salvaPromocao(){
 		
-		usuario = new RecuperaSessao().retornaUsuario();	
-		
-		promocao.setEmpresa(usuario.getEmpresa());
-		promocao.setStatus(true);
-		
-		promocaoDAO.adicionaPromocao(promocao);
-		return "salvaPromocao";
+		if(promocao.getPontos() <=0 || promocao.getDesconto() <=0 || promocao.getDesconto() > 100){ //verifica se os valores de ponto e desconto são válidos
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Valor inválido", null));
+			return "errorPromocao";
+		} else {
+			usuario = new RecuperaSessao().retornaUsuario();	
+			
+			promocao.setEmpresa(usuario.getEmpresa());
+			promocao.setStatus(true);
+			
+			promocaoDAO.adicionaPromocao(promocao);
+			
+			if(promocao.isEnviaEmail() == true){ // se a opção "enviar email" for marcada, manda um email sobra a promoção para todos os consumidores com pontos suficientes para usar ela
+				if(listaConsumidor == null){
+					List<Consumidor> consumidor = new ConsumidorDAO().listaPorPontos(promocao.getPontos());
+					listaConsumidor = new ArrayList<Consumidor>(consumidor);
+				}
+				for(int i=0; i < listaConsumidor.size();i++){
+					
+					consumidor = listaConsumidor.get(i);
+					
+					mensagem.setDestino(consumidor.getEmail());
+					mensagem.setTitulo("Uma nova promoção para você!");
+					mensagem.setMensagem("Caro sr." +consumidor.getNome()+", o sitema fideliza informa que houve a utilização dos pontos de sua conta . Segue as informações sobre a operação \n\n" +
+							"Estabelecimento: "+promocao.getEmpresa().getNome()+"\n\n"+
+							"Promocao :"+promocao.getNome()+"\n\n"+
+							"Quantidade de pontos utilizados: "+promocao.getPontos()+"\n\n");
+					try{
+						new EmailUtil().enviaEmail(mensagem);
+					}catch (EmailException ex) {
+						FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erro! Occoreu um erro ao enviar a mensagem.","Erro"));
+					}
+				}
+			}
+			return "salvaPromocao";
+		}
 	}
 	
 	//gets e setters

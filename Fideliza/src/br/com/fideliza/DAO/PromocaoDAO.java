@@ -39,6 +39,20 @@ public class PromocaoDAO {
 		}
 	}
 	
+	public void editaPromocao(Promocao promocao){
+		try{
+			session.update(promocao);
+			tx.commit();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Promocao> listaPromocao(){
 		try{

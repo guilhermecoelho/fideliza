@@ -37,36 +37,44 @@
 	<div id="conteudo">
 
 		<h:form id="form">
+			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+			<p:dialog modal="true" widgetVar="statusDialog"    
+	        	draggable="false" closable="false">  
+	    		<p:graphicImage value="/images/ajaxload.gif" />  
+			</p:dialog>
 			<p:panel header="Cadastro Promoção">
 			
 				<p:messages id="msgError" autoUpdate="true" />
 				
 				<h:panelGrid columns="3" cellpadding="5" process="@this">
 				
-					<h:outputLabel for="nome" value="nome *" />
+					<h:outputLabel for="nome" value="Nome" />
 					<p:inputText value="#{promocaoController.promocao.nome}" id="nome"
 						label="nome" required="true" requiredMessage="O campo nome deve ser preenchido"/>
 					<p:message for="nome"  />
 					
 					<h:outputLabel for="descricao" value="descricao" />
 					<p:inputText value="#{promocaoController.promocao.descricao}" id="descricao"
-						label="descricao" required="true" requiredMessage="Informe seu descricao" />
+						label="descricao" required="true" requiredMessage="Informe uma descrição" />
 					<p:message  for="descricao"/>
 					
-					<h:outputLabel for="desconto" value="desconto" />
+					<h:outputLabel for="desconto" value="Desconto em porcentagem" />
 					<p:inputText value="#{promocaoController.promocao.desconto}" id="desconto"
-						label="desconto" required="true" requiredMessage="Informe seu desconto" />
+						label="desconto" required="true" requiredMessage="Informe o desconto" />
 					<p:message  for="desconto"/>
 					
-					<h:outputLabel for="pontos" value="pontos" />
+					<h:outputLabel for="pontos" value="Quantidade de pontos" />
 					<p:inputText value="#{promocaoController.promocao.pontos}" id="pontos"
 						label="pontos" required="true" requiredMessage="Informe quantidade de pontos" />
 					<p:message  for="pontos"/>
 					
+					<h:outputText value="Enviar por email?"/>
+					<p:selectBooleanCheckbox value="#{promocaoController.promocao.enviaEmail}"/>
+					<h:outputText></h:outputText>
+					
 					<p:commandButton value="Salvar"
 						action="#{promocaoController.salvaPromocao}" ajax="false"/>
-					<p:commandButton value="Limpar campos"
-						type="reset"/>
+
 	
 				</h:panelGrid>
 				
