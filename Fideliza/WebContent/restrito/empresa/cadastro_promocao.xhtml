@@ -59,17 +59,17 @@
 					<p:message  for="descricao"/>
 					
 					<h:outputLabel for="desconto" value="Desconto em porcentagem" />
-					<p:inputText value="#{promocaoController.promocao.desconto}" id="desconto"
+					 <p:spinner id="desconto" value="#{promocaoController.promocao.desconto}" min="0" max="100"
 						label="desconto" required="true" requiredMessage="Informe o desconto" />
 					<p:message  for="desconto"/>
 					
 					<h:outputLabel for="pontos" value="Quantidade de pontos" />
-					<p:inputText value="#{promocaoController.promocao.pontos}" id="pontos"
+					<p:spinner value="#{promocaoController.promocao.pontos}" id="pontos" min="0"
 						label="pontos" required="true" requiredMessage="Informe quantidade de pontos" />
 					<p:message  for="pontos"/>
-					
+			  		
 					<h:outputText value="Enviar por email?"/>
-					<p:selectBooleanCheckbox value="#{promocaoController.promocao.enviaEmail}"/>
+						<p:selectBooleanCheckbox value="#{promocaoController.promocao.enviaEmail}"/>
 					<h:outputText></h:outputText>
 					
 					<p:commandButton value="Salvar"

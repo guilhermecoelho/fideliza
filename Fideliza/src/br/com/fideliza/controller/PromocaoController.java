@@ -60,6 +60,7 @@ public class PromocaoController implements Serializable{
 		} else {
 			usuario = new RecuperaSessao().retornaUsuario();	
 			
+
 			promocao.setEmpresa(usuario.getEmpresa());
 			promocao.setStatus(true);
 			

@@ -26,8 +26,12 @@
         <property name="status" type="boolean">
             <column name="BOOL_STATUS_PRO" />
         </property>
+        <property name="imagem" type="byte">
+            <column name="BYTE_IMAGEM_PRO" />
+        </property>
         <many-to-one name="empresa" class="br.com.fideliza.model.Empresa" fetch="join">
             <column name="INT_EMPRESA_PRO" />
         </many-to-one>
+        
     </class>
 </hibernate-mapping>
