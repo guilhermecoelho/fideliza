@@ -3,10 +3,12 @@ package br.com.fideliza.util;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import br.com.fideliza.DAO.AdministradorDAO;
 import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.EmpresaDAO;
 import br.com.fideliza.DAO.FuncionarioDAO;
 import br.com.fideliza.DAO.PromocaoDAO;
+import br.com.fideliza.model.Administrador;
 import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Empresa;
 import br.com.fideliza.model.Funcionario;
@@ -22,7 +24,20 @@ public class detalhaObjeto {
 	private ConsumidorDAO consumidorDAO = new ConsumidorDAO();
 	private Promocao promocao = new Promocao();
 	private PromocaoDAO promocaoDAO = new PromocaoDAO();
+	private Administrador admin = new Administrador();
+	private AdministradorDAO adminDAO = new AdministradorDAO();
 	
+	public Administrador detalhaAdministrador(int idAdmin){
+		
+		admin = adminDAO.buscaPorId(idAdmin);
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
+		session.setAttribute("administrador", admin); //salva dados do usuario na sessão
+		
+		return admin;
+		
+	}
 	
 	public Empresa detalhaEmpresa(int idEmpresa){
 		

@@ -35,50 +35,24 @@
     	<ui:include src="menu.xhtml"/>
     </div>
 </div>
-	<div id="fundo">
-		<div id="conteudo">
-		<h:form>	
+<div id="fundo">
+	<div id="conteudo">
+		<h:form id="form">
+			<p:tabView id="tabView" cache="true" >
 				<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
-				<p:dialog modal="true" widgetVar="statusDialog"    
-	        		draggable="false" closable="false">  
-	    		<p:graphicImage value="/images/ajaxload.gif" />  
-			</p:dialog>
-		<p:panelGrid >
-					<h:inputHidden value="#{administradorController.admin.idAdministrador}"/>
-					
-					<h:outputText value="nome:"/>
-					<h:outputText value="#{usuarioController.usuario.administrador.nome}"/>
-					<h:outputText value="Email:"/>
-					<h:outputText value="#{administradorController.admin.email}"/>
-		</p:panelGrid>
-				
-				<p:commandButton  value="editar" onclick="editor.show();" type="button" >
-					<f:setPropertyActionListener target="#{administradorController.admin}" value="#{administradorController.admin}"></f:setPropertyActionListener>
-				</p:commandButton>
-				
-					<h:form id="dialogEdit">
-						<p:dialog id="empEditDialog"  header="Consumidor" widgetVar="editor" >					
-								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
-									
-									<h:inputHidden value="#{administradorController.admin.idAdministrador}"/>
-									<h:inputHidden value="#{administradorController.admin.email}"/>
-									
-									<h:outputText value="Nome: "/>
-									<p:inputText value="#{administradorController.admin.nome}"/>
-									<h:outputText value="Status"/>
-									<p:selectOneRadio id="status" value="#{administradorController.admin.status}">
-										<f:selectItem itemLabel="Ativada" itemValue="true"/>
-										<f:selectItem itemLabel="Desativada" itemValue="false"/>
-									</p:selectOneRadio>
-									<p:commandButton value="Salvar" actionListener="#{empresaController.editaEmpresa}" oncomplete="editor.hide();" />
-									
-	
-								</h:panelGrid>
-						</p:dialog> 
-					</h:form>
-				</h:form>
-			</div>
+					<p:dialog modal="true" widgetVar="statusDialog"    
+		        		draggable="false" closable="false">  
+		    		<p:graphicImage value="/images/ajaxload.gif" />  
+				</p:dialog>
+				<p:tab id="tab1" title="dados">
+					<ui:include src="tab_dados_admin.xhtml"/>
+				</p:tab>
+
+			</p:tabView>
+		</h:form>
 	</div>
+	</div>
+
 <div id="rodape">
 	<h2> rodapé</h2>
 </div>	

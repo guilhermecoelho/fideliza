@@ -3,6 +3,7 @@ package br.com.fideliza.util;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import br.com.fideliza.model.Administrador;
 import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Empresa;
 import br.com.fideliza.model.Funcionario;
@@ -16,6 +17,13 @@ public class RecuperaSessao {
 	private Funcionario funcionario = new Funcionario();
 	private Promocao promocao = new Promocao();
 	private Usuario user = new Usuario();
+	private Administrador admin = new Administrador();
+	
+	public Administrador retornaAdmin(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
+		return admin = (Administrador) session.getAttribute("administrador");
+	}
 	
 	public Usuario retornaUsuario(){
 		FacesContext fc = FacesContext.getCurrentInstance();
