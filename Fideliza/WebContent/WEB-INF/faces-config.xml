@@ -278,22 +278,7 @@
 			<to-view-id>/restrito/admin/detalha_empresa.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	<navigation-rule>
-		<display-name>restrito/admin/menu.xhtml</display-name>
-		<from-view-id>/restrito/admin/menu.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>detalhaAdmin</from-outcome>
-			<to-view-id>/restrito/admin/detalha_admin.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>restrito/funcionario/index.xhtml</display-name>
-		<from-view-id>/restrito/funcionario/index.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>detalhaAdmin</from-outcome>
-			<to-view-id>/restrito/admin/detalha_admin.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
+
 	<navigation-rule>
 		<display-name>restrito/empresa/consulta_funcionario_ativo.xhtml</display-name>
 		<from-view-id>/restrito/empresa/consulta_funcionario_ativo.xhtml</from-view-id>
@@ -380,6 +365,14 @@
 		<navigation-case>
 			<from-outcome>errorPromocao</from-outcome>
 			<to-view-id>/restrito/empresa/cadastro_promocao.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/consulta_admin.xhtml</display-name>
+		<from-view-id>/restrito/admin/consulta_admin.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>detalhaAdmin</from-outcome>
+			<to-view-id>/restrito/admin/detalha_admin.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

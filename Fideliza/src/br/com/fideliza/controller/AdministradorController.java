@@ -31,9 +31,12 @@ import br.com.fideliza.util.detalhaObjeto;
 public class AdministradorController {
 
 	private Administrador admin = new Administrador();
+	private Administrador selectedAdmin = new Administrador();
 	private AdministradorDAO adminDAO = new AdministradorDAO();
+	
 	private Usuario user = new Usuario();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	
 	private Empresa empresa = new Empresa();
 	private EmpresaDAO empresaDAO = new EmpresaDAO();
 	private Empresa selectedEmpresa = new Empresa();
@@ -41,8 +44,10 @@ public class AdministradorController {
 	private Funcionario funcionario = new Funcionario();
 	private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 	private Funcionario selectedFuncionario = new Funcionario();
+	
 	private Promocao promocao = new Promocao();
 	private Promocao selectedPromocao = new Promocao();
+	private PromocaoDAO promocaoDAO = new PromocaoDAO();
 
 	private Consumidor consumidor = new Consumidor();
 	private ConsumidorDAO consumidorDAO = new ConsumidorDAO();
@@ -52,6 +57,7 @@ public class AdministradorController {
 	private RegraPontuacao regraPontuacao = new RegraPontuacao();
 	private RegistraPontos registraPontos = new RegistraPontos();
 	
+	private DataModel<Administrador> listaAdminAtivo;
 	private DataModel<Funcionario> listaFuncionarioEmpresa;
 	private DataModel<Promocao> listaPromocaoEmpresa;
 	private DataModel<RegraPontuacao> listaRegras;
@@ -102,6 +108,13 @@ public class AdministradorController {
 		empresaDAO.ativaEmpresa(empresa);
 
 		return "ativarEmpresa";
+	}
+	
+	public String detalhaAdmin(){
+		
+		admin = new detalhaObjeto().detalhaAdministrador(selectedAdmin.getIdAdministrador());
+		
+		return "detalhaAdmin";
 	}
 
 	public String detalhaEmpresa() {
@@ -189,6 +202,15 @@ public class AdministradorController {
 		funcionarioDAO.editaFuncionario(funcionario);
 		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("atualizado com sucesso"));
 	}
+	
+	public void editaPromocao(){
+		
+		Promocao retorno = promocaoDAO.buscaPorId(promocao.getIdPromocao());
+		promocao.setEmpresa(retorno.getEmpresa());
+		promocaoDAO.editaPromocao(promocao);
+		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("atualizado com sucesso"));
+		
+	}
 
 	public boolean verificaEmail(String email, String confirmEmail) { // verifica se email está correto nosdois campos e se já existe algum cadastrado
 
@@ -209,10 +231,31 @@ public class AdministradorController {
 		}
 	}
 
-	// get e set
-
+	//get e set
+	
 	public Empresa getSelectedEmpresa() {
 		return selectedEmpresa;
+	}
+
+	public Administrador getSelectedAdmin() {
+		return selectedAdmin;
+	}
+
+	public void setSelectedAdmin(Administrador selectedAdmin) {
+		this.selectedAdmin = selectedAdmin;
+	}
+
+	public DataModel<Administrador> getListaAdminAtivo() { //lista administradores ativos
+		if(listaAdminAtivo == null){
+			List<Administrador> administrador = adminDAO.listaAdmin();
+			listaAdminAtivo = new ListDataModel<Administrador>(administrador);
+		}
+		
+		return listaAdminAtivo;
+	}
+
+	public void setListaAdminAtivo(DataModel<Administrador> listaAdminAtivo) {
+		this.listaAdminAtivo = listaAdminAtivo;
 	}
 
 	public DataModel<UtilizaPontos> getListaUtilizaPontosPromocao() { // lista histórico de uso de uma promoção

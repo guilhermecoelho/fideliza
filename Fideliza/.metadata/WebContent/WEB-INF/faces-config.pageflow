@@ -3,7 +3,7 @@
   <nodes xsi:type="pageflow:PFPage" name="restrito/consumidor/index.xhtml" x="281" y="2664" id="pf13477675319566" referenceLink="//@navigationRule.14/@fromViewId|" outlinks="pf13509420367434" inlinks="pf13477686212377" path="/restrito/consumidor/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/admin/index.xhtml" x="294" y="2832" id="pf134776975486512" referenceLink="//@navigationRule.18/@navigationCase.0/@toViewId|" outlinks="pf13509420367445" inlinks="pf134776975486511 pf13518667047870" path="/restrito/admin/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/index.xhtml" x="288" y="2760" id="pf134776975486513" referenceLink="//@navigationRule.12/@fromViewId|" outlinks="pf13509420367446" inlinks="pf13475759256731" path="/restrito/empresa/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/index.xhtml" x="296" y="2904" id="pf134776975486514" referenceLink="//@navigationRule.28/@fromViewId|" outlinks="pf13481891926211 pf13525884872985" inlinks="pf13475759256732" path="/restrito/funcionario/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/index.xhtml" x="296" y="2904" id="pf134776975486514" referenceLink="//@navigationRule.28/@fromViewId|" outlinks="pf13481891926211" inlinks="pf13475759256732" path="/restrito/funcionario/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/consulta_promocao.xhtml" x="396" y="562" id="pf13480068891150" referenceLink="//@navigationRule.34/@navigationCase.0/@toViewId|" outlinks="pf13480635418860 pf135268274568817" inlinks="pf13480068891151 pf135268274568817" path="/restrito/funcionario/consulta_promocao.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/utiliza_pontos.xhtml" x="122" y="562" id="pf13480068891152" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf13480068891151 pf13480068891153" inlinks="pf13480068891153" path="/restrito/funcionario/utiliza_pontos.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/confirma_utiliza_pontos.xhtml" x="672" y="562" id="pf13480635418861" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf13480635418860" path="/restrito/funcionario/confirma_utiliza_pontos.xhtml"/>
@@ -15,7 +15,7 @@
   <nodes xsi:type="pageflow:PFPage" name="login_empresa.xhtml" x="122" y="2791" id="pf13509417769222" referenceLink="//@navigationRule.11/@navigationCase.0/@toViewId|" outlinks="pf134776975486511 pf13475759256731 pf13475759256732 pf13509417769223" inlinks="pf13509417769223" path="/login_empresa.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/confirma_registra_pontos.xhtml" x="338" y="2119" id="pf13509421578247" referenceLink="//@navigationRule.15/@navigationCase.0/@toViewId|" inlinks="pf135094254422410" path="/restrito/funcionario/confirma_registra_pontos.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/funcionario/registra_pontos.xhtml" x="122" y="2119" id="pf13509421578249" referenceLink="//@navigationRule.33/@navigationCase.0/@toViewId|" outlinks="pf135094254422410 pf135267660537316" inlinks="pf135267660537316" path="/restrito/funcionario/registra_pontos.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/cadastro_promocao.xhtml" x="122" y="4039" id="pf13510268467750" referenceLink="//@navigationRule.16/@fromViewId|" outlinks="pf13510268467751 pf13533276176570" inlinks="pf13533276176570" path="/restrito/empresa/cadastro_promocao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/cadastro_promocao.xhtml" x="122" y="4039" id="pf13510268467750" referenceLink="//@navigationRule.39/@navigationCase.0/@toViewId|" outlinks="pf13510268467751 pf13533276176570" inlinks="pf13533276176570" path="/restrito/empresa/cadastro_promocao.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/consultar_promocao.xhtml" x="400" y="4039" id="pf13510268467752" referenceLink="//@navigationRule.16/@navigationCase.0/@toViewId|" inlinks="pf13510268467751" path="/restrito/empresa/consultar_promocao.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/admin/consulta_empresa_ativa.xhtml" x="122" y="5216" id="pf13510996128830" referenceLink="//@navigationRule.17/@fromViewId|" outlinks="pf13510996128831" path="/restrito/admin/consulta_empresa_ativa.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/admin/detalha_empresa.xhtml" x="338" y="5408" id="pf13510996128832" referenceLink="//@navigationRule.26/@navigationCase.0/@toViewId|" inlinks="pf13510996128831 pf13525819567660" path="/restrito/admin/detalha_empresa.xhtml"/>
@@ -30,8 +30,6 @@
   <nodes xsi:type="pageflow:PFPage" name="restrito/admin/detalha_promocao.xhtml" x="338" y="6944" id="pf13524668451067" referenceLink="//@navigationRule.24/@navigationCase.0/@toViewId|" inlinks="pf13524668451066 pf13524587098543" path="/restrito/admin/detalha_promocao.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/admin/consulta_funcionario_desativado.xhtml" x="122" y="6368" id="pf13524670732299" referenceLink="//@navigationRule.25/@fromViewId|" outlinks="pf13524670732298" path="/restrito/admin/consulta_funcionario_desativado.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/admin/consulta_empresa_desativada.xhtml" x="122" y="5600" id="pf13525819567671" referenceLink="//@navigationRule.26/@fromViewId|" outlinks="pf13525819567660" path="/restrito/admin/consulta_empresa_desativada.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/admin/menu.xhtml" x="338" y="3655" id="pf13525874871492" referenceLink="//@navigationRule.27/@fromViewId|" outlinks="pf13525874871493" path="/restrito/admin/menu.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restrito/admin/detalha_admin.xhtml" x="554" y="3463" id="pf13525874871494" referenceLink="//@navigationRule.28/@navigationCase.0/@toViewId|" inlinks="pf13525874871493 pf13525884872985" path="/restrito/admin/detalha_admin.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/consulta_funcionario_ativo.xhtml" x="122" y="7520" id="pf13526028225806" referenceLink="//@navigationRule.29/@fromViewId|" outlinks="pf13526028225807" path="/restrito/empresa/consulta_funcionario_ativo.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/detalha_funcionario.xhtml" x="338" y="7712" id="pf13526028225808" referenceLink="//@navigationRule.30/@navigationCase.0/@toViewId|" inlinks="pf13526028225807 pf13526028620129" path="/restrito/empresa/detalha_funcionario.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/consulta_funcionario_desativado.xhtml" x="122" y="7904" id="pf135260286201210" referenceLink="//@navigationRule.30/@fromViewId|" outlinks="pf13526028620129" path="/restrito/empresa/consulta_funcionario_desativado.xhtml"/>
@@ -39,6 +37,8 @@
   <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/consulta_promocao_desativado.xhtml" x="122" y="8672" id="pf135261069029313" referenceLink="//@navigationRule.32/@fromViewId|" outlinks="pf135261069029314" path="/restrito/empresa/consulta_promocao_desativado.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="restrito/empresa/detalha_promocao.xhtml" x="338" y="8480" id="pf135261069029315" referenceLink="//@navigationRule.32/@navigationCase.0/@toViewId|" inlinks="pf135261069029312 pf135261069029314" path="/restrito/empresa/detalha_promocao.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="*" x="510" y="2628" id="pf13528031446095" referenceLink="//@navigationRule.38/@fromViewId|" outlinks="pf13528031446064" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/admin/consulta_admin.xhtml" x="156" y="8748" id="pf13535132720510" outlinks="pf13535133805511" path="/restrito/admin/consulta_admin.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="restrito/admin/detalha_admin.xhtml" x="480" y="8748" id="pf13535133805512" inlinks="pf13535133805511" path="/restrito/admin/detalha_admin.xhtml"/>
   <links id="pf13477686212377" target="pf13477675319566" source="pf13509417769220" outcome="loginConsumidor" redirect="true"/>
   <links id="pf13475759256732" target="pf134776975486514" source="pf13509417769222" outcome="loginFuncionario" redirect="true"/>
   <links id="pf13475759256731" target="pf134776975486513" source="pf13509417769222" outcome="loginEmpresa" redirect="true"/>
@@ -62,8 +62,6 @@
   <links id="pf13524668451066" target="pf13524668451067" source="pf13524668451065" outcome="detalhaPromocao"/>
   <links id="pf13524670732298" target="pf13524569626852" source="pf13524670732299" outcome="detalhaFuncionarioDesativado"/>
   <links id="pf13525819567660" target="pf13510996128832" source="pf13525819567671" outcome="detalhaEmpresaDesativada"/>
-  <links id="pf13525874871493" target="pf13525874871494" source="pf13525874871492" outcome="detalhaAdmin"/>
-  <links id="pf13525884872985" target="pf13525874871494" source="pf134776975486514" outcome="detalhaAdmin"/>
   <links id="pf13526028225807" target="pf13526028225808" source="pf13526028225806" outcome="detalhaFuncionario"/>
   <links id="pf13526028620129" target="pf13526028225808" source="pf135260286201210" outcome="detalhaFuncionarioDesativado"/>
   <links id="pf135261069029312" target="pf135261069029315" source="pf135261069029311" outcome="detalhaPromocao"/>
@@ -115,4 +113,5 @@
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
+  <links id="pf13535133805511" target="pf13535133805512" source="pf13535132720510" outcome="detalhaAdmin"/>
 </pageflow:Pageflow>

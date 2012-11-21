@@ -92,6 +92,10 @@ public class PromocaoController implements Serializable{
 		}
 	}
 	
+	public void editaPromocao(){
+		
+		promocaoDAO.editaPromocao(promocao);
+	}
 	//gets e setters
 	
 	public DataModel<Promocao> getListaPromocaoAtiva() { // lista promoçoes ativas

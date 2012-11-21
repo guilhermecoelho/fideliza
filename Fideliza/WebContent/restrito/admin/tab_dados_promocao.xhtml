@@ -37,12 +37,13 @@
 				</p:commandButton>
 				
 					<h:form id="dialogEdit">
-						<p:dialog id="funcEditDialog"  header="Consumidor" widgetVar="editor" >					
+						<p:dialog id="funcEditDialog"  header="Consumidor" widgetVar="editor" >	
+							<p:growl id="growl" showDetail="true" sticky="true" /> 					
 								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
 									
 									<h:inputHidden value="#{administradorController.promocao.idPromocao}"/>
 									<h:inputHidden/>
-									<h:outputText value="Nome: "/>
+									<h:outputText value="Nome "/>
 									<p:inputText value="#{administradorController.promocao.nome}"/>
 									<h:outputText value="Descrição"/>
 									<p:inputText value="#{administradorController.promocao.descricao}"/>
@@ -55,7 +56,7 @@
 										<f:selectItem itemLabel="Ativada" itemValue="true"/>
 										<f:selectItem itemLabel="Desativada" itemValue="false"/>
 									</p:selectOneRadio>
-									<p:commandButton value="Salvar" actionListener="#{promocaoController.editaPromocao}" oncomplete="editor.hide();" />
+									<p:commandButton value="Salvar" actionListener="#{administradorController.editaPromocao}" oncomplete="editor.hide();" update="growl" />
 								</h:panelGrid>
 						</p:dialog> 
 					</h:form>

@@ -1,0 +1,63 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<!-- 
+	author: guilherme coelho
+ -->
+<h:head>
+
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+
+</h:head>
+<h:body>
+	
+		<h:form>	
+				<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+				<p:dialog modal="true" widgetVar="statusDialog"    
+	        		draggable="false" closable="false">  
+	    		<p:graphicImage value="/images/ajaxload.gif" />  
+			</p:dialog>
+		<p:panelGrid >
+					<h:inputHidden value="#{administradorController.admin.idAdministrador}"/>
+					
+					<h:outputText value="nome:"/>
+					<h:outputText value="#{usuarioController.usuario.administrador.nome}"/>
+					<h:outputText value="Email:"/>
+					<h:outputText value="#{administradorController.admin.email}"/>
+		</p:panelGrid>
+				
+				<p:commandButton  value="editar" onclick="editor.show();" type="button" >
+					<f:setPropertyActionListener target="#{administradorController.admin}" value="#{administradorController.admin}"></f:setPropertyActionListener>
+				</p:commandButton>
+				
+					<h:form id="dialogEdit">
+						<p:dialog id="empEditDialog"  header="Consumidor" widgetVar="editor" >					
+								<h:panelGrid  id="displayEdit" columns="2" cellpadding="20" >
+									
+									<h:inputHidden value="#{administradorController.admin.idAdministrador}"/>
+									<h:inputHidden value="#{administradorController.admin.email}"/>
+									
+									<h:outputText value="Nome: "/>
+									<p:inputText value="#{administradorController.admin.nome}"/>
+									<h:outputText value="Status"/>
+									<p:selectOneRadio id="status" value="#{administradorController.admin.status}">
+										<f:selectItem itemLabel="Ativada" itemValue="true"/>
+										<f:selectItem itemLabel="Desativada" itemValue="false"/>
+									</p:selectOneRadio>
+									<p:commandButton value="Salvar" actionListener="#{empresaController.editaEmpresa}" oncomplete="editor.hide();" />
+									
+	
+								</h:panelGrid>
+						</p:dialog> 
+					</h:form>
+				</h:form>
+
+</h:body>
+</html>
