@@ -135,7 +135,7 @@ public class FuncionarioDAO {
 			e.printStackTrace();
 		} finally{
 			session.flush();
-			session.close();
+			session.clear();
 		}
 		return null;
 	}

@@ -28,8 +28,7 @@
   <context-param>
 	<param-name>primefaces.THEME</param-name>
 	<param-value>start</param-value>
-  </context-param>
-  
+  </context-param> 
   <error-page>
 	<error-code>404</error-code>
 	<location>/error/404.xhtml</location>

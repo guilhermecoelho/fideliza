@@ -4,6 +4,7 @@
 package br.com.fideliza.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Promocao implements Serializable {
 
@@ -20,11 +21,18 @@ public class Promocao implements Serializable {
 	private Empresa empresa;
 	private boolean status = false;
 	private boolean enviaEmail = false;
+	private byte[] imagem;
 	
 	// gets e setters
 	
 	public int getIdPromocao() {
 		return idPromocao;
+	}
+	public byte[] getImagem() {
+		return imagem;
+	}
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
 	}
 	public boolean isEnviaEmail() {
 		return enviaEmail;
@@ -72,7 +80,7 @@ public class Promocao implements Serializable {
 		this.status = status;
 	}
 	
-	//hashCode
+	//hashcode
 	
 	@Override
 	public int hashCode() {
@@ -84,7 +92,9 @@ public class Promocao implements Serializable {
 		result = prime * result
 				+ ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
+		result = prime * result + (enviaEmail ? 1231 : 1237);
 		result = prime * result + idPromocao;
+		result = prime * result + Arrays.hashCode(imagem);
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		temp = Double.doubleToLongBits(pontos);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -113,7 +123,11 @@ public class Promocao implements Serializable {
 				return false;
 		} else if (!empresa.equals(other.empresa))
 			return false;
+		if (enviaEmail != other.enviaEmail)
+			return false;
 		if (idPromocao != other.idPromocao)
+			return false;
+		if (!Arrays.equals(imagem, other.imagem))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -127,6 +141,4 @@ public class Promocao implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 }

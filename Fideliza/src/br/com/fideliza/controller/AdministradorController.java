@@ -171,21 +171,23 @@ public class AdministradorController {
 		empresa.setRegraPontuacao(regraPontuacao);
 		
 		empresaDAO.editaEmpresa(empresa);
+		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("atualizado com sucesso"));
 
 	}
 	
 	public void editaConsumidor() {
 		
 		consumidorDAO.editarConsumidor(consumidor);
+		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("atualizado com sucesso"));
 		
 	}
 	
 	public void editaFuncionario(){
 		
-		System.out.println("ID "+funcionario.getIdFuncionario());
 		Funcionario retorno = funcionarioDAO.buscaPorId(funcionario.getIdFuncionario());
-		System.out.println("ID: "+retorno.getEmpresa().getIdEmpresa());
+		funcionario.setEmpresa(retorno.getEmpresa());
 		funcionarioDAO.editaFuncionario(funcionario);
+		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("atualizado com sucesso"));
 	}
 
 	public boolean verificaEmail(String email, String confirmEmail) { // verifica se email está correto nosdois campos e se já existe algum cadastrado

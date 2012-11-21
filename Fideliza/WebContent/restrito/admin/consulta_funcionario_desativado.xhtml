@@ -52,7 +52,9 @@
 								<p:column filterBy="#{result.idFuncionario}" headerText="ID" footerText="ID">
 									<h:outputText value="#{result.idFuncionario}" />
 								</p:column>
-
+								<p:column filterBy="#{result.nome}" headerText="Nome" footerText="Nome">
+									<h:outputText value="#{result.nome}" />
+								</p:column>
 								<p:column filterBy="#{result.empresa.nome}" headerText="Empresa" footerText="Empresa">
 									<h:outputText value="#{result.empresa.nome}" />
 								</p:column>
