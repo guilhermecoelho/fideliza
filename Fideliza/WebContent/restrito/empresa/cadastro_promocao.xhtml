@@ -67,6 +67,8 @@
 					<p:spinner value="#{promocaoController.promocao.pontos}" id="pontos" min="0"
 						label="pontos" required="true" requiredMessage="Informe quantidade de pontos" />
 					<p:message  for="pontos"/>
+					<h:outputLabel for="foto" value="foto" />
+					<p:fileUpload id="upload"  value="#{promocaoController.fileUploadAction}" mode="simple" auto="true"/>
 			  		
 					<h:outputText value="Enviar por email?"/>
 						<p:selectBooleanCheckbox value="#{promocaoController.promocao.enviaEmail}"/>

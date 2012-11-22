@@ -4,6 +4,9 @@
 
 package br.com.fideliza.controller;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +15,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.EmailException;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.PromocaoDAO;
@@ -50,7 +56,29 @@ public class PromocaoController implements Serializable{
 	public PromocaoController(){
 
 	}
+	public void fileUploadAction(FileUploadEvent event) {
+        	 byte[] img = event.getFile().getContents();
+        	 String imagem = event.getFile().getFileName();
+        	 FacesContext facesContext = FacesContext.getCurrentInstance();
+        	 ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
+        	 String arquivo = scontext.getRealPath("/images/" +imagem);
+        	 criaArquivo(img, arquivo);
+        	 
+    }
 	
+	public void criaArquivo(byte [] bytes, String arquivo){
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(arquivo);
+			fos.write(bytes);
+			fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (IOException ex) {
+	      ex.printStackTrace();  
+	     }	
+	}
 	@SuppressWarnings("static-access")
 	public String salvaPromocao(){
 		
@@ -60,7 +88,6 @@ public class PromocaoController implements Serializable{
 		} else {
 			usuario = new RecuperaSessao().retornaUsuario();	
 			
-
 			promocao.setEmpresa(usuario.getEmpresa());
 			promocao.setStatus(true);
 			
