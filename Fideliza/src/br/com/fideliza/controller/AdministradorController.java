@@ -7,6 +7,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
+import org.hibernate.HibernateException;
+
 import br.com.fideliza.DAO.AdministradorDAO;
 import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.EmpresaDAO;
@@ -94,11 +96,6 @@ public class AdministradorController {
 		}
 	}
 
-	public void editaAdmin() {
-
-		adminDAO.editaAdmin(admin);
-	}
-
 	public String ativarEmpresa() {
 
 		empresa = selectedEmpresa;
@@ -173,58 +170,93 @@ public class AdministradorController {
 	}
 
 	public String detalhaConsumidorDesativado() {
-
+		
 		consumidor = new detalhaObjeto().detalhaConsumidorDesativado(selectedConsumidor.getCpf());
 
 		return "detalhaConsumidorDesativado";
 	}
-
+	
+	public void editaAdmin() {
+		try{
+			adminDAO.editaAdmin(admin);
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Atualização Completa", "item atualizado com sucesso"));
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao atualizar", "Erro"));
+		}
+	}
+	
 	public void editaEmpresa() {
-		regraPontuacao = new RegraPontuacaoDAO().buscaPorId(1);
-		empresa.setRegraPontuacao(regraPontuacao);
-		
-		empresaDAO.editaEmpresa(empresa);
-		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("atualizado com sucesso"));
+		try{
+			regraPontuacao = new RegraPontuacaoDAO().buscaPorId(1);
+			empresa.setRegraPontuacao(regraPontuacao);
+			empresaDAO.editaEmpresa(empresa);
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Atualização Completa", "item atualizado com sucesso"));
+			
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao atualizar", "Erro"));
+		}
 
 	}
 	
 	public void editaConsumidor() {
-		
-		consumidorDAO.editarConsumidor(consumidor);
-		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("atualizado com sucesso"));
-		
+		try{
+			consumidorDAO.editarConsumidor(consumidor);
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Atualização Completa", "item atualizado com sucesso"));
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao atualizar", "Erro"));
+		}
+
 	}
 	
 	public void editaFuncionario(){
-		
-		Funcionario retorno = funcionarioDAO.buscaPorId(funcionario.getIdFuncionario());
-		funcionario.setEmpresa(retorno.getEmpresa());
-		funcionarioDAO.editaFuncionario(funcionario);
-		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("atualizado com sucesso"));
+		try{
+			Funcionario retorno = funcionarioDAO.buscaPorId(funcionario.getIdFuncionario());
+			funcionario.setEmpresa(retorno.getEmpresa());
+			funcionarioDAO.editaFuncionario(funcionario);
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Atualização Completa", "item atualizado com sucesso"));
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao atualizar", "Erro"));
+		}
 	}
 	
 	public void editaPromocao(){
-		
-		Promocao retorno = promocaoDAO.buscaPorId(promocao.getIdPromocao());
-		promocao.setEmpresa(retorno.getEmpresa());
-		promocaoDAO.editaPromocao(promocao);
-		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("atualizado com sucesso"));
-		
+		try{
+			Promocao retorno = promocaoDAO.buscaPorId(promocao.getIdPromocao());
+			promocao.setEmpresa(retorno.getEmpresa());
+			promocaoDAO.editaPromocao(promocao);
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Atualização Completa", "item atualizado com sucesso"));
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao atualizar", "Erro"));
+		}
 	}
 
 	public boolean verificaEmail(String email, String confirmEmail) { // verifica se email está correto nosdois campos e se já existe algum cadastrado
 
 		if (!email.equals(confirmEmail)) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"email invalido", null));
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));
 			return false;
 		} else if (usuarioDAO.buscaPorUser(email) != null) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"email já cadastrado", null));
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email já cadastrado", null));
 			return false;
 		} else {
 			return true;
@@ -321,10 +353,8 @@ public class AdministradorController {
 
 			consumidor = new RecuperaSessao().retornaConsumidor();
 			if (listaUtilizaPontosConsumidor == null) {
-				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO()
-						.listaUtilizaPontosConsumidor(consumidor);
-				listaUtilizaPontosConsumidor = new ListDataModel<UtilizaPontos>(
-						utilizaPontos);
+				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosConsumidor(consumidor);
+				listaUtilizaPontosConsumidor = new ListDataModel<UtilizaPontos>(utilizaPontos);
 			}
 		}
 		return listaUtilizaPontosConsumidor;
@@ -360,10 +390,8 @@ public class AdministradorController {
 		if (listaUtilizaPontosEmpresa == null) {
 			empresa = new RecuperaSessao().retornaEmpresa();
 			if (listaUtilizaPontosEmpresa == null) {
-				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO()
-						.listaUtilizaPontosEmpresa(empresa);
-				listaUtilizaPontosEmpresa = new ListDataModel<UtilizaPontos>(
-						utilizaPontos);
+				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosEmpresa(empresa);
+				listaUtilizaPontosEmpresa = new ListDataModel<UtilizaPontos>(utilizaPontos);
 			}
 		}
 		return listaUtilizaPontosEmpresa;
@@ -387,10 +415,8 @@ public class AdministradorController {
 		if (listaRegistrosEmpresa == null) {
 
 			empresa = new RecuperaSessao().retornaEmpresa();
-			List<RegistraPontos> registraPontos = new RegistraPontosDAO()
-					.listaRegistroEmpresa(empresa);
-			listaRegistrosEmpresa = new ListDataModel<RegistraPontos>(
-					registraPontos);
+			List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroEmpresa(empresa);
+			listaRegistrosEmpresa = new ListDataModel<RegistraPontos>(registraPontos);
 		}
 		return listaRegistrosEmpresa;
 	}

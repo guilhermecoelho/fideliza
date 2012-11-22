@@ -36,12 +36,10 @@
 <div id="fundo">
 	<div id="conteudo">
 		<h:form id="editar">
-			<p:dataTable var="result" value="#{usuarioController.listaUmUsuario}">	
-			
-			<p:column filterBy="#{result.idUsuario}" headerText="Empresa">
-							<h:outputText value="#{result.idUsuario}" />
-						</p:column>
-			</p:dataTable>
+			<p:panelGrid>
+				<h:outputText value="CPF"/>
+				<h:outputText value="#{consumidorController.consumidor.cpf}"></h:outputText>
+			</p:panelGrid>
 				
 		</h:form>	
 	</div>

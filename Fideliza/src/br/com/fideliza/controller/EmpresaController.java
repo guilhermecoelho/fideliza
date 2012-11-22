@@ -10,8 +10,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
+import org.hibernate.HibernateException;
+
 import br.com.fideliza.DAO.EmpresaDAO;
 import br.com.fideliza.DAO.FuncionarioDAO;
+import br.com.fideliza.DAO.PromocaoDAO;
 import br.com.fideliza.DAO.RegistraPontosDAO;
 import br.com.fideliza.DAO.RegraPontuacaoDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
@@ -37,8 +40,10 @@ public class EmpresaController {
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private Funcionario funcionario = new Funcionario();
 	private Funcionario selectedFuncionario = new Funcionario();
+	private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 	private Promocao promocao = new Promocao();
 	private Promocao selectedPromocao = new Promocao();
+	private PromocaoDAO promocaoDAO = new PromocaoDAO();
 	private DataModel<Empresa> empresaLista; 
 	private DataModel<Empresa> listaEmpresaDesativada;
 	private DataModel<Empresa> listaEmpresaNova;
@@ -102,15 +107,6 @@ public class EmpresaController {
 		}
 	}
 
-	public void editaEmpresa() {
-		regraPontuacao = regraPontuacaoDAO.buscaPorId(1);
-		empresa.setRegraPontuacao(regraPontuacao);
-		
-		empresaDAO.editaEmpresa(empresa);
-		
-	}
-	
-
 	
 	public String detalhaFuncionario(){
 		
@@ -135,6 +131,44 @@ public class EmpresaController {
 		
 	}
 	
+	public void editaEmpresa() {
+		
+		regraPontuacao = regraPontuacaoDAO.buscaPorId(1);
+		empresa.setRegraPontuacao(regraPontuacao);
+		
+		empresaDAO.editaEmpresa(empresa);
+		
+	}
+	
+	public void editaFuncionario(){
+		try{
+			Funcionario retorno = funcionarioDAO.buscaPorId(funcionario.getIdFuncionario());
+			funcionario.setEmpresa(retorno.getEmpresa());
+			funcionarioDAO.editaFuncionario(funcionario);
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Atualização Completa", "item atualizado com sucesso"));
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao atualizar", "Erro"));
+		}
+	}
+	
+	public void editaPromocao(){
+		try{
+			Promocao retorno = promocaoDAO.buscaPorId(promocao.getIdPromocao());
+			promocao.setEmpresa(retorno.getEmpresa());
+			promocaoDAO.editaPromocao(promocao);
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Atualização Completa", "item atualizado com sucesso"));
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao atualizar", "Erro"));
+		}
+	}
 	
 	// gets e setters
 	

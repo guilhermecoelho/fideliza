@@ -12,18 +12,23 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
+
 	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+
 </h:head>
 <h:body>
-	<div id="topo">
+<div id="topo">
  
 	<div id="topoMeio">
     	<div id="banner">
-     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+     		<img src="images/fideliza2.png" alt="" />
         </div>
  	<div id="login">
  	<h:form>
- 		<p:button value="logout" action="#{usuarioController.logout}"/>
+ 		<p:menuButton value="login">
+ 			<p:menuitem value="Consumidor" url="login_consumidor.xhtml" ajax="false"/>
+ 			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false"/>
+ 		</p:menuButton>
  	</h:form>
  	</div>
 	</div>
@@ -35,12 +40,19 @@
 </div>
 <div id="fundo">
 	<div id="conteudo">
-
+	<h:form>
+			<p:dataGrid var="result" value="#{empresaController.empresaLista}" rows="5" paginator="true"
+			paginatorTemplate="  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
+        		<p:panel header="#{result.nome}">
+        			<h:panelGrid columns="1" style="width:100%" >
+						<h:outputText value="#{result.nome}"/>
+					</h:panelGrid>
+        		</p:panel>
+			</p:dataGrid>
 		
+	</h:form>
 	</div>
 </div>
-<div id="rodape">
-<h2> rodapé</h2>
-</div>
+
 </h:body>
 </html>

@@ -95,6 +95,11 @@ public class ConsumidorController {
 		
 	}
 	
+	public String detalhaUsuario(){
+		
+		return "detalhaUsuario";
+	}
+	
 	//gets e setters
 	
 	public DataModel<UtilizaPontos> getListaUtilizaPontosFuncionario() { // lista historico de registro de promoções por um funcionario

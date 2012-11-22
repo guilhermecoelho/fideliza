@@ -22,7 +22,7 @@ public class RecuperaSessao {
 	public Administrador retornaAdmin(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); 
-		return admin = (Administrador) session.getAttribute("administrador");
+		return  admin = (Administrador) session.getAttribute("administrador");
 	}
 	
 	public Usuario retornaUsuario(){

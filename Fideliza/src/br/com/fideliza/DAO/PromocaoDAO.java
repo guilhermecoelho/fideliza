@@ -107,7 +107,7 @@ public class PromocaoDAO {
 			e.printStackTrace();
 		} finally{
 			session.flush();
-			session.close();
+			session.clear();
 		}
 		return null;
 	}
