@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.EmailException;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
 
 import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.PromocaoDAO;
@@ -73,7 +72,7 @@ public class PromocaoController implements Serializable{
 			fos.write(bytes);
 			fos.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}catch (IOException ex) {
 	      ex.printStackTrace();  
