@@ -104,15 +104,6 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>login_consumidor.xhtml</display-name>
-		<from-view-id>/login_consumidor.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>loginConsumidor</from-outcome>
-			<to-view-id>/restrito/consumidor/index.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
 		<display-name>login_empresa.xhtml</display-name>
 		<from-view-id>/login_empresa.xhtml</from-view-id>
 		<navigation-case>
@@ -352,14 +343,6 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>*</display-name>
-		<from-view-id>/*</from-view-id>
-		<navigation-case>
-			<to-view-id>/index.xhtml</to-view-id>
-			<redirect></redirect>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
 		<display-name>restrito/empresa/cadastro_promocao.xhtml</display-name>
 		<from-view-id>/restrito/empresa/cadastro_promocao.xhtml</from-view-id>
 		<navigation-case>
@@ -373,6 +356,37 @@
 		<navigation-case>
 			<from-outcome>detalhaAdmin</from-outcome>
 			<to-view-id>/restrito/admin/detalha_admin.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginConsumidor</from-outcome>
+			<to-view-id>/restrito/consumidor/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>errorLogin</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>*</display-name>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_consumidor.xhtml</display-name>
+		<from-view-id>/login_consumidor.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginConsumidor</from-outcome>
+			<to-view-id>/restrito/consumidor/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

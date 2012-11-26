@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
+</h:head>
+<h:body>
+	<div id="tudo">
+		<div id="topo">
+
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<h:form>
+						<p:menuButton value="login">
+							<p:menuitem value="Consumidor" url="login_consumidor.xhtml"
+								ajax="false" />
+							<p:menuitem value="Empresa" url="login_empresa.xhtml"
+								ajax="false" />
+						</p:menuButton>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<div id="menu">
+			<div id="menuBotao">
+				<ui:include src="menu.xhtml" />
+			</div>
+		</div>
+		<div id="fundo">
+			<div id="conteudo">
+				<p:accordionPanel multiple="true" cache="true">
+					<p:tab title="Como funciona" >		
+							<h:panelGrid columns="2" cellpadding="10" >
+								
+								<h:outputText value="If you are already interesting in something of the above, and you cannot wait to get to work with 
+								the System and learn about the virtual market of discounts in more detail, examine how BonusPoints works. First, 
+								the Program site is a meeting place for buyers looking to buy with a profit, and sellers who want to increase sales. 
+								Second, the System BonusPoints itself does not sell anything, but merely arranges a meeting of potential 
+								customers and vendors, providing the required functionality of Bonus Points accumulation and marketing efforts 
+								of the Partners. And third, Members purchase for the nominal price, specified by the Partner at a rate of 
+								100% and the discount is accumulated for the future use when buying products from any other Partners of the 
+								System. For example, the airline you are flying during the year often enough, grants you a free flight."/>
+								<p:graphicImage value="images/customer-loyalty.JPG"/>
+							</h:panelGrid>
+					</p:tab>
+					<p:tab title="Vantagens para você" >		
+							<h:panelGrid columns="2" cellpadding="10">
+								<p:graphicImage value="images/loyalty-solutions-consulting-marketing-services.jpg"/>
+								<h:outputText value="If you are already interesting in something of the above, and you cannot wait to get to work with 
+								the System and learn about the virtual market of discounts in more detail, examine how BonusPoints works. First, 
+								the Program site is a meeting place for buyers looking to buy with a profit, and sellers who want to increase sales. 
+								Second, the System BonusPoints itself does not sell anything, but merely arranges a meeting of potential 
+								customers and vendors, providing the required functionality of Bonus Points accumulation and marketing efforts 
+								of the Partners. And third, Members purchase for the nominal price, specified by the Partner at a rate of 
+								100% and the discount is accumulated for the future use when buying products from any other Partners of the 
+								System. For example, the airline you are flying during the year often enough, grants you a free flight."/>
+								
+							</h:panelGrid>
+					</p:tab>
+					<p:tab title="Vantagem para o seu negócio">		
+							<h:panelGrid columns="2" cellpadding="10">
+								
+								<h:outputText value="If you are already interesting in something of the above, and you cannot wait to get to work with 
+								the System and learn about the virtual market of discounts in more detail, examine how BonusPoints works. First, 
+								the Program site is a meeting place for buyers looking to buy with a profit, and sellers who want to increase sales. 
+								Second, the System BonusPoints itself does not sell anything, but merely arranges a meeting of potential 
+								customers and vendors, providing the required functionality of Bonus Points accumulation and marketing efforts 
+								of the Partners. And third, Members purchase for the nominal price, specified by the Partner at a rate of 
+								100% and the discount is accumulated for the future use when buying products from any other Partners of the 
+								System. For example, the airline you are flying during the year often enough, grants you a free flight."/>
+								<p:graphicImage value="images/businessman.jpg"/>
+							</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</div>
+		</div>
+		<div id="rodape">
+			<h2>rodapé</h2>
+		</div>
+	</div>
+
+</h:body>
+</html>

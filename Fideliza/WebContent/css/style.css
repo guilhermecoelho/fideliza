@@ -6,23 +6,70 @@
 html, body{
 	height:100%;
 }
+/*
 #tudo{
-	min-height:100%;
+	height:100%;
+	width:100%;
 	position:relative;
 }
+#fundo {
+	width:100%;
+	height:100%;
+	margin: 0 auto;
+	padding-bottom: 75px;
+	
+
+}
+#conteudo {
+	width:900px;
+	margin: 0 auto;
+	padding:10px;
+	background:#FFF;
+	min-height:100%;	
+	padding-bottom: 75px;
+}
+#rodape {
+	width:100%;
+	height:75px;
+	background:#999;
+	position:absolute;
+	bottom: 0;
+	left:0;
+	margin-top:75px;
+}
+*/
+#tudo{
+	width: 100%;
+	position: relative;
+	min-height: 100%;
+}
+#fundo{
+
+}
+#conteudo{
+	width: 900px;
+	padding-bottom: 75px;
+	margin: 0 auto;
+	position: relative;
+}
+#rodape{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background: #999;
+}
+	
 #topo{
 		width:100%;
 		height:100px;
 		background-image:url(imagens/fundo_topo.png); background-repeat:repeat-x;
-		
 		border: 0px;
-	}
+}
 #topoMeio{
 	width:900px;
 	height:100px;
 	margin:0 auto;
 	text-align:left;
-	
 }
      
 #banner {
@@ -40,7 +87,6 @@ html, body{
 	width:100%;
 	height:80px;
 	margin-top: 5px;
-
 }
 
 #menuBotao {
@@ -48,30 +94,10 @@ html, body{
 	width:900px;
 	height:37px;
 	margin:0 auto;
-	
-	
-
 }
-
-#fundo {
-	width:100%;
-	
-	background-image:url(css/imagens/fundo.png); background-repeat:repeat-x;
-	padding-bottom: 50px;
-
-}
-#conteudo {
-	width:900px;
-	
-	margin: 0 auto;
-	padding:10px;
-	background:#FFF;
-	
-}
-
 #grid {
 	margin: 40px auto;
-	
+	padding-bottom: 200px;
 }
 #grid ul{
 	list-style-type: none;
@@ -91,8 +117,12 @@ html, body{
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#edf3f6',endColorstr='#d3e1e8');
 	background: -webkit-gradient(linear,left top,left bottom,from(#EDF3F6),to(#D3E1E8));
 	background: -moz-linear-gradient(top,#EDF3F6,#D3E1E8);
-	float: left;height: 200px;margin-right:20px;
-	padding: 10px;width: 260px;
+	float: left;
+	height: 200px;
+	margin-right:20px;
+	padding: 10px;
+	width: 260px;
+	
 }
 #menu .ui-menu, .ui-menu-list{
 	background-image:url(imagens/fundo_menu.png)  !important;
@@ -102,20 +132,20 @@ html, body{
 }
 #boxEsquerda {
 	width:490px;
-	height:741px;
+	height:100%;
 	float:left;
 	
 }
 #boxEsquerdaSucesso {
 	width:490px;
-	height:741px;
+	height:auto;
 	float:left;
 	margin: 40px auto;
 	
 }
 #boxDireita {
 	width:370px;
-	height:741px;
+	height:100%;
 	float:right;
 	margin: 40px auto;
 }
@@ -128,16 +158,10 @@ html, body{
 }
 #boxDireitaInferior {
 	width:370px;
-	height:441px;
+	height:auto;
 	background:#F3F3F3;
 	border: #C9C9C9 solid 1px;
 	float:right;
 }
-#rodape {
-	width:100%;
-	height:75px;
-	background:#999;
-	position:absolute;
-	bottom: 0;
-}
+
 
