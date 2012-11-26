@@ -6,76 +6,42 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
+<!-- 
+	author: guilherme coelho
+ -->
 <h:head>
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
 </h:head>
 <h:body>
-<div id="fundo">
-	<div id="topo">
- 
-	<div id="topoMeio">
-    	<div id="banner">
-     		 <h2> Imagem logo</h2>
-        </div>
 
-           
-	</div>
-</div>
-<div id="menu">
-	<div id="menuBotao">
-    	<ui:include src="menu.xhtml"/>
-    </div>
-</div>
-<div id="fundo">
-	<div id="conteudo">
-    	<div id="boxEsquerda">
-               <h:form>
-		Empresa
-		<p:messages id="error" showDetail="true" autoUpdate="true"/>
-		<h:panelGrid columns="2" cellpadding="5">
-						 
-			<h:outputText value="Usuario" />
-			<p:inputText value="#{usuarioController.usuario.user}" id="user"/>
-			
-			<h:outputText for="password" value="senha" />
-			<p:password value="#{usuarioController.usuario.password}" id="password" label = "senha"  required="true"/>
-					
-			<p:commandButton value="teste" action="#{usuarioController.login}" />
-
-		</h:panelGrid>
+	<h:form id="login">
+		<p:menuButton value="login">
+			<p:menuitem value="Consumidor" onclick="consumidor.show();"
+				type="button" />
+			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false" />
+		</p:menuButton>
 	</h:form>
 
-        </div>
-        <div id="boxDireitaSuperior">
-			<h:form>
-	Consumidor
-	
-		<h:panelGrid columns="2" cellpadding="5">
-				
-			 
-			<h:outputText value="CPF" />
-			<p:inputMask value="#{usuarioController.usuario.user}" id="cpf" mask="999.999.999-99"/>
-			
-			<h:outputText for="password" value="senha" />
-			<p:password value="#{usuarioController.usuario.password}" id="password" label = "senha"  required="true"/>
-			
-			
-			<p:commandButton value="teste" action="#{usuarioController.login}" />
+	<p:dialog id="consummidor" widgetVar="consumidor">
+		<h:form id="cons">
+			<p:messages id="error" autoUpdate="true" />
+			<h:panelGrid columns="2" cellpadding="5" process="@this">
 
+				<h:outputLabel value="CPF" />
+				<p:inputMask value="#{usuarioController.usuario.user}" id="cpf"
+					mask="999.999.999-99" required="true"
+					requiredMessage="Informe seu CPF" />
 
-		</h:panelGrid>
-	</h:form>
-        </div>
-		<div id="boxDireitaInferior">
-         <h2> coluna lateral inferior</h2>
-		</div>
-    </div>
-</div>
-<div id="rodape">
-<h2> rodapé</h2>
-</div>
-</div>
+				<h:outputLabel for="password" value="senha" />
+				<p:password value="#{usuarioController.usuario.password}"
+					id="password" label="senha" required="true"
+					requiredMessage="Preencha o campo senha" />
+
+				<p:commandButton value="Logar" action="#{usuarioController.login}" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
 
 </h:body>
+
+
 </html>

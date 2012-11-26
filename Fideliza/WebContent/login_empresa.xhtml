@@ -8,68 +8,70 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
 </h:head>
 <h:body>
-<div id="fundo">
-	<div id="topo">
- 
-	<div id="topoMeio">
-    	<div id="banner">
-     		<img src="images/fideliza2.png" alt="" />
-        </div>
- 	<div id="login">
- 	<h:form >
- 		<p:menuButton value="login" rendered="true">
- 			<p:menuitem value="Consumidor" url="login_consumidor.xhtml" ajax="false"/>
- 			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false"/>
- 		</p:menuButton>
- 	</h:form>
- 	</div>
-	</div>
-</div>
-<div id="menu">
-	<div id="menuBotao">
-    	<ui:include src="menu.xhtml"/>
-    </div>
-</div>
-<div id="fundo">
-	<div id="conteudo">
-		<div id="boxEsquerdaSucesso">
-			
-			<h:form>
-				<p:messages id="error"  autoUpdate="true"/>
-				<h:panelGrid columns="2" cellpadding="5" process="@form" >
-					
-					<h:outputText value="Email"/>
-					<p:inputText value="#{usuarioController.usuario.user}" id="email" required="true" requiredMessage="Informe seu email"/>
-						
-					<h:outputText for="password" value="senha" />
-					<p:password value="#{usuarioController.usuario.password}" id="password" label = "senha"  required="true" requiredMessage="Preencha o campo senha"/>
-					
-					<p:commandButton value="Logar" action="#{usuarioController.login}"  >
-						
-					</p:commandButton>
+	<div id="fundo">
+		<div id="topo">
 
-				</h:panelGrid>
-			</h:form>
-			
-		</div>
-		<div id="boxDireitaSucesso">
-			<div id ="grid">
-		    	<ul>		
-			    	<li>
-			    		Box1
-			    	</li>
-			    </ul>
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<h:form>
+						<p:menuButton value="login" rendered="true">
+							<p:menuitem value="Consumidor" url="login_consumidor.xhtml"
+								ajax="false" />
+							<p:menuitem value="Empresa" url="login_empresa.xhtml"
+								ajax="false" />
+						</p:menuButton>
+					</h:form>
+				</div>
 			</div>
-    	</div>
+		</div>
+		<div id="menu">
+			<div id="menuBotao">
+				<ui:include src="menu.xhtml" />
+			</div>
+		</div>
+		<div id="fundo">
+			<div id="conteudo">
+				<div id="boxEsquerdaSucesso">
+
+					<h:form>
+						<p:panel style="border: 0px">
+							<p:messages id="error" autoUpdate="true" />
+							<h:panelGrid columns="2" cellpadding="5" process="@form">
+								<h:outputText value="Email" />
+								<p:inputText value="#{usuarioController.usuario.user}"
+									id="email" required="true" requiredMessage="Informe seu email" />
+								<h:outputText for="password" value="senha" />
+								<p:password value="#{usuarioController.usuario.password}"
+									id="password" label="senha" required="true"
+									requiredMessage="Preencha o campo senha" />
+								<p:commandButton value="Logar"
+									action="#{usuarioController.login}">
+								</p:commandButton>
+							</h:panelGrid>
+						</p:panel>
+					</h:form>
+
+				</div>
+				<div id="boxDireitaSucesso">
+					<div id="grid">
+						<ul>
+							<li>Box1</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="rodape">
+			<h2>rodapé</h2>
+		</div>
 	</div>
-</div>
-<div id="rodape">
-<h2> rodapé</h2>
-</div>
-</div>
 
 </h:body>
 </html>

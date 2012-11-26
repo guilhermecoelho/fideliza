@@ -12,100 +12,103 @@
 
 <h:head>
 
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
 
 </h:head>
 <h:body>
 	<div id="tudo">
-<div id="topo">
- 
-	<div id="topoMeio">
-    	<div id="banner">
-     		<img src="images/fideliza2.png" alt="" />
-        </div>
- 	<div id="login">
- 	<h:form>
- 		<p:menuButton value="login">
- 			<p:menuitem value="Consumidor" url="login_consumidor.xhtml" ajax="false"/>
- 			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false"/>
- 		</p:menuButton>
- 	</h:form>
- 	</div>
-	</div>
-</div>
-<div id="menu">
-	<div id="menuBotao">
-    	<ui:include src="menu.xhtml"/>
-    </div>
-</div>
-<div id="fundo">
-	<div id="conteudo">
-		<div id="boxEsquerda">
-			<div id="grid">
-				<ul>		
-			    	<li>
-			    		Box1
-			    	</li>	
-		    	</ul>
+		<div id="topo">
+
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<h:form>
+						<p:menuButton value="login">
+							<p:menuitem value="Consumidor" url="login_consumidor.xhtml"
+								ajax="false" />
+							<p:menuitem value="Empresa" url="login_empresa.xhtml"
+								ajax="false" />
+						</p:menuButton>
+					</h:form>
+				</div>
 			</div>
 		</div>
-		<div id="boxDireita">
-			<h:form id="form">
-				<p:panel header="Cadastro Empresa">
-				
-					<p:messages id="msgError" autoUpdate="true" />
-					
-					<h:panelGrid columns="3" cellpadding="5">
-					
-						<h:outputLabel for="nome" value="nome *" />
-						<p:inputText value="#{empresaController.empresa.nome}" id="nome"
-							label="nome" required="true" requiredMessage="O campo nome deve ser preenchido"/>
-						<p:message for="nome"  />
-		
-						<h:outputLabel for="cnpj" value="CNPJ *" />
-						<p:inputMask value="#{empresaController.empresa.cnpj}" id="cnpj"
-							mask="99.999.999/9999-99" label="cpf" required="true" requiredMessage="Informe seu CNPJ" />
-						<p:message  for="cnpj"/>
-						
-						<h:outputLabel for="email" value="email" />
-						<p:inputText value="#{empresaController.empresa.email}" id="email"
-							label="email" required="true" requiredMessage="Informe seu email" />
-						<p:message  for="email"/>
-						
-						<h:outputLabel for="emailConfirm" value="confirmar email" />
-						<p:inputText value="#{empresaController.empresa.confirmEmail}" id="emailConfirm"
-							label="emailConfirm" required="true" requiredMessage="Confirme seu email" />
-						<p:message  for="emailConfirm"/>
-						
-						<h:outputLabel for="password" value="senha" />
-						<p:password value="#{empresaController.empresa.password}" id="password"
-							label="senha" match="passwordConfirm" feedback="true"
-							promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
-							strongLabel="forte" required="true" requiredMessage="Digite uma senha" validatorMessage="Senha não bate"/>
-							<p:message  for="password"/>
-		
-						<h:outputLabel for="password" value="confirmar senha" />
-						<p:password value="#{empresaController.empresa.password}"
-							id="passwordConfirm" label="confirmar senha" feedback="true"
-							promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
-							strongLabel="forte"  required="true" requiredMessage="Confirme a senha" />
-							<p:message  for="passwordConfirm"/>
-							
-						
-						<p:commandButton value="Salvar"
-							action="#{empresaController.salvaEmpresa}" ajax="false"/>
-						<p:commandButton value="Limpar campos"
-							type="reset"/>
-		
-					</h:panelGrid>
-				</p:panel>
-			</h:form>
+		<div id="menu">
+			<div id="menuBotao">
+				<ui:include src="menu.xhtml" />
+			</div>
+		</div>
+		<div id="fundo">
+			<div id="conteudo">
+				<div id="boxEsquerda">
+					<img src="images/shakehand.jpg" />
+				</div>
+				<div id="boxDireita">
+					<h:form id="form">
+						<p:panel header="Cadastro Empresa">
+
+							<p:messages id="msgError" autoUpdate="true" />
+
+							<h:panelGrid columns="3" cellpadding="5">
+
+								<h:outputLabel for="nome" value="nome *" />
+								<p:inputText value="#{empresaController.empresa.nome}" id="nome"
+									label="nome" required="true"
+									requiredMessage="O campo nome deve ser preenchido" />
+								<p:message for="nome" />
+
+								<h:outputLabel for="cnpj" value="CNPJ *" />
+								<p:inputMask value="#{empresaController.empresa.cnpj}" id="cnpj"
+									mask="99.999.999/9999-99" label="cpf" required="true"
+									requiredMessage="Informe seu CNPJ" />
+								<p:message for="cnpj" />
+
+								<h:outputLabel for="email" value="email" />
+								<p:inputText value="#{empresaController.empresa.email}"
+									id="email" label="email" required="true"
+									requiredMessage="Informe seu email" />
+								<p:message for="email" />
+
+								<h:outputLabel for="emailConfirm" value="confirmar email" />
+								<p:inputText value="#{empresaController.empresa.confirmEmail}"
+									id="emailConfirm" label="emailConfirm" required="true"
+									requiredMessage="Confirme seu email" />
+								<p:message for="emailConfirm" />
+
+								<h:outputLabel for="password" value="senha" />
+								<p:password value="#{empresaController.empresa.password}"
+									id="password" label="senha" match="passwordConfirm"
+									feedback="true" promptLabel="digite uma senha"
+									weakLabel="fraca" goodLabel="boa" strongLabel="forte"
+									required="true" requiredMessage="Digite uma senha"
+									validatorMessage="Senha não bate" />
+								<p:message for="password" />
+
+								<h:outputLabel for="password" value="confirmar senha" />
+								<p:password value="#{empresaController.empresa.password}"
+									id="passwordConfirm" label="confirmar senha" feedback="true"
+									promptLabel="digite uma senha" weakLabel="fraca"
+									goodLabel="boa" strongLabel="forte" required="true"
+									requiredMessage="Confirme a senha" />
+								<p:message for="passwordConfirm" />
+
+
+								<p:commandButton value="Salvar"
+									action="#{empresaController.salvaEmpresa}" ajax="false" />
+								<p:commandButton value="Limpar campos" type="reset" />
+
+							</h:panelGrid>
+						</p:panel>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<div id="rodape">
+			<h2>rodapé</h2>
 		</div>
 	</div>
-</div>
-<div id="rodape">
-<h2> rodapé</h2>
-</div>
-</div>
 </h:body>
 </html>
