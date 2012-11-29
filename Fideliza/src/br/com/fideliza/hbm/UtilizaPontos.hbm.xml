@@ -11,6 +11,9 @@
         <property name="valorCompra" type="double">
             <column name="DOUBLE_VALOR_COMPRA_UTIP" />
         </property>
+         <property name="valorDesconto" type="double">
+            <column name="DOUBLE_VALOR_DESCONTO_UTIP" />
+        </property>
 
         <many-to-one name="funcionario" class="br.com.fideliza.model.Funcionario" fetch="join">
             <column name="INT_FUNCIONARIO_UTIP" />
