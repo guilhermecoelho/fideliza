@@ -44,10 +44,13 @@
 					mask="999.999.999-99" label="cpf" required="true" requiredMessage="Informe CPF consumidor" />
 				<p:message  for="cpf"/>	
 				
+				<h:outputLabel for="valorCompra" value="Valor da compra"/>
+				<p:inputText value="#{utilizaPontosController.utilizaPontos.valorCompra}" id="valorCompra"/>
+				<p:message for="valorCompra"/>
+				
 				<p:commandButton value="Continuar"
 					action="#{utilizaPontosController.mostraPromocoes}" ajax="false"/>
-				<p:commandButton value="Limpar campos"
-					type="reset"/>
+
 
 				</h:panelGrid>
 			</p:panel>

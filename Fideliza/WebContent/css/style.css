@@ -132,7 +132,7 @@ html, body{
 }
 #boxEsquerda {
 	width:490px;
-	height:100%;
+	height:auto;
 	float:left;
 	
 }
@@ -140,19 +140,19 @@ html, body{
 	width:490px;
 	height:auto;
 	float:left;
-	margin: 40px auto;
+	
 	
 }
 #boxDireita {
 	width:370px;
-	height:100%;
+	height:auto;
 	float:right;
 	margin: 40px auto;
 }
 
 #boxDireitaSucesso {
 	width:370px;
-	height:741px;
+	height:auto;
 	float:right;
 	
 }

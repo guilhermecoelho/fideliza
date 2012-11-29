@@ -12,35 +12,13 @@
 <h:head>
 </h:head>
 <h:body>
-
-	<h:form id="login">
-		<p:menuButton value="login">
-			<p:menuitem value="Consumidor" onclick="consumidor.show();"
-				type="button" />
+	<h:form>
+		<p:menuButton value="login" rendered="true">
+			<p:menuitem value="Consumidor" url="login_consumidor.xhtml"
+				ajax="false" />
 			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false" />
 		</p:menuButton>
 	</h:form>
-
-	<p:dialog id="consummidor" widgetVar="consumidor">
-		<h:form id="cons">
-			<p:messages id="error" autoUpdate="true" />
-			<h:panelGrid columns="2" cellpadding="5" process="@this">
-
-				<h:outputLabel value="CPF" />
-				<p:inputMask value="#{usuarioController.usuario.user}" id="cpf"
-					mask="999.999.999-99" required="true"
-					requiredMessage="Informe seu CPF" />
-
-				<h:outputLabel for="password" value="senha" />
-				<p:password value="#{usuarioController.usuario.password}"
-					id="password" label="senha" required="true"
-					requiredMessage="Preencha o campo senha" />
-
-				<p:commandButton value="Logar" action="#{usuarioController.login}" />
-			</h:panelGrid>
-		</h:form>
-	</p:dialog>
-
 </h:body>
 
 

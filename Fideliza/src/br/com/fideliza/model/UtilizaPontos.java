@@ -16,6 +16,7 @@ public class UtilizaPontos implements Serializable{
 	
 	private int idUtilizaPontos;
 	private double valorCompra;
+	private double valorDesconto;
 	private String cpf;
 	private Funcionario funcionario;
 	private Empresa empresa;
@@ -28,6 +29,12 @@ public class UtilizaPontos implements Serializable{
 	
 	public int getIdUtilizaPontos() {
 		return idUtilizaPontos;
+	}
+	public double getValorDesconto() {
+		return valorDesconto;
+	}
+	public void setValorDesconto(double valorDesconto) {
+		this.valorDesconto = valorDesconto;
 	}
 	public Time getHoraRegistro() {
 		return horaRegistro;
@@ -103,6 +110,8 @@ public class UtilizaPontos implements Serializable{
 		long temp;
 		temp = Double.doubleToLongBits(valorCompra);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(valorDesconto);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 	@Override
@@ -153,6 +162,9 @@ public class UtilizaPontos implements Serializable{
 			return false;
 		if (Double.doubleToLongBits(valorCompra) != Double
 				.doubleToLongBits(other.valorCompra))
+			return false;
+		if (Double.doubleToLongBits(valorDesconto) != Double
+				.doubleToLongBits(other.valorDesconto))
 			return false;
 		return true;
 	}
