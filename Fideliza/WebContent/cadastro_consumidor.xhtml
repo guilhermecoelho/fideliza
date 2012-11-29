@@ -53,7 +53,7 @@
 						<p:panel header="Cadastro Consumidor">
 
 							<p:messages id="msgError" autoUpdate="true" />
-
+							<p:growl id="growl" showDetail="true" sticky="true"/> 	
 							<h:panelGrid columns="3" cellpadding="5" process="@this">
 
 								<h:outputLabel for="nome" value="nome *" />
@@ -101,7 +101,7 @@
 
 
 								<p:commandButton value="Salvar"
-									action="#{consumidorController.salvaConsumidor}" ajax="false" />
+									action="#{consumidorController.salvaConsumidor}" ajax="false" update=":growl"/>
 								<p:commandButton value="Limpar campos" type="reset" />
 
 							</h:panelGrid>

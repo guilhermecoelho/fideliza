@@ -12,6 +12,8 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.HibernateException;
+
 import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.RegistraPontosDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
@@ -40,64 +42,115 @@ public class ConsumidorController {
 	}
 
 	public String salvaConsumidor() {
+		try{
+			if(verificaEmail(consumidor.getEmail(), consumidor.getEmailConfirm()) == true && verificaCPF(consumidor.getCpf()) == true){	//verifica email e cpf
+				
+				consumidor.setStatus(true);
+				
+				user.setConsumidor(consumidor); 
+				user.setPassword(consumidor.getPassword());
+				user.setUser(consumidor.getCpf());
+				user.setPermissaoConsumidor(true);
+				
+				consumidorDAO.adicionaConsumidor(consumidor);
+				usuarioDAO.adicionaUsuario(user); // cria usuario usando o CPF como user
+				
+				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(null, "seu cadastro foi realizadocom sucesso", "Parabens!"));
+				return "salvaConsumidor";
+				
 
-		if(verificaEmail(consumidor.getEmail(), consumidor.getEmailConfirm()) == true && verificaCPF(consumidor.getCpf()) == true){	//verifica email e cpf
-			
-			consumidor.setStatus(true);
-			
-			user.setConsumidor(consumidor); 
-			user.setPassword(consumidor.getPassword());
-			user.setUser(consumidor.getCpf());
-			user.setPermissaoConsumidor(true);
-			
-			consumidorDAO.adicionaConsumidor(consumidor);
-			usuarioDAO.adicionaUsuario(user); // cria usuario usando o CPF como user
-			
-			
-			return "salvaConsumidor";
-
-		} else {
+			} else {
+				return "erroConsumidor";
+			}
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
 			return "erroConsumidor";
-		}
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao cadastrar", "Erro"));
+			return "erroConsumidor";
+		}		
 	}
+		
 	
 	public boolean verificaEmail(String email, String confirmEmail) { //verifica se email está correto nos dois campos e se já existe algum cadastrado
-
-		if (!email.equals(confirmEmail)) {
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));			
+		
+		try{
+			if (!email.equals(confirmEmail)) {
+				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email invalido", null));			
+				return false;
+			}else if(usuarioDAO.buscaPorUser(email) != null){
+				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email já cadastrado", null));			
+				return false;
+			} else {
+				return true;
+			}	
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
 			return false;
-		}else if(usuarioDAO.buscaPorUser(email) != null){
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"email já cadastrado", null));			
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
 			return false;
-		} else {
-			return true;
 		}
+		
 	}
 	
 	public boolean verificaCPF(String cpf) { // verifica se cpf já esta cadastrado
-
-		Consumidor retorno = consumidorDAO.buscaPorCPF(cpf);
-
-		if (retorno != null) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"CPF já cadastrado", null));
+		
+		try{	
+			Consumidor retorno = consumidorDAO.buscaPorCPF(cpf);
+	
+			if (retorno != null) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"CPF já cadastrado", null));
+				return false;
+				
+			} else {
+				return true;
+			}
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
 			return false;
-			
-		} else {
-			return true;
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return false;
 		}
 	}
 
 	public String editaConsumidor() {
-
-		consumidorDAO.editarConsumidor(consumidor);
 		
-		return "editadoConsumidor";
-		
+		try{
+			consumidorDAO.editarConsumidor(consumidor);
+			
+			return "editadoConsumidor";
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "erroEditaConsumidor";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar tarefa", "Erro"));
+			return "erroEditaConsumidor";
+		}
 	}
 	
 	public String detalhaUsuario(){
 		
-		return "detalhaUsuario";
+		try{
+			return "detalhaUsuario";
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "erroDetalhaUsuario";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "erroDetalhaUsuario";
+		}
 	}
 	
 	//gets e setters

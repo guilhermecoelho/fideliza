@@ -100,7 +100,7 @@
 		<from-view-id>/cadastro_consumidor.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>salvaConsumidor</from-outcome>
-			<to-view-id>/sucesso.xhtml</to-view-id>
+			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -362,14 +362,6 @@
 		<display-name>login.xhtml</display-name>
 		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>loginConsumidor</from-outcome>
-			<to-view-id>/restrito/consumidor/index.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>login.xhtml</display-name>
-		<from-view-id>/login.xhtml</from-view-id>
-		<navigation-case>
 			<from-outcome>errorLogin</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>
@@ -387,6 +379,7 @@
 		<navigation-case>
 			<from-outcome>loginConsumidor</from-outcome>
 			<to-view-id>/restrito/consumidor/index.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	
