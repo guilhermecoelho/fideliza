@@ -19,6 +19,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.EmailException;
+import org.hibernate.HibernateException;
 import org.primefaces.event.FileUploadEvent;
 
 import br.com.fideliza.DAO.ConsumidorDAO;
@@ -81,40 +82,50 @@ public class PromocaoController implements Serializable{
 	@SuppressWarnings("static-access")
 	public String salvaPromocao(){
 		
-		if(promocao.getPontos() <=0 || promocao.getDesconto() <=0 || promocao.getDesconto() > 100){ //verifica se os valores de ponto e desconto são válidos
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Valor inválido", null));
-			return "errorPromocao";
-		} else {
-			usuario = new RecuperaSessao().retornaUsuario();	
-			
-			promocao.setEmpresa(usuario.getEmpresa());
-			promocao.setStatus(true);
-			
-			promocaoDAO.adicionaPromocao(promocao);
-			
-			if(promocao.isEnviaEmail() == true){ // se a opção "enviar email" for marcada, manda um email sobra a promoção para todos os consumidores com pontos suficientes para usar ela
-				if(listaConsumidor == null){
-					List<Consumidor> consumidor = new ConsumidorDAO().listaPorPontos(promocao.getPontos());
-					listaConsumidor = new ArrayList<Consumidor>(consumidor);
-				}
-				for(int i=0; i < listaConsumidor.size();i++){
-					
-					consumidor = listaConsumidor.get(i);
-					
-					mensagem.setDestino(consumidor.getEmail());
-					mensagem.setTitulo("Uma nova promoção para você!");
-					mensagem.setMensagem("Caro sr." +consumidor.getNome()+", o sitema fideliza informa que houve a utilização dos pontos de sua conta . Segue as informações sobre a operação \n\n" +
-							"Estabelecimento: "+promocao.getEmpresa().getNome()+"\n\n"+
-							"Promocao :"+promocao.getNome()+"\n\n"+
-							"Quantidade de pontos utilizados: "+promocao.getPontos()+"\n\n");
-					try{
-						new EmailUtil().enviaEmail(mensagem);
-					}catch (EmailException ex) {
-						FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erro! Occoreu um erro ao enviar a mensagem.","Erro"));
+		try{
+			if(promocao.getPontos() <=0 || promocao.getDesconto() <=0 || promocao.getDesconto() > 100){ //verifica se os valores de ponto e desconto são válidos
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Valor inválido", null));
+				return "errorPromocao";
+			} else {
+				usuario = new RecuperaSessao().retornaUsuario();	
+				
+				promocao.setEmpresa(usuario.getEmpresa());
+				promocao.setStatus(true);
+				
+				promocaoDAO.adicionaPromocao(promocao);
+				
+				if(promocao.isEnviaEmail() == true){ // se a opção "enviar email" for marcada, manda um email sobra a promoção para todos os consumidores com pontos suficientes para usar ela
+					if(listaConsumidor == null){
+						List<Consumidor> consumidor = new ConsumidorDAO().listaPorPontos(promocao.getPontos());
+						listaConsumidor = new ArrayList<Consumidor>(consumidor);
+					}
+					for(int i=0; i < listaConsumidor.size();i++){
+						
+						consumidor = listaConsumidor.get(i);
+						
+						mensagem.setDestino(consumidor.getEmail());
+						mensagem.setTitulo("Uma nova promoção para você!");
+						mensagem.setMensagem("Caro sr." +consumidor.getNome()+", o sitema fideliza informa que houve a utilização dos pontos de sua conta . Segue as informações sobre a operação \n\n" +
+								"Estabelecimento: "+promocao.getEmpresa().getNome()+"\n\n"+
+								"Promocao :"+promocao.getNome()+"\n\n"+
+								"Quantidade de pontos utilizados: "+promocao.getPontos()+"\n\n");
+						try{
+							new EmailUtil().enviaEmail(mensagem);
+						}catch (EmailException ex) {
+							FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erro! Occoreu um erro ao enviar a mensagem.","Erro"));
+						}
 					}
 				}
+				return "salvaPromocao";
 			}
-			return "salvaPromocao";
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorPromocao";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorPromocao";
 		}
 	}
 	

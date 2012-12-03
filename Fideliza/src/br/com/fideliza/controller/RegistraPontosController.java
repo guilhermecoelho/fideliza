@@ -12,6 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.mail.EmailException;
+import org.hibernate.HibernateException;
 
 import br.com.fideliza.DAO.ConsumidorDAO;
 import br.com.fideliza.DAO.RegistraPontosDAO;
@@ -37,75 +38,82 @@ public class RegistraPontosController {
 
 	@SuppressWarnings("static-access")
 	public String registraPonto() {
-		usuario = new RecuperaSessao().retornaUsuario();
-		
-		registraPontos.setFuncionario(usuario.getFuncionario());
-
-		// recupera consumidor
-
-		consumidor = consumidorDAO.buscaPorCPF(registraPontos.getCpf());
-		
-
-		if (consumidor != null) {
-			if(registraPontos.getValorCompra() <= 0){
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Valor inválido", null));
-				return "errorRegistro";
-			}else {
-					
-				registraPontos.setConsumidor(consumidor);
+		try{ 
+			usuario = new RecuperaSessao().retornaUsuario();
 			
-				registraPontos.setEmpresa(usuario.getFuncionario().getEmpresa());
-				
-				registraPontos.setDataRegistro(new Date(System.currentTimeMillis()));
-				
-				registraPontos.setHoraRegistro(new Time(System.currentTimeMillis()));
-				
-				
-				// recupera regra de pontos
+			registraPontos.setFuncionario(usuario.getFuncionario());
 	
-				double valorPontos = registraPontos.getFuncionario().getEmpresa().getRegraPontuacao().getValorPonto();
-				double valorReal = registraPontos.getFuncionario().getEmpresa().getRegraPontuacao().getValorReal();
+			// recupera consumidor
 	
-				// calcula a quantidade de pontos a partir do valor da compra, seguindo a regra de pontos
+			consumidor = consumidorDAO.buscaPorCPF(registraPontos.getCpf());
 	
-				double pontosTotal = (valorPontos * registraPontos.getValorCompra())/ valorReal;
-				registraPontos.setQuantidadePontos(pontosTotal);
-	
-				// atualiza saldo do consumidor
-	
-				double saldoAntigo = consumidor.getPontos();
-				double saldoNovo = pontosTotal + saldoAntigo;
-	
-				consumidor.setPontos(saldoNovo);
-	
-				consumidorDAO.editarConsumidor(consumidor);
+			if (consumidor != null) {
+				if(registraPontos.getValorCompra() <= 0){
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Valor inválido", null));
+					return "errorRegistro";
+				}else {
+						
+					registraPontos.setConsumidor(consumidor);
 				
-				//Salva registro
-				
-				registraPontosDAO.SalvaRegistro(registraPontos);
-				
-				mensagem.setDestino(consumidor.getEmail());
-				mensagem.setTitulo("Registro de Pontos Realizado Sistema Fideliza");
-				mensagem.setMensagem("Caro sr." +consumidor.getNome()+", o sitema fideliza informa que houve um registro de pontos em sua conta. Segue as informações sobre a operação \n\n" +
-								"Estabelecimento: "+registraPontos.getEmpresa().getNome()+"\n\n"+
-								"Valor da compra :"+registraPontos.getValorCompra()+"\n\n"+
-								"Pontos registrados: "+registraPontos.getQuantidadePontos()+"\n\n"+
-								"Data: " +registraPontos.getDataRegistro()+"\n\n"+
-								"Hora: "+registraPontos.getHoraRegistro()+"\n\n"+
-								"Saldo de pontos: "+registraPontos.getConsumidor().getPontos());
-				
-				try{
-					new EmailUtil().enviaEmail(mensagem);
-				}catch (EmailException ex) {
-					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erro! Occoreu um erro ao enviar a mensagem.","Erro"));
+					registraPontos.setEmpresa(usuario.getFuncionario().getEmpresa());
+					
+					registraPontos.setDataRegistro(new Date(System.currentTimeMillis()));
+					
+					registraPontos.setHoraRegistro(new Time(System.currentTimeMillis()));
+					
+					
+					// recupera regra de pontos
+		
+					double valorPontos = registraPontos.getFuncionario().getEmpresa().getRegraPontuacao().getValorPonto();
+					double valorReal = registraPontos.getFuncionario().getEmpresa().getRegraPontuacao().getValorReal();
+		
+					// calcula a quantidade de pontos a partir do valor da compra, seguindo a regra de pontos
+		
+					double pontosTotal = (valorPontos * registraPontos.getValorCompra())/ valorReal;
+					registraPontos.setQuantidadePontos(pontosTotal);
+		
+					// atualiza saldo do consumidor
+		
+					double saldoAntigo = consumidor.getPontos();
+					double saldoNovo = pontosTotal + saldoAntigo;
+		
+					consumidor.setPontos(saldoNovo);
+		
+					consumidorDAO.editarConsumidor(consumidor);
+					
+					//Salva registro
+					
+					registraPontosDAO.SalvaRegistro(registraPontos);
+					
+					mensagem.setDestino(consumidor.getEmail());
+					mensagem.setTitulo("Registro de Pontos Realizado Sistema Fideliza");
+					mensagem.setMensagem("Caro sr." +consumidor.getNome()+", o sitema fideliza informa que houve um registro de pontos em sua conta. Segue as informações sobre a operação \n\n" +
+									"Estabelecimento: "+registraPontos.getEmpresa().getNome()+"\n\n"+
+									"Valor da compra :"+registraPontos.getValorCompra()+"\n\n"+
+									"Pontos registrados: "+registraPontos.getQuantidadePontos()+"\n\n"+
+									"Data: " +registraPontos.getDataRegistro()+"\n\n"+
+									"Hora: "+registraPontos.getHoraRegistro()+"\n\n"+
+									"Saldo de pontos: "+registraPontos.getConsumidor().getPontos());
+					
+					try{
+						new EmailUtil().enviaEmail(mensagem);
+					}catch (EmailException ex) {
+						FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erro! Occoreu um erro ao enviar a mensagem.","Erro"));
+					}
+					return "pontosRegistrados";
 				}
 				
-	
-				return "pontosRegistrados";
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"CPF invalido", null));
+				return "errorRegistro";
 			}
-			
-		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"CPF invalido", null));
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorRegistro";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
 			return "errorRegistro";
 		}
 	}

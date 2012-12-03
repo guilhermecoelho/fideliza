@@ -76,104 +76,208 @@ public class AdministradorController {
 	}
 
 	public String salvaAdmin() {
-
-		if (verificaEmail(admin.getEmail(), admin.getConfirmEmail()) == true) {
-
-			admin.setStatus(true);
-
-			user.setAdministrador(admin);
-			user.setUser(admin.getEmail());
-			user.setPassword(admin.getPassword());
-			user.setPermissaoAdministrador(true);
-
-			adminDAO.salvaAdmin(admin);
-			usuarioDAO.adicionaUsuario(user);
-
-			return "salvaAdmin";
-
-		} else {
+		
+		try{
+			if (verificaEmail(admin.getEmail(), admin.getConfirmEmail()) == true) {
+	
+				admin.setStatus(true);
+	
+				user.setAdministrador(admin);
+				user.setUser(admin.getEmail());
+				user.setPassword(admin.getPassword());
+				user.setPermissaoAdministrador(true);
+	
+				adminDAO.salvaAdmin(admin);
+				usuarioDAO.adicionaUsuario(user);
+	
+				return "salvaAdmin";
+	
+			} else {
+				return "errorAdmin";
+			}
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorAdmin";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
 			return "errorAdmin";
 		}
 	}
 
 	public String ativarEmpresa() {
-
-		empresa = selectedEmpresa;
-		empresa.setStatus(true);
-		empresa.setNovaEmpresa(false);
-
-		empresaDAO.ativaEmpresa(empresa);
-
-		return "ativarEmpresa";
+		
+		try{
+			empresa = selectedEmpresa;
+			empresa.setStatus(true);
+			empresa.setNovaEmpresa(false);
+	
+			empresaDAO.ativaEmpresa(empresa);
+	
+			return "ativarEmpresa";
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorAtivarEmpresa";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorAtivarEmpresa";
+		}
 	}
 	
 	public String detalhaAdmin(){
 		
-		admin = new detalhaObjeto().detalhaAdministrador(selectedAdmin.getIdAdministrador());
-		
-		return "detalhaAdmin";
+		try{
+			admin = new detalhaObjeto().detalhaAdministrador(selectedAdmin.getIdAdministrador());
+			
+			return "detalhaAdmin";
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorDetalhaAdmin";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorDetalhaAdmin";
+		}
 	}
 
 	public String detalhaEmpresa() {
+		try{
+			empresa = new detalhaObjeto().detalhaEmpresa(selectedEmpresa.getIdEmpresa());
+	
+			return "detalhaEmpresa";
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorDetalhaEmpresa";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorDetalhaEmpresa"; 
+		}
 
-		empresa = new detalhaObjeto().detalhaEmpresa(selectedEmpresa.getIdEmpresa());
-
-		return "detalhaEmpresa";
 
 	}
 
 	public String detalhaEmpresaDesativada() {
 
-		empresa = new detalhaObjeto().detalhaEmpresaDesativada(selectedEmpresa.getIdEmpresa());
-
-		return "detalhaEmpresaDesativada";
-
+		try{
+			empresa = new detalhaObjeto().detalhaEmpresaDesativada(selectedEmpresa.getIdEmpresa());
+	
+			return "detalhaEmpresaDesativada";
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorDetalhaEmpresaDesativada";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorDetalhaEmpresaDesativada";
+		}
 	}
 
 	public String detalhaFuncionario() {
-
-		funcionario = new detalhaObjeto().detalhaFuncionario(selectedFuncionario.getIdFuncionario());
-
-		return "detalhaFuncionario";
-
+		
+		try{
+			funcionario = new detalhaObjeto().detalhaFuncionario(selectedFuncionario.getIdFuncionario());
+	
+			return "detalhaFuncionario";
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorDetalhaFuncionario";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorDetalhaFuncionario";
+		}
 	}
 
 	public String detalhaFuncionarioDesativado() {
-
-		funcionario = new detalhaObjeto().detalhaFuncionarioDesativado(selectedFuncionario.getIdFuncionario());
-
-		return "detalhaFuncionarioDesativado";
-
+		
+		try{
+			funcionario = new detalhaObjeto().detalhaFuncionarioDesativado(selectedFuncionario.getIdFuncionario());
+	
+			return "detalhaFuncionarioDesativado";
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorDetalhaFuncionarioDesativada";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorDetalhaFuncionarioDesativada";
+		}
 	}
 
 	public String detalhaPromocao() {
-
-		promocao = new detalhaObjeto().detalhaPromocao(selectedPromocao.getIdPromocao());
-
-		return "detalhaPromocao";
-
+		
+		try{
+			promocao = new detalhaObjeto().detalhaPromocao(selectedPromocao.getIdPromocao());
+	
+			return "detalhaPromocao";
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorDetalhaPromocao";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorDetalhaPromocao";
+		}
 	}
 
 	public String detalhaPromocaoDesativada() {
-
-		promocao = new detalhaObjeto().detalhaPromocaoDesativada(selectedPromocao.getIdPromocao());
-
-		return "detalhaPromocaoDesativada";
-
+		
+		try{
+			promocao = new detalhaObjeto().detalhaPromocaoDesativada(selectedPromocao.getIdPromocao());
+	
+			return "detalhaPromocaoDesativada";
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorDetalhaEmpresaDesativada";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorDetalhaEmpresaDesativada";
+		}
 	}
 
 	public String detalhaConsumidor() {
-
-		consumidor = new detalhaObjeto().detalhaConsumidor(selectedConsumidor.getCpf());
-
-		return "detalhaConsumidor";
+		try{
+			consumidor = new detalhaObjeto().detalhaConsumidor(selectedConsumidor.getCpf());
+			return "detalhaConsumidor";
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorDetalhaConsumidor";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorDetalhaConsumidor";
+		}
+		
 	}
 
 	public String detalhaConsumidorDesativado() {
 		
-		consumidor = new detalhaObjeto().detalhaConsumidorDesativado(selectedConsumidor.getCpf());
-
-		return "detalhaConsumidorDesativado";
+		try{
+			consumidor = new detalhaObjeto().detalhaConsumidorDesativado(selectedConsumidor.getCpf());
+			return "detalhaConsumidorDesativado";
+			
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorDetalhaConsumidorDesativado";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorDetalhaConsumidorDesativado";
+		}
 	}
 	
 	public void editaAdmin() {
@@ -312,6 +416,7 @@ public class AdministradorController {
 		if (listaUtilizaPontosFuncionario == null) {
 
 			funcionario = new RecuperaSessao().retornaFuncionario();
+			
 			if (listaUtilizaPontosFuncionario == null) {
 				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO()
 						.listaUtilizaPontosFuncionario(funcionario);
@@ -330,7 +435,6 @@ public class AdministradorController {
 	public DataModel<RegistraPontos> getListaRegistrosFuncionario() { // lista todos os registro de pontos de um funcinario
 
 		if (listaRegistrosFuncionario == null) {
-			// funcionario = recuperaSessaoFuncionario();
 			funcionario = new RecuperaSessao().retornaFuncionario();
 			if (listaRegistrosFuncionario == null) {
 				List<RegistraPontos> registraPontos = new RegistraPontosDAO()
