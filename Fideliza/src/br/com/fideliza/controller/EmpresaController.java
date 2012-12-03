@@ -58,26 +58,35 @@ public class EmpresaController {
 
 	public String salvaEmpresa() {
 
-		
-		if(verificaEmail(empresa.getEmail(), empresa.getConfirmEmail()) == true && verificaCNPJ(empresa.getCnpj()) == true){
-			
-			regraPontuacao = regraPontuacaoDAO.buscaPorId(1);
-			empresa.setRegraPontuacao(regraPontuacao);
+		try{
+			if(verificaEmail(empresa.getEmail(), empresa.getConfirmEmail()) == true && verificaCNPJ(empresa.getCnpj()) == true){
 				
-			empresa.setStatus(false);
-			empresa.setNovaEmpresa(true);
-			
-			user.setEmpresa(empresa);
-			user.setUser(empresa.getEmail());
-			user.setPassword(empresa.getPassword());
-			user.setPermissaoEmpresa(true);
-			
-			empresaDAO.adicionaEmpresa(empresa);
-			usuarioDAO.adicionaUsuario(user);
-			
-			return "empresaSalva";
-			
-		} else {
+				regraPontuacao = regraPontuacaoDAO.buscaPorId(1);
+				empresa.setRegraPontuacao(regraPontuacao);
+					
+				empresa.setStatus(false);
+				empresa.setNovaEmpresa(true);
+				
+				user.setEmpresa(empresa);
+				user.setUser(empresa.getEmail());
+				user.setPassword(empresa.getPassword());
+				user.setPermissaoEmpresa(true);
+				
+				empresaDAO.adicionaEmpresa(empresa);
+				usuarioDAO.adicionaUsuario(user);
+				
+				return "empresaSalva";
+				
+			} else {
+				return "erroEmpresa";
+			}
+		} catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "erroEmpresa";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao atualizar", "Erro"));
 			return "erroEmpresa";
 		}
 	}

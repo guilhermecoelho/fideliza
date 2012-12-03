@@ -10,6 +10,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.HibernateException;
+
 import br.com.fideliza.DAO.UsuarioDAO;
 import br.com.fideliza.model.Consumidor;
 import br.com.fideliza.model.Usuario;
@@ -27,6 +29,7 @@ public class UsuarioController {
 	
 	public String login(){
 		
+		try{
 			Usuario retorno = userDAO.loginCliente(usuario.getPassword(), usuario.getUser());
 			
 			if(retorno != null){
@@ -77,20 +80,37 @@ public class UsuarioController {
 				this.usuario = new Usuario();
 				return "errorLogin";
 			}
-		
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorLogin";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorLogin";
+		}
 	}
 	
 	public String logout() throws IOException{
-		
-		userDAO.logout();
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
-		session.invalidate(); 
-		
-		//FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-		
-		return "logout";
+		try{
+			userDAO.logout();
+			
+			FacesContext fc = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false); //cria uma sessão
+			session.invalidate(); 
+			
+			//FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			
+			return "logout";
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorLogout";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorLogout";
+		}
 	}
 	
 	

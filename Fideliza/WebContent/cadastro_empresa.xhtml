@@ -44,7 +44,7 @@
 						<p:panel header="Cadastro Empresa">
 
 							<p:messages id="msgError" autoUpdate="true" />
-
+							<p:growl id="growl" showDetail="true" sticky="true"/> 	
 							<h:panelGrid columns="3" cellpadding="5">
 
 								<h:outputLabel for="nome" value="nome *" />
@@ -90,8 +90,8 @@
 
 
 								<p:commandButton value="Salvar"
-									action="#{empresaController.salvaEmpresa}" ajax="false" />
-								<p:commandButton value="Limpar campos" type="reset" />
+									action="#{empresaController.salvaEmpresa}" ajax="false" update=":growl" />
+								
 
 							</h:panelGrid>
 						</p:panel>
