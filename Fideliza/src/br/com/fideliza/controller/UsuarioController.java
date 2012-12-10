@@ -20,6 +20,7 @@ public class UsuarioController {
 	
 
 	private Usuario usuario = new Usuario();
+	private Usuario usuarioLogado = new Usuario();
 	private UsuarioDAO userDAO = new UsuarioDAO();
 	private Consumidor consumidor = new Consumidor();
 	
@@ -30,6 +31,7 @@ public class UsuarioController {
 	public String login(){
 		
 		try{
+			
 			Usuario retorno = userDAO.loginCliente(usuario.getPassword(), usuario.getUser());
 			
 			if(retorno != null){
@@ -47,6 +49,7 @@ public class UsuarioController {
 						tipoUser="consumidorDesativado";
 					}else {
 						tipoUser = "loginConsumidor";
+						
 					}
 					
 				}
@@ -55,6 +58,7 @@ public class UsuarioController {
 						tipoUser="FuncionarioDesativado";
 					}else {
 						tipoUser = "loginFuncionario";
+						
 					}
 				}
 				else if(usuario.isPermissaoEmpresa() == true){
@@ -62,6 +66,7 @@ public class UsuarioController {
 						tipoUser="EmpresaDesativado";
 					}else {
 						tipoUser =  "loginEmpresa";
+						
 					}
 				}
 				else if(usuario.isPermissaoAdministrador() == true){
@@ -71,7 +76,11 @@ public class UsuarioController {
 						tipoUser = "loginAdmin";
 					}
 				}	
+				
+				this.usuarioLogado = usuario;
+				
 				this.usuario = new Usuario();
+				
 				
 				return tipoUser;
 
@@ -93,6 +102,8 @@ public class UsuarioController {
 	
 	public String logout() throws IOException{
 		try{
+
+			this.usuarioLogado = new Usuario();
 			userDAO.logout();
 			
 			FacesContext fc = FacesContext.getCurrentInstance();
@@ -100,6 +111,7 @@ public class UsuarioController {
 			session.invalidate(); 
 			
 			//FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			
 			
 			return "logout";
 		}catch (HibernateException e){
@@ -119,9 +131,17 @@ public class UsuarioController {
 	}
 	
 	//getters and setters
-
+	
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
+	public void setUsuarioLogado(Usuario usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
 	}
 
 	public Consumidor getConsumidor() {

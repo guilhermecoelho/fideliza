@@ -21,6 +21,9 @@
 					<p:dataTable var="result" value="#{administradorController.listaRegistrosEmpresa}" 
 					 emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
 						
+						<f:facet name="header">	
+						Histórico de pontos registrados
+						</f:facet>
 						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
 							<h:outputText value="#{result.empresa.nome}" />
 						</p:column>

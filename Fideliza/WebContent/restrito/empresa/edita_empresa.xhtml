@@ -39,25 +39,23 @@
 			<div id="conteudo">
 				<h:form id="editar">
 					<p:panelGrid columns="2">
-						<h:outputText value="CPF" />
-						<h:outputText
-							value="#{usuarioController.usuarioLogado.consumidor.cpf}" />
-						<h:outputText value="Email" />
-						<h:outputText
-							value="#{usuarioController.usuarioLogado.consumidor.email}" />
 						<h:outputText value="Nome" />
 						<h:outputText
-							value="#{usuarioController.usuarioLogado.consumidor.nome}" />
-						<h:outputText value="Pontos" />
+							value="#{usuarioController.usuarioLogado.empresa.nome}" />
+						<h:outputText value="Email" />
 						<h:outputText
-							value="#{usuarioController.usuarioLogado.consumidor.pontos}" />
+							value="#{usuarioController.usuarioLogado.empresa.email}" />
+						<h:outputText value="CNPJ" />
+						<h:outputText
+							value="#{usuarioController.usuarioLogado.empresa.cnpj}" />
+
 					</p:panelGrid>
 
 					<p:commandButton value="editar" onclick="editor.show();"
 						type="button">
 						<f:setPropertyActionListener
-							target="#{usuarioController.usuarioLogado.consumidor}"
-							value="#{consumidorController.consumidor}" />
+							target="#{usuarioController.usuarioLogado.empresa}"
+							value="#{empresaController.empresa}" />
 					</p:commandButton>
 
 					<h:form id="dialogEdit">
@@ -67,24 +65,21 @@
 							<h:panelGrid id="displayEdit" columns="2" cellpadding="20">
 
 								<h:inputHidden
-									value="#{usuarioController.usuarioLogado.consumidor.cpf}" />
+									value="#{usuarioController.usuarioLogado.empresa.email}" />
 								<h:inputHidden
-									value="#{usuarioController.usuarioLogado.consumidor.email}" />
-								<h:inputHidden
-									value="#{usuarioController.usuarioLogado.consumidor.pontos}" />
-								<h:inputHidden value="" />
+									value="#{usuarioController.usuarioLogado.empresa.cnpj}" />
 
 								<h:outputText value="Nome: " />
 								<p:inputText
-									value="#{usuarioController.usuarioLogado.consumidor.nome}" />
+									value="#{usuarioController.usuarioLogado.empresa.nome}" />
 								<h:outputText value="Status" />
 								<p:selectOneRadio id="status"
-									value="#{usuarioController.usuarioLogado.consumidor.status}">
+									value="#{usuarioController.usuarioLogado.empresa.status}">
 									<f:selectItem itemLabel="Ativada" itemValue="true" />
 									<f:selectItem itemLabel="Desativada" itemValue="false" />
 								</p:selectOneRadio>
 								<p:commandButton value="Salvar"
-									actionListener="#{consumidorController.editaConsumidor}"
+									actionListener="#{empresaController.editaEmpresa}"
 									oncomplete="editor.hide();" update="growl" />
 
 

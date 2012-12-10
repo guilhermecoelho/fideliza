@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
+</h:head>
+<h:body>
+	<div id="tudo">
+		<div id="topo">
+
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<ui:include src="login.xhtml"/>
+				</div>
+			</div>
+		</div>
+		<div id="menu">
+			<div id="menuBotao">
+				<ui:include src="menu.xhtml" />
+			</div>
+		</div>
+		<div id="fundo">
+			<div id="conteudo">
+				 <p:outputPanel id="outputPanelMail">
+                <h:form>
+                <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+                                        <p:dialog modal="true" widgetVar="statusDialog"    
+                                        draggable="false" closable="false">  
+                                        <p:graphicImage value="/images/ajaxload.gif" />  
+                                        </p:dialog>
+                        <p:panel header="Entre em contato" >
+                                <p:messages />
+                                <h:panelGrid columns="2">  
+                               			 <h:outputText value="Email para contato: " />
+                                        <h:inputText value="#{indexController.mensagem.contato}" size="66" />                                
+                                        <h:outputText value="Assunto: " />
+                                        <h:inputText value="#{indexController.mensagem.titulo}" size="66" />
+                                        <h:outputText value="Mensagem: " />
+                                        <h:inputTextarea value="#{indexController.mensagem.mensagem}"
+                                                cols="63" rows="10" />
+                                </h:panelGrid>
+                                <p:commandButton value="Enviar e-mail"
+                                        action="#{indexController.enviaEmail}" update=":outputPanelMail" />
+                        </p:panel>
+                </h:form>
+        </p:outputPanel>
+			</div>
+		</div>
+		<div id="rodape">
+			<ui:include src="rodape.xhtml"/>
+		</div>
+	</div>
+
+</h:body>
+</html>

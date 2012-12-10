@@ -26,10 +26,7 @@
         </div>
  	<div id="login">
  	<h:form>
- 		<p:menuButton value="login">
- 			<p:menuitem value="Consumidor" url="login_consumidor.xhtml" ajax="false"/>
- 			<p:menuitem value="Empresa" url="login_empresa.xhtml" ajax="false"/>
- 		</p:menuButton>
+ 		<ui:include src="login.xhtml"/>
  	</h:form>
  	</div>
 	</div>
@@ -74,6 +71,9 @@
 		
 				</p:panel>
 			</h:form>
+		</div>
+		<div id="rodape">
+			<ui:include src="rodape.xhtml" />
 		</div>
 </div>
 </div>

@@ -19,6 +19,9 @@
 	    			<p:graphicImage value="/images/ajaxload.gif" />  
 				</p:dialog>
 					<p:dataTable var="result" value="#{administradorController.listaUtilizaPontosEmpresa}" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
+					<f:facet name="header">	
+						Histórico de promoções utilizadas
+					</f:facet>
 						<p:column filterBy="#{result.promocao.nome}" headerText="Promoção">
 							<h:outputText value="#{result.promocao.nome}" />
 						</p:column>

@@ -13,105 +13,112 @@
  -->
 <h:head>
 
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
 
 </h:head>
 <h:body>
-<div id="tudo">
-	<div id="topo">
-	 
-		<div id="topoMeio">
-	    	<div id="banner">
-	     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
-	        </div>
-	 	<div id="login">
-	 	<h:form>
-	 		<p:button value="logout" action="#{usuarioController.logout}"/>
-	 	</h:form>
-	 	</div>
+	<div id="tudo">
+		<div id="topo">
+
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<h:form>
+						<p:button value="logout" action="#{usuarioController.logout}" />
+					</h:form>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div id="conteudo">
-		<div id="grid">	
-			<h:form id="form">
-				
-			
-				<p:dataTable id="PromoTable" var="result"
-					value="#{promocaoController.listaPromocao}" rowKey="#{result.idPromocao}" selection="#{utilizaPontosController.selectedPromocao}"
-					 selectionMode="single" paginator="true" rows="6" >
-					 
-						 <f:facet name="header">  
+		<div id="conteudo">
+			<div id="grid">
+				<h:form id="form">
+
+
+					<p:dataTable id="PromoTable" var="result"
+						value="#{promocaoController.listaPromocao}"
+						rowKey="#{result.idPromocao}"
+						selection="#{utilizaPontosController.selectedPromocao}"
+						selectionMode="single" paginator="true" rows="6">
+
+						<f:facet name="header">  
 		           			 Clique sobre a promoção que deseja usar e clique em confirmar 
-		        		</f:facet>  
-		        		
-					<p:column exportable="false">
-						<p:rowToggler/>
-					</p:column>
-					
+		        		</f:facet>
+
+						<p:column exportable="false">
+							<p:rowToggler />
+						</p:column>
+
 						<p:column sortBy="#{result.idPromocao}">
-		
-						<f:facet name="header">
-							<h:outputText value="id" />
+
+							<f:facet name="header">
+								<h:outputText value="id" />
+							</f:facet>
+							<h:outputText value="#{result.idPromocao}" />
+						</p:column>
+
+						<p:column sortBy="#{result.nome}" exportable="false">
+
+							<f:facet name="header">
+								<h:outputText value="nome" />
+							</f:facet>
+							<h:outputText value="#{result.nome}" />
+						</p:column>
+
+						<p:column sortBy="#{result.pontos}">
+
+							<f:facet name="header">
+								<h:outputText value="pontos" />
+							</f:facet>
+							<h:outputText value="#{result.pontos}" />
+						</p:column>
+
+						<p:column sortBy="#{result.desconto}">
+
+							<f:facet name="header">
+								<h:outputText value="desconto" />
+							</f:facet>
+							<h:outputText value="#{result.desconto}%" />
+						</p:column>
+
+						<f:facet name="footer">
+							<p:commandButton
+								actionListener="#{utilizaPontosController.registraUso}"
+								value="confirmar" icon="ui-icon-search" />
 						</f:facet>
-						<h:outputText value="#{result.idPromocao}" />
-					</p:column>
-					
-					<p:column sortBy="#{result.nome}" exportable="false">
-		
-						<f:facet name="header">
-							<h:outputText value="nome" />
-						</f:facet>
-						<h:outputText value="#{result.nome}" />
-					</p:column>
-					
-					<p:column sortBy="#{result.pontos}">
-		
-						<f:facet name="header">
-							<h:outputText value="pontos" />
-						</f:facet>
-						<h:outputText value="#{result.pontos}" />
-					</p:column>
-					
-					<p:column sortBy="#{result.desconto}">
-		
-						<f:facet name="header">
-							<h:outputText value="desconto" />
-						</f:facet>
-						<h:outputText value="#{result.desconto}%" />
-					</p:column>
-							
-					<f:facet name="footer">
-						<p:commandButton actionListener="#{utilizaPontosController.registraUso}" value="confirmar" icon="ui-icon-search" />
-					</f:facet>
-					
-				<p:rowExpansion >
-				
-					<h:panelGrid columns="2" cellpadding="5" styleClass="ui-widget-content grid" id="display" >
-										
-						<h:outputText value="nome" />
-						<h:outputText value="#{result.nome}"/>
-						
-						<h:outputText value="descricao" />
-						<h:outputText value="#{result.descricao}"/>
-					
+
+						<p:rowExpansion>
+
+							<h:panelGrid columns="2" cellpadding="5"
+								styleClass="ui-widget-content grid" id="display">
+
+								<h:outputText value="nome" />
+								<h:outputText value="#{result.nome}" />
+
+								<h:outputText value="descricao" />
+								<h:outputText value="#{result.descricao}" />
+
+							</h:panelGrid>
+						</p:rowExpansion>
+
+					</p:dataTable>
+					<h:panelGrid columns="2">
+						<p:panel header="Exportar">
+							<h:commandLink>
+								<p:graphicImage value="/images/pdf.png" />
+								<p:dataExporter type="pdf" target="PromoTable"
+									fileName="listaPromocao" excludeColumns="0,5" />
+							</h:commandLink>
+						</p:panel>
 					</h:panelGrid>
-				</p:rowExpansion>
-			
-				</p:dataTable> 
-				<h:panelGrid columns="2">
-	    		<p:panel header="Exportar">
-        		<h:commandLink>
-	            		<p:graphicImage value="/images/pdf.png" />
-	            		<p:dataExporter type="pdf" target="PromoTable" fileName="listaPromocao" excludeColumns="0,5"/>
-	       			 </h:commandLink>
-	       		</p:panel>
-	       	</h:panelGrid>
-			</h:form>
+				</h:form>
+			</div>
+		</div>
+		<div id="rodape">
+			<ui:include src="rodape.xhtml" />
 		</div>
 	</div>
-<div id="rodape">
-	<h2> rodapé</h2>
-</div>
-</div>	
 </h:body>
 </html>

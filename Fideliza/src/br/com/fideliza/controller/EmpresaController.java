@@ -31,6 +31,7 @@ import br.com.fideliza.util.detalhaObjeto;
 
 public class EmpresaController {
 	
+	private Usuario usuario = new Usuario();
 	private Empresa empresa = new Empresa();
 	private EmpresaDAO empresaDAO = new EmpresaDAO();
 	private Empresa selectedEmpresa = new Empresa();
@@ -50,6 +51,8 @@ public class EmpresaController {
 	private DataModel<Funcionario> listaFuncionarioPorEmpresa;
 	private DataModel<RegistraPontos> listaRegistrosFuncionario;
 	private DataModel<UtilizaPontos> listaHistoricoPromocao;
+	private DataModel<UtilizaPontos> listaUltimosRegistros;
+	private DataModel<RegistraPontos> listaRegistroPorEmpresa;
 
 	public EmpresaController() {
 		
@@ -188,6 +191,36 @@ public class EmpresaController {
 			listaHistoricoPromocao = new ListDataModel<UtilizaPontos>(utilizaPontos);
 		}
 		return listaHistoricoPromocao;
+	}
+
+	public DataModel<RegistraPontos> getListaRegistroPorEmpresa() {
+		if(listaRegistroPorEmpresa == null){
+			 usuario = new RecuperaSessao().retornaUsuario();
+			 List<RegistraPontos> registraPontos = new RegistraPontosDAO().listaRegistroEmpresa(usuario.getEmpresa());
+			 listaRegistroPorEmpresa = new ListDataModel<RegistraPontos>(registraPontos);
+		}
+		return listaRegistroPorEmpresa;
+	}
+
+	public void setListaRegistroPorEmpresa(
+			DataModel<RegistraPontos> listaRegistroPorEmpresa) {
+		this.listaRegistroPorEmpresa = listaRegistroPorEmpresa;
+	}
+
+	public DataModel<UtilizaPontos> getListaUltimosRegistros() {
+		if(listaUltimosRegistros == null){
+			 usuario = new RecuperaSessao().retornaUsuario();
+			if(listaUltimosRegistros == null){
+				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosEmpresa(usuario.getEmpresa());
+				listaUltimosRegistros = new ListDataModel<UtilizaPontos>(utilizaPontos);
+			}
+		}
+		return listaUltimosRegistros;
+	}
+
+	public void setListaUltimosRegistros(
+			DataModel<UtilizaPontos> listaUltimosRegistros) {
+		this.listaUltimosRegistros = listaUltimosRegistros;
 	}
 
 	public void setListaHistoricoPromocao(

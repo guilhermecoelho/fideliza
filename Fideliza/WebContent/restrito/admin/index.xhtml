@@ -12,37 +12,114 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
 </h:head>
 <h:body>
+<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+					<p:dialog modal="true" widgetVar="statusDialog"    
+	        			draggable="false" closable="false">  
+	    				<p:graphicImage value="/images/ajaxload.gif" />  
+					</p:dialog>
 	<div id="tudo">
-	<div id="topo">
- 
-	<div id="topoMeio">
-    	<div id="banner">
-     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
-        </div>
- 	<div id="login">
- 	<h:form>
- 		<p:button value="logout" action="#{usuarioController.logout}"/>
- 	</h:form>
- 	</div>
-	</div>
-</div>
-<div id="menu">
-	<div id="menuBotao">
-    	<ui:include src="menu.xhtml"/>
-    </div>
-</div>
-<div id="fundo">
-	<div id="conteudo">
+		<div id="topo">
 
-		
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<ui:include src="login.xhtml" />
+				</div>
+			</div>
+		</div>
+		<div id="menu">
+			<div id="menuBotao">
+				<ui:include src="menu.xhtml" />
+			</div>
+		</div>
+		<div id="fundo">
+			<div id="conteudo">
+			<p:growl id="growl" showDetail="true" sticky="true" /> 		
+				<p:accordionPanel multiple="true" cache="true" id="painel">
+					<p:tab title="Bem vindo" id="tab1">
+						<h:form>
+							<h:outputText
+								value="Bem vindo #{usuarioController.usuarioLogado.user},
+					 o sistema conta atualmente com #{administradorController.contaEmpresa} empresas registras e #{administradorController.contaConsumidor} consumidores registrados" />
+
+						</h:form>
+					</p:tab>
+					<p:tab title="Novas empresas" id="tab2">
+						<h:form id="form">
+							<h:outputText
+								value="novas empresas cadastradas que estão aguardando a sua ativação" />
+
+							<p:dataTable id="EmpresaTable" var="result"
+								value="#{empresaController.listaEmpresaNova}"
+								rowKey="#{result.idEmpresa}"
+								selection="#{administradorController.selectedEmpresa}"
+								selectionMode="single" emptyMessage="Nenhum registro encontrado"
+								paginator="true" rows="10">
+
+								<f:facet name="header">  
+		           			 Clique sobre a empresa que deseja ativar
+		        		</f:facet>
+								
+								<p:column filterBy="#{result.nome}" headerText="Nome"
+									footerText="Nome">
+									<h:outputText value="#{result.nome}" />
+								</p:column>
+								<p:column filterBy="#{result.cnpj}" headerText="CNPJ"
+									footerText="CNPJ">
+									<h:outputText value="#{result.cnpj}" />
+								</p:column>
+								<p:column filterBy="#{result.email}" headerText="Email"
+									footerText="Email">
+									<h:outputText value="#{result.email}" />
+								</p:column>
+
+								<p:column style="width:4%">
+									<p:commandButton id="selectButton"
+										update=":painel:form:empDialog"
+										oncomplete="empresaDialog.show()" icon="ui-icon-search"
+										title="Detalhar">
+										<f:setPropertyActionListener value="#{result}"
+											target="#{administradorController.selectedEmpresa}" />
+									</p:commandButton>
+								</p:column>
+
+
+								<f:facet name="footer">
+									<p:commandButton
+										action="#{administradorController.ativarEmpresa}"
+										value="confirmar" />
+								</f:facet>
+
+							</p:dataTable>
+							<p:dialog id="empDialog" header="Empresa"
+								widgetVar="empresaDialog">
+								<h:panelGrid id="display" columns="2" cellpadding="20">
+									<h:outputText value="Nome: " />
+									<h:outputText
+										value="#{administradorController.selectedEmpresa.nome}" />
+									<h:outputText value="Email: " />
+									<h:outputText
+										value="#{administradorController.selectedEmpresa.email}" />
+									<h:outputText value="CNPJ" />
+									<h:outputText
+										value="#{administradorController.selectedEmpresa.cnpj}" />
+								</h:panelGrid>
+							</p:dialog>
+						</h:form>
+					</p:tab>
+				</p:accordionPanel>
+
+			</div>
+		</div>
+		<div id="rodape">
+			<ui:include src="rodape.xhtml" />
+		</div>
 	</div>
-</div>
-<div id="rodape">
-<h2> rodapé</h2>
-</div>
-</div>
 </h:body>
 </html>

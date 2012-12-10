@@ -26,7 +26,7 @@
 	        </div>
 	 	<div id="login">
 	 	<h:form>
-	 		<p:button value="logout" action="#{usuarioController.logout}"/>
+	 		<ui:include src="login.xhtml"/>
 	 	</h:form>
 	 	</div>
 		</div>
@@ -39,56 +39,74 @@
 	<div id="conteudo">
 		<div id="grid">	
 			<h:form id="form">
-				
-			
-				<p:dataTable id="EmpresaTable" var="result"  
-					value="#{empresaController.listaEmpresaNova}" rowKey="#{result.idEmpresa}" selection="#{administradorController.selectedEmpresa}"
-					 selectionMode="single" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" >
-					 
-						 <f:facet name="header">  
-		           			 Clique sobre a empresa que deseja ativar
-		        		</f:facet>  
-		        		
-					<p:column exportable="false">
-						<p:rowToggler/>
-					</p:column>
-					
-						<p:column sortBy="#{result.idEmpresa}">
-		
-						<f:facet name="header">
-							<h:outputText value="id" />
-						</f:facet>
-						<h:outputText value="#{result.idEmpresa}" />
-					</p:column>
-					
-					<p:column sortBy="#{result.nome}" exportable="false">
-		
-						<f:facet name="header">
-							<h:outputText value="nome" />
-						</f:facet>
-						<h:outputText value="#{result.nome}" />
-					</p:column>
-					
-					<p:column sortBy="#{result.cnpj}">
-		
-						<f:facet name="header">
-							<h:outputText value="pontos" />
-						</f:facet>
-						<h:outputText value="#{result.cnpj}" />
-					</p:column>
-					
+				<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+					<p:dialog modal="true" widgetVar="statusDialog"    
+	        			draggable="false" closable="false">  
+	    				<p:graphicImage value="/images/ajaxload.gif" />  
+					</p:dialog>			
 							
-					<f:facet name="footer">
-						<p:commandButton action="#{administradorController.ativarEmpresa}" value="confirmar" icon="ui-icon-search"  />
-					</f:facet>
-			
-				</p:dataTable> 
-			</h:form>
+							<p:dataTable id="EmpresaTable" var="result"
+								value="#{empresaController.listaEmpresaNova}"
+								rowKey="#{result.idEmpresa}"
+								selection="#{administradorController.selectedEmpresa}"
+								selectionMode="single" emptyMessage="Nenhum registro encontrado"
+								paginator="true" rows="10">
+								<p:growl id="growl" showDetail="true" sticky="true" /> 		
+								<f:facet name="header">  
+		           			 Clique sobre a empresa que deseja ativar
+		        		</f:facet>
+								
+								<p:column filterBy="#{result.nome}" headerText="Nome"
+									footerText="Nome">
+									<h:outputText value="#{result.nome}" />
+								</p:column>
+								<p:column filterBy="#{result.cnpj}" headerText="CNPJ"
+									footerText="CNPJ">
+									<h:outputText value="#{result.cnpj}" />
+								</p:column>
+								<p:column filterBy="#{result.email}" headerText="Email"
+									footerText="Email">
+									<h:outputText value="#{result.email}" />
+								</p:column>
+
+								<p:column style="width:4%">
+									<p:commandButton id="selectButton"
+										update=":form:empDialog"
+										oncomplete="empresaDialog.show()" icon="ui-icon-search"
+										title="Detalhar">
+										<f:setPropertyActionListener value="#{result}"
+											target="#{administradorController.selectedEmpresa}" />
+									</p:commandButton>
+								</p:column>
+
+
+								<f:facet name="footer">
+									<p:commandButton
+										action="#{administradorController.ativarEmpresa}"
+										value="confirmar" update="EmpresaTable:growl"/>
+								</f:facet>
+
+							</p:dataTable>
+							<p:dialog id="empDialog" header="Empresa"
+								widgetVar="empresaDialog">
+								<h:panelGrid id="display" columns="2" cellpadding="20">
+									<h:outputText value="Nome: " />
+									<h:outputText
+										value="#{administradorController.selectedEmpresa.nome}" />
+									<h:outputText value="Email: " />
+									<h:outputText
+										value="#{administradorController.selectedEmpresa.email}" />
+									<h:outputText value="CNPJ" />
+									<h:outputText
+										value="#{administradorController.selectedEmpresa.cnpj}" />
+								</h:panelGrid>
+							</p:dialog>
+						</h:form>
 		</div>
 	</div>
 
 <div id="rodape">
-	<h2> rodapé</h2>
+	<ui:include src="rodape.xhtml" />
 </div>
 </div>	
 </h:body>

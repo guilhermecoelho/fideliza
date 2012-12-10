@@ -33,17 +33,44 @@
 <div id="fundo">
 	<div id="conteudo">
     	<div id ="grid">
-	    	<ul>		
-		    	<li>
-		    		Box1
-		    	</li>
-		    	<li>
-		    		Box2
-		    	</li>
-		    	<li>
-		    		Box3
-		    	</li> 	
-	    	</ul>
+	    	<p:accordionPanel multiple="true" cache="true" id="painel">
+					<p:tab title="Bem vindo" id="tab1">
+						<h:form>
+							<h:outputText
+								value="Bem vindo #{usuarioController.usuarioLogado.user}" />
+
+						</h:form>
+					</p:tab>
+					<p:tab title="Ultimos registros" id="tab2">
+						<h:form>
+				<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
+					<p:dialog modal="true" widgetVar="statusDialog"    
+	        			draggable="false" closable="false">  
+	    			<p:graphicImage value="/images/ajaxload.gif" />  
+				</p:dialog>
+					<p:dataTable var="result" value="#{empresaController.listaUltimosRegistros}" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" >
+						<p:column filterBy="#{result.promocao.nome}" headerText="Promoção">
+							<h:outputText value="#{result.promocao.nome}" />
+						</p:column>
+						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
+							<h:outputText value="#{result.empresa.nome}" />
+						</p:column>
+						<p:column filterBy="#{result.funcionario.nome}" headerText="Funcionario">
+							<h:outputText value="#{result.funcionario.nome}" />
+						</p:column>
+						<p:column filterBy="#{result.consumidor.cpf}" headerText="Consumidor">
+							<h:outputText value="#{result.consumidor.cpf}" />
+						</p:column>
+						<p:column filterBy="#{result.promocao.pontos}" headerText="Pontos">
+							<h:outputText value="#{result.promocao.pontos}" />
+						</p:column>
+						<p:column filterBy="#{result.valorCompra}" headerText="Valor Compra">
+							<h:outputText value="R$ #{result.valorCompra}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+					</p:tab>
+				</p:accordionPanel>
     	</div>
     </div>
 </div>

@@ -13,61 +13,63 @@
  -->
 <h:head>
 
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
 
 </h:head>
 <h:body>
 	<div id="tudo">
-	<div id="topo">
-	 
-		<div id="topoMeio">
-	    	<div id="banner">
-	     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
-	        </div>
-	 	<div id="login">
-	 	<h:form>
-	 		<p:button value="logout" action="#{usuarioController.logout}"/>
-	 	</h:form>
-	 	</div>
-		</div>
-	</div>
-<div id="menu">
-	<div id="menuBotao">
-    	<ui:include src="menu.xhtml"/>
-    </div>
-</div>
-	<div id="fundo">
-		<div id="conteudo">
-							<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
-						<p:dialog modal="true" widgetVar="statusDialog"    
-		        			draggable="false" closable="false">  
-		    			<p:graphicImage value="/images/ajaxload.gif" />  
-					</p:dialog>
-			<p:tabView id="tabView" cache="true" >
+		<div id="topo">
 
-			<p:tab id="tab1" title="Dados" >
-			
-				<ui:include src="tab_dados_funcionario.xhtml"/>
-				
-			</p:tab>
-			<p:tab id="tab2" title="Histórico registro" >
-			
-				<ui:include src="tab_pontos_funcionario.xhtml"/>
-				
-			</p:tab>
-			<p:tab id="tab3" title="Registro de promoções" >
-			
-				<ui:include src="tab_utilizapontos_funcionario.xhtml"/>
-				
-			</p:tab>
-			
-		</p:tabView>
-				
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<h:form>
+						<p:button value="logout" action="#{usuarioController.logout}" />
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<div id="menu">
+			<div id="menuBotao">
+				<ui:include src="menu.xhtml" />
+			</div>
+		</div>
+		<div id="fundo">
+			<div id="conteudo">
+				<p:ajaxStatus onstart="statusDialog.show();"
+					onsuccess="statusDialog.hide();" />
+				<p:dialog modal="true" widgetVar="statusDialog" draggable="false"
+					closable="false">
+					<p:graphicImage value="/images/ajaxload.gif" />
+				</p:dialog>
+				<p:tabView id="tabView" cache="true">
+
+					<p:tab id="tab1" title="Dados">
+
+						<ui:include src="tab_dados_funcionario.xhtml" />
+
+					</p:tab>
+					<p:tab id="tab2" title="Histórico registro">
+
+						<ui:include src="tab_pontos_funcionario.xhtml" />
+
+					</p:tab>
+					<p:tab id="tab3" title="Registro de promoções">
+
+						<ui:include src="tab_utilizapontos_funcionario.xhtml" />
+
+					</p:tab>
+
+				</p:tabView>
+
+			</div>
+		</div>
+		<div id="rodape">
+			<ui:include src="rodape.xhtml" />
 		</div>
 	</div>
-<div id="rodape">
-	<h2> rodapé</h2>
-</div>	
-</div>
 </h:body>
 </html>

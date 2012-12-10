@@ -21,6 +21,9 @@ public class IndexController {
 	}
 
 	public void enviaEmail() {
+		
+		mensagem.setDestino("guilhermecoelho2@gmail.com");
+
 		try {
 			EmailUtil.enviaEmail(mensagem);
 		} catch (EmailException ex) {
