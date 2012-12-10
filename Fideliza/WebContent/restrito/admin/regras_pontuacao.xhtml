@@ -11,67 +11,74 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
 </h:head>
 <h:body>
 	<div id="tudo">
-	<div id="topo">
- 
-	<div id="topoMeio">
-    	<div id="banner">
-     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
-        </div>
- 	<div id="login">
- 	<h:form>
- 		<p:button value="logout" action="#{usuarioController.logout}"/>
- 	</h:form>
- 	</div>
+		<div id="topo">
+
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<h:form>
+						<ui:include src="login.xhtml" />
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<div id="menu">
+			<div id="menuBotao">
+				<ui:include src="menu.xhtml" />
+			</div>
+		</div>
+		<div id="fundo">
+			<div id="conteudo">
+				<h:form id="form">
+					<p:panel header="Regra de pontuação">
+
+						<p:messages id="msgError" autoUpdate="true" />
+
+						<h:panelGrid columns="3" cellpadding="5" process="@this">
+
+							<h:outputLabel for="nome" value="Nome " />
+							<p:inputText
+								value="#{regraPontuacaoController.regraPontuacao.nome}"
+								id="nome" label="nome" required="true"
+								requiredMessage="O campo nome deve ser preenchido" />
+							<p:message for="nome" />
+
+							<h:outputLabel for="valorReal" value="Preço" />
+							<p:inputText
+								value="#{regraPontuacaoController.regraPontuacao.valorReal}"
+								id="valorReal" label="nome" required="true"
+								requiredMessage="O campo nome deve ser preenchido" />
+							<p:message for="valorReal" />
+
+							<h:outputLabel for="valorPontos" value="Quantidade de pontos" />
+							<p:inputText
+								value="#{regraPontuacaoController.regraPontuacao.valorPonto}"
+								id="valorPontos" label="valorPontos" required="true"
+								requiredMessage="O campo nome deve ser preenchido" />
+							<p:message for="valorPontos" />
+
+							<p:commandButton value="Salvar"
+								action="#{regraPontuacaoController.adicionaRegraPontuacao}"
+								ajax="false" />
+							<p:commandButton value="Limpar campos" type="reset" />
+
+						</h:panelGrid>
+					</p:panel>
+
+				</h:form>
+
+			</div>
+		</div>
+		<div id="rodape">
+			<ui:include src="rodape.xhtml" />
+		</div>
 	</div>
-</div>
-<div id="menu">
-	<div id="menuBotao">
-    	<ui:include src="menu.xhtml"/>
-    </div>
-</div>
-<div id="fundo">
-	<div id="conteudo">
-		<h:form id="form">
-		<p:panel header="Regra de pontuação">
-		
-			<p:messages id="msgError" autoUpdate="true" />
-			
-			<h:panelGrid columns="3" cellpadding="5" process="@this">
-			
-				<h:outputLabel for="nome" value="Nome " />
-				<p:inputText value="#{regraPontuacaoController.regraPontuacao.nome}" id="nome"
-					label="nome" required="true" requiredMessage="O campo nome deve ser preenchido"/>
-				<p:message for="nome"  />
-
-				<h:outputLabel for="valorReal" value="Preço" />
-				<p:inputText value="#{regraPontuacaoController.regraPontuacao.valorReal}" id="valorReal"
-					label="nome" required="true" requiredMessage="O campo nome deve ser preenchido"/>
-				<p:message for="valorReal"  />
-				
-				<h:outputLabel for="valorPontos" value="Quantidade de pontos" />
-				<p:inputText value="#{regraPontuacaoController.regraPontuacao.valorPonto}" id="valorPontos"
-					label="valorPontos" required="true" requiredMessage="O campo nome deve ser preenchido"/>
-				<p:message for="valorPontos"  />
-					
-				<p:commandButton value="Salvar"
-					action="#{regraPontuacaoController.adicionaRegraPontuacao}" ajax="false"/>
-				<p:commandButton value="Limpar campos"
-					type="reset"/>
-
-			</h:panelGrid>
-		</p:panel>
-
-	</h:form>
-		
-	</div>
-</div>
-<div id="rodape">
-<h2> rodapé</h2>
-</div>
-</div>
 </h:body>
 </html>

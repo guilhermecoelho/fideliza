@@ -24,7 +24,7 @@
         </div>
  	<div id="login">
  	<h:form>
- 		<p:button value="logout" action="#{usuarioController.logout}"/>
+ 		<ui:include src="login.xhtml"/>
  	</h:form>
  	</div>
 	</div>
@@ -37,17 +37,19 @@
 <div id="fundo">
 	<div id="conteudo">
     	<div id ="grid">
-	    	<ul>		
-		    	<li>
-		    		Box1
-		    	</li>
-		    	<li>
-		    		Box2
-		    	</li>
-		    	<li>
-		    		Box3
-		    	</li> 	
-	    	</ul>
+	    	<h:form>
+				<p><h:outputText value="Bem vindo #{usuarioController.usuarioLogado.consumidor.nome}, seu saldo atual é de #{usuarioController.usuarioLogado.consumidor.pontos} pontos" /></p>
+				<br></br>
+				<p:carousel itemStyleClass="promocaoItem" pageLinks="2" autoPlayInterval="2000"   
+	       					 rows="3" effect="easeInStrong" circular="true" value="#{promocaoController.listaPromocaoAtiva}" var="result" headerText="Promoções">  
+						<p:panel header="#{result.nome}">
+	        			<h:panelGrid columns="1" style="width:100%" >
+							<h:outputText value="#{result.nome}"/>
+						</h:panelGrid>
+	        		</p:panel>
+		</p:carousel> 
+		
+			</h:form>
     	</div>
     </div>
 </div>

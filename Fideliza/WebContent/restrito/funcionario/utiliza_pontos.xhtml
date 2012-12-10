@@ -11,55 +11,59 @@
  -->
 <h:head>
 
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
 
 </h:head>
 <h:body>
-<div id="tudo">
-	<div id="topo">
-	 
-		<div id="topoMeio">
-	    	<div id="banner">
-	     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
-	        </div>
-	 	<div id="login">
-	 	<h:form>
-	 			<p:button value="logout" action="#{usuarioController.logout}"/>
-	 		
-	 	</h:form>
-	 	</div>
+	<div id="tudo">
+		<div id="topo">
+
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<h:form>
+						<p:button value="logout" action="#{usuarioController.logout}" />
+
+					</h:form>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div id="conteudo">
-		
+		<div id="conteudo">
+
 			<h:form id="form">
 				<p:panel header="Utiliza Pontos" style="left">
-		
-				<p:messages id="msgError" autoUpdate="true" />
-			
-				<h:panelGrid columns="3" cellpadding="5" process="@this">
-				
-				<h:outputLabel for="cpf" value="Informe CPF consumidor" />
-				<p:inputMask value="#{utilizaPontosController.utilizaPontos.cpf}" id="cpf"
-					mask="999.999.999-99" label="cpf" required="true" requiredMessage="Informe CPF consumidor" />
-				<p:message  for="cpf"/>	
-				
-				<h:outputLabel for="valorCompra" value="Valor da compra"/>
-				<p:inputText value="#{utilizaPontosController.utilizaPontos.valorCompra}" id="valorCompra"/>
-				<p:message for="valorCompra"/>
-				
-				<p:commandButton value="Continuar"
-					action="#{utilizaPontosController.mostraPromocoes}" ajax="false"/>
+
+					<p:messages id="msgError" autoUpdate="true" />
+
+					<h:panelGrid columns="3" cellpadding="5" process="@this">
+
+						<h:outputLabel for="cpf" value="Informe CPF consumidor" />
+						<p:inputMask value="#{utilizaPontosController.utilizaPontos.cpf}"
+							id="cpf" mask="999.999.999-99" label="cpf" required="true"
+							requiredMessage="Informe CPF consumidor" />
+						<p:message for="cpf" />
+
+						<h:outputLabel for="valorCompra" value="Valor da compra" />
+						<p:inputText
+							value="#{utilizaPontosController.utilizaPontos.valorCompra}"
+							id="valorCompra" />
+						<p:message for="valorCompra" />
+
+						<p:commandButton value="Continuar"
+							action="#{utilizaPontosController.mostraPromocoes}" ajax="false" />
 
 
-				</h:panelGrid>
-			</p:panel>
-		</h:form>
-		
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+
+		</div>
+		<div id="rodape">
+			<ui:include src="rodape.xhtml" />
+		</div>
 	</div>
-	<div id="rodape">
-		<h2> rodapé</h2>
-	</div>
-	</div>
-	</h:body>
+</h:body>
 </html>

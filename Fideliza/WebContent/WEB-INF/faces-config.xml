@@ -485,6 +485,22 @@
 			<to-view-id>/restrito/admin/consulta_admin.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/empresasNovas.xhtml</display-name>
+		<from-view-id>/restrito/admin/empresasNovas.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>errorAtivarEmpresa</from-outcome>
+			<to-view-id>/restrito/admin/empresasNovas.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/admin/empresasNovas.xhtml</display-name>
+		<from-view-id>/restrito/admin/empresasNovas.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>ativarEmpresa</from-outcome>
+			<to-view-id>/restrito/admin/empresasNovas.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	
 	<lifecycle>
 		<phase-listener>br.com.fideliza.filter.AuthorizationListener</phase-listener>

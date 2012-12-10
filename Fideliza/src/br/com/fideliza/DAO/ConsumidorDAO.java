@@ -5,9 +5,11 @@ package br.com.fideliza.DAO;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.fideliza.model.Consumidor;
@@ -144,5 +146,21 @@ public class ConsumidorDAO {
 			//session.clear();
 		}
 		return null;
+	}
+	
+	public long contaConsumidor(){
+		try{
+			Criteria criteria = session.createCriteria(Consumidor.class);
+			criteria.setProjection(Projections.rowCount());
+			long teste = (Long) criteria.uniqueResult();
+			
+			return teste;
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return (Long) null;
 	}
 }

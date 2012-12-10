@@ -12,80 +12,90 @@
 
 <h:head>
 
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
 
 </h:head>
 <h:body>
-<div id="tudo">
-<div id="topo">
- 
-	<div id="topoMeio">
-    	<div id="banner">
-     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
-        </div>
- 	<div id="login">
- 	<h:form>
- 		<p:button value="logout" action="#{usuarioController.logout}"/>
- 	</h:form>
- 	</div>
+	<div id="tudo">
+		<div id="topo">
+
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<h:form>
+						<ui:include src="login.xhtml" />
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<div id="menu">
+			<div id="menuBotao">
+				<ui:include src="menu.xhtml" />
+			</div>
+		</div>
+		<div id="conteudo">
+			<div id="grid">
+				<h:form id="form">
+					<p:panel header="Cadastro Adminstrador">
+
+						<p:messages id="msgError" autoUpdate="true" />
+
+						<h:panelGrid columns="3" cellpadding="5" process="@this">
+
+							<h:outputLabel for="nome" value="nome" />
+							<p:inputText value="#{administradorController.admin.nome}"
+								id="nome" label="email" required="true"
+								requiredMessage="Informe nome administrador" />
+							<p:message for="nome" />
+
+							<h:outputLabel for="email" value="email" />
+							<p:inputText value="#{administradorController.admin.email}"
+								id="email" label="email" required="true"
+								requiredMessage="Informe seu email" />
+							<p:message for="email" />
+
+							<h:outputLabel for="emailConfirm" value="confirmar email" />
+							<p:inputText
+								value="#{administradorController.admin.confirmEmail}"
+								id="emailConfirm" label="emailConfirm" required="true"
+								requiredMessage="Confirme seu email" />
+							<p:message for="emailConfirm" />
+
+							<h:outputLabel for="password" value="senha" />
+							<p:password value="#{administradorController.admin.password}"
+								id="password" label="senha" match="passwordConfirm"
+								feedback="true" promptLabel="digite uma senha" weakLabel="fraca"
+								goodLabel="boa" strongLabel="forte" required="true"
+								requiredMessage="Digite uma senha"
+								validatorMessage="Senha não bate" />
+							<p:message for="password" />
+
+							<h:outputLabel for="password" value="confirmar senha" />
+							<p:password value="#{administradorController.admin.password}"
+								id="passwordConfirm" label="confirmar senha" feedback="true"
+								promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
+								strongLabel="forte" required="true"
+								requiredMessage="Confirme a senha" />
+							<p:message for="passwordConfirm" />
+
+
+							<p:commandButton value="Salvar"
+								action="#{administradorController.salvaAdmin}" ajax="false" />
+							<p:commandButton value="Limpar campos" type="reset" />
+
+						</h:panelGrid>
+
+
+					</p:panel>
+				</h:form>
+			</div>
+		</div>
+		<div id="rodape">
+			<ui:include src="rodape.xhtml" />
+		</div>
 	</div>
-</div>
-<div id="menu">
-	<div id="menuBotao">
-    	<ui:include src="menu.xhtml"/>
-    </div>
-</div>
-<div id="conteudo">
-	<div id="grid">
-	<h:form id="form">
-		<p:panel header="Cadastro Adminstrador">
-		
-			<p:messages id="msgError" autoUpdate="true" />
-			
-			<h:panelGrid columns="3" cellpadding="5" process="@this">
-			
-				<h:outputLabel for="nome" value="nome" />
-				<p:inputText value="#{administradorController.admin.nome}" id="nome"
-					label="email" required="true" requiredMessage="Informe nome administrador" />
-				<p:message  for="nome"/>
-				
-				<h:outputLabel for="email" value="email" />
-				<p:inputText value="#{administradorController.admin.email}" id="email"
-					label="email" required="true" requiredMessage="Informe seu email" />
-				<p:message  for="email"/>
-				
-				<h:outputLabel for="emailConfirm" value="confirmar email" />
-				<p:inputText value="#{administradorController.admin.confirmEmail}" id="emailConfirm"
-					label="emailConfirm" required="true" requiredMessage="Confirme seu email" />
-				<p:message  for="emailConfirm"/>
-				
-				<h:outputLabel for="password" value="senha" />
-				<p:password value="#{administradorController.admin.password}" id="password"
-					label="senha" match="passwordConfirm" feedback="true"
-					promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
-					strongLabel="forte" required="true" requiredMessage="Digite uma senha" validatorMessage="Senha não bate"/>
-					<p:message  for="password"/>
-
-				<h:outputLabel for="password" value="confirmar senha" />
-				<p:password value="#{administradorController.admin.password}"
-					id="passwordConfirm" label="confirmar senha" feedback="true"
-					promptLabel="digite uma senha" weakLabel="fraca" goodLabel="boa"
-					strongLabel="forte"  required="true" requiredMessage="Confirme a senha" />
-					<p:message  for="passwordConfirm"/>
-					
-				
-				<p:commandButton value="Salvar"
-					action="#{administradorController.salvaAdmin}" ajax="false"/>
-				<p:commandButton value="Limpar campos"
-					type="reset"/>
-
-			</h:panelGrid>
-			
-
-		</p:panel>
-	</h:form>
-	</div>
-</div>
-</div>
 </h:body>
 </html>

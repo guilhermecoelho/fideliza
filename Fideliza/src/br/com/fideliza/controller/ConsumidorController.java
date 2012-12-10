@@ -36,6 +36,7 @@ public class ConsumidorController {
 	private DataModel<Consumidor> listaConsumidorDesativado;
 	private DataModel<RegistraPontos> listaRegistroConsumidor;
 	private DataModel<UtilizaPontos> listaUtilizaPontosFuncionario;
+	private DataModel<UtilizaPontos> listaUtilizaPontosConsumidor;
 
 	public ConsumidorController() {
 
@@ -121,20 +122,20 @@ public class ConsumidorController {
 		}
 	}
 
-	public String editaConsumidor() {
+	public void editaConsumidor() {
 		
 		try{
 			consumidorDAO.editarConsumidor(consumidor);
-			
-			return "editadoConsumidor";
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Atualização Completa", "item atualizado com sucesso"));
+			//return "editadoConsumidor";
 		} catch (HibernateException e){
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
-			return "erroEditaConsumidor";
+			//return "erroEditaConsumidor";
 		} catch (Exception e){
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar tarefa", "Erro"));
-			return "erroEditaConsumidor";
+			//return "erroEditaConsumidor";
 		}
 	}
 	
@@ -159,13 +160,30 @@ public class ConsumidorController {
 
 		if (listaUtilizaPontosFuncionario == null) {
 			user = new RecuperaSessao().retornaUsuario();
-			consumidor = user.getConsumidor();
+			
 			if (listaUtilizaPontosFuncionario == null) {
-				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosConsumidor(consumidor);
+				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosFuncionario(user.getFuncionario());
 				listaUtilizaPontosFuncionario = new ListDataModel<UtilizaPontos>(utilizaPontos);
 			}
 		}
 		return listaUtilizaPontosFuncionario;
+	}
+
+	public DataModel<UtilizaPontos> getListaUtilizaPontosConsumidor() {
+		if (listaUtilizaPontosConsumidor == null) {
+			user = new RecuperaSessao().retornaUsuario();
+			
+			if (listaUtilizaPontosConsumidor == null) {
+				List<UtilizaPontos> utilizaPontos = new UtilizaPontosDAO().listaUtilizaPontosConsumidor(user.getConsumidor());
+				listaUtilizaPontosConsumidor = new ListDataModel<UtilizaPontos>(utilizaPontos);
+			}
+		}
+		return listaUtilizaPontosConsumidor;
+	}
+
+	public void setListaUtilizaPontosConsumidor(
+			DataModel<UtilizaPontos> listaUtilizaPontosConsumidor) {
+		this.listaUtilizaPontosConsumidor = listaUtilizaPontosConsumidor;
 	}
 
 	public void setListaUtilizaPontosFuncionario(

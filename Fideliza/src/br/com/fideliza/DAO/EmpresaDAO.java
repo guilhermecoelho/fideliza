@@ -5,10 +5,12 @@ package br.com.fideliza.DAO;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.fideliza.model.Empresa;
@@ -74,6 +76,22 @@ public class EmpresaDAO {
 			session.close();
 		}
 		return null;
+	}
+	
+	public long contaEmpresa(){
+		try{
+			Criteria criteria = session.createCriteria(Empresa.class);
+			criteria.setProjection(Projections.rowCount());
+			long teste = (Long) criteria.uniqueResult();
+			
+			return teste;
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return (Long) null;
 	}
 	@SuppressWarnings("unchecked")
 	public List<Empresa> listaEmpresas2(){

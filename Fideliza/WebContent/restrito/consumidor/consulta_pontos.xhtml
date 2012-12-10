@@ -12,63 +12,73 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
 </h:head>
 <h:body>
 	<div id="tudo">
-	<div id="topo">
- 
-	<div id="topoMeio">
-    	<div id="banner">
-     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
-        </div>
- 	<div id="login">
- 	<h:form>
- 		<p:button value="logout" action="#{usuarioController.logout}"/>
- 	</h:form>
- 	</div>
-	</div>
-</div>
-<div id="menu">
-	<div id="menuBotao">
-    	<ui:include src="menu.xhtml"/>
-    </div>
-</div>
-<div id="fundo">
-	<div id="conteudo">
-			<h:form>
-					<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
-						<p:dialog modal="true" widgetVar="statusDialog"    
-		        			draggable="false" closable="false">  
-		    			<p:graphicImage value="/images/ajaxload.gif" />  
+		<div id="topo">
+
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<h:form>
+						<p:button value="logout" action="#{usuarioController.logout}" />
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<div id="menu">
+			<div id="menuBotao">
+				<ui:include src="menu.xhtml" />
+			</div>
+		</div>
+		<div id="fundo">
+			<div id="conteudo">
+				<h:form>
+					<p:ajaxStatus onstart="statusDialog.show();"
+						onsuccess="statusDialog.hide();" />
+					<p:dialog modal="true" widgetVar="statusDialog" draggable="false"
+						closable="false">
+						<p:graphicImage value="/images/ajaxload.gif" />
 					</p:dialog>
-					<p:dataTable var="result" value="#{consumidorController.listaRegistroConsumidor}" 
-						 emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" >
-						
+					<p:dataTable var="result"
+						value="#{consumidorController.listaRegistroConsumidor}"
+						emptyMessage="Nenhum registro encontrado" paginator="true"
+						rows="10">
+						<f:facet name="header">	
+							 Pontos registrados
+							</f:facet>
 						<p:column filterBy="#{result.empresa.nome}" headerText="Empresa">
 							<h:outputText value="#{result.empresa.nome}" />
 						</p:column>
-						<p:column filterBy="#{result.funcionario.nome}" headerText="Funcionario">
+						<p:column filterBy="#{result.funcionario.nome}"
+							headerText="Funcionario">
 							<h:outputText value="#{result.funcionario.nome}" />
 						</p:column>
-						<p:column filterBy="#{result.consumidor.cpf}" headerText="Consumidor">
+						<p:column filterBy="#{result.consumidor.cpf}"
+							headerText="Consumidor">
 							<h:outputText value="#{result.consumidor.cpf}" />
 						</p:column>
-						<p:column filterBy="#{result.valorCompra}" headerText="Valor Compra">
+						<p:column filterBy="#{result.valorCompra}"
+							headerText="Valor Compra">
 							<h:outputText value="R$ #{result.valorCompra}" />
 						</p:column>
-						<p:column filterBy="#{result.quantidadePontos}" headerText="Pontos Registrados">
+						<p:column filterBy="#{result.quantidadePontos}"
+							headerText="Pontos Registrados">
 							<h:outputText value="#{result.quantidadePontos}" />
 						</p:column>
 					</p:dataTable>
 
-			</h:form>
-		
+				</h:form>
+
+			</div>
+		</div>
+		<div id="rodape">
+			<ui:include src="rodape.xhtml" />
+		</div>
 	</div>
-</div>
-<div id="rodape">
-<h2> rodapé</h2>
-</div>
-</div>
 </h:body>
 </html>

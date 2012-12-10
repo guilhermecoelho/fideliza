@@ -70,6 +70,9 @@ public class AdministradorController {
 	private DataModel<RegistraPontos> listaRegistrosFuncionario;
 	private DataModel<UtilizaPontos> listaUtilizaPontosFuncionario;
 	private DataModel<UtilizaPontos> listaUtilizaPontosPromocao;
+	
+	private Long contaConsumidor;
+	private Long contaEmpresa;
 
 	public AdministradorController() {
 
@@ -114,8 +117,11 @@ public class AdministradorController {
 			empresa.setNovaEmpresa(false);
 	
 			empresaDAO.ativaEmpresa(empresa);
+			
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Atualização Completa", "item atualizado com sucesso"));
 	
 			return "ativarEmpresa";
+			
 		}catch (HibernateException e){
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
@@ -371,6 +377,24 @@ public class AdministradorController {
 	
 	public Empresa getSelectedEmpresa() {
 		return selectedEmpresa;
+	}
+
+	public long getContaConsumidor() {
+		contaConsumidor = consumidorDAO.contaConsumidor();
+		return contaConsumidor;
+	}
+
+	public void setContaConsumidor(Long contaConsumidor) {
+		this.contaConsumidor = contaConsumidor;
+	}
+
+	public Long getContaEmpresa() {
+		contaEmpresa = empresaDAO.contaEmpresa();
+		return contaEmpresa;
+	}
+
+	public void setContaEmpresa(Long contaEmpresa) {
+		this.contaEmpresa = contaEmpresa;
 	}
 
 	public Administrador getSelectedAdmin() {

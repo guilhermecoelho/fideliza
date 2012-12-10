@@ -13,67 +13,79 @@
  -->
 <h:head>
 
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
 
 </h:head>
 <h:body>
-<div id="tudo">
-	<div id="topo">
-	 
-		<div id="topoMeio">
-	    	<div id="banner">
-	     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
-	        </div>
-	 	<div id="login">
-	 	<h:form>
-	 		<p:button value="logout" action="#{usuarioController.logout}"/>
-	 	</h:form>
-	 	</div>
-		</div>
-	</div>
-<div id="menu">
-	<div id="menuBotao">
-    	<ui:include src="menu.xhtml"/>
-    </div>
-</div>
-	<div id="fundo">
-		<div id="conteudo">
-			
-				<h:form id="form">
-					<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>       
-					<p:dialog modal="true" widgetVar="statusDialog"    
-	        			draggable="false" closable="false">  
-	    				<p:graphicImage value="/images/ajaxload.gif" />  
-					</p:dialog>
-					<h:form id="formData">				
-						<p:dataTable id="empresaTable" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" var="result" value="#{empresaController.empresaLista}" rowKey="#{result.idEmpresa}" selection="#{administradorController.selectedEmpresa}" selectionMode="single" >
-							<f:facet name="header">	
-							 Empresas
-							</f:facet>
-								<p:column filterBy="#{result.idEmpresa}" headerText="ID" footerText="ID">
-									<h:outputText value="#{result.idEmpresa}" />
-								</p:column>
-								<p:column filterBy="#{result.nome}" headerText="Nome" footerText="Nome">
-									<h:outputText value="#{result.nome}" />
-								</p:column>
-								<p:column  filterBy="#{result.cnpj}" headerText="CNPJ" footerText="CNPJ">
-									<h:outputText value="#{result.cnpj}" />
-								</p:column>
-								<p:column  filterBy="#{result.email}" headerText="Email" footerText="Email">
-									<h:outputText value="#{result.email}" />
-								</p:column>	
+	<div id="tudo">
+		<div id="topo">
 
-	        					<f:facet name="footer">
-	        						<p:commandButton value="detalhar" update=":form" action="#{administradorController.detalhaEmpresa}" ajax="false"/>
-	        					</f:facet>		
-						</p:dataTable>				
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<h:form>
+						<ui:include src="login.xhtml" />
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<div id="menu">
+			<div id="menuBotao">
+				<ui:include src="menu.xhtml" />
+			</div>
+		</div>
+		<div id="fundo">
+			<div id="conteudo">
+
+				<h:form id="form">
+					<p:ajaxStatus onstart="statusDialog.show();"
+						onsuccess="statusDialog.hide();" />
+					<p:dialog modal="true" widgetVar="statusDialog" draggable="false"
+						closable="false">
+						<p:graphicImage value="/images/ajaxload.gif" />
+					</p:dialog>
+					<h:form id="formData">
+						<p:dataTable id="empresaTable"
+							emptyMessage="Nenhum registro encontrado" paginator="true"
+							rows="10" var="result" value="#{empresaController.empresaLista}"
+							rowKey="#{result.idEmpresa}"
+							selection="#{administradorController.selectedEmpresa}"
+							selectionMode="single">
+							<f:facet name="header">	
+							 Empresas ativas
+							</f:facet>
+							<p:column filterBy="#{result.idEmpresa}" headerText="ID"
+								footerText="ID">
+								<h:outputText value="#{result.idEmpresa}" />
+							</p:column>
+							<p:column filterBy="#{result.nome}" headerText="Nome"
+								footerText="Nome">
+								<h:outputText value="#{result.nome}" />
+							</p:column>
+							<p:column filterBy="#{result.cnpj}" headerText="CNPJ"
+								footerText="CNPJ">
+								<h:outputText value="#{result.cnpj}" />
+							</p:column>
+							<p:column filterBy="#{result.email}" headerText="Email"
+								footerText="Email">
+								<h:outputText value="#{result.email}" />
+							</p:column>
+
+							<f:facet name="footer">
+								<p:commandButton value="detalhar" update=":form"
+									action="#{administradorController.detalhaEmpresa}" ajax="false" />
+							</f:facet>
+						</p:dataTable>
 					</h:form>
 				</h:form>
 			</div>
+		</div>
+		<div id="rodape">
+			<ui:include src="rodape.xhtml" />
+		</div>
 	</div>
-<div id="rodape">
-	<h2> rodapé</h2>
-</div>	
-</div>
 </h:body>
 </html>

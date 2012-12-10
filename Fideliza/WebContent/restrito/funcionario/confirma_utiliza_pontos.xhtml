@@ -13,47 +13,46 @@
  -->
 <h:head>
 
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
 
 </h:head>
 <h:body>
-<div id="tudo">
-<div id="topo">
- 
-	<div id="topoMeio">
-    	<div id="banner">
-     		<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
-        </div>
- 	<div id="login">
- 	<h:form>
- 		<p:button value="logout" action="#{usuarioController.logout}"/>
- 	</h:form>
- 	</div>
-	</div>
-</div>
+	<div id="tudo">
+		<div id="topo">
 
-<div id="fundo">
-	<div id="conteudo">
-		<div id="boxEsquerdaSucesso">
-			<p>Utilização de pontos efetuada com sucesso!</p>
-			<p:button href="index.xhtml" value="Voltar"/>
+			<div id="topoMeio">
+				<div id="banner">
+					<img src="#{request.contextPath}/images/fideliza2.png" alt="" />
+				</div>
+				<div id="login">
+					<h:form>
+						<p:button value="logout" action="#{usuarioController.logout}" />
+					</h:form>
+				</div>
+			</div>
 		</div>
-		<div id="boxDireitaSucesso">
-	    	<div id ="grid">
-		    	<ul>		
-			    	<li>
-			    		Box1
-			    	</li>	
-		    	</ul>
-	    	</div>
-    	</div>
-    </div>
-</div>
 
-<div id="rodape">
-<h2> rodapé</h2>
-</div>
-</div>
+		<div id="fundo">
+			<div id="conteudo">
+				<div id="boxEsquerdaSucesso">
+					<p>Utilização de pontos efetuada com sucesso!</p>
+					<p:button href="index.xhtml" value="Voltar" />
+				</div>
+				<div id="boxDireitaSucesso">
+					<div id="grid">
+						<ul>
+							<li>Box1</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="rodape">
+			<ui:include src="rodape.xhtml" />
+		</div>
+	</div>
 
 </h:body>
 </html>

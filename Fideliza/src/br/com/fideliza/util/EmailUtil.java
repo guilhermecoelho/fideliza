@@ -31,10 +31,11 @@ public class EmailUtil {
 		Email email = new SimpleEmail();
 		email = conectaEmail();
 		email.setSubject(mensagem.getTitulo());
-		email.setMsg(mensagem.getMensagem());
+		email.setMsg(mensagem.getContato()+"\n"+ mensagem.getMensagem());
+		
 		email.addTo(mensagem.getDestino());
 		email.send();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "E-mail enviado com sucesso para: " + mensagem.getDestino(), "Informação"));	
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "E-mail enviado com sucesso", "Informação"));	
 	}
 
 }

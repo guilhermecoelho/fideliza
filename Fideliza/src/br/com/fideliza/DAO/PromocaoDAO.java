@@ -143,6 +143,22 @@ public class PromocaoDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Promocao> listaPromocaoDesativadaPorEmpresa(Empresa idEmpresa){
+		try{
+			return session.createCriteria(Promocao.class).add(Restrictions.like("empresa",idEmpresa)).add(Restrictions.eq("status", false)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}
+		return null;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
 	public List<Promocao> listaPromocaoAtiva(){
 		try{
 			return session.createCriteria(Promocao.class).add(Restrictions.eq("status", true)).list();
