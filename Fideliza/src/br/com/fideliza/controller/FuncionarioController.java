@@ -11,6 +11,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
+import org.hibernate.HibernateException;
+
 import br.com.fideliza.DAO.FuncionarioDAO;
 import br.com.fideliza.DAO.UsuarioDAO;
 import br.com.fideliza.model.Funcionario;
@@ -37,28 +39,40 @@ public class FuncionarioController{
 	}
 
 	public String salvaFuncionario(){
-			
-		if(verificaEmail(funcionario.getEmail(), funcionario.getEmailConfirm()) == true){
-			usuario = new RecuperaSessao().retornaUsuario();
-			
-			funcionario.setStatus(true);
-	
-			funcionario.setEmpresa(usuario.getEmpresa());
-			
-			funcionarioDAO.adicionaFuncionario(funcionario);
-			
-			usuario.setUser(funcionario.getEmail());
-			usuario.setPassword(funcionario.getPassword());
-			usuario.setFuncionario(funcionario);
-			
-			usuario.setPermissaoFuncionario(true);
-			usuario.setPermissaoEmpresa(false);
-			
-			usuarioDAO.adicionaUsuario(usuario);
-	
-			return "FuncionarioSalva";
-		} else {
-			return "error";
+		
+		try{
+			if(verificaEmail(funcionario.getEmail(), funcionario.getEmailConfirm()) == true){
+				usuario = new RecuperaSessao().retornaUsuario();
+				
+				funcionario.setStatus(true);
+		
+				funcionario.setEmpresa(usuario.getEmpresa());
+				
+				funcionarioDAO.adicionaFuncionario(funcionario);
+				
+				usuario.setUser(funcionario.getEmail());
+				usuario.setPassword(funcionario.getPassword());
+				usuario.setFuncionario(funcionario);
+				
+				usuario.setPermissaoFuncionario(true);
+				usuario.setPermissaoEmpresa(false);
+				
+				usuarioDAO.adicionaUsuario(usuario);
+				
+				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("o cadastro foi realizado com sucesso", "Parabens!"));
+				
+				return "FuncionarioSalva";
+			} else {
+				return "errorFuncionario";
+			}
+		}catch (HibernateException e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao conectar com o banco de dados", "Erro"));
+			return "errorFuncionario";
+		} catch (Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "erro ao realizar a tarefa", "Erro"));
+			return "errorFuncionario";
 		}
 		
 	}

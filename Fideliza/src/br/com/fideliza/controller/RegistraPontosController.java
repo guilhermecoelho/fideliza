@@ -86,6 +86,7 @@ public class RegistraPontosController {
 					registraPontosDAO.SalvaRegistro(registraPontos);
 					
 					mensagem.setDestino(consumidor.getEmail());
+					mensagem.setContato(" ");
 					mensagem.setTitulo("Registro de Pontos Realizado Sistema Fideliza");
 					mensagem.setMensagem("Caro sr." +consumidor.getNome()+", o sitema fideliza informa que houve um registro de pontos em sua conta. Segue as informações sobre a operação \n\n" +
 									"Estabelecimento: "+registraPontos.getEmpresa().getNome()+"\n\n"+

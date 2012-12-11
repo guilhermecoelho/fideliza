@@ -56,7 +56,7 @@ public class ConsumidorController {
 				consumidorDAO.adicionaConsumidor(consumidor);
 				usuarioDAO.adicionaUsuario(user); // cria usuario usando o CPF como user
 				
-				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(null, "seu cadastro foi realizadocom sucesso", "Parabens!"));
+				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("seu cadastro foi realizadocom sucesso", "Parabens!"));
 				return "salvaConsumidor";
 				
 

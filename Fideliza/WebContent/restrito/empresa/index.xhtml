@@ -20,7 +20,7 @@
         </div>
  	<div id="login">
  	<h:form>
- 		<p:button value="logout" action="#{usuarioController.logout}"/>
+ 		<ui:include src="login.xhtml" />
  	</h:form>
  	</div>
 	</div>
@@ -32,6 +32,9 @@
 </div>
 <div id="fundo">
 	<div id="conteudo">
+	<h:form>
+		<p:growl id="growl" showDetail="true" /> 
+	</h:form>
     	<div id ="grid">
 	    	<p:accordionPanel multiple="true" cache="true" id="painel">
 					<p:tab title="Bem vindo" id="tab1">
