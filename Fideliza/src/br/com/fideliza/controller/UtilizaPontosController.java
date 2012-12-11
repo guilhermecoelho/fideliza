@@ -39,6 +39,7 @@ public class UtilizaPontosController {
 	private UtilizaPontos utilizaPontos = new UtilizaPontos();
 	private UtilizaPontosDAO utilizaPontosDAO = new UtilizaPontosDAO();
 	private Mensagem mensagem = new Mensagem();
+	private UtilizaPontos listaUltimoRegistro;
 
 	private DataModel<Promocao> listaPromocao;
 
@@ -141,12 +142,14 @@ public class UtilizaPontosController {
 
 			mensagem.setDestino(consumidor.getEmail());
 			mensagem.setTitulo("Utilização de Pontos Sistema Fideliza");
+			mensagem.setContato(" ");
 			mensagem.setMensagem("Caro sr."
 					+ consumidor.getNome()
 					+ ", o sitema fideliza informa que houve a utilização dos pontos de sua conta . Segue as informações sobre a operação \n\n"
 					+ "Estabelecimento: "
 					+ utilizaPontos.getEmpresa().getNome() + "\n\n"
-					+ "Promocao :" + utilizaPontos.getPromocao().getNome()
+					+ "Promocao: " + utilizaPontos.getPromocao().getNome() +"\n\n"
+					+ "Desconto: " + utilizaPontos.getPromocao().getDesconto()
 					+ "\n\n" + "Quantidade de pontos utilizados: "
 					+ utilizaPontos.getPromocao().getPontos() + "\n\n"
 					+ "Data: " + utilizaPontos.getDataRegistro() + "\n\n"
@@ -191,6 +194,17 @@ public class UtilizaPontosController {
 
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public UtilizaPontos getListaUltimoRegistro() {
+		if(listaUltimoRegistro == null){
+			listaUltimoRegistro = new UtilizaPontosDAO().listaUltimoRegistro();
+		}
+		return listaUltimoRegistro;
+	}
+
+	public void setListaUltimoRegistro(UtilizaPontos listaUltimoRegistro) {
+		this.listaUltimoRegistro = listaUltimoRegistro;
 	}
 
 	public Promocao getSelectedPromocao() {

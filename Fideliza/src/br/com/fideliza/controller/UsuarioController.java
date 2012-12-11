@@ -46,7 +46,7 @@ public class UsuarioController {
 				if(usuario.isPermissaoConsumidor() == true){
 					
 					if(usuario.getConsumidor().isStatus() == false){
-						tipoUser="consumidorDesativado";
+						tipoUser="desativado";
 					}else {
 						tipoUser = "loginConsumidor";
 						
@@ -55,7 +55,7 @@ public class UsuarioController {
 				}
 				else if(usuario.isPermissaoFuncionario() == true){
 					if(usuario.getFuncionario().isStatus() == false){
-						tipoUser="FuncionarioDesativado";
+						tipoUser="desativado";
 					}else {
 						tipoUser = "loginFuncionario";
 						
@@ -63,7 +63,7 @@ public class UsuarioController {
 				}
 				else if(usuario.isPermissaoEmpresa() == true){
 					if(usuario.getEmpresa().isStatus() == false){
-						tipoUser="EmpresaDesativado";
+						tipoUser="desativado";
 					}else {
 						tipoUser =  "loginEmpresa";
 						
@@ -71,7 +71,7 @@ public class UsuarioController {
 				}
 				else if(usuario.isPermissaoAdministrador() == true){
 					if(usuario.getAdministrador().isStatus() == false){
-						tipoUser="AdminDesativado";
+						tipoUser="desativado";
 					}else {
 						tipoUser = "loginAdmin";
 					}

@@ -117,6 +117,7 @@ public class PromocaoController implements Serializable{
 						}
 					}
 				}
+				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("seu cadastro foi realizadocom sucesso", "Parabens!"));
 				return "salvaPromocao";
 			}
 		}catch (HibernateException e){

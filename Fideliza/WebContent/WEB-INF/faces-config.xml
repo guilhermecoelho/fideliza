@@ -92,7 +92,7 @@
 		<from-view-id>/cadastro_empresa.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>empresaSalva</from-outcome>
-			<to-view-id>/sucesso.xhtml</to-view-id>
+			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -185,7 +185,7 @@
 		<from-view-id>/restrito/empresa/cadastro_promocao.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>salvaPromocao</from-outcome>
-			<to-view-id>/restrito/empresa/consultar_promocao.xhtml</to-view-id>
+			<to-view-id>/restrito/empresa/index.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>
@@ -499,6 +499,30 @@
 		<navigation-case>
 			<from-outcome>ativarEmpresa</from-outcome>
 			<to-view-id>/restrito/admin/empresasNovas.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_empresa.xhtml</display-name>
+		<from-view-id>/login_empresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>desativado</from-outcome>
+			<to-view-id>/desativado.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/empresa/cadastro_funcionario.xhtml</display-name>
+		<from-view-id>/restrito/empresa/cadastro_funcionario.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>FuncionarioSalva</from-outcome>
+			<to-view-id>/restrito/empresa/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>restrito/empresa/cadastro_funcionario.xhtml</display-name>
+		<from-view-id>/restrito/empresa/cadastro_funcionario.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>errorFuncionario</from-outcome>
+			<to-view-id>/restrito/empresa/cadastro_funcionario.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

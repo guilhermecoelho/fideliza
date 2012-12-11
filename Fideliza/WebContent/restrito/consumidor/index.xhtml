@@ -44,7 +44,8 @@
 	       					 rows="3" effect="easeInStrong" circular="true" value="#{promocaoController.listaPromocaoAtiva}" var="result" headerText="Promoções">  
 						<p:panel header="#{result.nome}">
 	        			<h:panelGrid columns="1" style="width:100%" >
-							<h:outputText value="#{result.nome}"/>
+							<h:outputText value="Empresa: #{result.empresa.nome}"/>
+							<h:outputText value="#{result.descricao}"/>
 						</h:panelGrid>
 	        		</p:panel>
 		</p:carousel> 

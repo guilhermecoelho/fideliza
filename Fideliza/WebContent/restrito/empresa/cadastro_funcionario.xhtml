@@ -26,7 +26,7 @@
 				</div>
 				<div id="login">
 					<h:form>
-						<p:button value="logout" action="#{usuarioController.logout}" />
+						<ui:include src="login.xhtml" />
 					</h:form>
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 		<div id="conteudo">
-			<div id="grid">
+			
 				<h:form id="form">
 					<p:panel header="Cadastro Funcionario">
 
@@ -91,7 +91,7 @@
 
 					</p:panel>
 				</h:form>
-			</div>
+			
 		</div>
 		<div id="rodape">
 			<ui:include src="rodape.xhtml" />

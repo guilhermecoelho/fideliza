@@ -5,9 +5,11 @@ package br.com.fideliza.DAO;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.fideliza.model.Consumidor;
@@ -46,6 +48,30 @@ public class UtilizaPontosDAO {
 	public List<UtilizaPontos> listaUtilizaPontosEmpresa(Empresa empresa){
 		try{
 			return session.createCriteria(UtilizaPontos.class).add(Restrictions.like("empresa", empresa)).list();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			session.flush();
+			session.close();
+		}	
+		return null;
+	}
+	
+	public UtilizaPontos listaUltimoRegistro(){
+		try{
+			
+			//return session.createCriteria(UtilizaPontos.class).add(Restrictions.("empresa", empresa)).list();
+			Criteria criteria = session.createCriteria(UtilizaPontos.class).setProjection(Projections.max("idUtilizaPontos"));
+			Integer list = (Integer) criteria.uniqueResult();
+			
+			session.flush();
+			session.clear();
+			criteria = null;
+			return (UtilizaPontos) session.createCriteria(UtilizaPontos.class).add(Restrictions.eq("idUtilizaPontos", list)).uniqueResult();
+            // System.out.println("TESE: "+list);
+
 		}catch (HibernateException e){
 			e.printStackTrace();
 		}catch (Exception e){

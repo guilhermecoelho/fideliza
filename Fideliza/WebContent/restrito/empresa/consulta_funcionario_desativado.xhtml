@@ -27,7 +27,7 @@
 				</div>
 				<div id="login">
 					<h:form>
-						<p:button value="logout" action="#{usuarioController.logout}" />
+						<ui:include src="login.xhtml" />
 					</h:form>
 				</div>
 			</div>
@@ -57,18 +57,18 @@
 							<f:facet name="header">	
 							 Funcionarios
 							</f:facet>
-							<p:column filterBy="#{result.idFuncionario}" headerText="ID"
-								footerText="ID">
-								<h:outputText value="#{result.idFuncionario}" />
+								<p:column filterBy="#{result.nome}" headerText="Nome"
+								footerText="Nome">
+								<h:outputText value="#{result.nome}" />
 							</p:column>
 
-							<p:column filterBy="#{result.empresa.nome}" headerText="Empresa"
-								footerText="Empresa">
-								<h:outputText value="#{result.empresa.nome}" />
-							</p:column>
 							<p:column filterBy="#{result.email}" headerText="Email"
 								footerText="Email">
 								<h:outputText value="#{result.email}" />
+							</p:column>
+							<p:column filterBy="#{result.empresa.nome}" headerText="Empresa"
+								footerText="Empresa">
+								<h:outputText value="#{result.empresa.nome}" />
 							</p:column>
 							<f:facet name="footer">
 								<p:commandButton value="detalhar" update=":form"

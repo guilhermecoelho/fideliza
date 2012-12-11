@@ -78,6 +78,7 @@ public class EmpresaController {
 				empresaDAO.adicionaEmpresa(empresa);
 				usuarioDAO.adicionaUsuario(user);
 				
+				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("seu cadastro foi realizadocom sucesso", "Parabens!"));
 				return "empresaSalva";
 				
 			} else {
